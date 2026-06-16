@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YUNUS PARFUM — Селективная парфюмерия на разлив · Санкт-Петербург</title>
+  <meta name="description" content="Сотни ароматов на разлив: от 3 до 100 мл, спрей или масло, свой флакон. Собираем вручную в СПб. +7 906 448 2204">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Lora:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-cream: #F4ECDD;
+      --bg-ivory: #FBF5EA;
+      --espresso: #2C1B10;
+      --ink: #241710;
+      --ink-muted: #6E5C4C;
+      --mocha: #7A4F2C;
+      --gold: #C2A05A;
+      --gold-light: #E4C988;
+      --gold-dark: #9C7B3A;
+      --line: #E2D4BF;
+      --grad-gold: linear-gradient(135deg, #E4C988 0%, #C2A05A 45%, #9C7B3A 100%);
+      --shadow-sm: 0 2px 8px rgba(60,40,20,.06);
+      --shadow-md: 0 10px 30px rgba(60,40,20,.10);
+      --shadow-lg: 0 24px 60px rgba(60,40,20,.14);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg-cream); color: var(--ink); font-family: 'Lora', serif; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+    ::selection { background: var(--gold); color: var(--espresso); }
+    a { color: inherit; }
+    button { font-family: inherit; cursor: pointer; border: none; background: none; }
+    input { font-family: 'Inter', sans-serif; }
+
+    .container { max-width: 1240px; margin: 0 auto; padding: 0 24px; }
+    @media (min-width: 768px) { .container { padding: 0 40px; } }
+
+    /* Typography */
+    .eyebrow { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 13px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); }
+    .h1 { font-family: 'Playfair Display', serif; font-weight: 700; font-size: clamp(40px, 6.4vw, 72px); line-height: 1.06; letter-spacing: -.5px; }
+    .h2 { font-family: 'Playfair Display', serif; font-weight: 700; font-size: clamp(30px, 5vw, 48px); line-height: 1.12; letter-spacing: -.3px; }
+    .h3 { font-family: 'Playfair Display', serif; font-weight: 600; font-size: clamp(26px, 4vw, 36px); line-height: 1.15; }
+    .h4 { font-family: 'Lora', serif; font-weight: 600; font-size: clamp(19px, 2vw, 22px); line-height: 1.3; }
+    .body-lg { font-family: 'Lora', serif; font-size: clamp(17px, 1.5vw, 19px); line-height: 1.6; }
+
+    /* Buttons */
+    .btn { display: inline-flex; align-items: center; justify-content: center; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 15px; letter-spacing: .5px; border-radius: 999px; padding: 16px 30px; text-decoration: none; transition: transform .18s ease, box-shadow .18s ease, background .18s ease, color .18s ease; cursor: pointer; border: none; }
+    .btn-primary { background: var(--espresso); color: var(--bg-ivory); box-shadow: var(--shadow-md); }
+    .btn-primary:hover { transform: translateY(-1px); box-shadow: var(--shadow-lg); }
+    .btn-secondary { background: transparent; color: var(--ink); border: 1.5px solid var(--mocha); padding: 14.5px 28px; }
+    .btn-secondary:hover { background: var(--mocha); color: var(--bg-ivory); }
+    .btn-gold { background: var(--grad-gold); color: var(--espresso); box-shadow: 0 4px 14px rgba(194,160,90,.35); }
+    .btn-gold:hover { box-shadow: 0 8px 22px rgba(194,160,90,.5); transform: translateY(-1px); }
+    .btn-sm { padding: 12px 22px; font-size: 14px; }
+
+    /* Pill tags */
+    .pill { display: inline-flex; align-items: center; font-family: 'Inter', sans-serif; font-size: 13px; padding: 9px 16px; border-radius: 999px; border: 1px solid var(--line); background: var(--bg-cream); color: var(--ink); transition: all .18s; cursor: pointer; }
+    .pill.active { background: var(--espresso); color: var(--bg-ivory); border-color: var(--espresso); }
+    .pill.gold-active { background: var(--grad-gold); color: var(--espresso); border-color: var(--gold); }
+
+    /* Cards */
+    .card { background: var(--bg-ivory); border: 1px solid var(--line); border-radius: 18px; transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease; }
+    .card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: var(--gold); }
+
+    /* Section padding */
+    .section-pad { padding: clamp(72px, 9vw, 120px) 0; }
+
+    /* Header */
+    #header { position: sticky; top: 0; z-index: 60; background: transparent; transition: background .3s ease, box-shadow .3s ease; backdrop-filter: blur(8px); }
+    #header.scrolled { background: var(--bg-ivory); box-shadow: var(--shadow-sm); }
+    .header-inner { max-width: 1240px; margin: 0 auto; padding: 16px 24px; display: flex; align-items: center; gap: 24px; }
+    .logo { text-decoration: none; display: flex; align-items: baseline; gap: 8px; margin-right: auto; flex-shrink: 0; }
+    .logo-yunus { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 24px; color: var(--ink); letter-spacing: -.3px; }
+    .logo-parfum { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 12px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); }
+    nav.desktop a { font-family: 'Inter', sans-serif; font-size: 14px; color: var(--ink); text-decoration: none; opacity: .85; transition: opacity .15s, color .15s; }
+    nav.desktop a:hover { opacity: 1; color: var(--mocha); }
+    .burger { display: none; flex-direction: column; gap: 5px; padding: 8px; }
+    .burger span { display: block; width: 24px; height: 2px; background: var(--ink); border-radius: 2px; }
+    @media (max-width: 880px) { nav.desktop, .hd-cta { display: none !important; } .burger { display: flex; } }
+
+    /* Mobile menu */
+    #mobile-menu { position: fixed; inset: 0; z-index: 70; background: var(--espresso); display: flex; flex-direction: column; padding: 80px 32px; gap: 8px; animation: fadeIn .2s ease; }
+    #mobile-menu a { font-family: 'Playfair Display', serif; font-size: 32px; color: var(--bg-ivory); text-decoration: none; padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,.1); }
+    #mobile-menu .phone { margin-top: 24px; color: var(--gold); font-family: 'Inter', sans-serif; font-size: 18px; }
+
+    /* Hero */
+    #hero { position: relative; background: radial-gradient(120% 120% at 70% 10%, #FBF5EA 0%, #F4ECDD 45%, #EFE2C8 100%); overflow: hidden; }
+    .hero-glow-1 { position: absolute; right: -6%; top: 8%; width: min(46vw,560px); height: min(46vw,560px); border-radius: 50%; background: radial-gradient(circle at 38% 32%, rgba(228,201,136,.85), rgba(194,160,90,.35) 55%, rgba(156,123,58,.12) 80%); filter: blur(2px); pointer-events: none; }
+    .hero-glow-2 { position: absolute; right: 8%; top: 26%; width: min(20vw,200px); height: min(20vw,200px); border-radius: 50%; background: radial-gradient(circle at 40% 35%, rgba(255,255,255,.7), rgba(194,160,90,.15) 70%); pointer-events: none; }
+    .hero-inner { position: relative; max-width: 1240px; margin: 0 auto; padding: clamp(72px,11vw,128px) 24px clamp(64px,9vw,110px); display: grid; grid-template-columns: minmax(0,1.15fr) minmax(0,.85fr); gap: 48px; align-items: center; }
+    @media (max-width: 768px) { .hero-inner { grid-template-columns: 1fr; } .hero-img { display: none; } }
+    .hero-img { position: relative; aspect-ratio: 4/5; border-radius: 24px; overflow: hidden; box-shadow: var(--shadow-lg); }
+    .hero-img img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
+    .hero-trust { display: flex; flex-wrap: wrap; gap: 20px; }
+    .hero-trust span { font-family: 'Inter', sans-serif; font-size: 13px; color: var(--ink-muted); display: flex; align-items: center; gap: 7px; }
+    .hero-trust .check { color: var(--gold); }
+
+    /* Marquee */
+    #marquee { background: var(--espresso); overflow: hidden; white-space: nowrap; padding: 14px 0; }
+    .marquee-track { display: inline-block; animation: marqueeAnim 26s linear infinite; }
+    .marquee-text { font-family: 'Inter', sans-serif; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: rgba(244,236,221,.75); }
+    .marquee-text span { color: var(--gold); margin: 0 6px; }
+    @media (prefers-reduced-motion: reduce) { .marquee-track { animation: none; } }
+
+    /* Why cards */
+    .why-icon { width: 48px; height: 48px; border-radius: 12px; background: var(--grad-gold); display: flex; align-items: center; justify-content: center; margin-bottom: 20px; font-size: 22px; }
+
+    /* Steps */
+    .step { position: relative; padding-top: 28px; border-top: 2px solid var(--line); }
+    .step-num { position: absolute; top: -22px; left: 0; font-family: 'Playfair Display', serif; font-weight: 700; font-size: 44px; color: var(--gold); line-height: 1; background: var(--bg-ivory); padding-right: 14px; }
+
+    /* Catalog */
+    .frag-card { cursor: pointer; background: var(--bg-ivory); border: 1px solid var(--line); border-radius: 18px; overflow: hidden; display: flex; flex-direction: column; transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease; }
+    .frag-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: var(--gold); }
+    .frag-thumb { position: relative; aspect-ratio: 4/5; display: flex; align-items: flex-end; justify-content: center; overflow: hidden; }
+    .frag-thumb-pattern { position: absolute; inset: 0; background: repeating-linear-gradient(135deg, rgba(255,255,255,.05) 0 10px, rgba(255,255,255,0) 10px 20px); }
+    .frag-bottle { position: relative; width: 40%; height: 58%; margin-bottom: 10%; border-radius: 12px 12px 16px 16px; background: linear-gradient(180deg, rgba(251,245,234,.4), rgba(44,27,16,.18)); border: 1px solid rgba(255,255,255,.35); }
+    .hit-badge { position: absolute; top: 12px; left: 12px; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 11px; letter-spacing: 1px; color: var(--espresso); background: var(--grad-gold); padding: 5px 11px; border-radius: 999px; }
+    .frag-info { padding: 20px; display: flex; flex-direction: column; flex: 1; }
+    .frag-name { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 20px; color: var(--ink); line-height: 1.2; margin: 6px 0 7px; }
+    .frag-desc { font-family: 'Inter', sans-serif; font-size: 12px; color: var(--ink-muted); line-height: 1.55; flex: 1; }
+    .frag-footer { margin-top: 16px; display: flex; align-items: center; justify-content: space-between; }
+    .frag-price { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 17px; color: var(--gold); }
+    .frag-cta { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 13px; color: var(--mocha); }
+
+    /* Mix sliders */
+    input[type=range].mix-range { -webkit-appearance: none; appearance: none; width: 100%; height: 6px; border-radius: 999px; background: linear-gradient(90deg, var(--gold-light), var(--gold-dark)); outline: none; cursor: pointer; }
+    input[type=range].mix-range::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; border-radius: 50%; background: var(--bg-ivory); border: 3px solid var(--gold); box-shadow: 0 2px 10px rgba(20,12,6,.4); cursor: pointer; }
+    input[type=range].mix-range::-moz-range-thumb { width: 22px; height: 22px; border-radius: 50%; background: var(--bg-ivory); border: 3px solid var(--gold); cursor: pointer; }
+
+    /* Modals */
+    .modal-overlay { position: fixed; inset: 0; z-index: 100; background: rgba(44,27,16,.6); backdrop-filter: blur(4px); display: flex; align-items: flex-start; justify-content: center; padding: 24px; overflow-y: auto; animation: fadeIn .2s ease; }
+    .modal-box { background: var(--bg-ivory); border-radius: 24px; box-shadow: 0 24px 60px rgba(60,40,20,.3); width: 100%; max-width: 920px; margin: auto; overflow: hidden; }
+    .cfg-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+    .cfg-left { background: linear-gradient(165deg, #EFE2C8, #E3CFA3); padding: 40px 32px; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; }
+    .cfg-right { padding: 32px; max-height: 80vh; overflow-y: auto; position: relative; }
+    .cfg-bottle-wrap { position: relative; width: 120px; height: 230px; display: flex; flex-direction: column; align-items: center; }
+    .cfg-cap { width: 34px; height: 26px; background: linear-gradient(180deg, var(--gold), var(--gold-dark)); border-radius: 6px 6px 3px 3px; z-index: 2; }
+    .cfg-neck { width: 22px; height: 14px; background: #B9954F; z-index: 2; }
+    .cfg-body { position: relative; width: 120px; flex: 1; border: 2px solid rgba(122,79,44,.5); border-radius: 14px 14px 22px 22px; overflow: hidden; background: rgba(251,245,234,.55); box-shadow: inset 0 6px 20px rgba(255,255,255,.4); }
+    .cfg-fill { position: absolute; left: 0; right: 0; bottom: 0; background: linear-gradient(180deg, var(--gold-light), var(--gold) 60%, var(--gold-dark)); transition: height .4s ease; box-shadow: inset 0 4px 12px rgba(255,255,255,.35); }
+    .cfg-gloss { position: absolute; inset: 0; background: linear-gradient(110deg, rgba(255,255,255,.25) 0%, rgba(255,255,255,0) 40%); }
+    .cfg-section-title { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 8px; }
+    .cfg-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+    .cfg-pill { font-family: 'Inter', sans-serif; font-weight: 500; font-size: 13px; cursor: pointer; padding: 9px 14px; border-radius: 999px; border: 1px solid var(--line); background: #fff; color: var(--ink); transition: all .18s; }
+    .cfg-pill.active { background: var(--espresso); color: var(--bg-ivory); border-color: var(--espresso); }
+    .cfg-pill.flex-1 { flex: 1; padding: 12px; text-align: center; }
+    .bottle-opt { display: flex; align-items: center; gap: 14px; text-align: left; cursor: pointer; padding: 12px 14px; border-radius: 14px; border: 1px solid var(--line); background: #fff; width: 100%; margin-bottom: 8px; transition: all .18s; }
+    .bottle-opt.active { border-color: var(--gold); background: #F7EFDD; }
+    .bottle-icon { width: 34px; height: 42px; flex-shrink: 0; border-radius: 5px 5px 8px 8px; background: linear-gradient(180deg, rgba(228,201,136,.6), rgba(122,79,44,.45)); border: 1px solid rgba(122,79,44,.3); }
+    .pickup-opt { display: flex; justify-content: space-between; align-items: center; cursor: pointer; padding: 12px 16px; border-radius: 12px; border: 1px solid var(--line); background: #fff; width: 100%; margin-bottom: 8px; transition: all .18s; }
+    .pickup-opt.active { border-color: var(--gold); background: #F7EFDD; }
+
+    /* Review cards */
+    .review-card { background: var(--bg-ivory); border: 1px solid var(--line); border-radius: 18px; padding: 28px; }
+
+    /* Scroll reveal */
+    .reveal { opacity: 0; transform: translateY(16px); transition: opacity .5s ease-out, transform .5s ease-out; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
+
+    /* Focus */
+    :focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+
+    /* Animations */
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes heroUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes marqueeAnim { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    .hero-content { animation: heroUp .8s cubic-bezier(.2,.7,.2,1) both; }
+
+    /* Delivery grid */
+    .tariff-card { background: var(--bg-ivory); border: 1px solid var(--line); border-radius: 18px; padding: 30px 26px; }
+
+    /* Checkbox custom */
+    input[type=checkbox] { width: 18px; height: 18px; accent-color: var(--gold); cursor: pointer; flex-shrink: 0; }
+  </style>
+</head>
+<body>
+
+<!-- ======== HEADER ======== -->
+<header id="header">
+  <div class="header-inner">
+    <a href="#top" class="logo">
+      <span class="logo-yunus">YUNUS</span>
+      <span class="logo-parfum">PARFUM</span>
+    </a>
+    <nav class="desktop" style="display:flex; gap:28px; align-items:center;">
+      <a href="#catalog">Каталог</a>
+      <a href="#how">Как это работает</a>
+      <a href="#mix">Свой микс</a>
+      <a href="#delivery">Доставка</a>
+      <a href="#about">О нас</a>
+    </nav>
+    <a href="#catalog" class="btn btn-gold btn-sm hd-cta">Подобрать аромат</a>
+    <button class="burger" id="burger-btn" aria-label="Меню" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- Mobile menu -->
+<div id="mobile-menu" style="display:none;" role="dialog" aria-label="Навигация">
+  <a href="#catalog" onclick="closeMobileMenu()">Каталог</a>
+  <a href="#how" onclick="closeMobileMenu()">Как это работает</a>
+  <a href="#mix" onclick="closeMobileMenu()">Свой микс</a>
+  <a href="#delivery" onclick="closeMobileMenu()">Доставка</a>
+  <a href="#about" onclick="closeMobileMenu()">О нас</a>
+  <span class="phone">+7 906 448 2204</span>
+</div>
+
+<!-- ======== HERO ======== -->
+<section id="top">
+  <div id="hero">
+    <div class="hero-glow-1"></div>
+    <div class="hero-glow-2"></div>
+    <div class="hero-inner">
+      <div class="hero-content">
+        <p class="eyebrow" style="margin-bottom:20px;">Селективная парфюмерия на разлив · Санкт-Петербург</p>
+        <h1 class="h1" style="margin-bottom:24px; color:var(--ink);">Соберите свой аромат — <span style="color:var(--mocha);">от 3 мл до 100 мл</span></h1>
+        <p class="body-lg" style="color:var(--ink-muted); max-width:560px; margin-bottom:36px;">Сотни ароматов в наличии: мужские, женские и универсальные. Выберите формат — спрей или чистое масло, нужный объём и флакон. Соберём вручную и отправим по России или подготовим к вашему приходу.</p>
+        <div style="display:flex; flex-wrap:wrap; gap:14px; margin-bottom:28px;">
+          <a href="#catalog" class="btn btn-primary">Выбрать аромат</a>
+          <a href="#mix" class="btn btn-secondary">Собрать свой микс</a>
+        </div>
+        <div class="hero-trust">
+          <span><span class="check">✓</span> Все ароматы в наличии</span>
+          <span><span class="check">✓</span> Спрей или масло</span>
+          <span><span class="check">✓</span> Свой объём и концентрация</span>
+        </div>
+      </div>
+      <div class="hero-img">
+        <img src="images/shop.jpg" alt="Магазин Yunus Parfum — флаконы и ароматы" loading="eager">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======== MARQUEE ======== -->
+<div id="marquee">
+  <div class="marquee-track">
+    <span class="marquee-text">БРОНЬ <span>·</span> САМОВЫВОЗ <span>·</span> ДОСТАВКА ПО РФ <span>·</span> СВОЙ МИКС <span>·</span> ОТ 3 МЛ <span>·</span> СПРЕЙ И МАСЛО <span>·</span> БРОНЬ <span>·</span> САМОВЫВОЗ <span>·</span> ДОСТАВКА ПО РФ <span>·</span> СВОЙ МИКС <span>·</span> ОТ 3 МЛ <span>·</span> СПРЕЙ И МАСЛО <span>·</span></span>
+  </div>
+</div>
+
+<!-- ======== WHY ======== -->
+<section class="section-pad reveal">
+  <div class="container">
+    <p class="eyebrow" style="margin-bottom:12px;">Почему мы</p>
+    <h2 class="h2" style="color:var(--ink); margin-bottom:48px;">Парфюмерия под вас</h2>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:24px;">
+      <div class="tariff-card">
+        <div class="why-icon">🧴</div>
+        <h4 class="h4" style="margin-bottom:10px;">Только качественные масла</h4>
+        <p style="font-size:15px; line-height:1.6; color:var(--ink-muted);">Работаем с проверенными концентратами, все ароматы всегда в наличии.</p>
+      </div>
+      <div class="tariff-card">
+        <div class="why-icon">⚗️</div>
+        <h4 class="h4" style="margin-bottom:10px;">Любой объём</h4>
+        <p style="font-size:15px; line-height:1.6; color:var(--ink-muted);">От пробника 3 мл до 100 мл на один флакон. Платите только за масло.</p>
+      </div>
+      <div class="tariff-card">
+        <div class="why-icon">✨</div>
+        <h4 class="h4" style="margin-bottom:10px;">Спрей или масло</h4>
+        <p style="font-size:15px; line-height:1.6; color:var(--ink-muted);">Селективный парфюм (30% масла / 70% этанола) или чистое масло. Концентрацию можно усилить.</p>
+      </div>
+      <div class="tariff-card">
+        <div class="why-icon">🎨</div>
+        <h4 class="h4" style="margin-bottom:10px;">Ваш аромат</h4>
+        <p style="font-size:15px; line-height:1.6; color:var(--ink-muted);">Соберём индивидуальный микс из нескольких масел под ваш вкус.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======== HOW IT WORKS ======== -->
+<section id="how" style="background:var(--bg-ivory); border-top:1px solid var(--line); border-bottom:1px solid var(--line);">
+  <div class="container section-pad reveal">
+    <p class="eyebrow" style="margin-bottom:12px;">Просто</p>
+    <h2 class="h2" style="color:var(--ink); margin-bottom:56px;">Как собрать свои духи</h2>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:32px;">
+      <div class="step">
+        <span class="step-num" style="background:var(--bg-ivory);">01</span>
+        <h4 class="h4" style="margin-bottom:8px;">Выберите аромат</h4>
+        <p style="font-size:15px; line-height:1.6; color:var(--ink-muted);">Из каталога — мужской, женский или универсальный.</p>
+      </div>
+      <div class="step">
+        <span class="step-num" style="background:var(--bg-ivory);">02</span>
+        <h4 class="h4" style="margin-bottom:8px;">Выберите формат</h4>
+        <p style="font-size:15px; line-height:1.6; color:var(--ink-muted);">Спрей или масло, при желании усильте концентрацию.</p>
+      </div>
+      <div class="step">
+        <span class="step-num" style="background:var(--bg-ivory);">03</span>
+        <h4 class="h4" style="margin-bottom:8px;">Объём и флакон</h4>
+        <p style="font-size:15px; line-height:1.6; color:var(--ink-muted);">От 3 до 100 мл, выберите тару.</p>
+      </div>
+      <div class="step">
+        <span class="step-num" style="background:var(--bg-ivory);">04</span>
+        <h4 class="h4" style="margin-bottom:8px;">Доставка или бронь</h4>
+        <p style="font-size:15px; line-height:1.6; color:var(--ink-muted);">Отправим по России или подготовим к вашему приходу.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======== CATALOG ======== -->
+<section id="catalog" class="section-pad">
+  <div class="container">
+    <p class="eyebrow" style="margin-bottom:12px;">Каталог</p>
+    <h2 class="h2" style="color:var(--ink); margin-bottom:32px;">Ароматы в наличии</h2>
+
+    <div style="display:flex; flex-wrap:wrap; gap:16px; justify-content:space-between; align-items:center; margin-bottom:36px;">
+      <div id="cat-filters" style="display:flex; flex-wrap:wrap; gap:8px;"></div>
+      <div style="position:relative; flex:1; min-width:220px; max-width:320px;">
+        <span style="position:absolute; left:16px; top:50%; transform:translateY(-50%); color:var(--ink-muted); font-size:16px; pointer-events:none;">⌕</span>
+        <input id="search-input" type="search" placeholder="Поиск по названию…" style="width:100%; padding:11px 16px 11px 40px; border-radius:999px; border:1px solid var(--line); background:var(--bg-ivory); font-size:14px; color:var(--ink); outline:none; transition:border-color .15s, box-shadow .15s;" onfocus="this.style.borderColor='var(--gold)';this.style.boxShadow='0 0 0 2px rgba(194,160,90,.3)'" onblur="this.style.borderColor='var(--line)';this.style.boxShadow='none'">
+      </div>
+    </div>
+
+    <div id="catalog-empty" style="display:none; text-align:center; padding:64px 24px; background:var(--bg-ivory); border:1px solid var(--line); border-radius:18px; margin-bottom:32px;">
+      <p style="font-size:18px; color:var(--ink-muted);">Ничего не нашли. Попробуйте другое название или напишите нам — соберём под заказ.</p>
+    </div>
+
+    <div id="catalog-grid" style="display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:24px;"></div>
+
+    <div id="show-more-wrap" style="text-align:center; margin-top:48px; display:none;">
+      <button id="show-more-btn" class="btn btn-secondary">Показать ещё</button>
+    </div>
+  </div>
+</section>
+
+<!-- ======== MIX ======== -->
+<section id="mix" style="background:var(--espresso); color:var(--bg-cream);">
+  <div class="container section-pad">
+    <p class="eyebrow" style="margin-bottom:12px;">Индивидуально</p>
+    <h2 class="h2" style="color:var(--bg-ivory); margin-bottom:16px;">Свой аромат из нескольких масел</h2>
+    <p style="font-family:'Lora',serif; font-size:18px; line-height:1.6; color:rgba(244,236,221,.78); max-width:620px; margin-bottom:48px;">Выберите от 2 до 4 масел — мы соберём авторский микс под ваш вкус и подготовим к вашему приходу.</p>
+
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:40px; align-items:start;">
+      <div>
+        <p style="font-family:'Inter',sans-serif; font-weight:600; font-size:13px; letter-spacing:1.5px; text-transform:uppercase; color:var(--gold); margin-bottom:14px;">1 · Выберите масла (до 4)</p>
+        <div id="mix-options" style="max-height:300px; overflow-y:auto; display:flex; flex-wrap:wrap; gap:8px; padding:18px; background:rgba(251,245,234,.05); border:1px solid rgba(194,160,90,.25); border-radius:18px;"></div>
+      </div>
+
+      <div style="background:rgba(251,245,234,.05); border:1px solid rgba(194,160,90,.25); border-radius:24px; padding:32px;">
+        <p style="font-family:'Inter',sans-serif; font-weight:600; font-size:13px; letter-spacing:1.5px; text-transform:uppercase; color:var(--gold); margin-bottom:18px;">2 · Пропорции</p>
+        <div id="mix-empty-hint" style="font-family:'Lora',serif; font-size:15px; color:rgba(244,236,221,.6); margin-bottom:24px;">Выберите минимум 2 масла слева.</div>
+        <div id="mix-sliders" style="display:flex; flex-direction:column; gap:18px; margin-bottom:24px;"></div>
+
+        <p style="font-family:'Inter',sans-serif; font-weight:600; font-size:13px; letter-spacing:1.5px; text-transform:uppercase; color:var(--gold); margin-bottom:10px;">3 · Объём</p>
+        <div id="mix-volumes" style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:24px;"></div>
+
+        <div style="display:flex; justify-content:space-between; align-items:baseline; padding-top:20px; border-top:1px solid rgba(194,160,90,.25); margin-bottom:20px;">
+          <span style="font-family:'Inter',sans-serif; font-size:14px; color:rgba(244,236,221,.7);">Итого <span style="font-size:12px;">(вкл. услугу +1000 ₽)</span></span>
+          <span id="mix-total-label" style="font-family:'Playfair Display',serif; font-weight:700; font-size:30px; color:var(--gold);">—</span>
+        </div>
+        <button id="mix-submit" class="btn btn-gold" style="width:100%; opacity:.5; cursor:not-allowed;" disabled>Заказать микс</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======== DELIVERY ======== -->
+<section id="delivery" class="section-pad reveal">
+  <div class="container">
+    <p class="eyebrow" style="margin-bottom:12px;">Получение</p>
+    <h2 class="h2" style="color:var(--ink); margin-bottom:48px;">Доставка и бронь</h2>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:24px; margin-bottom:32px;">
+      <div class="tariff-card">
+        <h4 class="h4" style="margin-bottom:8px;">Самовывоз</h4>
+        <p style="font-family:'Inter',sans-serif; font-weight:600; font-size:22px; color:var(--gold); margin-bottom:16px;">Бесплатно</p>
+        <p style="font-size:15px; line-height:1.55; color:var(--ink-muted);">Соберём заказ — заберёте на нашей точке в ТЦ (Санкт-Петербург).</p>
+      </div>
+      <div class="tariff-card">
+        <h4 class="h4" style="margin-bottom:8px;">Бронь «Готово к приходу»</h4>
+        <p style="font-family:'Inter',sans-serif; font-weight:600; font-size:22px; color:var(--gold); margin-bottom:16px;">+100 ₽</p>
+        <p style="font-size:15px; line-height:1.55; color:var(--ink-muted);">Подготовим заранее к выбранному времени — не ждёте на месте.</p>
+      </div>
+      <div class="tariff-card">
+        <h4 class="h4" style="margin-bottom:8px;">Приоритет</h4>
+        <p style="font-family:'Inter',sans-serif; font-weight:600; font-size:22px; color:var(--gold); margin-bottom:16px;">+300 ₽</p>
+        <p style="font-size:15px; line-height:1.55; color:var(--ink-muted);">К точному времени, аккуратная упаковка, чек.</p>
+      </div>
+      <div class="tariff-card">
+        <h4 class="h4" style="margin-bottom:8px;">VIP / свой микс</h4>
+        <p style="font-family:'Inter',sans-serif; font-weight:600; font-size:22px; color:var(--gold); margin-bottom:16px;">+1000 ₽</p>
+        <p style="font-size:15px; line-height:1.55; color:var(--ink-muted);">Авторский микс масел под вас + подарочная упаковка.</p>
+      </div>
+    </div>
+    <p style="font-family:'Lora',serif; font-size:16px; line-height:1.6; color:var(--ink-muted); background:var(--bg-ivory); border:1px solid var(--line); border-radius:18px; padding:22px 26px;">Курьер по Санкт-Петербургу — 300 ₽. Почта России / СДЭК по всей РФ — от 350 ₽. <strong style="color:var(--mocha);">Бесплатная доставка по РФ при заказе от 3000 ₽.</strong></p>
+  </div>
+</section>
+
+<!-- ======== ABOUT ======== -->
+<section id="about" style="background:var(--bg-ivory); border-top:1px solid var(--line);">
+  <div class="container section-pad">
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:56px; align-items:center;">
+      <div style="position:relative; aspect-ratio:5/4; border-radius:24px; overflow:hidden; box-shadow:var(--shadow-lg);">
+        <img src="images/spray.jpg" alt="Флаконы Yunus Parfum" style="width:100%; height:100%; object-fit:cover;">
+      </div>
+      <div class="reveal">
+        <p class="eyebrow" style="margin-bottom:12px;">Ателье ароматов</p>
+        <h3 class="h3" style="color:var(--ink); margin-bottom:24px;">Юнус — ваш парфюмер</h3>
+        <p style="font-family:'Lora',serif; font-size:18px; line-height:1.65; color:var(--ink-muted); margin-bottom:28px;">Юнус — основатель ателье селективной парфюмерии в Санкт-Петербурге. Уже несколько лет он помогает находить аромат, который раскрывается именно на вас. В наличии — сотни мужских, женских и универсальных ароматов, каждый можно взять в любом объёме, как спрей или как чистое масло, а можно собрать собственный микс. Здесь не продают «как все» — здесь собирают аромат под человека.</p>
+        <div style="display:flex; flex-wrap:wrap; gap:10px;">
+          <span class="pill">Сотни ароматов</span>
+          <span class="pill">От 3 до 100 мл</span>
+          <span class="pill">Спрей и масло</span>
+          <span class="pill">Свой микс</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======== REVIEWS ======== -->
+<section class="section-pad reveal">
+  <div class="container">
+    <div style="display:flex; flex-wrap:wrap; gap:16px; justify-content:space-between; align-items:flex-end; margin-bottom:40px;">
+      <div>
+        <p class="eyebrow" style="margin-bottom:12px;">Нам доверяют</p>
+        <h2 class="h2" style="color:var(--ink);">Отзывы клиентов</h2>
+      </div>
+      <a href="https://instagram.com/aroma_garden_spb" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">Instagram: aroma_garden_spb →</a>
+    </div>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:24px;">
+      <div class="review-card">
+        <p style="font-family:'Lora',serif; font-size:16px; line-height:1.6; color:var(--ink); font-style:italic; margin-bottom:18px;">«Спасибо большое! Хорошо держатся, стойкие, очень долго не выветриваются.»</p>
+        <p style="font-family:'Inter',sans-serif; font-weight:600; font-size:14px; color:var(--mocha);">Клиент <span style="color:var(--gold);">★★★★★</span></p>
+      </div>
+      <div class="review-card">
+        <p style="font-family:'Lora',serif; font-size:16px; line-height:1.6; color:var(--ink); font-style:italic; margin-bottom:18px;">«Ассаламу алейкум, тоже брал месяц назад — просто бомба, в подарок ещё 4мл получил. Очень нравятся ароматы, дай Аллагь торговли и процветания!»</p>
+        <p style="font-family:'Inter',sans-serif; font-weight:600; font-size:14px; color:var(--mocha);">Постоянный клиент <span style="color:var(--gold);">★★★★★</span></p>
+      </div>
+      <div class="review-card">
+        <p style="font-family:'Lora',serif; font-size:16px; line-height:1.6; color:var(--ink); font-style:italic; margin-bottom:18px;">«Я не ошиблась! Шла мимо и услышала аромат, который давно искала. Возвращаюсь к вам не первый раз и всегда готова кричать о вас на каждом углу!»</p>
+        <p style="font-family:'Inter',sans-serif; font-weight:600; font-size:14px; color:var(--mocha);">Постоянная клиентка <span style="color:var(--gold);">★★★★★</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======== FINAL CTA ======== -->
+<section style="background:var(--espresso); text-align:center;">
+  <div style="max-width:760px; margin:0 auto; padding:clamp(72px,10vw,120px) 24px;">
+    <h2 class="h2" style="color:var(--bg-ivory); margin-bottom:32px;">Готовы собрать <span style="font-style:italic; color:var(--gold);">свой аромат?</span></h2>
+    <div style="display:flex; flex-wrap:wrap; gap:16px; justify-content:center; align-items:center;">
+      <a href="#catalog" class="btn btn-gold" style="font-size:16px; padding:18px 40px;">Выбрать аромат</a>
+      <a href="tel:+79064482204" style="font-family:'Inter',sans-serif; font-weight:600; font-size:18px; color:var(--bg-ivory); text-decoration:none;">+7 906 448 2204</a>
+    </div>
+  </div>
+</section>
+
+<!-- ======== FOOTER ======== -->
+<footer style="background:var(--espresso); color:rgba(244,236,221,.7); border-top:1px solid rgba(194,160,90,.2);">
+  <div class="container" style="padding-top:64px; padding-bottom:40px; display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:40px;">
+    <div>
+      <div style="display:flex; align-items:baseline; gap:8px; margin-bottom:16px;">
+        <span style="font-family:'Playfair Display',serif; font-weight:700; font-size:24px; color:var(--bg-ivory);">YUNUS</span>
+        <span style="font-family:'Inter',sans-serif; font-weight:600; font-size:12px; letter-spacing:2.5px; text-transform:uppercase; color:var(--gold);">PARFUM</span>
+      </div>
+      <p style="font-family:'Lora',serif; font-size:15px; line-height:1.6;">Ателье селективной парфюмерии на разлив. Соберём ваш аромат вручную.</p>
+    </div>
+    <div>
+      <p style="font-family:'Inter',sans-serif; font-weight:600; font-size:12px; letter-spacing:1.5px; text-transform:uppercase; color:var(--gold); margin-bottom:14px;">Навигация</p>
+      <div style="display:flex; flex-direction:column; gap:10px;">
+        <a href="#catalog" style="font-family:'Lora',serif; font-size:15px; color:rgba(244,236,221,.7); text-decoration:none; transition:color .15s;" onmouseover="this.style.color='#FBF5EA'" onmouseout="this.style.color='rgba(244,236,221,.7)'">Каталог</a>
+        <a href="#how" style="font-family:'Lora',serif; font-size:15px; color:rgba(244,236,221,.7); text-decoration:none;" onmouseover="this.style.color='#FBF5EA'" onmouseout="this.style.color='rgba(244,236,221,.7)'">Как это работает</a>
+        <a href="#mix" style="font-family:'Lora',serif; font-size:15px; color:rgba(244,236,221,.7); text-decoration:none;" onmouseover="this.style.color='#FBF5EA'" onmouseout="this.style.color='rgba(244,236,221,.7)'">Свой микс</a>
+        <a href="#delivery" style="font-family:'Lora',serif; font-size:15px; color:rgba(244,236,221,.7); text-decoration:none;" onmouseover="this.style.color='#FBF5EA'" onmouseout="this.style.color='rgba(244,236,221,.7)'">Доставка</a>
+      </div>
+    </div>
+    <div>
+      <p style="font-family:'Inter',sans-serif; font-weight:600; font-size:12px; letter-spacing:1.5px; text-transform:uppercase; color:var(--gold); margin-bottom:14px;">Контакты</p>
+      <div style="display:flex; flex-direction:column; gap:10px;">
+        <a href="tel:+79064482204" style="font-family:'Lora',serif; font-size:15px; color:var(--bg-ivory); text-decoration:none;">+7 906 448 2204</a>
+        <div style="display:flex; flex-wrap:wrap; gap:8px;">
+          <a href="https://wa.me/79064482204" target="_blank" rel="noopener" style="font-family:'Inter',sans-serif; font-weight:600; font-size:13px; color:var(--bg-ivory); text-decoration:none; background:rgba(194,160,90,.16); border:1px solid rgba(194,160,90,.35); padding:7px 14px; border-radius:999px; transition:background .15s;" onmouseover="this.style.background='rgba(194,160,90,.28)'" onmouseout="this.style.background='rgba(194,160,90,.16)'">WhatsApp</a>
+          <a href="https://t.me/+79064482204" target="_blank" rel="noopener" style="font-family:'Inter',sans-serif; font-weight:600; font-size:13px; color:var(--bg-ivory); text-decoration:none; background:rgba(194,160,90,.16); border:1px solid rgba(194,160,90,.35); padding:7px 14px; border-radius:999px; transition:background .15s;" onmouseover="this.style.background='rgba(194,160,90,.28)'" onmouseout="this.style.background='rgba(194,160,90,.16)'">Telegram</a>
+        </div>
+        <a href="https://instagram.com/aroma_garden_spb" target="_blank" rel="noopener" style="font-family:'Lora',serif; font-size:15px; color:rgba(244,236,221,.7); text-decoration:none;" onmouseover="this.style.color='#FBF5EA'" onmouseout="this.style.color='rgba(244,236,221,.7)'">Instagram: aroma_garden_spb</a>
+        <span style="font-family:'Lora',serif; font-size:15px;">Санкт-Петербург, Лиговский пр., 153, 2 этаж</span>
+      </div>
+    </div>
+  </div>
+  <div class="container" style="padding-top:24px; padding-bottom:24px; border-top:1px solid rgba(194,160,90,.2); display:flex; flex-wrap:wrap; gap:16px; justify-content:space-between;">
+    <p style="font-family:'Inter',sans-serif; font-size:12px; color:rgba(244,236,221,.5); max-width:640px; line-height:1.5;">Названия ароматов приведены для ориентира по парфюмерным мотивам и не являются оригинальной продукцией указанных брендов.</p>
+    <p style="font-family:'Inter',sans-serif; font-size:12px; color:rgba(244,236,221,.5);">© 2026 YUNUS PARFUM</p>
+  </div>
+</footer>
+
+<!-- ======== CONFIGURATOR MODAL ======== -->
+<div id="cfg-modal" style="display:none;" role="dialog" aria-label="Конфигуратор аромата" aria-modal="true">
+  <div class="modal-overlay" id="cfg-overlay">
+    <div class="modal-box">
+      <div class="cfg-grid">
+        <!-- Left: visualization -->
+        <div class="cfg-left">
+          <button onclick="closeCfg()" aria-label="Закрыть" style="position:absolute; top:16px; left:16px; background:rgba(44,27,16,.08); border:none; cursor:pointer; width:38px; height:38px; border-radius:999px; font-size:18px; color:var(--espresso);">✕</button>
+          <div class="cfg-bottle-wrap">
+            <div class="cfg-cap"></div>
+            <div class="cfg-neck"></div>
+            <div class="cfg-body">
+              <div class="cfg-fill" id="cfg-fill" style="height:50%;"></div>
+              <div class="cfg-gloss"></div>
+            </div>
+          </div>
+          <p style="margin:24px 0 4px; font-family:'Inter',sans-serif; font-size:13px; letter-spacing:1px; text-transform:uppercase; color:var(--mocha);" id="cfg-vol-label">10 мл</p>
+          <p style="font-family:'Playfair Display',serif; font-weight:700; font-size:42px; color:var(--espresso); line-height:1;" id="cfg-total-label">—</p>
+          <p style="margin-top:8px; font-family:'Inter',sans-serif; font-size:12px; color:var(--ink-muted);" id="cfg-oil-label"></p>
+        </div>
+        <!-- Right: choices -->
+        <div class="cfg-right">
+          <button onclick="closeCfg()" aria-label="Закрыть" style="position:absolute; top:20px; right:24px; background:none; border:none; cursor:pointer; font-size:22px; color:var(--ink-muted);">✕</button>
+          <p class="eyebrow" style="margin-bottom:4px;" id="cfg-cat-label"></p>
+          <h3 style="font-family:'Playfair Display',serif; font-weight:700; font-size:26px; color:var(--ink); margin-bottom:4px; padding-right:32px;" id="cfg-name"></h3>
+          <p style="font-family:'Inter',sans-serif; font-size:14px; color:var(--mocha); font-weight:600; margin-bottom:24px;" id="cfg-per-ml"></p>
+
+          <p class="cfg-section-title">Формат</p>
+          <div class="cfg-pills" id="cfg-formats"></div>
+
+          <div id="cfg-conc-wrap" style="margin-bottom:22px; display:none;">
+            <p class="cfg-section-title">Концентрация</p>
+            <div class="cfg-pills" id="cfg-concentrations"></div>
+            <p style="font-family:'Lora',serif; font-size:12px; color:var(--ink-muted); line-height:1.5;">Платите только за масло. Чем выше концентрация — тем насыщеннее и стойче аромат.</p>
+          </div>
+
+          <p class="cfg-section-title">Объём</p>
+          <div class="cfg-pills" id="cfg-volumes"></div>
+
+          <p class="cfg-section-title">Флакон</p>
+          <div id="cfg-bottles"></div>
+
+          <label style="display:flex; align-items:center; gap:10px; cursor:pointer; margin-bottom:22px; font-family:'Inter',sans-serif; font-size:14px; color:var(--ink);">
+            <input type="checkbox" id="cfg-giftbox"> + Подарочная коробка <span style="color:var(--gold); font-weight:600;">+250 ₽</span>
+          </label>
+
+          <p class="cfg-section-title">Получение</p>
+          <div id="cfg-pickups"></div>
+
+          <button id="cfg-submit" class="btn btn-primary" style="width:100%; font-size:16px; padding:18px; margin-top:4px;">Оформить заказ</button>
+          <p style="margin-top:12px; text-align:center; font-family:'Inter',sans-serif; font-size:12px; color:var(--ink-muted);">Заявка откроется в WhatsApp со сводкой заказа</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======== ORDER SUMMARY FALLBACK ======== -->
+<div id="summary-modal" style="display:none;" role="dialog" aria-label="Сводка заказа" aria-modal="true">
+  <div class="modal-overlay" onclick="if(event.target===this)closeSummary()">
+    <div style="background:var(--bg-ivory); border-radius:24px; box-shadow:0 24px 60px rgba(60,40,20,.3); width:100%; max-width:440px; margin:auto; padding:36px; text-align:center;">
+      <div style="width:56px; height:56px; margin:0 auto 20px; border-radius:999px; background:var(--grad-gold); display:flex; align-items:center; justify-content:center; font-size:26px; color:var(--espresso);">✓</div>
+      <h3 style="font-family:'Playfair Display',serif; font-weight:700; font-size:24px; color:var(--ink); margin-bottom:12px;">Спасибо, заявка собрана</h3>
+      <pre id="summary-text" style="text-align:left; white-space:pre-wrap; font-family:'Inter',sans-serif; font-size:13px; line-height:1.6; color:var(--ink-muted); background:var(--bg-cream); border:1px solid var(--line); border-radius:14px; padding:18px; margin-bottom:24px;"></pre>
+      <button id="copy-btn" onclick="copyOrder()" class="btn btn-primary" style="width:100%; margin-bottom:10px;">Скопировать заказ</button>
+      <button onclick="closeSummary()" class="btn btn-secondary" style="width:100%;">Закрыть</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ====== DATA ======
+const FRAGRANCES = [
+  {cat:'m', name:"L.V. L'Immensité", price:300, desc:"Свежий имбирь и тёплая амбра"},
+  {cat:'m', name:"Dark Lord by Kilian", price:250, desc:"Дымный кофе, ром и тёмный шоколад"},
+  {cat:'m', name:"Bvlgari Aqva", price:250, desc:"Морская свежесть и солнечный посидониум"},
+  {cat:'m', name:"Tiger Bvlgari", price:250, desc:"Пряный табак и дерзкий цитрус"},
+  {cat:'m', name:"Sheikh 77", price:200, desc:"Богатый уд, шафран и роза"},
+  {cat:'m', name:"Versace Eros", price:200, hit:true, desc:"Мята, ваниль и тонка"},
+  {cat:'m', name:"Antonio Banderas Blue", price:150, desc:"Акватика и древесина, лёгкий шлейф"},
+  {cat:'m', name:"P.R. Invictus Aqua", price:150, desc:"Морская соль и грейпфрут, спорт-фреш"},
+  {cat:'m', name:"G. Armani Acqua di Giò", price:150, desc:"Бергамот, морской бриз и ротанг"},
+  {cat:'m', name:"Egoiste Chanel", price:100, desc:"Сандал, корица и роза — благородство"},
+  {cat:'m', name:"Lacoste Sport", price:150, desc:"Ментол, цитрус и спортивный драйв"},
+  {cat:'m', name:"Dior Homme", price:250, desc:"Пудровый ирис и какао, элегантность"},
+  {cat:'m', name:"C.H. 212 Men", price:100, desc:"Пряный грейпфрут и зелёный лист"},
+  {cat:'m', name:"D&G Light Blue", price:100, desc:"Яблоко, кедр и средиземноморское солнце"},
+  {cat:'m', name:"Allure Homme Sport", price:150, desc:"Цитрус, перец и морская свежесть"},
+  {cat:'m', name:"Lacoste White", price:100, desc:"Имбирь, кедр и чистая свежесть"},
+  {cat:'m', name:"Zam Zam Gold", price:150, desc:"Сладкий восточный амбровый аккорд"},
+  {cat:'m', name:"Dior Sauvage", price:200, hit:true, desc:"Амброксан, бергамот и перец"},
+  {cat:'m', name:"Bleu de Chanel", price:150, hit:true, desc:"Цитрус, кедр и дымный ладан"},
+  {cat:'w', name:"Victoria's Secret So Sexy", price:200, desc:"Цветочно-фруктовый соблазн"},
+  {cat:'w', name:"Victoria's Secret Aqua Kiss", price:150, desc:"Нежная водяная свежесть и мускус"},
+  {cat:'w', name:"Victoria's Secret Scandalous", price:200, desc:"Дерзкий жасмин и сливочная ваниль"},
+  {cat:'w', name:"Victoria's Secret Mango", price:250, desc:"Сочное манго и тропические ноты"},
+  {cat:'w', name:"Victoria's Secret Bombshell", price:200, desc:"Пион, маракуйя и сияющий шик"},
+  {cat:'w', name:"Hürrem Sultan", price:150, desc:"Роза, уд и восточная роскошь"},
+  {cat:'w', name:"Lanvin Éclat", price:150, desc:"Сирень, зелень и тёплый мускус"},
+  {cat:'w', name:"Dior J'adore", price:150, hit:true, desc:"Иланг-иланг, роза и жасмин"},
+  {cat:'w', name:"Miss Dior", price:150, desc:"Романтичная роза и пачули"},
+  {cat:'w', name:"Chanel №5", price:150, desc:"Легендарный альдегидный букет"},
+  {cat:'w', name:"Chanel Chance", price:150, desc:"Цитрус, пачули и пудровый шлейф"},
+  {cat:'w', name:"Coco Mademoiselle", price:100, hit:true, desc:"Пачули, роза и апельсин"},
+  {cat:'w', name:"Chanel Tendre", price:150, desc:"Нежный цитрус и жасмин"},
+  {cat:'w', name:"Trussardi Donna", price:150, desc:"Цветы, дерево и чувственность"},
+  {cat:'w', name:"Givenchy Secret", price:200, desc:"Роза, пачули и таинственность"},
+  {cat:'w', name:"Givenchy Ange ou Démon", price:150, desc:"Ладан, специи и тубероза"},
+  {cat:'w', name:"Black Opium", price:150, hit:true, desc:"Кофе, ваниль и белые цветы"},
+  {cat:'w', name:"Carolina Herrera", price:150, desc:"Тубероза, жасмин и сандал"},
+  {cat:'w', name:"D&G Imperatrice 3", price:150, desc:"Арбуз, киви и свежесть"},
+  {cat:'w', name:"Gucci Flora", price:150, desc:"Цветущий пион и роза"},
+  {cat:'w', name:"Gucci Bamboo", price:150, desc:"Касабланка-лилия и сандал"},
+  {cat:'w', name:"Lancôme Idôle", price:150, hit:true, desc:"Роза, жасмин и чистый мускус"},
+  {cat:'w', name:"Escada Cherry", price:150, desc:"Сочная вишня и спелые ягоды"},
+  {cat:'w', name:"Sheikh 33", price:200, desc:"Богатый уд и сладкая роза"},
+  {cat:'w', name:"Soblazn", price:200, desc:"Сладкие ягоды и ваниль"},
+  {cat:'w', name:"Zara Tuberose", price:150, desc:"Кремовая тубероза и белые цветы"},
+  {cat:'w', name:"Montale Roses", price:250, desc:"Насыщенная дамасская роза"},
+  {cat:'w', name:"Montale Dark Purple", price:200, desc:"Слива, роза и пачули"},
+  {cat:'w', name:"Kilian Good Girl", price:250, hit:true, desc:"Миндаль, ваниль и тубероза"},
+  {cat:'w', name:"Jasmine", price:250, desc:"Чистый чувственный жасмин"},
+  {cat:'w', name:"Versace Bright Crystal", price:150, desc:"Гранат, пион и лотос"},
+  {cat:'u', name:"Zam Zam", price:150, desc:"Тёплый восточный мускус"},
+  {cat:'u', name:"Capitan Black", price:150, desc:"Табак, ваниль и пряности"},
+  {cat:'u', name:"Alexandre.J", price:250, desc:"Медовый ирис и пачули"},
+  {cat:'u', name:"Puredistance White", price:250, desc:"Пудровый цветочный люкс"},
+  {cat:'u', name:"Initio Oud for Greatness", price:300, hit:true, desc:"Уд, шафран и мускатный орех"},
+  {cat:'u', name:"Hayati Al Haramain", price:200, desc:"Сладкий фруктовый уд"},
+  {cat:'u', name:"Sospiro Accento", price:300, hit:true, desc:"Тропики, имбирь и пачули"},
+  {cat:'u', name:"Sospiro Erba Pura", price:300, hit:true, desc:"Сладкие фрукты и амбра"},
+  {cat:'u', name:"Zielinski Orange", price:250, desc:"Сочный апельсин и нероли"},
+  {cat:'u', name:"Zielinski Rosen Vanilla", price:250, desc:"Роза и кремовая ваниль"},
+  {cat:'u', name:"Zielinski Lemon", price:250, desc:"Искристый лимон и фреш"},
+  {cat:'u', name:"Zielinski Pepper", price:300, desc:"Чёрный перец и древесина"},
+  {cat:'u', name:"Zielinski Rosemary", price:250, desc:"Розмарин и ароматные травы"},
+  {cat:'u', name:"Tom Ford Cherry", price:300, desc:"Ликёрная вишня и миндаль"},
+  {cat:'u', name:"Tom Ford Tobacco Vanille", price:200, hit:true, desc:"Табак, ваниль и специи"},
+  {cat:'u', name:"Tom Ford Tuscan Leather", price:250, desc:"Кожа, шафран и малина"},
+  {cat:'u', name:"Tom Ford Tobacco Oud", price:200, desc:"Дымный табак и уд"},
+  {cat:'u', name:"Tom Ford Oud Wood", price:200, hit:true, desc:"Уд, сандал и кардамон"},
+  {cat:'u', name:"Tom Ford Bitter Peach", price:250, hit:true, desc:"Сочный персик и ром"},
+  {cat:'u', name:"Tom Ford Black Orchid", price:200, desc:"Тёмная орхидея и трюфель"},
+  {cat:'u', name:"Molecule 01", price:250, desc:"Чистый изо-э-супер, звучит на коже"},
+  {cat:'u', name:"Molecule 02", price:300, hit:true, desc:"Амброксан, мягкое облако"},
+  {cat:'u', name:"Molecule 04", price:300, desc:"Уд и мускус, минимализм"},
+  {cat:'u', name:"Molecule 05", price:300, desc:"Ирис и тёплый кашмеран"},
+  {cat:'u', name:"Molecule 09", price:250, desc:"Роза и чистый мускус"},
+  {cat:'u', name:"Molecule «Игры разума»", price:250, desc:"Гипнотический мускусный аккорд"},
+  {cat:'u', name:"Black Afgano", price:300, hit:true, desc:"Смолы, уд и тёмные травы"},
+  {cat:'u', name:"Amber Wood Ajmal", price:250, desc:"Амбра, дерево и мускус"},
+  {cat:'u', name:"Tiziana Terenzi Kirke", price:300, hit:true, desc:"Маракуйя, персик и ваниль"},
+  {cat:'u', name:"Tiziana Terenzi Gumin", price:300, desc:"Фрукты, ладан и амбра"},
+  {cat:'u', name:"Narcotic", price:250, desc:"Гипнотичный белый цветок"},
+  {cat:'u', name:"Baccarat 540", price:250, hit:true, desc:"Шафран, амбра и жасмин"},
+  {cat:'u', name:"Roja Elysium", price:300, hit:true, desc:"Цитрус, кедр и амбра"},
+  {cat:'u', name:"Memo African Leather", price:250, desc:"Кожа, специи и кардамон"},
+  {cat:'u', name:"Memo Italian Leather", price:250, desc:"Замша, шафран и фрукты"},
+  {cat:'u', name:"Initio Musk", price:300, desc:"Чувственный мускус-афродизиак"},
+  {cat:'u', name:"Kenzo Electric", price:300, desc:"Пряный имбирь и древесина"},
+  {cat:'u', name:"Megamare Orto Parisi", price:300, desc:"Солёный океан и водоросли"},
+  {cat:'u', name:"Mancera Cedrat Boise", price:300, hit:true, desc:"Лимон, кедр и амбра"},
+  {cat:'u', name:"Blood Shahid", price:200, desc:"Сладкая вишня и тёмные специи"},
+  {cat:'u', name:"Cocain", price:200, desc:"Холодный мускус и пудра"},
+  {cat:'u', name:"L.V. Afternoon", price:300, desc:"Ладан, кожа и древесина"},
+  {cat:'u', name:"Intrigue Devil's", price:300, desc:"Тёмные специи и уд"},
+  {cat:'u', name:"Montale Starry Nights", price:200, desc:"Уд, бергамот и пачули"},
+  {cat:'u', name:"Montabaco", price:250, desc:"Табак, специи и сухофрукты"},
+  {cat:'u', name:"Byredo Bal d'Afrique", price:250, desc:"Фиалка, ваниль и нероли"},
+  {cat:'u', name:"Jo Malone Wood Sage", price:250, desc:"Морская соль и шалфей"},
+  {cat:'u', name:"Ganymede", price:300, hit:true, desc:"Шафран, мандарин и замша"},
+  {cat:'u', name:"Kajal Dahab", price:300, desc:"Медовый табак и амбра"},
+  {cat:'u', name:"Musk Kashmir", price:300, desc:"Тёплый кашмирский мускус"},
+  {cat:'u', name:"Arabians Montale", price:300, desc:"Сладкий уд и роза"},
+  {cat:'u', name:"L.V. Symphony", price:300, desc:"Ладан, амбра и древесина"},
+  {cat:'u', name:"Attar Collection Khalat Light Blue", price:250, desc:"Свежий фруктовый мускус"},
+  {cat:'u', name:"Initio Everest", price:300, desc:"Ветивер, мята и древесина"},
+  {cat:'u', name:"Mr. Burberry Element", price:250, desc:"Цитрус, кедр и пачули"},
+  {cat:'u', name:"Thomas Kosmala №4", price:300, desc:"Ваниль, мускус и амбра"},
+  {cat:'u', name:"Sheikh Shuyukh", price:200, desc:"Роскошный уд и специи"},
+  {cat:'u', name:"Oud Forest Montale", price:200, desc:"Дымный уд и древесина"},
+  {cat:'u', name:"Nejma 7", price:150, desc:"Сладкие специи и амбра"},
+  {cat:'u', name:"Kilian Intoxicated", price:250, desc:"Кофе, кардамон и корица"},
+];
+
+const BOTTLES = [
+  {id:'roll',    name:'Масляный ролик',        ml:[3,5,10],    price:0,   note:'аккуратный флакон-ролик для масла'},
+  {id:'spray-s', name:'Стеклянный спрей',      ml:[15,30],     price:150, note:'классический спрей'},
+  {id:'spray-m', name:'Спрей премиум',         ml:[30,50,100], price:300, note:'флакон с золотой крышкой'},
+  {id:'arab',    name:'Арабский декоративный', ml:[3,6,12],    price:350, note:'узорный восточный флакон'},
+  {id:'crystal', name:'Хрустальный графин',    ml:[30,50,100], price:400, note:'гранёный флакон-графин'},
+  {id:'car',     name:'Автоароматизатор',      ml:[5,8],       price:200, note:'подвесной в авто'},
+];
+const VOLUMES = [3, 5, 10, 15, 30, 50, 100];
+const FORMATS = [
+  {id:'oil',   label:'Масло',          ratio:1.0},
+  {id:'spray', label:'Спрей (парфюм)', ratio:0.30},
+];
+const CONCENTRATIONS = [
+  {id:30, label:'30% (стандарт)', ratio:0.30},
+  {id:40, label:'40%',            ratio:0.40},
+  {id:50, label:'50%',            ratio:0.50},
+];
+const PICKUP = [
+  {id:'self',    label:'Самовывоз',                 fee:0},
+  {id:'book100', label:'Бронь «Готово к приходу»',  fee:100},
+  {id:'book300', label:'Приоритет',                 fee:300},
+  {id:'vip1000', label:'VIP / свой микс',           fee:1000},
+  {id:'spb',     label:'Доставка по СПб (курьер)',  fee:300},
+  {id:'rf',      label:'Доставка по РФ (Почта/СДЭК)',fee:350},
+];
+const CAT_LABEL = {m:'Мужской', w:'Женский', u:'Универсальный'};
+const SWATCH = {m:'linear-gradient(160deg,#C9B58C,#7A4F2C)', w:'linear-gradient(160deg,#E6C9A8,#B97A6A)', u:'linear-gradient(160deg,#DDC489,#9C7B3A)'};
+const PHONE = '79064482204';
+
+// ====== STATE ======
+const state = {
+  cat: 'all', query: '', shown: 12,
+  cfgFrag: null,
+  cfgFormat: 'oil', cfgConc: 30, cfgVolume: 10, cfgBottle: 'roll', cfgGiftbox: false, cfgPickup: 'self',
+  summaryText: '',
+  mixWeights: {}, mixVolume: 30,
+};
+
+// ====== UTILS ======
+const fmt = n => Math.round(n).toLocaleString('ru-RU') + ' ₽';
+
+function compatibleBottles(vol) {
+  return BOTTLES.filter(b => b.ml.includes(vol));
+}
+function oilRatio() {
+  return state.cfgFormat === 'oil' ? 1.0 : state.cfgConc / 100;
+}
+function oilCost() {
+  if (!state.cfgFrag) return 0;
+  return state.cfgFrag.price * state.cfgVolume * oilRatio();
+}
+function bottlePrice() {
+  const b = BOTTLES.find(x => x.id === state.cfgBottle);
+  return b ? b.price : 0;
+}
+function pickupFee() {
+  const p = PICKUP.find(x => x.id === state.cfgPickup);
+  return p ? p.fee : 0;
+}
+function cfgTotal() {
+  return oilCost() + bottlePrice() + (state.cfgGiftbox ? 250 : 0) + pickupFee();
+}
+function fillPct() {
+  return Math.round((state.cfgVolume / 100) * 85) + 5;
+}
+
+// ====== HEADER SCROLL ======
+window.addEventListener('scroll', () => {
+  document.getElementById('header').classList.toggle('scrolled', window.scrollY > 24);
+}, {passive: true});
+
+// ====== MOBILE MENU ======
+document.getElementById('burger-btn').onclick = () => {
+  const m = document.getElementById('mobile-menu');
+  const open = m.style.display === 'flex';
+  m.style.display = open ? 'none' : 'flex';
+  m.style.flexDirection = 'column';
+  document.getElementById('burger-btn').setAttribute('aria-expanded', String(!open));
+  document.body.style.overflow = open ? '' : 'hidden';
+};
+function closeMobileMenu() {
+  document.getElementById('mobile-menu').style.display = 'none';
+  document.getElementById('burger-btn').setAttribute('aria-expanded', 'false');
+  document.body.style.overflow = '';
+}
+
+// ====== SCROLL REVEAL ======
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+}, {threshold: 0.08});
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// ====== CATALOG ======
+const CAT_FILTERS = [
+  {id:'all',  label:'Все'},
+  {id:'hits', label:'★ Хиты'},
+  {id:'m',    label:'Мужские'},
+  {id:'w',    label:'Женские'},
+  {id:'u',    label:'Универсальные'},
+];
+
+function renderFilters() {
+  const wrap = document.getElementById('cat-filters');
+  wrap.innerHTML = CAT_FILTERS.map(f =>
+    `<button class="pill${state.cat === f.id ? ' gold-active' : ''}" onclick="setCat('${f.id}')">${f.label}</button>`
+  ).join('');
+}
+
+function filteredFragrances() {
+  const q = state.query.trim().toLowerCase();
+  return FRAGRANCES.filter(f => {
+    if (state.cat === 'hits' && !f.hit) return false;
+    if (state.cat !== 'all' && state.cat !== 'hits' && f.cat !== state.cat) return false;
+    if (q && !f.name.toLowerCase().includes(q)) return false;
+    return true;
+  });
+}
+
+function renderCatalog() {
+  const all = filteredFragrances();
+  const visible = all.slice(0, state.shown);
+  const grid = document.getElementById('catalog-grid');
+  const empty = document.getElementById('catalog-empty');
+  const moreWrap = document.getElementById('show-more-wrap');
+  const moreBtn = document.getElementById('show-more-btn');
+
+  empty.style.display = all.length === 0 ? 'block' : 'none';
+  grid.style.display = all.length === 0 ? 'none' : 'grid';
+
+  grid.innerHTML = visible.map(f => `
+    <div class="frag-card" onclick="openCfg(${FRAGRANCES.indexOf(f)})" tabindex="0" onkeydown="if(event.key==='Enter')openCfg(${FRAGRANCES.indexOf(f)})" role="button" aria-label="Открыть конфигуратор для ${f.name}">
+      <div class="frag-thumb" style="background:${SWATCH[f.cat]};">
+        <div class="frag-thumb-pattern"></div>
+        ${f.hit ? '<span class="hit-badge">ХИТ</span>' : ''}
+        <div class="frag-bottle"></div>
+      </div>
+      <div class="frag-info">
+        <p class="eyebrow" style="font-size:11px; letter-spacing:2px;">${CAT_LABEL[f.cat]}</p>
+        <h4 class="frag-name">${f.name}</h4>
+        <p class="frag-desc">${f.desc || ''}</p>
+        <div class="frag-footer">
+          <span class="frag-price">от ${f.price} ₽/мл</span>
+          <span class="frag-cta">Собрать →</span>
+        </div>
+      </div>
+    </div>
+  `).join('');
+
+  const remaining = all.length - state.shown;
+  if (remaining > 0) {
+    moreWrap.style.display = 'block';
+    moreBtn.textContent = `Показать ещё · ${remaining}`;
+  } else {
+    moreWrap.style.display = 'none';
+  }
+}
+
+function setCat(c) { state.cat = c; state.shown = 12; renderFilters(); renderCatalog(); }
+function setCatQuery(val) { state.query = val; state.shown = 12; renderCatalog(); }
+
+document.getElementById('search-input').oninput = e => setCatQuery(e.target.value);
+document.getElementById('show-more-btn').onclick = () => { state.shown += 12; renderCatalog(); };
+
+// ====== CONFIGURATOR ======
+function openCfg(idx) {
+  const frag = FRAGRANCES[idx];
+  const compat = compatibleBottles(10);
+  state.cfgFrag = frag;
+  state.cfgFormat = 'oil';
+  state.cfgConc = 30;
+  state.cfgVolume = 10;
+  state.cfgBottle = compat.length ? compat[0].id : 'roll';
+  state.cfgGiftbox = false;
+  state.cfgPickup = 'self';
+  document.getElementById('cfg-modal').style.display = 'block';
+  document.body.style.overflow = 'hidden';
+  renderCfg();
+}
+function closeCfg() {
+  document.getElementById('cfg-modal').style.display = 'none';
+  document.body.style.overflow = '';
+}
+document.getElementById('cfg-overlay').onclick = e => { if (e.target === e.currentTarget) closeCfg(); };
+
+function renderCfg() {
+  if (!state.cfgFrag) return;
+  const f = state.cfgFrag;
+
+  // Header info
+  document.getElementById('cfg-cat-label').textContent = CAT_LABEL[f.cat];
+  document.getElementById('cfg-name').textContent = f.name;
+  document.getElementById('cfg-per-ml').textContent = `${f.price} ₽/мл · масло`;
+
+  // Bottle fill
+  document.getElementById('cfg-fill').style.height = fillPct() + '%';
+
+  // Price
+  const total = cfgTotal();
+  document.getElementById('cfg-total-label').textContent = fmt(total);
+  document.getElementById('cfg-vol-label').textContent = state.cfgVolume + ' мл';
+  document.getElementById('cfg-oil-label').textContent = `в т.ч. масло: ${fmt(oilCost())}`;
+
+  // Formats
+  document.getElementById('cfg-formats').innerHTML = FORMATS.map(fmt2 =>
+    `<button class="cfg-pill flex-1${state.cfgFormat === fmt2.id ? ' active' : ''}" onclick="setCfgFormat('${fmt2.id}')">${fmt2.label}</button>`
+  ).join('');
+
+  // Concentration (spray only)
+  const concWrap = document.getElementById('cfg-conc-wrap');
+  concWrap.style.display = state.cfgFormat === 'spray' ? 'block' : 'none';
+  document.getElementById('cfg-concentrations').innerHTML = CONCENTRATIONS.map(c =>
+    `<button class="cfg-pill${state.cfgConc === c.id ? ' active' : ''}" onclick="setCfgConc(${c.id})">${c.label}</button>`
+  ).join('');
+
+  // Volumes
+  document.getElementById('cfg-volumes').innerHTML = VOLUMES.map(v =>
+    `<button class="cfg-pill${state.cfgVolume === v ? ' active' : ''}" onclick="setCfgVolume(${v})">${v} мл</button>`
+  ).join('');
+
+  // Bottles
+  const compat = compatibleBottles(state.cfgVolume);
+  document.getElementById('cfg-bottles').innerHTML = compat.map(b =>
+    `<button class="bottle-opt${state.cfgBottle === b.id ? ' active' : ''}" onclick="setCfgBottle('${b.id}')">
+      <span class="bottle-icon"></span>
+      <span style="flex:1;">
+        <span style="display:block; font-family:'Inter',sans-serif; font-weight:600; font-size:14px; color:#241710;">${b.name}</span>
+        <span style="display:block; font-family:'Lora',serif; font-size:12px; color:#6E5C4C;">${b.note}</span>
+      </span>
+      <span style="font-family:'Inter',sans-serif; font-weight:600; font-size:14px; color:var(--gold); white-space:nowrap;">${b.price === 0 ? 'бесплатно' : '+' + b.price + ' ₽'}</span>
+    </button>`
+  ).join('');
+
+  // Giftbox
+  document.getElementById('cfg-giftbox').checked = state.cfgGiftbox;
+
+  // Pickups
+  document.getElementById('cfg-pickups').innerHTML = PICKUP.map(pk =>
+    `<button class="pickup-opt${state.cfgPickup === pk.id ? ' active' : ''}" onclick="setCfgPickup('${pk.id}')">
+      <span style="font-family:'Inter',sans-serif; font-weight:500; font-size:14px; color:#241710;">${pk.label}</span>
+      <span style="font-family:'Inter',sans-serif; font-weight:600; font-size:13px; color:var(--gold);">${pk.fee === 0 ? 'бесплатно' : '+' + pk.fee + ' ₽'}</span>
+    </button>`
+  ).join('');
+
+  // Submit button
+  document.getElementById('cfg-submit').textContent = `Оформить заказ · ${fmt(total)}`;
+}
+
+function setCfgFormat(id) { state.cfgFormat = id; renderCfg(); }
+function setCfgConc(id) { state.cfgConc = id; renderCfg(); }
+function setCfgVolume(v) {
+  state.cfgVolume = v;
+  const compat = compatibleBottles(v);
+  if (!compat.find(b => b.id === state.cfgBottle)) state.cfgBottle = compat.length ? compat[0].id : state.cfgBottle;
+  renderCfg();
+}
+function setCfgBottle(id) { state.cfgBottle = id; renderCfg(); }
+function setCfgPickup(id) { state.cfgPickup = id; renderCfg(); }
+document.getElementById('cfg-giftbox').onchange = () => { state.cfgGiftbox = document.getElementById('cfg-giftbox').checked; renderCfg(); };
+
+function buildOrderSummary() {
+  const s = state;
+  const fmtLabel = s.cfgFormat === 'oil' ? 'Масло' : 'Спрей (парфюм)';
+  const concLabel = s.cfgFormat === 'spray' ? `${s.cfgConc}%` : '—';
+  const bottle = BOTTLES.find(b => b.id === s.cfgBottle);
+  const pickup = PICKUP.find(p => p.id === s.cfgPickup);
+  return [
+    'Заказ · YUNUS PARFUM',
+    `Аромат: ${s.cfgFrag.name} (${CAT_LABEL[s.cfgFrag.cat]})`,
+    `Формат: ${fmtLabel}`,
+    `Концентрация: ${concLabel}`,
+    `Объём: ${s.cfgVolume} мл`,
+    `Флакон: ${bottle ? bottle.name : '—'}${s.cfgGiftbox ? ' + подарочная коробка' : ''}`,
+    `Получение: ${pickup ? pickup.label : '—'}`,
+    `В т.ч. масло: ${fmt(oilCost())}`,
+    `Итого: ${fmt(cfgTotal())}`,
+  ].join('\n');
+}
+
+document.getElementById('cfg-submit').onclick = () => {
+  const text = buildOrderSummary();
+  state.summaryText = text;
+  try {
+    const url = `https://wa.me/${PHONE}?text=${encodeURIComponent(text)}`;
+    const w = window.open(url, '_blank');
+    if (!w) showSummary(text);
+  } catch(e) { showSummary(text); }
+};
+
+// ====== SUMMARY MODAL ======
+function showSummary(text) {
+  document.getElementById('summary-text').textContent = text;
+  document.getElementById('copy-btn').textContent = 'Скопировать заказ';
+  document.getElementById('summary-modal').style.display = 'block';
+}
+function closeSummary() {
+  document.getElementById('summary-modal').style.display = 'none';
+}
+function copyOrder() {
+  try { navigator.clipboard.writeText(state.summaryText); } catch(e) {}
+  document.getElementById('copy-btn').textContent = '✓ Скопировано!';
+  setTimeout(() => { document.getElementById('copy-btn').textContent = 'Скопировать заказ'; }, 2000);
+}
+
+// ====== MIX BUILDER ======
+function mixShares() {
+  const w = state.mixWeights;
+  const names = Object.keys(w);
+  const sum = names.reduce((a, n) => a + w[n], 0) || 1;
+  return names.map(n => ({name: n, weight: w[n], share: w[n] / sum}));
+}
+function mixTotal() {
+  const shares = mixShares();
+  if (shares.length < 2) return 0;
+  const perMl = shares.reduce((a, sh) => {
+    const f = FRAGRANCES.find(x => x.name === sh.name);
+    return a + sh.share * (f ? f.price : 0);
+  }, 0);
+  const oil = perMl * state.mixVolume;
+  const bottles = compatibleBottles(state.mixVolume);
+  const bottleP = bottles.length ? bottles[0].price : 0;
+  return oil + bottleP + 1000;
+}
+
+function renderMix() {
+  const selected = Object.keys(state.mixWeights);
+  const count = selected.length;
+
+  // Options
+  document.getElementById('mix-options').innerHTML = FRAGRANCES.map(f => {
+    const active = !!state.mixWeights[f.name];
+    const disabled = !active && count >= 4;
+    return `<button
+      onclick="toggleMix('${f.name.replace(/'/g, "\\'")}')"
+      style="font-family:'Inter',sans-serif; font-size:12px; cursor:${disabled ? 'not-allowed' : 'pointer'}; padding:7px 12px; border-radius:999px; border:1px solid ${active ? 'var(--gold)' : 'rgba(194,160,90,.35)'}; background:${active ? 'rgba(194,160,90,.25)' : 'transparent'}; color:${active ? '#E4C988' : 'rgba(244,236,221,.8)'}; opacity:${disabled ? '.4' : '1'}; transition:all .15s;"
+    >${f.name}</button>`;
+  }).join('');
+
+  // Empty hint
+  document.getElementById('mix-empty-hint').style.display = count < 2 ? 'block' : 'none';
+
+  // Sliders
+  document.getElementById('mix-sliders').innerHTML = mixShares().map(s =>
+    `<div>
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+        <span style="font-family:'Lora',serif; font-size:15px; color:var(--bg-ivory);">${s.name}</span>
+        <span style="font-family:'Inter',sans-serif; font-weight:600; font-size:14px; color:var(--gold);">${Math.round(s.share * 100)}%</span>
+      </div>
+      <input class="mix-range" type="range" min="1" max="10" value="${state.mixWeights[s.name]}"
+        oninput="setMixWeight('${s.name.replace(/'/g, "\\'")}', this.value)">
+    </div>`
+  ).join('');
+
+  // Volumes
+  document.getElementById('mix-volumes').innerHTML = VOLUMES.map(v => {
+    const active = state.mixVolume === v;
+    return `<button onclick="setMixVolume(${v})" style="font-family:'Inter',sans-serif; font-size:13px; font-weight:500; cursor:pointer; padding:8px 14px; border-radius:999px; border:1px solid ${active ? 'var(--gold)' : 'rgba(194,160,90,.35)'}; background:${active ? 'rgba(194,160,90,.2)' : 'transparent'}; color:${active ? '#E4C988' : 'rgba(244,236,221,.8)'}; transition:all .15s;">${v} мл</button>`;
+  }).join('');
+
+  // Total
+  const total = mixTotal();
+  document.getElementById('mix-total-label').textContent = count >= 2 ? fmt(total) : '—';
+
+  // Submit
+  const btn = document.getElementById('mix-submit');
+  btn.disabled = count < 2;
+  btn.style.opacity = count < 2 ? '.5' : '1';
+  btn.style.cursor = count < 2 ? 'not-allowed' : 'pointer';
+}
+
+function toggleMix(name) {
+  if (state.mixWeights[name]) {
+    delete state.mixWeights[name];
+  } else {
+    if (Object.keys(state.mixWeights).length >= 4) return;
+    state.mixWeights[name] = 5;
+  }
+  renderMix();
+}
+function setMixWeight(name, val) { state.mixWeights[name] = Number(val); renderMix(); }
+function setMixVolume(v) { state.mixVolume = v; renderMix(); }
+
+document.getElementById('mix-submit').onclick = () => {
+  const shares = mixShares();
+  if (shares.length < 2) return;
+  const text = [
+    'Заказ · Свой микс · YUNUS PARFUM',
+    ...shares.map(s => `· ${s.name} — ${Math.round(s.share * 100)}%`),
+    `Объём: ${state.mixVolume} мл`,
+    'Услуга VIP-микс: +1000 ₽',
+    `Итого: ${fmt(mixTotal())}`,
+  ].join('\n');
+  state.summaryText = text;
+  try {
+    const url = `https://wa.me/${PHONE}?text=${encodeURIComponent(text)}`;
+    const w = window.open(url, '_blank');
+    if (!w) showSummary(text);
+  } catch(e) { showSummary(text); }
+};
+
+// ====== KEYBOARD ESCAPE ======
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    closeCfg();
+    closeSummary();
+    closeMobileMenu();
+  }
+});
+
+// ====== INIT ======
+renderFilters();
+renderCatalog();
+renderMix();
+</script>
+</body>
+</html>

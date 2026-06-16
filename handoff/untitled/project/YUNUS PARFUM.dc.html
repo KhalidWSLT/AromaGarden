@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Lora:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --accent: #C2A05A;
+    --accent-light: #E4C988;
+    --accent-dark: #9C7B3A;
+    --accent-deep: #7A4F2C;
+    --display: 'Playfair Display', serif;
+    --glow: 1;
+  }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: #F4ECDD; color: #241710; font-family: 'Lora', serif; -webkit-font-smoothing: antialiased; }
+  * { box-sizing: border-box; }
+  ::selection { background: var(--accent); color: #2C1B10; }
+  input { font-family: 'Inter', sans-serif; }
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  @keyframes heroUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  input.yp-range { -webkit-appearance:none; appearance:none; width:100%; height:6px; border-radius:999px; background:linear-gradient(90deg, var(--accent-light), var(--accent-dark)); outline:none; cursor:pointer; }
+  input.yp-range::-webkit-slider-thumb { -webkit-appearance:none; appearance:none; width:22px; height:22px; border-radius:50%; background:#FBF5EA; border:3px solid var(--accent); box-shadow:0 2px 10px rgba(20,12,6,.4); cursor:pointer; }
+  input.yp-range::-moz-range-thumb { width:22px; height:22px; border-radius:50%; background:#FBF5EA; border:3px solid var(--accent); box-shadow:0 2px 10px rgba(20,12,6,.4); cursor:pointer; }
+  input.yp-range::-moz-range-track { height:6px; border-radius:999px; background:linear-gradient(90deg, var(--accent-light), var(--accent-dark)); }
+  @media (max-width: 880px) {
+    [data-hdnav] { display: none !important; }
+    [data-hdcta] { display: none !important; }
+    [data-burger] { display: block !important; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    [data-marquee] { animation: none !important; }
+    [data-hero] { animation: none !important; opacity: 1 !important; transform: none !important; }
+    html { scroll-behavior: auto; }
+  }
+</style>
+</helmet>
+
+<div style="{{ rootStyle }}">
+
+  <!-- ============ HEADER ============ -->
+  <header style="position:sticky; top:0; z-index:60; background:{{ headerBg }}; box-shadow:{{ headerShadow }}; backdrop-filter:blur(8px); transition:background .3s ease, box-shadow .3s ease;">
+    <div style="max-width:1240px; margin:0 auto; padding:16px 24px; display:flex; align-items:center; gap:24px;">
+      <a href="#top" style="text-decoration:none; display:flex; align-items:baseline; gap:8px; margin-right:auto;">
+        <span style="font-family:var(--display); font-weight:700; font-size:24px; color:#241710; letter-spacing:-.3px;">Aroma</span>
+        <span style="font-family:'Inter',sans-serif; font-weight:600; font-size:12px; letter-spacing:2.5px; text-transform:uppercase; color:var(--accent);">Garden</span>
+      </a>
+      <nav data-hdnav style="display:flex; gap:28px; align-items:center;">
+        <a href="#catalog" style="font-family:'Inter',sans-serif; font-size:14px; color:#241710; text-decoration:none; opacity:.85;" style-hover="opacity:1; color:var(--accent-deep);">Каталог</a>
+        <a href="#how" style="font-family:'Inter',sans-serif; font-size:14px; color:#241710; text-decoration:none; opacity:.85;" style-hover="opacity:1; color:var(--accent-deep);">Как это работает</a>
+        <a href="#mix" style="font-family:'Inter',sans-serif; font-size:14px; color:#241710; text-decoration:none; opacity:.85;" style-hover="opacity:1; color:var(--accent-deep);">Свой микс</a>
+        <a href="#delivery" style="font-family:'Inter',sans-serif; font-size:14px; color:#241710; text-decoration:none; opacity:.85;" style-hover="opacity:1; color:var(--accent-deep);">Доставка</a>
+        <a href="#about" style="font-family:'Inter',sans-serif; font-size:14px; color:#241710; text-decoration:none; opacity:.85;" style-hover="opacity:1; color:var(--accent-deep);">О нас</a>
+      </nav>
+      <a href="#catalog" data-hdcta style="font-family:'Inter',sans-serif; font-weight:600; font-size:14px; letter-spacing:.3px; color:#2C1B10; text-decoration:none; background:linear-gradient(135deg,var(--accent-light) 0%,var(--accent) 45%,var(--accent-dark) 100%); padding:12px 22px; border-radius:999px; box-shadow:0 4px 14px rgba(194,160,90,.35); white-space:nowrap;" style-hover="box-shadow:0 8px 22px rgba(194,160,90,.5);">Подобрать аромат</a>
+      <button onClick="{{ toggleMenu }}" aria-label="Меню" style="display:none; background:none; border:none; cursor:pointer; padding:8px;" data-burger>
+        <span style="display:block; width:24px; height:2px; background:#241710; margin:5px 0;"></span>
+        <span style="display:block; width:24px; height:2px; background:#241710; margin:5px 0;"></span>
+        <span style="display:block; width:24px; height:2px; background:#241710; margin:5px 0;"></span>
+      </button>
+    </div>
+  </header>
+
+  <sc-if value="{{ mobileMenu }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeMenu }}" style="position:fixed; inset:0; z-index:70; background:#2C1B10; animation:fadeIn .2s ease; display:flex; flex-direction:column; padding:80px 32px; gap:8px;">
+      <a href="#catalog" style="font-family:var(--display); font-size:32px; color:#FBF5EA; text-decoration:none; padding:14px 0; border-bottom:1px solid rgba(255,255,255,.1);">Каталог</a>
+      <a href="#how" style="font-family:var(--display); font-size:32px; color:#FBF5EA; text-decoration:none; padding:14px 0; border-bottom:1px solid rgba(255,255,255,.1);">Как это работает</a>
+      <a href="#mix" style="font-family:var(--display); font-size:32px; color:#FBF5EA; text-decoration:none; padding:14px 0; border-bottom:1px solid rgba(255,255,255,.1);">Свой микс</a>
+      <a href="#delivery" style="font-family:var(--display); font-size:32px; color:#FBF5EA; text-decoration:none; padding:14px 0; border-bottom:1px solid rgba(255,255,255,.1);">Доставка</a>
+      <a href="#about" style="font-family:var(--display); font-size:32px; color:#FBF5EA; text-decoration:none; padding:14px 0; border-bottom:1px solid rgba(255,255,255,.1);">О нас</a>
+      <span style="margin-top:24px; color:var(--accent); font-family:'Inter',sans-serif; font-size:18px;">+7 906 448 2204</span>
+    </div>
+  </sc-if>
+
+  <!-- ============ HERO ============ -->
+  <section id="top" style="position:relative; background:radial-gradient(120% 120% at 70% 10%, #FBF5EA 0%, #F4ECDD 45%, #EFE2C8 100%); overflow:hidden;">
+    <div style="position:absolute; right:-6%; top:8%; width:min(46vw,560px); height:min(46vw,560px); border-radius:50%; background:radial-gradient(circle at 38% 32%, rgba(228,201,136,.85), rgba(194,160,90,.35) 55%, rgba(156,123,58,.12) 80%); filter:blur(2px); pointer-events:none; opacity:var(--glow); transition:opacity .4s ease;"></div>
+    <div style="position:absolute; right:8%; top:26%; width:min(20vw,200px); height:min(20vw,200px); border-radius:50%; background:radial-gradient(circle at 40% 35%, rgba(255,255,255,.7), rgba(194,160,90,.15) 70%); pointer-events:none; opacity:var(--glow); transition:opacity .4s ease;"></div>
+    <div style="position:relative; max-width:1240px; margin:0 auto; padding:clamp(72px,11vw,128px) 24px clamp(64px,9vw,110px); display:grid; grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr); gap:48px; align-items:center;">
+      <div data-hero style="animation:heroUp .8s cubic-bezier(.2,.7,.2,1) both;">
+        <p style="margin:0 0 20px; font-family:'Inter',sans-serif; font-weight:600; font-size:13px; letter-spacing:2.5px; text-transform:uppercase; color:var(--accent);">Селективная парфюмерия на разлив · Санкт-Петербург</p>
+        <h1 style="margin:0 0 24px; font-family:var(--display); font-weight:700; font-size:clamp(40px,6.4vw,72px); line-height:1.06; letter-spacing:-.5px; color:#241710; text-wrap:balance;">Соберите свой аромат — <span style="color:var(--accent-deep);">от 3 мл до 100 мл</span></h1>
+        <p style="margin:0 0 36px; font-family:'Lora',serif; font-size:clamp(17px,1.5vw,19px); line-height:1.6; color:#6E5C4C; max-width:560px; text-wrap:pretty;">Сотни ароматов в наличии: мужские, женские и универсальные. Выберите формат — спрей или чистое масло, нужный объём и флакон. Соберём вручную и отправим по России или подготовим к вашему приходу.</p>
+        <div style="display:flex; flex-wrap:wrap; gap:14px; margin-bottom:28px;">
+          <a href="#catalog" style="font-family:'Inter',sans-serif; font-weight:600; font-size:15px; letter-spacing:.5px; color:#FBF5EA; text-decoration:none; background:#2C1B10; padding:16px 30px; border-radius:999px; box-shadow:0 10px 30px rgba(60,40,20,.18);" style-hover="transform:translateY(-1px);">Выбрать аромат</a>
+          <a href="#mix" style="font-family:'Inter',sans-serif; font-weight:600; font-size:15px; letter-spacing:.5px; color:#241710; text-decoration:none; background:transparent; border:1.5px solid var(--accent-deep); padding:14.5px 28px; border-radius:999px;" style-hover="background:var(--accent-deep); color:#FBF5EA;">Собрать свой микс</a>
+        </div>
+        <div style="display:flex; flex-wrap:wrap; gap:20px;">
+          <span style="font-family:'Inter',sans-serif; font-size:13px; color:#6E5C4C; display:flex; align-items:center; gap:7px;"><span style="color:var(--accent);">✓</span> Все ароматы в наличии</span>
+          <span style="font-family:'Inter',sans-serif; font-size:13px; color:#6E5C4C; display:flex; align-items:center; gap:7px;"><span style="color:var(--accent);">✓</span> Спрей или масло</span>
+          <span style="font-family:'Inter',sans-serif; font-size:13px; color:#6E5C4C; display:flex; align-items:center; gap:7px;"><span style="color:var(--accent);">✓</span> Свой объём и концентрация</span>
+        </div>
+      </div>
+      <div data-hero-img style="position:relative; aspect-ratio:4/5; border-radius:24px; overflow:hidden; background:linear-gradient(160deg,#EBD9B4 0%,#D8BE8A 60%,#B9954F 100%); box-shadow:0 24px 60px rgba(60,40,20,.2); display:flex; align-items:flex-end; justify-content:center;">
+        <div style="position:absolute; inset:0; background:repeating-linear-gradient(135deg, rgba(255,255,255,.06) 0 12px, rgba(255,255,255,0) 12px 24px);"></div>
+        <div style="position:absolute; top:16px; left:16px; font-family:'Inter',sans-serif; font-size:11px; letter-spacing:1px; text-transform:uppercase; color:rgba(44,27,16,.55); background:rgba(251,245,234,.5); padding:6px 10px; border-radius:999px;">макрофото · флакон с золотой каплей</div>
+        <div style="position:relative; width:42%; height:62%; margin-bottom:8%; border-radius:14px 14px 18px 18px; background:linear-gradient(180deg, rgba(251,245,234,.35), rgba(194,160,90,.55)); border:1px solid rgba(255,255,255,.4); box-shadow:inset 0 8px 30px rgba(255,255,255,.3), 0 10px 30px rgba(60,40,20,.25);"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MARQUEE ============ -->
+  <div style="background:#2C1B10; overflow:hidden; white-space:nowrap; padding:14px 0;">
+    <div data-marquee style="display:inline-block; animation:marquee 26s linear infinite;">
+      <span style="font-family:'Inter',sans-serif; font-size:13px; letter-spacing:2px; text-transform:uppercase;">{{ marqueeText }}{{ marqueeText }}</span>
+    </div>
+  </div>
+
+  <!-- ============ WHY ============ -->
+  <section style="max-width:1240px; margin:0 auto; padding:clamp(72px,9vw,120px) 24px;">
+    <p style="margin:0 0 12px; font-family:'Inter',sans-serif; font-weight:600; font-size:13px; letter-spacing:2.5px; text-transform:uppercase; color:var(--accent);">Почему мы</p>
+    <h2 style="margin:0 0 48px; font-family:var(--display); font-weight:700; font-size:clamp(30px,5vw,48px); line-height:1.12; letter-spacing:-.3px; color:#241710;">Парфюмерия под вас</h2>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:24px;">
+      <sc-for list="{{ whyCards }}" as="c" hint-placeholder-count="4">
+        <div style="background:#FBF5EA; border:1px solid #E2D4BF; border-radius:18px; padding:32px 28px;">
+          <div style="width:48px; height:48px; border-radius:12px; background:linear-gradient(135deg,var(--accent-light),var(--accent-dark)); display:flex; align-items:center; justify-content:center; margin-bottom:20px; color:#2C1B10; font-family:var(--display); font-weight:700; font-size:22px;">{{ c.icon }}</div>
+          <h4 style="margin:0 0 10px; font-family:'Lora',serif; font-weight:600; font-size:20px; color:#241710;">{{ c.title }}</h4>
+          <p style="margin:0; font-family:'Lora',serif; font-size:15px; line-height:1.6; color:#6E5C4C;">{{ c.text }}</p>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- ============ HOW ============ -->
+  <section id="how" style="background:#FBF5EA; border-top:1px solid #E2D4BF; border-bottom:1px solid #E2D4BF;">
+    <div style="max-width:1240px; margin:0 auto; padding:clamp(72px,9vw,120px) 24px;">
+      <p style="margin:0 0 12px; font-family:'Inter',sans-serif; font-weight:600; font-size:13px; letter-spacing:2.5px; text-transform:uppercase; color:var(--accent);">Просто</p>
+      <h2 style="margin:0 0 56px; font-family:var(--display); font-weight:700; font-size:clamp(30px,5vw,48px); line-height:1.12; letter-spacing:-.3px; color:#241710;">Как собрать свои духи</h2>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:32px;">
+        <sc-for list="{{ steps }}" as="s" hint-placeholder-count="4">
+          <div style="position:relative; padding-top:28px; border-top:2px solid #E2D4BF;">
+            <span style="position:absolute; top:-22px; left:0; font-family:var(--display); font-weight:700; font-size:44px; color:var(--accent); line-height:1; background:#FBF5EA; padding-right:14px;">{{ s.num }}</span>
+            <h4 style="margin:0 0 8px; font-family:'Lora',serif; font-weight:600; font-size:19px; color:#241710;">{{ s.title }}</h4>
+            <p style="margin:0; font-family:'Lora',serif; font-size:15px; line-height:1.6; color:#6E5C4C;">{{ s.text }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CATALOG ============ -->
+  <section id="catalog" style="max-width:1240px; margin:0 auto; padding:clamp(72px,9vw,120px) 24px;">
+    <p style="margin:0 0 12px; font-family:'Inter',sans-serif; font-weight:600; font-size:13px; letter-spacing:2.5px; text-transform:uppercase; color:var(--accent);">Каталог</p>
+    <h2 style="margin:0 0 32px; font-family:var(--display); font-weight:700; font-size:clamp(30px,5vw,48px); line-height:1.12; letter-spacing:-.3px; color:#241710;">Ароматы в наличии</h2>
+
+    <div style="display:flex; flex-wrap:wrap; gap:16px; justify-content:space-between; align-items:center; margin-bottom:36px;">
+      <div style="display:flex; flex-wrap:wrap; gap:8px;">
+        <sc-for list="{{ catFilters }}" as="f" hint-placeholder-count="4">
+          <button onClick="{{ f.onClick }}" style="font-family:'Inter',sans-serif; font-weight:600; font-size:14px; cursor:pointer; padding:10px 20px; border-radius:999px; border:1px solid {{ f.border }}; background:{{ f.bg }}; color:{{ f.color }}; transition:all .18s ease;">{{ f.label }}</button>
+        </sc-for>
+      </div>
+      <div style="position:relative; flex:1; min-width:220px; max-width:320px;">
+        <span style="position:absolute; left:16px; top:50%; transform:translateY(-50%); color:#6E5C4C; font-size:15px;">⌕</span>
+        <input value="{{ query }}" onInput="{{ onQuery }}" placeholder="Поиск по названию…" style="width:100%; padding:11px 16px 11px 38px; border-radius:999px; border:1px solid #E2D4BF; background:#FBF5EA; font-size:14px; color:#241710; outline:none;" style-focus="border-color:var(--accent); box-shadow:0 0 0 2px rgba(194,160,90,.4);">
+      </div>
+    </div>
+
+    <sc-if value="{{ emptyState }}" hint-placeholder-val="{{ false }}">
+      <div style="text-align:center; padding:64px 24px; background:#FBF5EA; border:1px solid #E2D4BF; border-radius:18px;">
+        <p style="margin:0; font-family:'Lora',serif; font-size:18px; color:#6E5C4C;">Ничего не нашли. Попробуйте другое название или напишите нам — соберём под заказ.</p>
+      </div>
+    </sc-if>
+
+    <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:24px;">
+      <sc-for list="{{ visible }}" as="p" hint-placeholder-count="12">
+        <div onClick="{{ p.open }}" style="cursor:pointer; background:#FBF5EA; border:1px solid #E2D4BF; border-radius:18px; overflow:hidden; transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease; display:flex; flex-direction:column;" style-hover="transform:translateY(-4px); box-shadow:0 24px 60px rgba(60,40,20,.14); border-color:var(--accent);">
+          <div style="position:relative; aspect-ratio:4/5; background:{{ p.swatch }}; display:flex; align-items:flex-end; justify-content:center;">
+            <div style="position:absolute; inset:0; background:repeating-linear-gradient(135deg, rgba(255,255,255,.05) 0 10px, rgba(255,255,255,0) 10px 20px);"></div>
+            <sc-if value="{{ p.hit }}" hint-placeholder-val="{{ false }}">
+              <span style="position:absolute; top:12px; left:12px; font-family:'Inter',sans-serif; font-weight:600; font-size:11px; letter-spacing:1px; color:#2C1B10; background:linear-gradient(135deg,var(--accent-light),var(--accent)); padding:5px 11px; border-radius:999px;">ХИТ</span>
+            </sc-if>
+            <div style="position:relative; width:40%; height:58%; margin-bottom:10%; border-radius:12px 12px 16px 16px; background:linear-gradient(180deg, rgba(251,245,234,.4), rgba(44,27,16,.18)); border:1px solid rgba(255,255,255,.35);"></div>
+          </div>
+          <div style="padding:20px; display:flex; flex-direction:column; flex:1;">
+            <p style="margin:0 0 6px; font-family:'Inter',sans-serif; font-weight:600; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--accent);">{{ p.catLabel }}</p>
+            <h4 style="margin:0 0 7px; font-family:var(--display); font-weight:700; font-size:22px; color:#241710; line-height:1.18; letter-spacing:-.3px;">{{ p.name }}</h4>
+            <p style="margin:0 0 18px; font-family:'Inter',sans-serif; font-size:13px; line-height:1.55; color:#6E5C4C; letter-spacing:.1px;">{{ p.note }}</p>
+            <div style="margin-top:auto; display:flex; align-items:center; justify-content:space-between;">
+              <span style="font-family:'Inter',sans-serif; font-weight:600; font-size:18px; color:var(--accent);">{{ p.priceLabel }}</span>
+              <span style="font-family:'Inter',sans-serif; font-weight:600; font-size:14px; color:var(--accent-deep);">Собрать →</span>
+            </div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+
+    <sc-if value="{{ hasMore }}" hint-placeholder-val="{{ true }}">
+      <div style="text-align:center; margin-top:48px;">
+        <button onClick="{{ showMore }}" style="font-family:'Inter',sans-serif; font-weight:600; font-size:15px; cursor:pointer; color:#241710; background:transparent; border:1.5px solid var(--accent-deep); padding:14px 36px; border-radius:999px;" style-hover="background:var(--accent-deep); color:#FBF5EA;">Показать ещё · {{ remainingLabel }}</button>
+      </div>
+    </sc-if>
+  </section>
+
+  <!-- ============ MIX ============ -->
+  <section id="mix" style="background:#2C1B10; color:#F4ECDD;">
+    <div style="max-width:1240px; margin:0 auto; padding:clamp(72px,9vw,120px) 24px;">
+      <p style="margin:0 0 12px; font-family:'Inter',sans-serif; font-weight:600; font-size:13px; letter-spacing:2.5px; text-transform:uppercase; color:var(--accent);">Индивидуально</p>
+      <h2 style="margin:0 0 16px; font-family:var(--display); font-weight:700; font-size:clamp(30px,5vw,48px); line-height:1.12; letter-spacing:-.3px; color:#FBF5EA;">Свой аромат из нескольких масел</h2>
+      <p style="margin:0 0 48px; font-family:'Lora',serif; font-size:18px; line-height:1.6; color:rgba(244,236,221,.78); max-width:620px;">Выберите от 2 до 4 масел — мы соберём авторский микс под ваш вкус и подготовим к вашему приходу.</p>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:40px; align-items:start;">
+        <div>
+          <p style="margin:0 0 14px; font-family:'Inter',sans-serif; font-weight:600; font-size:13px; letter-spacing:1.5px; text-transform:uppercase; color:var(--accent);">1 · Выберите масла (до 4)</p>
+          <div style="max-height:300px; overflow-y:auto; display:flex; flex-wrap:wrap; gap:8px; padding:18px; background:rgba(251,245,234,.05); border:1px solid rgba(194,160,90,.25); border-radius:18px;">
+            <sc-for list="{{ mixOptions }}" as="m" hint-placeholder-count="20">
+              <button onClick="{{ m.onClick }}" style="font-family:'Inter',sans-serif; font-size:13px; cursor:pointer; padding:8px 14px; border-radius:999px; border:1px solid {{ m.border }}; background:{{ m.bg }}; color:{{ m.color }}; transition:all .15s ease;">{{ m.name }}</button>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="background:rgba(251,245,234,.05); border:1px solid rgba(194,160,90,.25); border-radius:24px; padding:32px;">
+          <p style="margin:0 0 18px; font-family:'Inter',sans-serif; font-weight:600; font-size:13px; letter-spacing:1.5px; text-transform:uppercase; color:var(--accent);">2 · Пропорции</p>
+          <sc-if value="{{ mixEmpty }}" hint-placeholder-val="{{ true }}">
+            <p style="margin:0 0 24px; font-family:'Lora',serif; font-size:15px; color:rgba(244,236,221,.6);">Выберите минимум 2 масла слева.</p>
+          </sc-if>
+          <div style="display:flex; flex-direction:column; gap:18px; margin-bottom:24px;">
+            <sc-for list="{{ mixSelected }}" as="ms" hint-placeholder-count="0">
+              <div>
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                  <span style="font-family:'Lora',serif; font-size:15px; color:#FBF5EA;">{{ ms.name }}</span>
+                  <span style="font-family:'Inter',sans-serif; font-weight:600; font-size:14px; color:var(--accent);">{{ ms.shareLabel }}</span>
+                </div>
+                <input class="yp-range" type="range" min="1" max="10" value="{{ ms.weight }}" onInput="{{ ms.onSlide }}">
+              </div>
+            </sc-for>
+          </div>
+
+          <p style="margin:0 0 10px; font-family:'Inter',sans-serif; font-weight:600; font-size:13px; letter-spacing:1.5px; text-transform:uppercase; color:var(--accent);">3 · Объём</p>
+          <div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:24px;">
+            <sc-for list="{{ mixVolumes }}" as="v" hint-placeholder-count="7">
+              <button onClick="{{ v.onClick }}" style="font-family:'Inter',sans-serif; font-size:13px; font-weight:500; cursor:pointer; padding:8px 14px; border-radius:999px; border:1px solid {{ v.border }}; background:{{ v.bg }}; color:{{ v.color }};">{{ v.label }}</button>
+            </sc-for>
+          </div>
+
+          <div style="display:flex; justify-content:space-between; align-items:baseline; padding-top:20px; border-top:1px solid rgba(194,160,90,.25); margin-bottom:20px;">
+            <span style="font-family:'Inter',sans-serif; font-size:14px; color:rgba(244,236,221,.7);">Итого <span style="font-size:12px;">(вкл. услугу +1000 ₽)</span></span>
+            <span style="font-family:var(--display); font-weight:700; font-size:30px; color:var(--accent);">{{ mixTotalLabel }}</span>
+          </div>
+          <button onClick="{{ submitMix }}" disabled="{{ mixDisabled }}" style="width:100%; font-family:'Inter',sans-serif; font-weight:600; font-size:15px; letter-spacing:.5px; cursor:{{ mixCursor }}; color:{{ mixBtnColor }}; background:{{ mixBtnBg }}; border:none; padding:16px; border-radius:999px; transition:opacity .2s;">Заказать микс</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DELIVERY ============ -->
+  <section id="delivery" style="max-width:1240px; margin:0 auto; padding:clamp(72px,9vw,120px) 24px;">
+    <p style="margin:0 0 12px; font-family:'Inter',sans-serif; font-weight:600; font-size:13px; letter-spacing:2.5px; text-transform:uppercase; color:var(--accent);">Получение</p>
+    <h2 style="margin:0 0 48px; font-family:var(--display); font-weight:700; font-size:clamp(30px,5vw,48px); line-height:1.12; letter-spacing:-.3px; color:#241710;">Доставка и бронь</h2>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:24px; margin-bottom:32px;">
+      <sc-for list="{{ tariffs }}" as="t" hint-placeholder-count="4">
+        <div style="background:#FBF5EA; border:1px solid #E2D4BF; border-radius:18px; padding:30px 26px;">
+          <h4 style="margin:0 0 8px; font-family:'Lora',serif; font-weight:600; font-size:19px; color:#241710;">{{ t.name }}</h4>
+          <p style="margin:0 0 16px; font-family:'Inter',sans-serif; font-weight:600; font-size:22px; color:var(--accent);">{{ t.price }}</p>
+          <p style="margin:0; font-family:'Lora',serif; font-size:15px; line-height:1.55; color:#6E5C4C;">{{ t.desc }}</p>
+        </div>
+      </sc-for>
+    </div>
+    <p style="margin:0; font-family:'Lora',serif; font-size:16px; line-height:1.6; color:#6E5C4C; background:#FBF5EA; border:1px solid #E2D4BF; border-radius:18px; padding:22px 26px;">Курьер по Санкт-Петербургу — от 500 ₽. Почта России по всей РФ — от 350 ₽. <strong style="color:var(--accent-deep);">Бесплатная доставка по РФ при заказе от 3000 ₽.</strong></p>
+  </section>
+
+  <!-- ============ PERKS / DISCOUNTS ============ -->
+  <section style="background:#FBF5EA; border-top:1px solid #E2D4BF;">
+    <div style="max-width:1240px; margin:0 auto; padding:clamp(72px,9vw,120px) 24px;">
+      <p style="margin:0 0 12px; font-family:'Inter',sans-serif; font-weight:600; font-size:13px; letter-spacing:2.5px; text-transform:uppercase; color:var(--accent);">Выгодно</p>
+      <h2 style="margin:0 0 16px; font-family:var(--display); font-weight:700; font-size:clamp(30px,5vw,48px); line-height:1.12; letter-spacing:-.3px; color:#241710;">Скидки и привилегии</h2>
+      <p style="margin:0 0 48px; font-family:'Lora',serif; font-size:18px; line-height:1.6; color:#6E5C4C; max-width:620px;">Постоянным клиентам, профессионалам бьюти-индустрии и за объём — приятные условия. И маленький подарок к каждой посылке.</p>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:24px;">
+        <sc-for list="{{ perks }}" as="p" hint-placeholder-count="4">
+          <div style="background:#F4ECDD; border:1px solid #E2D4BF; border-radius:18px; padding:30px 26px; display:flex; flex-direction:column;">
+            <span style="align-self:flex-start; font-family:'Inter',sans-serif; font-weight:700; font-size:15px; letter-spacing:.3px; color:#2C1B10; background:linear-gradient(135deg,var(--accent-light) 0%,var(--accent) 45%,var(--accent-dark) 100%); padding:8px 16px; border-radius:999px; margin-bottom:20px;">{{ p.badge }}</span>
+            <h4 style="margin:0 0 8px; font-family:'Lora',serif; font-weight:600; font-size:19px; color:#241710;">{{ p.title }}</h4>
+            <p style="margin:0; font-family:'Lora',serif; font-size:15px; line-height:1.6; color:#6E5C4C;">{{ p.text }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ABOUT ============ -->
+  <section id="about" style="background:#FBF5EA; border-top:1px solid #E2D4BF;">
+    <div style="max-width:1240px; margin:0 auto; padding:clamp(72px,9vw,120px) 24px; display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:56px; align-items:center;">
+      <div style="position:relative; aspect-ratio:5/4; border-radius:24px; overflow:hidden; background:linear-gradient(155deg,#E3CFA3 0%,var(--accent) 55%,var(--accent-deep) 100%); box-shadow:0 24px 60px rgba(60,40,20,.18); display:flex; align-items:flex-end;">
+        <div style="position:absolute; inset:0; background:repeating-linear-gradient(135deg, rgba(255,255,255,.06) 0 12px, rgba(255,255,255,0) 12px 24px);"></div>
+        <div style="position:absolute; top:16px; left:16px; font-family:'Inter',sans-serif; font-size:11px; letter-spacing:1px; text-transform:uppercase; color:rgba(44,27,16,.6); background:rgba(251,245,234,.55); padding:6px 10px; border-radius:999px;">фото точки · флаконы и масла</div>
+      </div>
+      <div>
+        <p style="margin:0 0 12px; font-family:'Inter',sans-serif; font-weight:600; font-size:13px; letter-spacing:2.5px; text-transform:uppercase; color:var(--accent);">Ателье ароматов</p>
+        <h3 style="margin:0 0 24px; font-family:var(--display); font-weight:600; font-size:clamp(26px,4vw,36px); line-height:1.15; color:#241710;">Юнус — ваш парфюмер</h3>
+        <p style="margin:0 0 28px; font-family:'Lora',serif; font-size:18px; line-height:1.65; color:#6E5C4C; text-wrap:pretty;">Юнус — основатель ателье селективной парфюмерии в Санкт-Петербурге. Уже несколько лет он помогает находить аромат, который раскрывается именно на вас. В наличии — сотни мужских, женских и универсальных ароматов, каждый можно взять в любом объёме, как спрей или как чистое масло, а можно собрать собственный микс. Здесь не продают «как все» — здесь собирают аромат под человека.</p>
+        <div style="display:flex; flex-wrap:wrap; gap:10px;">
+          <span style="font-family:'Inter',sans-serif; font-size:13px; color:#241710; background:#F4ECDD; border:1px solid #E2D4BF; padding:9px 16px; border-radius:999px;">Сотни ароматов</span>
+          <span style="font-family:'Inter',sans-serif; font-size:13px; color:#241710; background:#F4ECDD; border:1px solid #E2D4BF; padding:9px 16px; border-radius:999px;">От 3 до 100 мл</span>
+          <span style="font-family:'Inter',sans-serif; font-size:13px; color:#241710; background:#F4ECDD; border:1px solid #E2D4BF; padding:9px 16px; border-radius:999px;">Спрей и масло</span>
+          <span style="font-family:'Inter',sans-serif; font-size:13px; color:#241710; background:#F4ECDD; border:1px solid #E2D4BF; padding:9px 16px; border-radius:999px;">Свой микс</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ REVIEWS ============ -->
+  <section style="max-width:1240px; margin:0 auto; padding:clamp(72px,9vw,120px) 24px;">
+    <div style="display:flex; flex-wrap:wrap; gap:16px; justify-content:space-between; align-items:flex-end; margin-bottom:40px;">
+      <div>
+        <p style="margin:0 0 12px; font-family:'Inter',sans-serif; font-weight:600; font-size:13px; letter-spacing:2.5px; text-transform:uppercase; color:var(--accent);">Нам доверяют</p>
+        <h2 style="margin:0; font-family:var(--display); font-weight:700; font-size:clamp(30px,5vw,48px); line-height:1.12; letter-spacing:-.3px; color:#241710;">Отзывы и аромат-будни</h2>
+      </div>
+      <a href="https://instagram.com/aroma_garden_spb" target="_blank" rel="noopener" style="font-family:'Inter',sans-serif; font-weight:600; font-size:14px; color:var(--accent-deep); text-decoration:none; border:1.5px solid var(--accent-deep); padding:12px 22px; border-radius:999px;" style-hover="background:var(--accent-deep); color:#FBF5EA;">Instagram: aroma_garden_spb →</a>
+    </div>
+    <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:16px; margin-bottom:40px;">
+      <sc-for list="{{ gallery }}" as="g" hint-placeholder-count="6">
+        <div style="aspect-ratio:1; border-radius:14px; background:{{ g.swatch }}; position:relative; overflow:hidden;">
+          <div style="position:absolute; inset:0; background:repeating-linear-gradient(135deg, rgba(255,255,255,.06) 0 10px, rgba(255,255,255,0) 10px 20px);"></div>
+        </div>
+      </sc-for>
+    </div>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:24px;">
+      <sc-for list="{{ reviews }}" as="r" hint-placeholder-count="3">
+        <div style="background:#FBF5EA; border:1px solid #E2D4BF; border-radius:18px; padding:28px;">
+          <p style="margin:0 0 18px; font-family:'Lora',serif; font-size:16px; line-height:1.6; color:#241710; font-style:italic;">«{{ r.text }}»</p>
+          <p style="margin:0; font-family:'Inter',sans-serif; font-weight:600; font-size:14px; color:var(--accent-deep);">{{ r.name }}<span style="color:var(--accent);"> · {{ r.stars }}</span></p>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- ============ FINAL CTA ============ -->
+  <section style="background:#2C1B10; color:#F4ECDD; text-align:center;">
+    <div style="max-width:760px; margin:0 auto; padding:clamp(72px,10vw,120px) 24px;">
+      <h2 style="margin:0 0 32px; font-family:var(--display); font-weight:700; font-size:clamp(32px,5.5vw,54px); line-height:1.1; color:#FBF5EA;">Готовы собрать <span style="font-style:italic; color:var(--accent);">свой аромат?</span></h2>
+      <div style="display:flex; flex-wrap:wrap; gap:16px; justify-content:center; align-items:center;">
+        <a href="#catalog" style="font-family:'Inter',sans-serif; font-weight:600; font-size:16px; letter-spacing:.5px; color:#2C1B10; text-decoration:none; background:linear-gradient(135deg,var(--accent-light) 0%,var(--accent) 45%,var(--accent-dark) 100%); padding:18px 40px; border-radius:999px; box-shadow:0 10px 30px rgba(194,160,90,.3);" style-hover="transform:translateY(-1px);">Выбрать аромат</a>
+        <a href="tel:+79064482204" style="font-family:'Inter',sans-serif; font-weight:600; font-size:18px; color:#FBF5EA; text-decoration:none;">+7 906 448 2204</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer style="background:#2C1B10; color:rgba(244,236,221,.7); border-top:1px solid rgba(194,160,90,.2);">
+    <div style="max-width:1240px; margin:0 auto; padding:64px 24px 40px; display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:40px;">
+      <div>
+        <div style="display:flex; align-items:baseline; gap:8px; margin-bottom:16px;">
+          <span style="font-family:var(--display); font-weight:700; font-size:24px; color:#FBF5EA;">Aroma</span>
+          <span style="font-family:'Inter',sans-serif; font-weight:600; font-size:12px; letter-spacing:2.5px; text-transform:uppercase; color:var(--accent);">Garden</span>
+        </div>
+        <p style="margin:0; font-family:'Lora',serif; font-size:15px; line-height:1.6;">Ателье селективной парфюмерии на разлив. Соберём ваш аромат вручную.</p>
+      </div>
+      <div>
+        <p style="margin:0 0 14px; font-family:'Inter',sans-serif; font-weight:600; font-size:12px; letter-spacing:1.5px; text-transform:uppercase; color:var(--accent);">Навигация</p>
+        <div style="display:flex; flex-direction:column; gap:10px;">
+          <a href="#catalog" style="font-family:'Lora',serif; font-size:15px; color:rgba(244,236,221,.7); text-decoration:none;" style-hover="color:#FBF5EA;">Каталог</a>
+          <a href="#how" style="font-family:'Lora',serif; font-size:15px; color:rgba(244,236,221,.7); text-decoration:none;" style-hover="color:#FBF5EA;">Как это работает</a>
+          <a href="#mix" style="font-family:'Lora',serif; font-size:15px; color:rgba(244,236,221,.7); text-decoration:none;" style-hover="color:#FBF5EA;">Свой микс</a>
+          <a href="#delivery" style="font-family:'Lora',serif; font-size:15px; color:rgba(244,236,221,.7); text-decoration:none;" style-hover="color:#FBF5EA;">Доставка</a>
+        </div>
+      </div>
+      <div>
+        <p style="margin:0 0 14px; font-family:'Inter',sans-serif; font-weight:600; font-size:12px; letter-spacing:1.5px; text-transform:uppercase; color:var(--accent);">Контакты</p>
+        <div style="display:flex; flex-direction:column; gap:10px;">
+          <a href="tel:+79064482204" style="font-family:'Lora',serif; font-size:15px; color:#FBF5EA; text-decoration:none;">+7 906 448 2204</a>
+          <div style="display:flex; flex-wrap:wrap; gap:8px; margin:2px 0;">
+            <a href="https://wa.me/79064482204" target="_blank" rel="noopener" style="font-family:'Inter',sans-serif; font-weight:600; font-size:13px; color:#FBF5EA; text-decoration:none; background:rgba(194,160,90,.16); border:1px solid rgba(194,160,90,.35); padding:7px 14px; border-radius:999px;" style-hover="background:rgba(194,160,90,.28);">WhatsApp</a>
+            <a href="https://t.me/+79064482204" target="_blank" rel="noopener" style="font-family:'Inter',sans-serif; font-weight:600; font-size:13px; color:#FBF5EA; text-decoration:none; background:rgba(194,160,90,.16); border:1px solid rgba(194,160,90,.35); padding:7px 14px; border-radius:999px;" style-hover="background:rgba(194,160,90,.28);">Telegram</a>
+          </div>
+          <a href="https://instagram.com/aroma_garden_spb" target="_blank" rel="noopener" style="font-family:'Lora',serif; font-size:15px; color:rgba(244,236,221,.7); text-decoration:none;" style-hover="color:#FBF5EA;">Instagram: aroma_garden_spb</a>
+          <span style="font-family:'Lora',serif; font-size:15px;">Санкт-Петербург, Лиговский проспект, 153, 2 этаж</span>
+        </div>
+      </div>
+    </div>
+    <div style="max-width:1240px; margin:0 auto; padding:24px; border-top:1px solid rgba(194,160,90,.2); display:flex; flex-wrap:wrap; gap:16px; justify-content:space-between;">
+      <p style="margin:0; font-family:'Inter',sans-serif; font-size:12px; color:rgba(244,236,221,.5); max-width:640px; line-height:1.5;">Названия ароматов приведены для ориентира по парфюмерным мотивам и не являются оригинальной продукцией указанных брендов.</p>
+      <p style="margin:0; font-family:'Inter',sans-serif; font-size:12px; color:rgba(244,236,221,.5);">© 2026 Aroma Garden</p>
+    </div>
+  </footer>
+
+  <!-- ============ CONFIGURATOR MODAL ============ -->
+  <sc-if value="{{ cfgOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed; inset:0; z-index:100; background:rgba(44,27,16,.6); backdrop-filter:blur(4px); display:flex; align-items:flex-start; justify-content:center; padding:24px; overflow-y:auto; animation:fadeIn .2s ease;">
+      <div style="background:#FBF5EA; border-radius:24px; box-shadow:0 24px 60px rgba(60,40,20,.3); width:100%; max-width:920px; margin:auto; overflow:hidden;">
+        <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr));">
+
+          <!-- LEFT: visualization -->
+          <div style="background:linear-gradient(165deg,#EFE2C8,#E3CFA3); padding:40px 32px; display:flex; flex-direction:column; align-items:center; justify-content:center; position:relative;">
+            <button onClick="{{ closeCfg }}" style="position:absolute; top:16px; left:16px; background:rgba(44,27,16,.08); border:none; cursor:pointer; width:38px; height:38px; border-radius:999px; font-size:18px; color:#2C1B10;" data-mobile-close>✕</button>
+            <div style="position:relative; width:120px; height:230px; display:flex; flex-direction:column; align-items:center;">
+              <div style="width:34px; height:26px; background:linear-gradient(180deg,var(--accent),var(--accent-dark)); border-radius:6px 6px 3px 3px; z-index:2;"></div>
+              <div style="width:22px; height:14px; background:#B9954F; z-index:2;"></div>
+              <div style="position:relative; width:120px; flex:1; border:2px solid rgba(122,79,44,.5); border-radius:14px 14px 22px 22px; overflow:hidden; background:rgba(251,245,234,.55); box-shadow:inset 0 6px 20px rgba(255,255,255,.4);">
+                <div style="position:absolute; left:0; right:0; bottom:0; height:{{ fillPct }}%; background:linear-gradient(180deg,var(--accent-light),var(--accent) 60%,var(--accent-dark)); transition:height .4s ease; box-shadow:inset 0 4px 12px rgba(255,255,255,.35);"></div>
+                <div style="position:absolute; inset:0; background:linear-gradient(110deg, rgba(255,255,255,.25) 0%, rgba(255,255,255,0) 40%);"></div>
+              </div>
+            </div>
+            <p style="margin:24px 0 4px; font-family:'Inter',sans-serif; font-size:13px; letter-spacing:1px; text-transform:uppercase; color:var(--accent-deep);">{{ cfgVolLabel }}</p>
+            <p style="margin:0; font-family:var(--display); font-weight:700; font-size:42px; color:#2C1B10; line-height:1;">{{ totalLabel }}</p>
+            <p style="margin:8px 0 0; font-family:'Inter',sans-serif; font-size:12px; color:#6E5C4C;">в т.ч. масло: {{ oilLabel }}</p>
+          </div>
+
+          <!-- RIGHT: choices -->
+          <div style="padding:32px; max-height:80vh; overflow-y:auto; position:relative;">
+            <button onClick="{{ closeCfg }}" style="position:absolute; top:20px; right:24px; background:none; border:none; cursor:pointer; font-size:22px; color:#6E5C4C;" data-desktop-close>✕</button>
+            <p style="margin:0 0 4px; font-family:'Inter',sans-serif; font-weight:600; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--accent);">{{ cfgCat }}</p>
+            <h3 style="margin:0 0 4px; font-family:var(--display); font-weight:700; font-size:26px; color:#241710; padding-right:32px;">{{ cfgName }}</h3>
+            <p style="margin:0 0 24px; font-family:'Inter',sans-serif; font-size:14px; color:var(--accent-deep); font-weight:600;">{{ cfgPerMl }}</p>
+
+            <p style="margin:0 0 8px; font-family:'Inter',sans-serif; font-weight:600; font-size:12px; letter-spacing:1px; text-transform:uppercase; color:#6E5C4C;">Формат</p>
+            <div style="display:flex; gap:8px; margin-bottom:22px;">
+              <sc-for list="{{ formats }}" as="f" hint-placeholder-count="2">
+                <button onClick="{{ f.onClick }}" style="flex:1; font-family:'Inter',sans-serif; font-weight:600; font-size:14px; cursor:pointer; padding:12px; border-radius:999px; border:1px solid {{ f.border }}; background:{{ f.bg }}; color:{{ f.color }}; transition:all .18s;">{{ f.label }}</button>
+              </sc-for>
+            </div>
+
+            <sc-if value="{{ isSpray }}" hint-placeholder-val="{{ false }}">
+              <div style="margin-bottom:22px;">
+                <p style="margin:0 0 8px; font-family:'Inter',sans-serif; font-weight:600; font-size:12px; letter-spacing:1px; text-transform:uppercase; color:#6E5C4C;">Концентрация</p>
+                <div style="display:flex; gap:8px; margin-bottom:8px;">
+                  <sc-for list="{{ concentrations }}" as="c" hint-placeholder-count="3">
+                    <button onClick="{{ c.onClick }}" style="flex:1; font-family:'Inter',sans-serif; font-weight:500; font-size:13px; cursor:pointer; padding:10px 6px; border-radius:999px; border:1px solid {{ c.border }}; background:{{ c.bg }}; color:{{ c.color }};">{{ c.label }}</button>
+                  </sc-for>
+                </div>
+                <p style="margin:0; font-family:'Lora',serif; font-size:12px; color:#6E5C4C; line-height:1.5;">Платите только за масло. Чем выше концентрация — тем насыщеннее и стойче аромат.</p>
+              </div>
+            </sc-if>
+
+            <p style="margin:0 0 8px; font-family:'Inter',sans-serif; font-weight:600; font-size:12px; letter-spacing:1px; text-transform:uppercase; color:#6E5C4C;">Объём</p>
+            <div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:22px;">
+              <sc-for list="{{ volumes }}" as="v" hint-placeholder-count="7">
+                <button onClick="{{ v.onClick }}" style="font-family:'Inter',sans-serif; font-weight:500; font-size:13px; cursor:pointer; padding:9px 14px; border-radius:999px; border:1px solid {{ v.border }}; background:{{ v.bg }}; color:{{ v.color }};">{{ v.label }}</button>
+              </sc-for>
+            </div>
+
+            <p style="margin:0 0 8px; font-family:'Inter',sans-serif; font-weight:600; font-size:12px; letter-spacing:1px; text-transform:uppercase; color:#6E5C4C;">Флакон</p>
+            <div style="display:flex; flex-direction:column; gap:8px; margin-bottom:14px;">
+              <sc-for list="{{ bottles }}" as="b" hint-placeholder-count="3">
+                <button onClick="{{ b.onClick }}" style="display:flex; align-items:center; gap:14px; text-align:left; cursor:pointer; padding:12px 14px; border-radius:14px; border:1px solid {{ b.border }}; background:{{ b.bg }};">
+                  <span style="width:34px; height:42px; flex-shrink:0; border-radius:5px 5px 8px 8px; background:linear-gradient(180deg,rgba(228,201,136,.6),rgba(122,79,44,.45)); border:1px solid rgba(122,79,44,.3);"></span>
+                  <span style="flex:1;">
+                    <span style="display:block; font-family:'Inter',sans-serif; font-weight:600; font-size:14px; color:#241710;">{{ b.name }}</span>
+                    <span style="display:block; font-family:'Lora',serif; font-size:12px; color:#6E5C4C;">{{ b.note }}</span>
+                  </span>
+                  <span style="font-family:'Inter',sans-serif; font-weight:600; font-size:14px; color:var(--accent); white-space:nowrap;">{{ b.priceLabel }}</span>
+                </button>
+              </sc-for>
+            </div>
+            <label style="display:flex; align-items:center; gap:10px; cursor:pointer; margin-bottom:22px; font-family:'Inter',sans-serif; font-size:14px; color:#241710;">
+              <input type="checkbox" checked="{{ giftbox }}" onChange="{{ toggleGift }}" style="width:18px; height:18px; accent-color:var(--accent); cursor:pointer;">
+              + Подарочная коробка <span style="color:var(--accent); font-weight:600;">+250 ₽</span>
+            </label>
+
+            <p style="margin:0 0 8px; font-family:'Inter',sans-serif; font-weight:600; font-size:12px; letter-spacing:1px; text-transform:uppercase; color:#6E5C4C;">Получение</p>
+            <div style="display:flex; flex-direction:column; gap:8px; margin-bottom:26px;">
+              <sc-for list="{{ pickups }}" as="pk" hint-placeholder-count="6">
+                <button onClick="{{ pk.onClick }}" style="display:flex; justify-content:space-between; align-items:center; cursor:pointer; padding:12px 16px; border-radius:12px; border:1px solid {{ pk.border }}; background:{{ pk.bg }};">
+                  <span style="font-family:'Inter',sans-serif; font-weight:500; font-size:14px; color:#241710;">{{ pk.label }}</span>
+                  <span style="font-family:'Inter',sans-serif; font-weight:600; font-size:13px; color:var(--accent);">{{ pk.feeLabel }}</span>
+                </button>
+              </sc-for>
+            </div>
+
+            <button onClick="{{ submitOrder }}" style="width:100%; font-family:'Inter',sans-serif; font-weight:600; font-size:16px; letter-spacing:.5px; cursor:pointer; color:#FBF5EA; background:#2C1B10; border:none; padding:18px; border-radius:999px; box-shadow:0 10px 30px rgba(60,40,20,.18);" style-hover="background:#3a2516;">Оформить заказ · {{ totalLabel }}</button>
+            <p style="margin:12px 0 0; text-align:center; font-family:'Inter',sans-serif; font-size:12px; color:#6E5C4C;">Заявка откроется в WhatsApp со сводкой заказа</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- ============ ORDER SUMMARY FALLBACK ============ -->
+  <sc-if value="{{ summaryOpen }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeSummary }}" style="position:fixed; inset:0; z-index:120; background:rgba(44,27,16,.6); backdrop-filter:blur(4px); display:flex; align-items:center; justify-content:center; padding:24px; animation:fadeIn .2s ease;">
+      <div style="background:#FBF5EA; border-radius:24px; box-shadow:0 24px 60px rgba(60,40,20,.3); width:100%; max-width:440px; padding:36px; text-align:center;">
+        <div style="width:56px; height:56px; margin:0 auto 20px; border-radius:999px; background:linear-gradient(135deg,var(--accent-light),var(--accent-dark)); display:flex; align-items:center; justify-content:center; font-size:26px; color:#2C1B10;">✓</div>
+        <h3 style="margin:0 0 12px; font-family:var(--display); font-weight:700; font-size:24px; color:#241710;">Спасибо, заявка собрана</h3>
+        <pre style="margin:0 0 24px; text-align:left; white-space:pre-wrap; font-family:'Inter',sans-serif; font-size:13px; line-height:1.6; color:#6E5C4C; background:#F4ECDD; border:1px solid #E2D4BF; border-radius:14px; padding:18px;">{{ summaryText }}</pre>
+        <button onClick="{{ copyOrder }}" style="width:100%; font-family:'Inter',sans-serif; font-weight:600; font-size:15px; cursor:pointer; color:#FBF5EA; background:#2C1B10; border:none; padding:15px; border-radius:999px; margin-bottom:10px;">{{ copyLabel }}</button>
+        <button onClick="{{ closeSummary }}" style="width:100%; font-family:'Inter',sans-serif; font-weight:600; font-size:15px; cursor:pointer; color:#241710; background:transparent; border:1.5px solid var(--accent-deep); padding:13px; border-radius:999px;">Закрыть</button>
+      </div>
+    </div>
+  </sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1240,&quot;height&quot;:900},&quot;accent&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Золотой янтарь&quot;,&quot;Розовый уд&quot;,&quot;Изумрудный мускус&quot;],&quot;default&quot;:&quot;Золотой янтарь&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;display&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Классика (антиква)&quot;,&quot;Модерн (гротеск)&quot;],&quot;default&quot;:&quot;Классика (антиква)&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;glow&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Яркое сияние&quot;,&quot;Мягкое сияние&quot;,&quot;Без ореола&quot;],&quot;default&quot;:&quot;Яркое сияние&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  FRAGRANCES = [
+    {cat:'m', name:"L.V. L'Immensité", price:300, desc:"Свежий имбирь и тёплая амбра"},
+    {cat:'m', name:"Dark Lord by Kilian", price:250, desc:"Дымный кофе, ром и тёмный шоколад"},
+    {cat:'m', name:"Bvlgari Aqva", price:250, desc:"Морская свежесть и солнечный посидониум"},
+    {cat:'m', name:"Tiger Bvlgari", price:250, desc:"Пряный табак и дерзкий цитрус"},
+    {cat:'m', name:"Sheikh 77", price:200, desc:"Богатый уд, шафран и роза"},
+    {cat:'m', name:"Versace Eros", price:200, hit:true, desc:"Мята, ваниль и тонка"},
+    {cat:'m', name:"Antonio Banderas Blue", price:150, desc:"Акватика и древесина, лёгкий шлейф"},
+    {cat:'m', name:"P.R. Invictus Aqua", price:150, desc:"Морская соль и грейпфрут, спорт-фреш"},
+    {cat:'m', name:"G. Armani Acqua di Giò", price:150, desc:"Бергамот, морской бриз и ротанг"},
+    {cat:'m', name:"Egoiste Chanel", price:100, desc:"Сандал, корица и роза — благородство"},
+    {cat:'m', name:"Lacoste Sport", price:150, desc:"Ментол, цитрус и спортивный драйв"},
+    {cat:'m', name:"Dior Homme", price:250, desc:"Пудровый ирис и какао, элегантность"},
+    {cat:'m', name:"C.H. 212 Men", price:100, desc:"Пряный грейпфрут и зелёный лист"},
+    {cat:'m', name:"D&G Light Blue", price:100, desc:"Яблоко, кедр и средиземноморское солнце"},
+    {cat:'m', name:"Allure Homme Sport", price:150, desc:"Цитрус, перец и морская свежесть"},
+    {cat:'m', name:"Lacoste White", price:100, desc:"Имбирь, кедр и чистая свежесть"},
+    {cat:'m', name:"Zam Zam Gold", price:150, desc:"Сладкий восточный амбровый аккорд"},
+    {cat:'m', name:"Dior Sauvage", price:200, hit:true, desc:"Амброксан, бергамот и перец"},
+    {cat:'m', name:"Bleu de Chanel", price:150, hit:true, desc:"Цитрус, кедр и дымный ладан"},
+    {cat:'w', name:"Victoria's Secret So Sexy", price:200, desc:"Цветочно-фруктовый соблазн"},
+    {cat:'w', name:"Victoria's Secret Aqua Kiss", price:150, desc:"Нежная водяная свежесть и мускус"},
+    {cat:'w', name:"Victoria's Secret Scandalous", price:200, desc:"Дерзкий жасмин и сливочная ваниль"},
+    {cat:'w', name:"Victoria's Secret Mango", price:250, desc:"Сочное манго и тропические ноты"},
+    {cat:'w', name:"Victoria's Secret Bombshell", price:200, desc:"Пион, маракуйя и сияющий шик"},
+    {cat:'w', name:"Hürrem Sultan", price:150, desc:"Роза, уд и восточная роскошь"},
+    {cat:'w', name:"Lanvin Éclat", price:150, desc:"Сирень, зелень и тёплый мускус"},
+    {cat:'w', name:"Dior J'adore", price:150, hit:true, desc:"Иланг-иланг, роза и жасмин"},
+    {cat:'w', name:"Miss Dior", price:150, desc:"Романтичная роза и пачули"},
+    {cat:'w', name:"Chanel №5", price:150, desc:"Легендарный альдегидный букет"},
+    {cat:'w', name:"Chanel Chance", price:150, desc:"Цитрус, пачули и пудровый шлейф"},
+    {cat:'w', name:"Coco Mademoiselle", price:100, hit:true, desc:"Пачули, роза и апельсин"},
+    {cat:'w', name:"Chanel Tendre", price:150, desc:"Нежный цитрус и жасмин"},
+    {cat:'w', name:"Trussardi Donna", price:150, desc:"Цветы, дерево и чувственность"},
+    {cat:'w', name:"Givenchy Secret", price:200, desc:"Роза, пачули и таинственность"},
+    {cat:'w', name:"Givenchy Ange ou Démon", price:150, desc:"Ладан, специи и тубероза"},
+    {cat:'w', name:"Black Opium", price:150, hit:true, desc:"Кофе, ваниль и белые цветы"},
+    {cat:'w', name:"Carolina Herrera", price:150, desc:"Тубероза, жасмин и сандал"},
+    {cat:'w', name:"D&G Imperatrice 3", price:150, desc:"Арбуз, киви и свежесть"},
+    {cat:'w', name:"Gucci Flora", price:150, desc:"Цветущий пион и роза"},
+    {cat:'w', name:"Gucci Bamboo", price:150, desc:"Касабланка-лилия и сандал"},
+    {cat:'w', name:"Lancôme Idôle", price:150, hit:true, desc:"Роза, жасмин и чистый мускус"},
+    {cat:'w', name:"Escada Cherry", price:150, desc:"Сочная вишня и спелые ягоды"},
+    {cat:'w', name:"Sheikh 33", price:200, desc:"Богатый уд и сладкая роза"},
+    {cat:'w', name:"Soblazn", price:200, desc:"Сладкие ягоды и ваниль"},
+    {cat:'w', name:"Zara Tuberose", price:150, desc:"Кремовая тубероза и белые цветы"},
+    {cat:'w', name:"Montale Roses", price:250, desc:"Насыщенная дамасская роза"},
+    {cat:'w', name:"Montale Dark Purple", price:200, desc:"Слива, роза и пачули"},
+    {cat:'w', name:"Kilian Good Girl", price:250, hit:true, desc:"Миндаль, ваниль и тубероза"},
+    {cat:'w', name:"Jasmine", price:250, desc:"Чистый чувственный жасмин"},
+    {cat:'w', name:"Versace Bright Crystal", price:150, desc:"Гранат, пион и лотос"},
+    {cat:'u', name:"Zam Zam", price:150, desc:"Тёплый восточный мускус"},
+    {cat:'u', name:"Capitan Black", price:150, desc:"Табак, ваниль и пряности"},
+    {cat:'u', name:"Alexandre.J", price:250, desc:"Медовый ирис и пачули"},
+    {cat:'u', name:"Puredistance White", price:250, desc:"Пудровый цветочный люкс"},
+    {cat:'u', name:"Initio Oud for Greatness", price:300, hit:true, desc:"Уд, шафран и мускатный орех"},
+    {cat:'u', name:"Hayati Al Haramain", price:200, desc:"Сладкий фруктовый уд"},
+    {cat:'u', name:"Sospiro Accento", price:300, hit:true, desc:"Тропики, имбирь и пачули"},
+    {cat:'u', name:"Sospiro Erba Pura", price:300, hit:true, desc:"Сладкие фрукты и амбра"},
+    {cat:'u', name:"Zielinski Orange", price:250, desc:"Сочный апельсин и нероли"},
+    {cat:'u', name:"Zielinski Rosen Vanilla", price:250, desc:"Роза и кремовая ваниль"},
+    {cat:'u', name:"Zielinski Lemon", price:250, desc:"Искристый лимон и фреш"},
+    {cat:'u', name:"Zielinski Pepper", price:300, desc:"Чёрный перец и древесина"},
+    {cat:'u', name:"Zielinski Rosemary", price:250, desc:"Розмарин и ароматные травы"},
+    {cat:'u', name:"Tom Ford Cherry", price:300, desc:"Ликёрная вишня и миндаль"},
+    {cat:'u', name:"Tom Ford Tobacco Vanille", price:200, hit:true, desc:"Табак, ваниль и специи"},
+    {cat:'u', name:"Tom Ford Tuscan Leather", price:250, desc:"Кожа, шафран и малина"},
+    {cat:'u', name:"Tom Ford Tobacco Oud", price:200, desc:"Дымный табак и уд"},
+    {cat:'u', name:"Tom Ford Oud Wood", price:200, hit:true, desc:"Уд, сандал и кардамон"},
+    {cat:'u', name:"Tom Ford Bitter Peach", price:250, hit:true, desc:"Сочный персик и ром"},
+    {cat:'u', name:"Tom Ford Black Orchid", price:200, desc:"Тёмная орхидея и трюфель"},
+    {cat:'u', name:"Molecule 01", price:250, desc:"Чистый изо-э-супер, звучит на коже"},
+    {cat:'u', name:"Molecule 02", price:300, hit:true, desc:"Амброксан, мягкое облако"},
+    {cat:'u', name:"Molecule 04", price:300, desc:"Уд и мускус, минимализм"},
+    {cat:'u', name:"Molecule 05", price:300, desc:"Ирис и тёплый кашмеран"},
+    {cat:'u', name:"Molecule 09", price:250, desc:"Роза и чистый мускус"},
+    {cat:'u', name:"Molecule «Игры разума»", price:250, desc:"Гипнотический мускусный аккорд"},
+    {cat:'u', name:"Black Afgano", price:300, hit:true, desc:"Смолы, уд и тёмные травы"},
+    {cat:'u', name:"Amber Wood Ajmal", price:250, desc:"Амбра, дерево и мускус"},
+    {cat:'u', name:"Tiziana Terenzi Kirke", price:300, hit:true, desc:"Маракуйя, персик и ваниль"},
+    {cat:'u', name:"Tiziana Terenzi Gumin", price:300, desc:"Фрукты, ладан и амбра"},
+    {cat:'u', name:"Narcotic", price:250, desc:"Гипнотичный белый цветок"},
+    {cat:'u', name:"Baccarat 540", price:250, hit:true, desc:"Шафран, амбра и жасмин"},
+    {cat:'u', name:"Roja Elysium", price:300, hit:true, desc:"Цитрус, кедр и амбра"},
+    {cat:'u', name:"Memo African Leather", price:250, desc:"Кожа, специи и кардамон"},
+    {cat:'u', name:"Memo Italian Leather", price:250, desc:"Замша, шафран и фрукты"},
+    {cat:'u', name:"Initio Musk", price:300, desc:"Чувственный мускус-афродизиак"},
+    {cat:'u', name:"Kenzo Electric", price:300, desc:"Пряный имбирь и древесина"},
+    {cat:'u', name:"Megamare Orto Parisi", price:300, desc:"Солёный океан и водоросли"},
+    {cat:'u', name:"Mancera Cedrat Boise", price:300, hit:true, desc:"Лимон, кедр и амбра"},
+    {cat:'u', name:"Blood Shahid", price:200, desc:"Сладкая вишня и тёмные специи"},
+    {cat:'u', name:"Cocain", price:200, desc:"Холодный мускус и пудра"},
+    {cat:'u', name:"L.V. Afternoon", price:300, desc:"Ладан, кожа и древесина"},
+    {cat:'u', name:"Intrigue Devil's", price:300, desc:"Тёмные специи и уд"},
+    {cat:'u', name:"Montale Starry Nights", price:200, desc:"Уд, бергамот и пачули"},
+    {cat:'u', name:"Montabaco", price:250, desc:"Табак, специи и сухофрукты"},
+    {cat:'u', name:"Byredo Bal d'Afrique", price:250, desc:"Фиалка, ваниль и нероли"},
+    {cat:'u', name:"Jo Malone Wood Sage", price:250, desc:"Морская соль и шалфей"},
+    {cat:'u', name:"Ganymede", price:300, hit:true, desc:"Шафран, мандарин и замша"},
+    {cat:'u', name:"Kajal Dahab", price:300, desc:"Медовый табак и амбра"},
+    {cat:'u', name:"Musk Kashmir", price:300, desc:"Тёплый кашмирский мускус"},
+    {cat:'u', name:"Arabians Montale", price:300, desc:"Сладкий уд и роза"},
+    {cat:'u', name:"L.V. Symphony", price:300, desc:"Ладан, амбра и древесина"},
+    {cat:'u', name:"Attar Collection Khalat Light Blue", price:250, desc:"Свежий фруктовый мускус"},
+    {cat:'u', name:"Initio Everest", price:300, desc:"Ветивер, мята и древесина"},
+    {cat:'u', name:"Mr. Burberry Element", price:250, desc:"Цитрус, кедр и пачули"},
+    {cat:'u', name:"Thomas Kosmala №4", price:300, desc:"Ваниль, мускус и амбра"},
+    {cat:'u', name:"Sheikh Shuyukh", price:200, desc:"Роскошный уд и специи"},
+    {cat:'u', name:"Oud Forest Montale", price:200, desc:"Дымный уд и древесина"},
+    {cat:'u', name:"Nejma 7", price:150, desc:"Сладкие специи и амбра"},
+    {cat:'u', name:"Kilian Intoxicated", price:250, desc:"Кофе, кардамон и корица"},
+  ];
+  BOTTLES = [
+    { id:'roll',    name:'Масляный ролик',        ml:[3,5,10],    price:0,   note:'аккуратный флакон-ролик для масла' },
+    { id:'spray-s', name:'Стеклянный спрей',      ml:[15,30],     price:150, note:'классический спрей' },
+    { id:'spray-m', name:'Спрей премиум',         ml:[30,50,100], price:300, note:'флакон с золотой крышкой' },
+    { id:'arab',    name:'Арабский декоративный', ml:[3,6,12],    price:350, note:'узорный восточный флакон' },
+    { id:'crystal', name:'Хрустальный графин',    ml:[30,50,100], price:400, note:'гранёный флакон-графин' },
+    { id:'car',     name:'Автоароматизатор',      ml:[5,8],       price:200, note:'подвесной в авто' },
+  ];
+  VOLUMES = [3, 5, 10, 15, 30, 50, 100];
+  FORMATS = [
+    { id:'oil',   label:'Масло',          ratio:1.0 },
+    { id:'spray', label:'Спрей (парфюм)', ratio:0.30 },
+  ];
+  CONCENTRATIONS = [
+    { id:30, label:'30% (стандарт)', ratio:0.30 },
+    { id:40, label:'40%',            ratio:0.40 },
+    { id:50, label:'50%',            ratio:0.50 },
+  ];
+  PICKUP = [
+    { id:'self',    label:'Самовывоз',                  fee:0 },
+    { id:'book100', label:'Бронь «Готово к приходу»',   fee:100 },
+    { id:'book300', label:'Приоритет (курьер по СПб)',  fee:500 },
+    { id:'vip1000', label:'VIP / свой микс',            fee:1000 },
+    { id:'spb',     label:'Курьер по СПб',              fee:500 },
+    { id:'rf',      label:'Почта России по РФ',         fee:350 },
+  ];
+  CAT_LABEL = { m:'Мужской', w:'Женский', u:'Универсальный', all:'Все' };
+  NOTES = {
+    m:'тёплая древесно-пряная нота',
+    w:'цветочно-сладкая нота',
+    u:'нишевая амбровая нота',
+  };
+  PHONE = '79064482204';
+
+  state = {
+    cat: 'all', query: '', shown: 12,
+    scrolled: false, mobileMenu: false,
+    cfgOpen: false, cfg: null,
+    format: 'oil', conc: 30, volume: 10, bottle: 'roll', giftbox: false, pickup: 'self',
+    summaryOpen: false, summaryText: '', copied: false,
+    mixWeights: {}, mixVolume: 30,
+  };
+
+  componentDidMount() {
+    this._onScroll = () => {
+      const s = window.scrollY > 24;
+      if (s !== this.state.scrolled) this.setState({ scrolled: s });
+    };
+    window.addEventListener('scroll', this._onScroll, { passive: true });
+    this._mq = () => this.forceUpdate();
+    window.addEventListener('resize', this._mq);
+  }
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this._onScroll);
+    window.removeEventListener('resize', this._mq);
+  }
+
+  fmt(n) { return Math.round(n).toLocaleString('ru-RU'); }
+
+  oilRatio() {
+    if (this.state.format === 'oil') return 1.0;
+    return this.state.conc / 100;
+  }
+  compatibleBottles() {
+    return this.BOTTLES.filter(b => b.ml.includes(this.state.volume));
+  }
+  bottlePrice() {
+    const b = this.BOTTLES.find(x => x.id === this.state.bottle);
+    return b ? b.price : 0;
+  }
+  pickupFee() {
+    const p = this.PICKUP.find(x => x.id === this.state.pickup);
+    return p ? p.fee : 0;
+  }
+  oilCost() {
+    if (!this.state.cfg) return 0;
+    return this.state.cfg.price * this.state.volume * this.oilRatio();
+  }
+  total() {
+    return this.oilCost() + this.bottlePrice() + (this.state.giftbox ? 250 : 0) + this.pickupFee();
+  }
+
+  openCfg = (frag) => {
+    const compat = this.BOTTLES.filter(b => b.ml.includes(10));
+    this.setState({
+      cfgOpen: true, cfg: frag, mobileMenu: false,
+      format: 'oil', conc: 30, volume: 10,
+      bottle: compat.length ? compat[0].id : 'roll',
+      giftbox: false, pickup: 'self',
+    });
+    document.body.style.overflow = 'hidden';
+  };
+  closeCfg = () => { this.setState({ cfgOpen: false }); document.body.style.overflow = ''; };
+
+  setVolume = (v) => {
+    const compat = this.BOTTLES.filter(b => b.ml.includes(v));
+    let bottle = this.state.bottle;
+    if (!compat.find(b => b.id === bottle)) bottle = compat.length ? compat[0].id : bottle;
+    this.setState({ volume: v, bottle });
+  };
+  setFormat = (id) => this.setState({ format: id });
+  setConc = (id) => this.setState({ conc: id });
+  setBottle = (id) => this.setState({ bottle: id });
+  setPickup = (id) => this.setState({ pickup: id });
+  toggleGift = () => this.setState(s => ({ giftbox: !s.giftbox }));
+
+  buildSummary() {
+    const s = this.state;
+    const fmtLabel = s.format === 'oil' ? 'Масло' : 'Спрей (парфюм)';
+    const concLabel = s.format === 'spray' ? `${s.conc}%` : '—';
+    const bottle = this.BOTTLES.find(b => b.id === s.bottle);
+    const pickup = this.PICKUP.find(p => p.id === s.pickup);
+    const lines = [
+      'Заказ · Aroma Garden',
+      `Аромат: ${s.cfg.name} (${this.CAT_LABEL[s.cfg.cat]})`,
+      `Формат: ${fmtLabel}`,
+      `Концентрация: ${concLabel}`,
+      `Объём: ${s.volume} мл`,
+      `Флакон: ${bottle ? bottle.name : '—'}${s.giftbox ? ' + подарочная коробка' : ''}`,
+      `Получение: ${pickup ? pickup.label : '—'}`,
+      `В т.ч. масло: ${this.fmt(this.oilCost())} ₽`,
+      `Итого: ${this.fmt(this.total())} ₽`,
+    ];
+    return lines.join('\n');
+  }
+
+  submitOrder = () => {
+    const text = this.buildSummary();
+    this.setState({ summaryText: text, copied: false });
+    try {
+      const url = `https://wa.me/${this.PHONE}?text=${encodeURIComponent(text)}`;
+      const w = window.open(url, '_blank');
+      if (!w) this.setState({ summaryOpen: true });
+    } catch (e) {
+      this.setState({ summaryOpen: true });
+    }
+  };
+  closeSummary = () => this.setState({ summaryOpen: false });
+  copyOrder = () => {
+    try { navigator.clipboard.writeText(this.state.summaryText); } catch (e) {}
+    this.setState({ copied: true });
+  };
+
+  // ---- mix ----
+  mixNames() { return Object.keys(this.state.mixWeights); }
+  toggleMix = (name) => {
+    this.setState(s => {
+      const w = { ...s.mixWeights };
+      if (w[name]) { delete w[name]; }
+      else { if (Object.keys(w).length >= 4) return {}; w[name] = 5; }
+      return { mixWeights: w };
+    });
+  };
+  setMixWeight = (name, val) => {
+    this.setState(s => ({ mixWeights: { ...s.mixWeights, [name]: Number(val) } }));
+  };
+  setMixVolume = (v) => this.setState({ mixVolume: v });
+  mixShares() {
+    const w = this.state.mixWeights;
+    const names = Object.keys(w);
+    const sum = names.reduce((a, n) => a + w[n], 0) || 1;
+    return names.map(n => ({ name: n, weight: w[n], share: w[n] / sum }));
+  }
+  mixTotal() {
+    const shares = this.mixShares();
+    if (shares.length < 2) return 0;
+    const perMl = shares.reduce((a, sh) => {
+      const f = this.FRAGRANCES.find(x => x.name === sh.name);
+      return a + sh.share * (f ? f.price : 0);
+    }, 0);
+    const oil = perMl * this.state.mixVolume;
+    const bottles = this.BOTTLES.filter(b => b.ml.includes(this.state.mixVolume));
+    const bottlePrice = bottles.length ? bottles[0].price : 0;
+    return oil + bottlePrice + 1000;
+  }
+  submitMix = () => {
+    const shares = this.mixShares();
+    if (shares.length < 2) return;
+    const lines = [
+      'Заказ · Свой микс · Aroma Garden',
+      ...shares.map(s => `· ${s.name} — ${Math.round(s.share * 100)}%`),
+      `Объём: ${this.state.mixVolume} мл`,
+      `Услуга VIP-микс: +1000 ₽`,
+      `Итого: ${this.fmt(this.mixTotal())} ₽`,
+    ];
+    const text = lines.join('\n');
+    this.setState({ summaryText: text, copied: false });
+    try {
+      const url = `https://wa.me/${this.PHONE}?text=${encodeURIComponent(text)}`;
+      const w = window.open(url, '_blank');
+      if (!w) this.setState({ summaryOpen: true });
+    } catch (e) { this.setState({ summaryOpen: true }); }
+  };
+
+  setCat = (c) => this.setState({ cat: c, shown: 12 });
+  onQuery = (e) => this.setState({ query: e.target.value, shown: 12 });
+  showMore = () => this.setState(s => ({ shown: s.shown + 12 }));
+  toggleMenu = () => this.setState(s => ({ mobileMenu: !s.mobileMenu }));
+  closeMenu = () => this.setState({ mobileMenu: false });
+
+  pillStyle(active) {
+    return active
+      ? { bg: '#2C1B10', color: '#FBF5EA', border: '#2C1B10' }
+      : { bg: 'transparent', color: '#241710', border: '#E2D4BF' };
+  }
+  goldPill(active) {
+    return active
+      ? { bg: 'linear-gradient(135deg,#E4C988,#C2A05A)', color: '#2C1B10', border: '#C2A05A' }
+      : { bg: 'transparent', color: '#241710', border: '#E2D4BF' };
+  }
+  darkPill(active) {
+    return active
+      ? { bg: '#C2A05A', color: '#2C1B10', border: '#C2A05A' }
+      : { bg: 'transparent', color: 'rgba(244,236,221,.85)', border: 'rgba(194,160,90,.4)' };
+  }
+
+  filtered() {
+    const q = this.state.query.trim().toLowerCase();
+    return this.FRAGRANCES.filter(f => {
+      if (this.state.cat === 'hits') { if (!f.hit) return false; }
+      else if (this.state.cat !== 'all' && f.cat !== this.state.cat) return false;
+      if (q && !f.name.toLowerCase().includes(q)) return false;
+      return true;
+    });
+  }
+
+  swatchFor(cat, i) {
+    const palettes = {
+      m: 'linear-gradient(160deg,#C9B58C,#7A4F2C)',
+      w: 'linear-gradient(160deg,#E6C9A8,#B97A6A)',
+      u: 'linear-gradient(160deg,#DDC489,#9C7B3A)',
+    };
+    return palettes[cat] || palettes.u;
+  }
+
+  themeVars() {
+    const ACCENTS = {
+      'Золотой янтарь':     { a:'#C2A05A', l:'#E4C988', d:'#9C7B3A', dp:'#7A4F2C' },
+      'Розовый уд':         { a:'#B0746A', l:'#D89E92', d:'#8A4E46', dp:'#7A3F38' },
+      'Изумрудный мускус':  { a:'#5E8C6A', l:'#8FB89A', d:'#3F6B4C', dp:'#345C40' },
+    };
+    const ac = ACCENTS[this.props.accent] || ACCENTS['Золотой янтарь'];
+    const display = (this.props.display === 'Модерн (гротеск)')
+      ? "'Inter', sans-serif"
+      : "'Playfair Display', serif";
+    const glowMap = { 'Яркое сияние': 1, 'Мягкое сияние': 0.55, 'Без ореола': 0 };
+    const glow = glowMap[this.props.glow] != null ? glowMap[this.props.glow] : 1;
+    return {
+      background: '#F4ECDD', color: '#241710', minHeight: '100vh', overflowX: 'hidden',
+      '--accent': ac.a, '--accent-light': ac.l, '--accent-dark': ac.d, '--accent-deep': ac.dp,
+      '--display': display, '--glow': glow,
+    };
+  }
+
+  renderVals() {
+    const st = this.state;
+    const all = this.filtered();
+    const rootStyle = this.themeVars();
+    const visible = all.slice(0, st.shown).map((f, i) => ({
+      ...f,
+      catLabel: this.CAT_LABEL[f.cat],
+      note: f.desc || this.NOTES[f.cat],
+      priceLabel: `от ${f.price} ₽/мл`,
+      swatch: this.swatchFor(f.cat, i),
+      hit: !!f.hit,
+      open: () => this.openCfg(f),
+    }));
+
+    const catFilters = [
+      { id: 'all', label: 'Все' },
+      { id: 'hits', label: '★ Хиты' },
+      { id: 'm', label: 'Мужские' },
+      { id: 'w', label: 'Женские' },
+      { id: 'u', label: 'Универсальные' },
+    ].map(c => {
+      const p = this.goldPill(st.cat === c.id);
+      return { label: c.label, ...p, onClick: () => this.setCat(c.id) };
+    });
+
+    const formats = this.FORMATS.map(f => {
+      const p = this.pillStyle(st.format === f.id);
+      return { label: f.label, ...p, onClick: () => this.setFormat(f.id) };
+    });
+    const concentrations = this.CONCENTRATIONS.map(c => {
+      const p = this.pillStyle(st.conc === c.id);
+      return { label: c.label, ...p, onClick: () => this.setConc(c.id) };
+    });
+    const volumes = this.VOLUMES.map(v => {
+      const p = this.pillStyle(st.volume === v);
+      return { label: v + ' мл', ...p, onClick: () => this.setVolume(v) };
+    });
+    const bottles = this.compatibleBottles().map(b => {
+      const active = st.bottle === b.id;
+      return {
+        name: b.name, note: b.note,
+        priceLabel: b.price === 0 ? 'бесплатно' : '+' + b.price + ' ₽',
+        border: active ? '#C2A05A' : '#E2D4BF',
+        bg: active ? '#F7EFDD' : '#FFFFFF',
+        onClick: () => this.setBottle(b.id),
+      };
+    });
+    const pickups = this.PICKUP.map(pk => {
+      const active = st.pickup === pk.id;
+      return {
+        label: pk.label,
+        feeLabel: pk.fee === 0 ? 'бесплатно' : '+' + pk.fee + ' ₽',
+        border: active ? '#C2A05A' : '#E2D4BF',
+        bg: active ? '#F7EFDD' : '#FFFFFF',
+        onClick: () => this.setPickup(pk.id),
+      };
+    });
+
+    // mix
+    const mixSet = st.mixWeights;
+    const mixSelectedNames = Object.keys(mixSet);
+    const mixOptions = this.FRAGRANCES.map(f => {
+      const active = !!mixSet[f.name];
+      return {
+        name: f.name,
+        border: active ? '#C2A05A' : 'rgba(194,160,90,.35)',
+        bg: active ? '#C2A05A' : 'transparent',
+        color: active ? '#2C1B10' : 'rgba(244,236,221,.85)',
+        onClick: () => this.toggleMix(f.name),
+      };
+    });
+    const shares = this.mixShares();
+    const mixSelected = shares.map(s => ({
+      name: s.name, weight: s.weight,
+      shareLabel: Math.round(s.share * 100) + '%',
+      onSlide: (e) => this.setMixWeight(s.name, e.target.value),
+    }));
+    const mixVolumes = this.VOLUMES.map(v => {
+      const p = this.darkPill(st.mixVolume === v);
+      return { label: v + ' мл', ...p, onClick: () => this.setMixVolume(v) };
+    });
+    const mixCanOrder = mixSelectedNames.length >= 2;
+
+    const tariffs = [
+      { name: 'Самовывоз', price: 'бесплатно', desc: 'Соберём заказ — заберёте на нашей точке в ТЦ (Санкт-Петербург).' },
+      { name: 'Бронь «Готово к приходу»', price: '+100 ₽', desc: 'Подготовим заранее к выбранному времени — не ждёте на месте.' },
+      { name: 'Приоритет', price: 'от 500 ₽', desc: 'Курьер по Санкт-Петербургу к точному времени, аккуратная упаковка и чек.' },
+      { name: 'VIP / свой микс', price: '+1000 ₽', desc: 'Авторский микс масел под вас + подарочная упаковка.' },
+    ];
+    const whyCards = [
+      { icon: '✦', title: 'Только качественные масла', text: 'Концентраты из Швейцарии, Франции и Германии — те же, на которых строятся оригиналы. Все ароматы всегда в наличии.' },
+      { icon: '◷', title: 'Любой объём', text: 'От пробника 3 мл до 100 мл на один флакон. Платите только за масло.' },
+      { icon: '◇', title: 'Спрей или масло', text: 'Селективный парфюм (30% масла / 70% этанола) или чистое масло. Концентрацию можно усилить.' },
+      { icon: '❋', title: 'Ваш аромат', text: 'Соберём индивидуальный микс из нескольких масел под ваш вкус.' },
+    ];
+    const steps = [
+      { num: '01', title: 'Выберите аромат', text: 'Из каталога — мужской, женский или универсальный.' },
+      { num: '02', title: 'Выберите формат', text: 'Спрей или масло, при желании усильте концентрацию.' },
+      { num: '03', title: 'Объём и флакон', text: 'От 3 до 100 мл, выберите тару.' },
+      { num: '04', title: 'Доставка или бронь', text: 'Отправим почтой/курьером или подготовим к вашему приходу.' },
+    ];
+    const reviews = [
+      { text: 'Хочу выразить огромную благодарность консультанту — помогла всё подобрать, очень всё понравилось! Возвращаюсь к вам не первый раз и всегда готова кричать о вас на каждом углу, потому что вы ЛУЧШИЕ!', name: 'Отзыв в Instagram', stars: '★★★★★' },
+      { text: 'Я не ошиблась! Шла мимо магазина и услышала аромат, который давно искала. Благодарна за идеальный парфюм, понимание и учёт привередливого вкуса — до каждой нужной ноты. И в кризис самая приятная цена. Влюблена.', name: 'Отзыв в переписке', stars: '★★★★★' },
+      { text: 'Ассаламу алейкум, посылку забрал — просто нереально чёткие ароматы)) Бомба, честно говоря. Спасибо большое!', name: 'Покупатель из РФ', stars: '★★★★★' },
+      { text: 'Тоже брал месяц назад, брат — просто бомба, ещё и 4 мл в подарок получил)) Очень нравятся ароматы, дай Аллах торговли и процветания.', name: 'Постоянный клиент', stars: '★★★★★' },
+      { text: 'Спасибо большое 😊 Хорошо держатся, стойкие, очень долго не выветриваются.', name: 'Отзыв в переписке', stars: '★★★★★' },
+    ];
+    const perks = [
+      { badge: '−15% профи', title: 'Профи-скидка', text: 'Визажистам, стилистам, барберам и бьюти-мастерам — постоянная скидка по подтверждению профессии.' },
+      { badge: 'Бонусы', title: 'Постоянным клиентам', text: 'Накопительная скидка: чем чаще собираете ароматы у нас, тем приятнее цена.' },
+      { badge: '+4 мл', title: 'Подарок к заказу', text: 'К каждой посылке кладём пробник 4 мл — попробуете новый аромат бесплатно.' },
+      { badge: 'Опт', title: 'Оптовые цены', text: 'Берёте на перепродажу или для салона — специальные условия от объёма.' },
+    ];
+    const gallery = ['m','w','u','u','m','w'].map((c, i) => ({ swatch: this.swatchFor(c, i) }));
+
+    return {
+      rootStyle,
+      headerBg: st.scrolled ? '#FBF5EA' : 'transparent',
+      headerShadow: st.scrolled ? '0 2px 8px rgba(60,40,20,.06)' : 'none',
+      mobileMenu: st.mobileMenu, toggleMenu: this.toggleMenu, closeMenu: this.closeMenu,
+      marqueeText: 'БРОНЬ · САМОВЫВОЗ · ДОСТАВКА ПО РФ · СВОЙ МИКС · ОТ 3 МЛ · СПРЕЙ И МАСЛО · ',
+
+      whyCards, steps, tariffs, reviews, gallery, perks,
+
+      catFilters, query: st.query, onQuery: this.onQuery,
+      visible,
+      hasMore: all.length > st.shown,
+      showMore: this.showMore,
+      remainingLabel: `${all.length - st.shown}`,
+      emptyState: all.length === 0,
+
+      cfgOpen: st.cfgOpen, closeCfg: this.closeCfg,
+      cfgName: st.cfg ? st.cfg.name : '',
+      cfgCat: st.cfg ? this.CAT_LABEL[st.cfg.cat] : '',
+      cfgPerMl: st.cfg ? `${st.cfg.price} ₽ за 1 мл масла` : '',
+      cfgVolLabel: st.volume + ' мл',
+      formats, isSpray: st.format === 'spray', concentrations, volumes, bottles, pickups,
+      giftbox: st.giftbox, toggleGift: this.toggleGift,
+      fillPct: Math.max(6, Math.round(st.volume / 100 * 100)),
+      totalLabel: this.fmt(this.total()) + ' ₽',
+      oilLabel: this.fmt(this.oilCost()) + ' ₽',
+      submitOrder: this.submitOrder,
+
+      summaryOpen: st.summaryOpen, summaryText: st.summaryText,
+      closeSummary: this.closeSummary, copyOrder: this.copyOrder,
+      copyLabel: st.copied ? 'Скопировано ✓' : 'Скопировать заказ',
+
+      mixOptions, mixSelected, mixVolumes,
+      mixEmpty: mixSelected.length < 2,
+      mixDisabled: !mixCanOrder,
+      mixCursor: mixCanOrder ? 'pointer' : 'not-allowed',
+      mixBtnBg: mixCanOrder ? 'linear-gradient(135deg,#E4C988 0%,#C2A05A 45%,#9C7B3A 100%)' : 'rgba(194,160,90,.25)',
+      mixBtnColor: mixCanOrder ? '#2C1B10' : 'rgba(244,236,221,.4)',
+      mixTotalLabel: this.fmt(this.mixTotal()) + ' ₽',
+      submitMix: this.submitMix,
+    };
+  }
+}
+</script>
+</body>
+</html>
