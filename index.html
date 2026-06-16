@@ -176,6 +176,50 @@
 
     /* Checkbox custom */
     input[type=checkbox] { width: 18px; height: 18px; accent-color: var(--gold); cursor: pointer; flex-shrink: 0; }
+
+    /* ====== ANIMATED CATALOG BOTTLES ====== */
+    .bottle-scene { position:absolute; inset:0; display:flex; align-items:flex-end; justify-content:center; padding-bottom:8%; }
+    .bottle-float { display:flex; flex-direction:column; align-items:center; animation:bottleFloat 4s ease-in-out infinite; filter:drop-shadow(0 16px 28px rgba(0,0,0,.28)); transition:filter .3s; }
+    .frag-card:hover .bottle-float { animation-play-state:paused; filter:drop-shadow(0 22px 36px rgba(0,0,0,.42)); }
+    @keyframes bottleFloat { 0%,100%{transform:translateY(0) rotate(0deg)} 40%{transform:translateY(-8px) rotate(1.6deg)} 70%{transform:translateY(-4px) rotate(-1deg)} }
+    .b-cap { width:24px; height:17px; border-radius:5px 5px 2px 2px; background:linear-gradient(180deg,rgba(255,255,255,.58),rgba(255,255,255,.2)); border:1px solid rgba(255,255,255,.42); }
+    .b-neck { width:14px; height:9px; background:linear-gradient(90deg,rgba(255,255,255,.07),rgba(255,255,255,.26),rgba(255,255,255,.07)); }
+    .b-body { width:64px; height:90px; border-radius:9px 9px 18px 18px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.16); position:relative; overflow:hidden; }
+    .b-liquid { position:absolute; bottom:0; left:0; right:0; height:62%; animation:liquidSway 5s ease-in-out infinite; }
+    @keyframes liquidSway { 0%,100%{transform:translateY(0);border-radius:8px 4px 0 0} 50%{transform:translateY(-4px);border-radius:4px 8px 0 0} }
+    .b-shine { position:absolute; top:7px; left:8px; width:9px; height:44px; background:linear-gradient(180deg,rgba(255,255,255,.44),transparent); border-radius:999px; animation:shinePulse 3s ease-in-out infinite; }
+    .b-shine2 { position:absolute; top:7px; left:21px; width:4px; height:20px; background:linear-gradient(180deg,rgba(255,255,255,.2),transparent); border-radius:999px; }
+    @keyframes shinePulse { 0%,100%{opacity:.5} 50%{opacity:1} }
+    .b-label { position:absolute; bottom:18px; left:6px; right:6px; height:22px; background:rgba(255,255,255,.09); border:1px solid rgba(255,255,255,.13); border-radius:3px; }
+    .b-base { width:72px; height:7px; border-radius:0 0 6px 6px; background:rgba(0,0,0,.14); }
+    .b-spark { position:absolute; border-radius:50%; background:rgba(255,255,255,.88); animation:sparkAnim 2.5s ease-in-out infinite; }
+    @keyframes sparkAnim { 0%,100%{opacity:0;transform:scale(0)} 40%,60%{opacity:1;transform:scale(1)} }
+
+    /* ====== AI FAQ ====== */
+    .faq-msgs { min-height:160px; max-height:360px; overflow-y:auto; display:flex; flex-direction:column; gap:14px; padding-bottom:4px; scrollbar-width:thin; scrollbar-color:rgba(139,92,246,.3) transparent; }
+    .faq-msgs::-webkit-scrollbar { width:4px; }
+    .faq-msgs::-webkit-scrollbar-thumb { background:rgba(139,92,246,.35); border-radius:2px; }
+    .faq-msg { display:flex; gap:10px; align-items:flex-start; animation:msgIn .3s ease-out; }
+    @keyframes msgIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+    .faq-msg-user { justify-content:flex-end; }
+    .faq-ai-avatar { width:32px; height:32px; border-radius:50%; background:linear-gradient(135deg,#7C3AED,#4F46E5); display:flex; align-items:center; justify-content:center; font-family:'Inter',sans-serif; font-weight:700; font-size:11px; color:#fff; flex-shrink:0; letter-spacing:-.5px; }
+    .faq-bubble { font-family:'Lora',serif; font-size:15px; line-height:1.65; padding:12px 17px; border-radius:16px; max-width:500px; }
+    .faq-msg-ai .faq-bubble { background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.07); color:rgba(255,255,255,.85); border-radius:4px 16px 16px 16px; }
+    .faq-msg-user .faq-bubble { background:linear-gradient(135deg,rgba(124,58,237,.22),rgba(79,70,229,.22)); border:1px solid rgba(124,58,237,.22); color:rgba(255,255,255,.9); border-radius:16px 4px 16px 16px; }
+    .faq-dot { width:6px; height:6px; border-radius:50%; background:rgba(139,92,246,.8); animation:dotBounce 1.2s ease-in-out infinite; }
+    .faq-dot:nth-child(2){animation-delay:.15s}
+    .faq-dot:nth-child(3){animation-delay:.3s}
+    @keyframes dotBounce { 0%,60%,100%{transform:translateY(0);opacity:.4} 30%{transform:translateY(-6px);opacity:1} }
+    .faq-chip { font-family:'Inter',sans-serif; font-size:13px; padding:9px 15px; border-radius:999px; border:1px solid rgba(139,92,246,.28); background:rgba(139,92,246,.05); color:rgba(255,255,255,.62); cursor:pointer; transition:all .18s; }
+    .faq-chip:hover { background:rgba(139,92,246,.18); border-color:rgba(139,92,246,.52); color:#fff; transform:translateY(-1px); }
+    .faq-input-wrap { display:flex; align-items:flex-end; gap:12px; background:rgba(255,255,255,.02); border:1px solid rgba(255,255,255,.06); border-radius:16px; padding:12px 16px; transition:border-color .2s,box-shadow .2s; }
+    .faq-input-wrap:focus-within { border-color:rgba(139,92,246,.38); box-shadow:0 0 0 3px rgba(139,92,246,.08); }
+    .faq-input { flex:1; background:transparent; border:none; outline:none; font-family:'Lora',serif; font-size:15px; color:rgba(255,255,255,.85); resize:none; min-height:40px; max-height:120px; overflow-y:auto; }
+    .faq-input::placeholder { color:rgba(255,255,255,.22); }
+    .faq-send-btn { width:40px; height:40px; border-radius:12px; background:linear-gradient(135deg,#7C3AED,#4F46E5); border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all .18s; flex-shrink:0; }
+    .faq-send-btn:hover:not(:disabled) { transform:scale(1.06); box-shadow:0 4px 14px rgba(124,58,237,.42); }
+    .faq-send-btn:disabled { opacity:.32; cursor:not-allowed; }
+    .ai-glow { position:absolute; border-radius:50%; filter:blur(110px); pointer-events:none; }
   </style>
 </head>
 <body>
@@ -191,6 +235,7 @@
       <a href="#catalog">Каталог</a>
       <a href="#how">Как это работает</a>
       <a href="#mix">Свой микс</a>
+      <a href="#faq">Вопросы</a>
       <a href="#delivery">Доставка</a>
       <a href="#about">О нас</a>
     </nav>
@@ -206,6 +251,7 @@
   <a href="#catalog" onclick="closeMobileMenu()">Каталог</a>
   <a href="#how" onclick="closeMobileMenu()">Как это работает</a>
   <a href="#mix" onclick="closeMobileMenu()">Свой микс</a>
+  <a href="#faq" onclick="closeMobileMenu()">Вопросы</a>
   <a href="#delivery" onclick="closeMobileMenu()">Доставка</a>
   <a href="#about" onclick="closeMobileMenu()">О нас</a>
   <span class="phone">+7 906 448 2204</span>
@@ -451,6 +497,33 @@
   </div>
 </section>
 
+<!-- ======== AI FAQ ======== -->
+<section id="faq" style="background:#0D0A08; position:relative; overflow:hidden;">
+  <div class="ai-glow" style="width:500px;height:500px;top:-15%;left:16%;background:rgba(124,58,237,.09);"></div>
+  <div class="ai-glow" style="width:380px;height:380px;bottom:-12%;right:10%;background:rgba(79,70,229,.07);"></div>
+  <div class="ai-glow" style="width:260px;height:260px;top:35%;right:28%;background:rgba(220,38,230,.05);"></div>
+
+  <div class="container section-pad" style="position:relative;z-index:2;">
+    <div style="text-align:center; margin-bottom:48px;">
+      <p class="eyebrow" style="color:#8B5CF6; margin-bottom:12px;">Умный помощник</p>
+      <h2 class="h2" style="color:#fff; margin-bottom:0;">Ответы на ваши вопросы</h2>
+      <div style="width:64px;height:1px;background:linear-gradient(90deg,transparent,rgba(139,92,246,.6),transparent);margin:16px auto 14px;"></div>
+      <p style="font-family:'Lora',serif; font-size:16px; color:rgba(255,255,255,.38);">Нажмите на вопрос или задайте свой</p>
+    </div>
+
+    <div style="max-width:700px; margin:0 auto;">
+      <div id="faq-msgs" class="faq-msgs" style="margin-bottom:20px;"></div>
+      <div id="faq-chips" style="display:flex; flex-wrap:wrap; gap:10px; margin-bottom:20px;"></div>
+      <div class="faq-input-wrap">
+        <textarea id="faq-input" class="faq-input" placeholder="Задайте вопрос об ароматах…" rows="1"></textarea>
+        <button id="faq-send" class="faq-send-btn" disabled aria-label="Отправить">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ======== PERKS ======== -->
 <section id="perks" style="background:var(--bg-ivory); border-top:1px solid var(--line);">
   <div class="container section-pad reveal">
@@ -460,43 +533,50 @@
     <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:20px;">
 
       <div style="background:var(--bg-cream); border:1px solid var(--line); border-radius:20px; padding:28px 24px; position:relative; overflow:hidden;">
-        <div style="position:absolute; top:-10px; right:-10px; font-size:64px; opacity:.08;">🎁</div>
+        <div style="position:absolute; top:-10px; right:-10px; font-size:64px; opacity:.07;">🎁</div>
         <div style="width:44px; height:44px; border-radius:12px; background:var(--grad-gold); display:flex; align-items:center; justify-content:center; font-size:20px; margin-bottom:16px;">🎁</div>
         <h4 class="h4" style="margin-bottom:8px; font-size:18px;">Первый заказ −10%</h4>
-        <p style="font-size:14px; line-height:1.6; color:var(--ink-muted);">Скажи «первый раз» при оформлении — получи скидку 10% на всё.</p>
+        <p style="font-size:14px; line-height:1.6; color:var(--ink-muted);">Скажи «первый раз» при оформлении — получи скидку 10% на весь заказ.</p>
       </div>
 
       <div style="background:var(--bg-cream); border:1px solid var(--line); border-radius:20px; padding:28px 24px; position:relative; overflow:hidden;">
-        <div style="position:absolute; top:-10px; right:-10px; font-size:64px; opacity:.08;">⭐</div>
+        <div style="position:absolute; top:-10px; right:-10px; font-size:64px; opacity:.07;">⭐</div>
         <div style="width:44px; height:44px; border-radius:12px; background:var(--grad-gold); display:flex; align-items:center; justify-content:center; font-size:20px; margin-bottom:16px;">⭐</div>
         <h4 class="h4" style="margin-bottom:8px; font-size:18px;">Карта постоянного клиента</h4>
-        <p style="font-size:14px; line-height:1.6; color:var(--ink-muted);">После 3-го заказа — карточка с постоянной скидкой 5% на всё.</p>
+        <p style="font-size:14px; line-height:1.6; color:var(--ink-muted);">После 3-го заказа — личная карта со скидкой 5% на всё навсегда.</p>
       </div>
 
       <div style="background:var(--bg-cream); border:1px solid var(--line); border-radius:20px; padding:28px 24px; position:relative; overflow:hidden;">
-        <div style="position:absolute; top:-10px; right:-10px; font-size:64px; opacity:.08;">🧴</div>
+        <div style="position:absolute; top:-10px; right:-10px; font-size:64px; opacity:.07;">🧴</div>
         <div style="width:44px; height:44px; border-radius:12px; background:var(--grad-gold); display:flex; align-items:center; justify-content:center; font-size:20px; margin-bottom:16px;">🧴</div>
         <h4 class="h4" style="margin-bottom:8px; font-size:18px;">Пробник в подарок</h4>
-        <p style="font-size:14px; line-height:1.6; color:var(--ink-muted);">К каждому заказу от 500 ₽ — 3 мл любого аромата на выбор.</p>
+        <p style="font-size:14px; line-height:1.6; color:var(--ink-muted);">К каждому заказу от 1500 ₽ — 3 мл любого аромата на выбор в подарок.</p>
       </div>
 
       <div style="background:var(--bg-cream); border:1px solid var(--line); border-radius:20px; padding:28px 24px; position:relative; overflow:hidden;">
-        <div style="position:absolute; top:-10px; right:-10px; font-size:64px; opacity:.08;">🎂</div>
-        <div style="width:44px; height:44px; border-radius:12px; background:var(--grad-gold); display:flex; align-items:center; justify-content:center; font-size:20px; margin-bottom:16px;">🎂</div>
-        <h4 class="h4" style="margin-bottom:8px; font-size:18px;">Подарок в День рождения</h4>
-        <p style="font-size:14px; line-height:1.6; color:var(--ink-muted);">В месяц рождения — 5 мл любимого аромата в подарок. Просто напиши Юнусу.</p>
+        <div style="position:absolute; top:-10px; right:-10px; font-size:64px; opacity:.07;">🫐</div>
+        <div style="width:44px; height:44px; border-radius:12px; background:var(--grad-gold); display:flex; align-items:center; justify-content:center; font-size:20px; margin-bottom:16px;">🫐</div>
+        <h4 class="h4" style="margin-bottom:8px; font-size:18px;">Дегустационный сет</h4>
+        <p style="font-size:14px; line-height:1.6; color:var(--ink-muted);">Любые 5 ароматов по 3 мл — платишь как за 4. Идеально для знакомства с коллекцией.</p>
       </div>
 
       <div style="background:var(--bg-cream); border:1px solid var(--line); border-radius:20px; padding:28px 24px; position:relative; overflow:hidden;">
-        <div style="position:absolute; top:-10px; right:-10px; font-size:64px; opacity:.08;">👥</div>
+        <div style="position:absolute; top:-10px; right:-10px; font-size:64px; opacity:.07;">👥</div>
         <div style="width:44px; height:44px; border-radius:12px; background:var(--grad-gold); display:flex; align-items:center; justify-content:center; font-size:20px; margin-bottom:16px;">👥</div>
         <h4 class="h4" style="margin-bottom:8px; font-size:18px;">Приведи друга</h4>
-        <p style="font-size:14px; line-height:1.6; color:var(--ink-muted);">Твой друг сделал заказ? Ты получаешь 5 мл на выбор — бесплатно.</p>
+        <p style="font-size:14px; line-height:1.6; color:var(--ink-muted);">Друг оформил заказ по твоей рекомендации — ты получаешь 5 мл любого аромата бесплатно.</p>
+      </div>
+
+      <div style="background:var(--bg-cream); border:1px solid var(--line); border-radius:20px; padding:28px 24px; position:relative; overflow:hidden;">
+        <div style="position:absolute; top:-10px; right:-10px; font-size:64px; opacity:.07;">⚡</div>
+        <div style="width:44px; height:44px; border-radius:12px; background:var(--grad-gold); display:flex; align-items:center; justify-content:center; font-size:20px; margin-bottom:16px;">⚡</div>
+        <h4 class="h4" style="margin-bottom:8px; font-size:18px;">Парный заказ −7%</h4>
+        <p style="font-size:14px; line-height:1.6; color:var(--ink-muted);">Заказываете 2 и более аромата в один заказ — скидка 7% на весь чек автоматически.</p>
       </div>
 
       <div style="background:linear-gradient(135deg,#2C1B10,#4A2E18); border:1px solid rgba(194,160,90,.3); border-radius:20px; padding:28px 24px; display:flex; flex-direction:column; justify-content:center; align-items:flex-start;">
         <p style="font-family:'Playfair Display',serif; font-style:italic; font-size:18px; color:var(--bg-ivory); line-height:1.5; margin-bottom:20px;">«Постоянным клиентам — всегда лучшие условия. Напиши мне лично.»</p>
-        <a href="https://wa.me/79064482204?text=Здравствуйте, Юнус! Хочу узнать о скидках" target="_blank" rel="noopener" class="btn btn-gold btn-sm">Написать Юнусу</a>
+        <a href="https://wa.me/79064482204?text=Здравствуйте, Юнус! Хочу узнать о скидках и бонусах" target="_blank" rel="noopener" class="btn btn-gold btn-sm">Написать Юнусу</a>
       </div>
 
     </div>
@@ -766,6 +846,11 @@ const PICKUP = [
 ];
 const CAT_LABEL = {m:'Мужской', w:'Женский', u:'Универсальный'};
 const SWATCH = {m:'linear-gradient(160deg,#C9B58C,#7A4F2C)', w:'linear-gradient(160deg,#E6C9A8,#B97A6A)', u:'linear-gradient(160deg,#DDC489,#9C7B3A)'};
+const LIQUID = {
+  m: 'linear-gradient(180deg,rgba(110,145,210,.7),rgba(55,85,165,.95))',
+  w: 'linear-gradient(180deg,rgba(215,110,145,.7),rgba(175,72,112,.95))',
+  u: 'linear-gradient(180deg,rgba(228,201,136,.7),rgba(194,160,90,.95))',
+};
 const PHONE = '79064482204';
 
 // ====== STATE ======
@@ -868,12 +953,26 @@ function renderCatalog() {
   empty.style.display = all.length === 0 ? 'block' : 'none';
   grid.style.display = all.length === 0 ? 'none' : 'grid';
 
-  grid.innerHTML = visible.map(f => `
+  grid.innerHTML = visible.map((f, vi) => `
     <div class="frag-card" onclick="openCfg(${FRAGRANCES.indexOf(f)})" tabindex="0" onkeydown="if(event.key==='Enter')openCfg(${FRAGRANCES.indexOf(f)})" role="button" aria-label="Открыть конфигуратор для ${f.name}">
       <div class="frag-thumb" style="background:${SWATCH[f.cat]};">
         <div class="frag-thumb-pattern"></div>
         ${f.hit ? '<span class="hit-badge">ХИТ</span>' : ''}
-        <div class="frag-bottle"></div>
+        <div class="bottle-scene">
+          <div class="bottle-float" style="animation-delay:${(vi * 0.38) % 3}s">
+            <div class="b-cap"></div>
+            <div class="b-neck"></div>
+            <div class="b-body">
+              <div class="b-liquid" style="background:${LIQUID[f.cat]};animation-delay:${(vi * 0.5) % 4}s"></div>
+              <div class="b-shine"></div>
+              <div class="b-shine2"></div>
+              <div class="b-label"></div>
+              <div class="b-spark" style="width:3px;height:3px;top:10px;right:12px;animation-delay:${0.6+vi*0.3}s;"></div>
+              <div class="b-spark" style="width:4px;height:4px;top:24px;right:7px;animation-delay:${1.4+vi*0.25}s;"></div>
+            </div>
+            <div class="b-base"></div>
+          </div>
+        </div>
       </div>
       <div class="frag-info">
         <p class="eyebrow" style="font-size:11px; letter-spacing:2px;">${CAT_LABEL[f.cat]}</p>
@@ -1147,10 +1246,104 @@ document.addEventListener('keydown', e => {
   }
 });
 
+// ====== FAQ AI CHAT ======
+const FAQS = [
+  { q: "Чем масло отличается от спрея?", a: "Масло — чистый ароматический концентрат без спирта. Держится на коже 8–12 часов, звучит глубже и камернее. Спрей — парфюм на спиртовой основе: лёгкий шлейф, быстро распространяется. Оба формата доступны в любом объёме — выбор за вами." },
+  { q: "Как долго держится аромат?", a: "Масло держится 8–12 часов, особенно хорошо на увлажнённой коже. Спрей 30% — 4–8 часов. При концентрации 40–50% стойкость заметно выше. Наносите на точки пульса: запястья, шея, за ушами — так аромат раскроется лучше всего." },
+  { q: "Можно ли попробовать аромат?", a: "Да! К каждому заказу от 1500 ₽ прилагается 3 мл любого аромата на ваш выбор. Также можно приехать к нам в СПб на Лиговский пр., 153 — Юнус поможет подобрать аромат лично и дать понюхать всё что понравилось." },
+  { q: "Как сделать заказ?", a: "Откройте каталог, нажмите «Собрать» на понравившемся аромате. Настройте формат, объём и флакон. Нажмите «Оформить заказ» — откроется WhatsApp с готовой сводкой. Юнус подтвердит заказ и договорится об удобном способе получения." },
+  { q: "Доставляете по всей России?", a: "Да, Почтой России и СДЭК по всей стране от 350 ₽. При заказе от 3000 ₽ — доставка бесплатная. По Санкт-Петербургу — курьер от 500 ₽. Самовывоз на точке — всегда бесплатно." },
+  { q: "Что такое концентрация 40–50%?", a: "Стандартный спрей — 30% масла и 70% спирта. При повышении до 40–50% аромат становится гуще, насыщеннее и держится значительно дольше. Особенно рекомендуем в холодное время года — осенью и зимой." },
+];
+
+let faqTypingEl = null;
+
+function faqInit() {
+  const chips = document.getElementById('faq-chips');
+  if (!chips) return;
+  chips.innerHTML = FAQS.map((f, i) =>
+    `<button class="faq-chip" onclick="faqAsk(${i})">${f.q}</button>`
+  ).join('');
+  document.getElementById('faq-send').addEventListener('click', faqSend);
+  const inp = document.getElementById('faq-input');
+  inp.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); faqSend(); }
+  });
+  inp.addEventListener('input', () => {
+    inp.style.height = '40px';
+    inp.style.height = Math.min(inp.scrollHeight, 120) + 'px';
+    document.getElementById('faq-send').disabled = !inp.value.trim();
+  });
+}
+
+function faqAsk(index) {
+  const faq = FAQS[index];
+  faqAddMsg('user', faq.q);
+  faqShowTyping();
+  setTimeout(() => { faqHideTyping(); faqAddMsg('ai', faq.a); }, 1300 + Math.random() * 700);
+}
+
+function faqSend() {
+  const inp = document.getElementById('faq-input');
+  const text = inp.value.trim();
+  if (!text) return;
+  const lc = text.toLowerCase();
+  const match = FAQS.find(f =>
+    f.q.toLowerCase().split(' ').some(w => w.length > 4 && lc.includes(w))
+  );
+  faqAddMsg('user', text);
+  inp.value = ''; inp.style.height = '40px';
+  document.getElementById('faq-send').disabled = true;
+  faqShowTyping();
+  setTimeout(() => {
+    faqHideTyping();
+    faqAddMsg('ai', match
+      ? match.a
+      : 'Хороший вопрос! Для точного ответа напишите Юнусу в WhatsApp — он поможет подобрать идеальный аромат и ответит лично. Среднее время ответа — несколько минут.'
+    );
+  }, 1500 + Math.random() * 800);
+}
+
+function faqShowTyping() {
+  const msgs = document.getElementById('faq-msgs');
+  faqTypingEl = document.createElement('div');
+  faqTypingEl.className = 'faq-msg faq-msg-ai';
+  faqTypingEl.innerHTML = `<div class="faq-ai-avatar">AG</div><div style="display:flex;gap:5px;align-items:center;padding:12px 17px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:4px 16px 16px 16px;"><div class="faq-dot"></div><div class="faq-dot"></div><div class="faq-dot"></div></div>`;
+  msgs.appendChild(faqTypingEl);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+function faqHideTyping() {
+  if (faqTypingEl) { faqTypingEl.remove(); faqTypingEl = null; }
+}
+
+function faqAddMsg(type, text) {
+  const msgs = document.getElementById('faq-msgs');
+  const div = document.createElement('div');
+  div.className = `faq-msg faq-msg-${type}`;
+  if (type === 'ai') {
+    div.innerHTML = `<div class="faq-ai-avatar">AG</div><div class="faq-bubble"></div>`;
+    msgs.appendChild(div);
+    const bubble = div.querySelector('.faq-bubble');
+    let i = 0;
+    const speed = text.length > 180 ? 12 : 16;
+    const iv = setInterval(() => {
+      bubble.textContent += text[i++];
+      msgs.scrollTop = msgs.scrollHeight;
+      if (i >= text.length) clearInterval(iv);
+    }, speed);
+  } else {
+    div.innerHTML = `<div class="faq-bubble">${text}</div>`;
+    msgs.appendChild(div);
+    msgs.scrollTop = msgs.scrollHeight;
+  }
+}
+
 // ====== INIT ======
 renderFilters();
 renderCatalog();
 renderMix();
+faqInit();
 </script>
 </body>
 </html>
