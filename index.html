@@ -259,6 +259,49 @@
     /* Mobile bottom padding for tube bar */
     @media(max-width:880px) { footer { padding-bottom: 88px !important; } }
 
+    /* ====== PIXEL HERO CANVAS ====== */
+    #hero-canvas { position:absolute; inset:0; width:100%; height:100%; pointer-events:none; opacity:.7; display:block; }
+
+    /* Gold shimmer on hero heading */
+    @keyframes goldShimmer { 0%{background-position:200% center} 100%{background-position:0% center} }
+    .hero-shimmer {
+      color:transparent !important;
+      background:linear-gradient(125deg, var(--ink) 0%, var(--mocha) 22%, var(--gold) 42%, var(--gold-light) 50%, var(--gold) 58%, var(--mocha) 78%, var(--ink) 100%);
+      background-size:220% auto;
+      -webkit-background-clip:text; background-clip:text;
+      animation:goldShimmer 5.5s linear infinite;
+    }
+
+    /* ====== CONTAINER SCROLL PREVIEW ====== */
+    #scroll-preview { min-height:clamp(900px,110vh,1200px); display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden; padding:80px 24px; background:var(--bg-ivory); border-top:1px solid var(--line); }
+    .sc-persp { perspective:1100px; width:100%; max-width:1060px; margin:0 auto; }
+    .sc-header { text-align:center; position:relative; z-index:2; margin-bottom:-20px; }
+    .sc-card { background:var(--espresso); border-radius:28px; border:1px solid rgba(194,160,90,.22); padding:clamp(18px,2.5vw,32px); transform-origin:center bottom; overflow:hidden; will-change:transform;
+      box-shadow:0 0 0 rgba(0,0,0,.3), 0 9px 20px rgba(0,0,0,.24), 0 37px 37px rgba(0,0,0,.19), 0 84px 50px rgba(0,0,0,.1), 0 149px 60px rgba(0,0,0,.04); }
+    .sc-topbar { display:flex; gap:10px; align-items:center; margin-bottom:18px; flex-wrap:wrap; }
+    .sc-search-mock { flex:1; min-width:180px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.07); border-radius:12px; padding:10px 16px; font-family:'Inter',sans-serif; font-size:13px; color:rgba(244,236,221,.28); display:flex; align-items:center; gap:8px; }
+    .sc-pills { display:flex; gap:6px; flex-wrap:wrap; }
+    .sc-pill { font-family:'Inter',sans-serif; font-size:12px; font-weight:600; padding:7px 14px; border-radius:999px; cursor:default; }
+    .sc-pill-active { background:var(--grad-gold); color:var(--espresso); border:none; }
+    .sc-pill-idle { border:1px solid rgba(255,255,255,.1); color:rgba(244,236,221,.5); background:transparent; }
+    .sc-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:10px; }
+    .sc-frag { background:rgba(255,255,255,.03); border:1px solid rgba(194,160,90,.15); border-radius:14px; overflow:hidden; transition:border-color .2s; }
+    .sc-frag:hover { border-color:rgba(194,160,90,.38); }
+    .sc-frag-thumb { height:88px; position:relative; display:flex; align-items:flex-end; justify-content:center; padding-bottom:6px; overflow:hidden; }
+    .sc-frag-thumb::before { content:''; position:absolute; inset:0; background:repeating-linear-gradient(135deg,rgba(255,255,255,.04) 0 7px,transparent 7px 14px); }
+    .sc-mini-bottle { display:flex; flex-direction:column; align-items:center; position:relative; z-index:1; }
+    .sc-mb-cap { width:11px; height:7px; border-radius:3px 3px 1px 1px; background:rgba(255,255,255,.48); border:1px solid rgba(255,255,255,.3); }
+    .sc-mb-neck { width:7px; height:4px; background:rgba(255,255,255,.2); }
+    .sc-mb-body { width:30px; height:46px; border-radius:5px 5px 10px 10px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.14); position:relative; overflow:hidden; }
+    .sc-mb-liq { position:absolute; bottom:0; left:0; right:0; height:62%; border-radius:4px 2px 0 0; }
+    .sc-mb-shine { position:absolute; top:3px; left:3px; width:4px; height:20px; background:linear-gradient(180deg,rgba(255,255,255,.4),transparent); border-radius:999px; }
+    .sc-mb-base { width:34px; height:4px; border-radius:0 0 4px 4px; background:rgba(0,0,0,.18); }
+    .sc-frag-body { padding:10px 12px; }
+    .sc-frag-name { font-family:'Playfair Display',serif; font-size:13px; color:rgba(244,236,221,.88); margin-bottom:3px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .sc-frag-meta { font-family:'Inter',sans-serif; font-size:10px; color:rgba(244,236,221,.4); }
+    .sc-frag-price { font-family:'Inter',sans-serif; font-weight:600; font-size:12px; color:var(--gold); margin-top:6px; }
+    .sc-hit { position:absolute; top:7px; left:7px; font-family:'Inter',sans-serif; font-size:9px; font-weight:700; color:var(--espresso); background:var(--grad-gold); padding:3px 8px; border-radius:999px; z-index:2; }
+
     /* ====== CATALOG REDESIGN ====== */
     .catalog-search-wrap { position:relative; max-width:520px; }
     .catalog-search-icon { position:absolute; left:18px; top:50%; transform:translateY(-50%); pointer-events:none; color:var(--ink-muted); }
@@ -358,12 +401,13 @@
 <!-- ======== HERO ======== -->
 <section id="top">
   <div id="hero">
+    <canvas id="hero-canvas" aria-hidden="true"></canvas>
     <div class="hero-glow-1"></div>
     <div class="hero-glow-2"></div>
     <div class="hero-inner">
       <div class="hero-content">
         <p class="eyebrow" style="margin-bottom:20px;">Селективная парфюмерия на разлив · Санкт-Петербург</p>
-        <h1 class="h1" style="margin-bottom:24px; color:var(--ink);">Соберите свой аромат — <span style="color:var(--mocha);">от 3 мл до 100 мл</span></h1>
+        <h1 class="h1 hero-shimmer" style="margin-bottom:24px;">Соберите свой аромат — <span>от 3 мл до 100 мл</span></h1>
         <p class="body-lg" style="color:var(--ink-muted); max-width:560px; margin-bottom:36px;">Сотни ароматов в наличии: мужские, женские и универсальные. Выберите формат — спрей или чистое масло, нужный объём и флакон. Соберём вручную и отправим по России или подготовим к вашему приходу.</p>
         <div style="display:flex; flex-wrap:wrap; gap:14px; margin-bottom:28px;">
           <a href="#catalog" class="btn btn-primary">Выбрать аромат</a>
@@ -385,6 +429,36 @@
     <span class="marquee-text">БРОНЬ <span>·</span> САМОВЫВОЗ <span>·</span> ДОСТАВКА ПО РФ <span>·</span> СВОЙ МИКС <span>·</span> ОТ 3 МЛ <span>·</span> СПРЕЙ И МАСЛО <span>·</span> БРОНЬ <span>·</span> САМОВЫВОЗ <span>·</span> ДОСТАВКА ПО РФ <span>·</span> СВОЙ МИКС <span>·</span> ОТ 3 МЛ <span>·</span> СПРЕЙ И МАСЛО <span>·</span></span>
   </div>
 </div>
+
+<!-- ======== SCROLL PREVIEW (ContainerScroll) ======== -->
+<section id="scroll-preview">
+  <div class="sc-persp">
+    <!-- Header -->
+    <div class="sc-header reveal" id="sc-header">
+      <p class="eyebrow" style="margin-bottom:12px;">Весь ассортимент</p>
+      <h2 class="h2" style="color:var(--ink); margin-bottom:14px;">Более 100 ароматов<br>на любой вкус</h2>
+      <p style="font-family:'Lora',serif; font-size:17px; color:var(--ink-muted); max-width:500px; margin:0 auto;">Мужские, женские и универсальные — в удобном каталоге с фильтрами и поиском</p>
+    </div>
+    <!-- 3D Card -->
+    <div class="sc-card" id="sc-card">
+      <!-- Mock top bar -->
+      <div class="sc-topbar">
+        <div class="sc-search-mock">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(244,236,221,.3)" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          Поиск по названию аромата…
+        </div>
+        <div class="sc-pills">
+          <span class="sc-pill sc-pill-active">Все ароматы</span>
+          <span class="sc-pill sc-pill-idle">★ Хиты</span>
+          <span class="sc-pill sc-pill-idle">♂ Мужские</span>
+          <span class="sc-pill sc-pill-idle">♀ Женские</span>
+        </div>
+      </div>
+      <!-- Fragrance grid (filled by JS) -->
+      <div class="sc-grid" id="sc-grid"></div>
+    </div>
+  </div>
+</section>
 
 <!-- ======== WHY ======== -->
 <section class="section-pad reveal">
@@ -1529,6 +1603,139 @@ function faqAddMsg(type, text) {
     msgs.scrollTop = msgs.scrollHeight;
   }
 }
+
+// ====== PIXEL HERO CANVAS ======
+(function() {
+  const canvas = document.getElementById('hero-canvas');
+  if (!canvas || !canvas.getContext) return;
+  const ctx = canvas.getContext('2d');
+  const hero = document.getElementById('hero');
+  let pixels = [], raf, active = true;
+
+  const COLORS = [
+    'rgba(228,201,136,0.55)',
+    'rgba(194,160,90,0.38)',
+    'rgba(244,236,221,0.62)',
+    'rgba(228,201,136,0.32)',
+    'rgba(156,123,58,0.28)',
+  ];
+
+  function build() {
+    const r = hero.getBoundingClientRect();
+    const W = Math.floor(r.width), H = Math.floor(r.height);
+    canvas.width = W; canvas.height = H;
+    canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
+    pixels = [];
+    const GAP = 8, cx = W / 2, cy = H / 2;
+    for (let x = 0; x < W; x += GAP) {
+      for (let y = 0; y < H; y += GAP) {
+        const dist = Math.hypot(x - cx, y - cy);
+        const maxS = Math.random() * 1.8 + 0.35;
+        pixels.push({
+          x, y,
+          color: COLORS[Math.floor(Math.random() * COLORS.length)],
+          size: 0, maxS,
+          spd: Math.random() * 0.1 + 0.045,
+          delay: dist * 0.42 + Math.random() * 18,
+          cnt: 0, tick: Math.random() * 2.2 + 1.4 + (W + H) * 0.005,
+          phase: 0, dir: 1,
+        });
+      }
+    }
+  }
+
+  function frame() {
+    if (!active) return;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (const p of pixels) {
+      if (p.phase === 0) {
+        p.cnt += p.tick;
+        if (p.cnt >= p.delay) p.phase = 1;
+        else continue;
+      }
+      if (p.phase === 1) {
+        p.size += p.spd;
+        if (p.size >= p.maxS) { p.size = p.maxS; p.phase = 2; }
+      } else {
+        p.size += p.spd * 0.38 * p.dir;
+        if (p.size >= p.maxS) p.dir = -1;
+        else if (p.size <= 0.28) p.dir = 1;
+      }
+      const off = (p.maxS - p.size) * 0.5;
+      ctx.fillStyle = p.color;
+      ctx.fillRect(p.x + off, p.y + off, p.size, p.size);
+    }
+    raf = requestAnimationFrame(frame);
+  }
+
+  build();
+  new ResizeObserver(() => { cancelAnimationFrame(raf); build(); if (active) raf = requestAnimationFrame(frame); }).observe(hero);
+  new IntersectionObserver(([e]) => {
+    active = e.isIntersecting;
+    if (active) raf = requestAnimationFrame(frame);
+    else cancelAnimationFrame(raf);
+  }, { threshold: 0 }).observe(hero);
+  raf = requestAnimationFrame(frame);
+})();
+
+// ====== CONTAINER SCROLL PREVIEW ======
+(function() {
+  const section = document.getElementById('scroll-preview');
+  const card = document.getElementById('sc-card');
+  const header = document.getElementById('sc-header');
+  const grid = document.getElementById('sc-grid');
+  if (!section || !card || !grid) return;
+
+  const LIQ = {
+    m: 'rgba(72,108,190,.72)',
+    w: 'rgba(195,88,118,.72)',
+    u: 'rgba(194,160,90,.72)',
+  };
+  const SWCH = {
+    m: 'linear-gradient(155deg,#7B90C8,#3A5295)',
+    w: 'linear-gradient(155deg,#D9A3B0,#A55A6E)',
+    u: 'linear-gradient(155deg,#D4B86A,#8C6028)',
+  };
+
+  // Pick 6 hits, pad with first frags if needed
+  const preview = [...FRAGRANCES.filter(f => f.hit).slice(0, 6),
+                   ...FRAGRANCES.filter(f => !f.hit)].slice(0, 6);
+
+  grid.innerHTML = preview.map(f => `
+    <div class="sc-frag">
+      <div class="sc-frag-thumb" style="background:${SWCH[f.cat]};">
+        ${f.hit ? '<span class="sc-hit">ХИТ</span>' : ''}
+        <div class="sc-mini-bottle">
+          <div class="sc-mb-cap"></div>
+          <div class="sc-mb-neck"></div>
+          <div class="sc-mb-body">
+            <div class="sc-mb-liq" style="background:${LIQ[f.cat]};"></div>
+            <div class="sc-mb-shine"></div>
+          </div>
+          <div class="sc-mb-base"></div>
+        </div>
+      </div>
+      <div class="sc-frag-body">
+        <div class="sc-frag-name">${f.name}</div>
+        <div class="sc-frag-meta">${f.desc}</div>
+        <div class="sc-frag-price">от ${f.price} ₽/мл</div>
+      </div>
+    </div>
+  `).join('');
+
+  function tick() {
+    const rect = section.getBoundingClientRect();
+    const wh = window.innerHeight;
+    const progress = Math.max(0, Math.min(1, (wh - rect.top) / (wh + rect.height)));
+    const rotate = 20 * (1 - progress);
+    const scale = 1.05 - progress * 0.05;
+    card.style.transform = `rotateX(${rotate}deg) scale(${scale})`;
+    if (header) header.style.transform = `translateY(${-progress * 55}px)`;
+  }
+
+  window.addEventListener('scroll', tick, { passive: true });
+  tick();
+})();
 
 // ====== ORIGIN BUTTON RIPPLE ======
 (function() {
