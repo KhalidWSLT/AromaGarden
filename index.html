@@ -256,6 +256,22 @@
     .nav-tube-glow { position:absolute; top:-5px; height:18px; border-radius:50%; background:rgba(194,160,90,.4); filter:blur(6px); pointer-events:none;
       transition:left .32s cubic-bezier(0.3,1,0.3,1), width .32s cubic-bezier(0.3,1,0.3,1), opacity .2s; opacity:0; }
 
+    /* Mobile bottom padding for tube bar */
+    @media(max-width:880px) { footer { padding-bottom: 88px !important; } }
+
+    /* ====== CATALOG REDESIGN ====== */
+    .catalog-search-wrap { position:relative; max-width:520px; }
+    .catalog-search-icon { position:absolute; left:18px; top:50%; transform:translateY(-50%); pointer-events:none; color:var(--ink-muted); }
+    .catalog-search { width:100%; padding:15px 20px 15px 50px; border-radius:16px; border:1.5px solid var(--line); background:var(--bg-ivory); font-family:'Inter',sans-serif; font-size:15px; color:var(--ink); outline:none; transition:border-color .18s, box-shadow .18s; box-shadow:var(--shadow-sm); }
+    .catalog-search:focus { border-color:var(--gold); box-shadow:0 0 0 3px rgba(194,160,90,.14), var(--shadow-sm); }
+    .catalog-search::placeholder { color:var(--ink-muted); opacity:.7; }
+
+    .cat-tab { display:inline-flex; align-items:center; gap:8px; font-family:'Inter',sans-serif; font-weight:600; font-size:14px; padding:13px 22px; border-radius:999px; border:1.5px solid var(--line); background:var(--bg-ivory); color:var(--ink-muted); cursor:pointer; transition:all .2s ease; white-space:nowrap; }
+    .cat-tab:hover { border-color:var(--gold); color:var(--mocha); background:rgba(194,160,90,.06); transform:translateY(-1px); }
+    .cat-tab.active { background:var(--grad-gold); color:var(--espresso); border-color:transparent; box-shadow:0 5px 16px rgba(194,160,90,.38); transform:translateY(-1px); }
+    .cat-count { display:inline-flex; align-items:center; justify-content:center; min-width:22px; height:20px; padding:0 6px; border-radius:999px; font-size:11px; font-weight:700; background:rgba(44,27,16,.1); color:var(--ink-muted); transition:all .2s; }
+    .cat-tab.active .cat-count { background:rgba(44,27,16,.18); color:var(--espresso); }
+
     /* ====== ANIMATED CATALOG BOTTLES ====== */
     .bottle-scene { position:absolute; inset:0; display:flex; align-items:flex-end; justify-content:center; padding-bottom:8%; }
     .bottle-float { display:flex; flex-direction:column; align-items:center; animation:bottleFloat 4s ease-in-out infinite; filter:drop-shadow(0 16px 28px rgba(0,0,0,.28)); transition:filter .3s; }
@@ -433,15 +449,21 @@
 <!-- ======== CATALOG ======== -->
 <section id="catalog" class="section-pad">
   <div class="container">
-    <p class="eyebrow" style="margin-bottom:12px;">Каталог</p>
-    <h2 class="h2" style="color:var(--ink); margin-bottom:32px;">Ароматы в наличии</h2>
 
-    <div style="display:flex; flex-wrap:wrap; gap:16px; justify-content:space-between; align-items:center; margin-bottom:36px;">
-      <div id="cat-filters" style="display:flex; flex-wrap:wrap; gap:8px;"></div>
-      <div style="position:relative; flex:1; min-width:220px; max-width:320px;">
-        <span style="position:absolute; left:16px; top:50%; transform:translateY(-50%); color:var(--ink-muted); font-size:16px; pointer-events:none;">⌕</span>
-        <input id="search-input" type="search" placeholder="Поиск по названию…" style="width:100%; padding:11px 16px 11px 40px; border-radius:999px; border:1px solid var(--line); background:var(--bg-ivory); font-size:14px; color:var(--ink); outline:none; transition:border-color .15s, box-shadow .15s;" onfocus="this.style.borderColor='var(--gold)';this.style.boxShadow='0 0 0 2px rgba(194,160,90,.3)'" onblur="this.style.borderColor='var(--line)';this.style.boxShadow='none'">
+    <!-- Header: title + search -->
+    <div style="margin-bottom:36px;">
+      <p class="eyebrow" style="margin-bottom:12px;">Каталог</p>
+      <div style="display:flex; flex-wrap:wrap; gap:24px; align-items:flex-end; justify-content:space-between; margin-bottom:28px;">
+        <h2 class="h2" style="color:var(--ink); margin:0;">Ароматы в наличии</h2>
+        <div class="catalog-search-wrap">
+          <span class="catalog-search-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </span>
+          <input id="search-input" type="search" class="catalog-search" placeholder="Поиск по названию аромата…" autocomplete="off">
+        </div>
       </div>
+      <!-- Filter tabs -->
+      <div id="cat-filters" style="display:flex; flex-wrap:wrap; gap:10px;"></div>
     </div>
 
     <div id="catalog-empty" style="display:none; text-align:center; padding:64px 24px; background:var(--bg-ivory); border:1px solid var(--line); border-radius:18px; margin-bottom:32px;">
@@ -1069,18 +1091,30 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
 // ====== CATALOG ======
 const CAT_FILTERS = [
-  {id:'all',  label:'Все'},
-  {id:'hits', label:'★ Хиты'},
-  {id:'m',    label:'Мужские'},
-  {id:'w',    label:'Женские'},
-  {id:'u',    label:'Универсальные'},
+  {id:'all',  label:'Все ароматы', icon:''},
+  {id:'hits', label:'Хиты',        icon:'★'},
+  {id:'m',    label:'Мужские',     icon:'♂'},
+  {id:'w',    label:'Женские',     icon:'♀'},
+  {id:'u',    label:'Унисекс',     icon:'◈'},
 ];
 
 function renderFilters() {
   const wrap = document.getElementById('cat-filters');
-  wrap.innerHTML = CAT_FILTERS.map(f =>
-    `<button class="pill${state.cat === f.id ? ' gold-active' : ''}" onclick="setCat('${f.id}')">${f.label}</button>`
-  ).join('');
+  const cnt = {
+    all:  FRAGRANCES.length,
+    hits: FRAGRANCES.filter(f=>f.hit).length,
+    m:    FRAGRANCES.filter(f=>f.cat==='m').length,
+    w:    FRAGRANCES.filter(f=>f.cat==='w').length,
+    u:    FRAGRANCES.filter(f=>f.cat==='u').length,
+  };
+  wrap.innerHTML = CAT_FILTERS.map(f => {
+    const active = state.cat === f.id;
+    return `<button class="cat-tab${active ? ' active' : ''}" onclick="setCat('${f.id}')">
+      ${f.icon ? `<span style="font-size:13px;">${f.icon}</span>` : ''}
+      <span>${f.label}</span>
+      <span class="cat-count">${cnt[f.id]}</span>
+    </button>`;
+  }).join('');
 }
 
 function filteredFragrances() {
@@ -1405,6 +1439,12 @@ const FAQS = [
   { q: "Как сделать заказ?", a: "Откройте каталог, нажмите «Собрать» на понравившемся аромате. Настройте формат, объём и флакон. Нажмите «Оформить заказ» — откроется WhatsApp с готовой сводкой. Юнус подтвердит заказ и договорится об удобном способе получения." },
   { q: "Доставляете по всей России?", a: "Да, Почтой России и СДЭК по всей стране от 350 ₽. При заказе от 3000 ₽ — доставка бесплатная. По Санкт-Петербургу — курьер от 500 ₽. Самовывоз на точке — всегда бесплатно." },
   { q: "Что такое концентрация 40–50%?", a: "Стандартный спрей — 30% масла и 70% спирта. При повышении до 40–50% аромат становится гуще, насыщеннее и держится значительно дольше. Особенно рекомендуем в холодное время года — осенью и зимой." },
+  { q: "Как правильно наносить масло?", a: "Наносите масло на точки пульса: запястья, внутренняя сторона локтя, шея, за ушами. Лучше всего — на чуть влажную или увлажнённую кожу: крем создаёт «подложку» и аромат держится дольше. Не растирайте — просто прижмите запястья друг к другу." },
+  { q: "Есть ли подарочная упаковка?", a: "Да! При заказе можно добавить подарочную упаковку — коробка с лентой и открыткой. Уточните у Юнуса в WhatsApp при оформлении заказа. Особенно популярно для подарков на дни рождения и праздники." },
+  { q: "Какой объём выбрать для первого раза?", a: "Рекомендуем начать с 10–15 мл — этого хватит на 2–4 недели ежедневного использования. Если аромат понравится, удобно дозаказать. Для знакомства с несколькими ароматами идеально подойдёт Дегустационный сет: 5×3 мл — платите как за 4." },
+  { q: "Можно ли вернуть или обменять?", a: "Парфюмерия относится к категории товаров, которые не подлежат возврату по закону. Но если что-то пошло не так — Юнус всегда идёт навстречу. Напишите в WhatsApp, обсудим ситуацию лично. Довольный клиент важнее формальностей." },
+  { q: "Сколько времени занимает сборка?", a: "Стандартный заказ собирается в течение 1–2 часов. При самовывозе — уточните удобное время у Юнуса. Срочные заказы принимаются: если нужно «к вечеру» — напишите, постараемся успеть. VIP-миксы могут занять до суток." },
+  { q: "Какие ароматы самые популярные?", a: "В топе всегда: Baccarat Rouge 540 — культовый сладко-древесный, Oud Wood — глубокий восточный, Dior Sauvage — свежий мужской бестселлер, Coco Mademoiselle — цветочно-пудровый женский. Полный список хитов — в каталоге, отмечены значком ХИТ." },
 ];
 
 let faqTypingEl = null;
