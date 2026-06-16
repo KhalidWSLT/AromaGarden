@@ -134,19 +134,50 @@
     .step { position: relative; padding-top: 28px; border-top: 2px solid var(--line); }
     .step-num { position: absolute; top: -22px; left: 0; font-family: 'Playfair Display', serif; font-weight: 700; font-size: 44px; color: var(--gold); line-height: 1; background: var(--bg-ivory); padding-right: 14px; }
 
-    /* Catalog */
-    .frag-card { cursor: pointer; background: var(--bg-ivory); border: 1px solid var(--line); border-radius: 18px; overflow: hidden; display: flex; flex-direction: column; transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease; }
-    .frag-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: var(--gold); }
-    .frag-thumb { position: relative; aspect-ratio: 4/5; display: flex; align-items: flex-end; justify-content: center; overflow: hidden; }
-    .frag-thumb-pattern { position: absolute; inset: 0; background: repeating-linear-gradient(135deg, rgba(255,255,255,.05) 0 10px, rgba(255,255,255,0) 10px 20px); }
-    .frag-bottle { position: relative; width: 40%; height: 58%; margin-bottom: 10%; border-radius: 12px 12px 16px 16px; background: linear-gradient(180deg, rgba(251,245,234,.4), rgba(44,27,16,.18)); border: 1px solid rgba(255,255,255,.35); }
-    .hit-badge { position: absolute; top: 12px; left: 12px; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 11px; letter-spacing: 1px; color: var(--espresso); background: var(--grad-gold); padding: 5px 11px; border-radius: 999px; }
-    .frag-info { padding: 20px; display: flex; flex-direction: column; flex: 1; }
-    .frag-name { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 20px; color: var(--ink); line-height: 1.2; margin: 6px 0 7px; }
-    .frag-desc { font-family: 'Inter', sans-serif; font-size: 12px; color: var(--ink-muted); line-height: 1.55; flex: 1; }
-    .frag-footer { margin-top: 16px; display: flex; align-items: center; justify-content: space-between; }
-    .frag-price { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 17px; color: var(--gold); }
-    .frag-cta { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 13px; color: var(--mocha); }
+    /* ====== COMPACT CATALOG ITEMS ====== */
+    .frag-item { background: var(--bg-cream); border: 1.5px solid var(--line); border-radius: 16px; padding: 16px 18px 14px; cursor: pointer; transition: all .2s ease; position: relative; overflow: hidden; display: flex; flex-direction: column; gap: 5px; }
+    .frag-item::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; opacity: 0; transition: opacity .2s; border-radius: 16px 16px 0 0; }
+    .frag-item.cat-m::after { background: linear-gradient(90deg,#7A9DC9,#4A6FA5); }
+    .frag-item.cat-w::after { background: linear-gradient(90deg,#D9849A,#B85C6E); }
+    .frag-item.cat-u::after { background: var(--grad-gold); }
+    .frag-item:hover { border-color: var(--gold); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(194,160,90,.18); background: var(--bg-ivory); }
+    .frag-item:hover::after { opacity: 1; }
+    .fi-tag { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; font-family: 'Inter', sans-serif; }
+    .fi-tag.m { color: #4A6FA5; }
+    .fi-tag.w { color: #B85C6E; }
+    .fi-tag.u { color: var(--mocha); }
+    .fi-iname { font-family: 'Playfair Display', serif; font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; flex: 1; }
+    .fi-irow { display: flex; align-items: center; justify-content: space-between; margin-top: 4px; }
+    .fi-iprice { font-size: 12px; font-weight: 700; color: var(--gold-dark); font-family: 'Inter', sans-serif; }
+    .fi-ihit { font-size: 9px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; background: var(--grad-gold); color: var(--espresso); padding: 2px 7px; border-radius: 99px; font-family: 'Inter', sans-serif; }
+    .fi-iarr { font-size: 13px; color: var(--gold); opacity: 0; transition: opacity .15s, transform .15s; }
+    .frag-item:hover .fi-iarr { opacity: 1; transform: translateX(3px); }
+
+    /* ====== FRAGRANCE INFO MODAL ====== */
+    .fi-overlay { position: fixed; inset: 0; background: rgba(44,27,16,.65); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); z-index: 200; display: flex; align-items: center; justify-content: center; padding: 20px; }
+    .fi-box { background: var(--bg-ivory); border-radius: 28px; max-width: 560px; width: 100%; max-height: 90vh; overflow-y: auto; position: relative; box-shadow: 0 32px 80px rgba(44,27,16,.38), 0 0 0 1px rgba(194,160,90,.18); }
+    .fi-hd { padding: 36px 36px 0; }
+    .fi-bd { padding: 0 36px 36px; }
+    .fi-m-close { position: absolute; top: 16px; right: 16px; width: 36px; height: 36px; border-radius: 50%; border: 1.5px solid var(--line); background: var(--bg-cream); display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 15px; color: var(--ink-muted); transition: all .18s; z-index: 1; }
+    .fi-m-close:hover { background: var(--espresso); color: #fff; border-color: var(--espresso); }
+    .fi-m-cat { font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 10px; }
+    .fi-m-cat.m { color: #4A6FA5; }
+    .fi-m-cat.w { color: #B85C6E; }
+    .fi-m-cat.u { color: var(--mocha); }
+    .fi-m-name { font-family: 'Playfair Display', serif; font-size: clamp(22px, 4vw, 30px); font-weight: 700; color: var(--ink); line-height: 1.2; margin-bottom: 6px; }
+    .fi-m-div { height: 1px; background: linear-gradient(90deg,transparent,var(--gold) 30%,var(--gold-light) 50%,var(--gold) 70%,transparent); margin: 20px 0; }
+    .fi-m-hint { font-family: 'Lora', serif; font-size: 13px; color: var(--ink-muted); font-style: italic; margin-bottom: 18px; line-height: 1.6; }
+    .fi-m-story { font-family: 'Lora', serif; font-size: 16px; line-height: 1.82; color: var(--ink); margin-bottom: 22px; }
+    .fi-m-price { display: inline-flex; align-items: baseline; gap: 6px; margin-bottom: 24px; }
+    .fi-m-price-val { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 700; color: var(--gold); }
+    .fi-m-price-sub { font-family: 'Inter', sans-serif; font-size: 13px; color: var(--ink-muted); }
+    .fi-m-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    @media(max-width:600px) { .fi-hd,.fi-bd { padding-left:22px; padding-right:22px; } .fi-hd { padding-top:26px; } .fi-bd { padding-bottom:26px; } .fi-m-name { font-size:22px; } }
+
+    /* ====== MIX VIBE BOX ====== */
+    .mix-vibe-box { margin-top: 20px; padding: 18px 20px; background: rgba(194,160,90,.07); border: 1px solid rgba(194,160,90,.22); border-radius: 16px; animation: msgIn .35s ease-out; }
+    .mix-vibe-label { font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+    .mix-vibe-text { font-family: 'Lora', serif; font-size: 14px; line-height: 1.72; color: rgba(244,236,221,.82); }
 
     /* Mix sliders */
     input[type=range].mix-range { -webkit-appearance: none; appearance: none; width: 100%; height: 6px; border-radius: 999px; background: linear-gradient(90deg, var(--gold-light), var(--gold-dark)); outline: none; cursor: pointer; }
@@ -338,23 +369,6 @@
     .cat-count { display:inline-flex; align-items:center; justify-content:center; min-width:22px; height:20px; padding:0 6px; border-radius:999px; font-size:11px; font-weight:700; background:rgba(44,27,16,.1); color:var(--ink-muted); transition:all .2s; }
     .cat-tab.active .cat-count { background:rgba(44,27,16,.18); color:var(--espresso); }
 
-    /* ====== ANIMATED CATALOG BOTTLES ====== */
-    .bottle-scene { position:absolute; inset:0; display:flex; align-items:flex-end; justify-content:center; padding-bottom:8%; }
-    .bottle-float { display:flex; flex-direction:column; align-items:center; animation:bottleFloat 4s ease-in-out infinite; filter:drop-shadow(0 16px 28px rgba(0,0,0,.28)); transition:filter .3s; }
-    .frag-card:hover .bottle-float { animation-play-state:paused; filter:drop-shadow(0 22px 36px rgba(0,0,0,.42)); }
-    @keyframes bottleFloat { 0%,100%{transform:translateY(0) rotate(0deg)} 40%{transform:translateY(-8px) rotate(1.6deg)} 70%{transform:translateY(-4px) rotate(-1deg)} }
-    .b-cap { width:24px; height:17px; border-radius:5px 5px 2px 2px; background:linear-gradient(180deg,rgba(255,255,255,.58),rgba(255,255,255,.2)); border:1px solid rgba(255,255,255,.42); }
-    .b-neck { width:14px; height:9px; background:linear-gradient(90deg,rgba(255,255,255,.07),rgba(255,255,255,.26),rgba(255,255,255,.07)); }
-    .b-body { width:64px; height:90px; border-radius:9px 9px 18px 18px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.16); position:relative; overflow:hidden; }
-    .b-liquid { position:absolute; bottom:0; left:0; right:0; height:62%; animation:liquidSway 5s ease-in-out infinite; }
-    @keyframes liquidSway { 0%,100%{transform:translateY(0);border-radius:8px 4px 0 0} 50%{transform:translateY(-4px);border-radius:4px 8px 0 0} }
-    .b-shine { position:absolute; top:7px; left:8px; width:9px; height:44px; background:linear-gradient(180deg,rgba(255,255,255,.44),transparent); border-radius:999px; animation:shinePulse 3s ease-in-out infinite; }
-    .b-shine2 { position:absolute; top:7px; left:21px; width:4px; height:20px; background:linear-gradient(180deg,rgba(255,255,255,.2),transparent); border-radius:999px; }
-    @keyframes shinePulse { 0%,100%{opacity:.5} 50%{opacity:1} }
-    .b-label { position:absolute; bottom:18px; left:6px; right:6px; height:22px; background:rgba(255,255,255,.09); border:1px solid rgba(255,255,255,.13); border-radius:3px; }
-    .b-base { width:72px; height:7px; border-radius:0 0 6px 6px; background:rgba(0,0,0,.14); }
-    .b-spark { position:absolute; border-radius:50%; background:rgba(255,255,255,.88); animation:sparkAnim 2.5s ease-in-out infinite; }
-    @keyframes sparkAnim { 0%,100%{opacity:0;transform:scale(0)} 40%,60%{opacity:1;transform:scale(1)} }
 
     /* ====== AI FAQ ====== */
     .faq-msgs { min-height:160px; max-height:360px; overflow-y:auto; display:flex; flex-direction:column; gap:14px; padding-bottom:4px; scrollbar-width:thin; scrollbar-color:rgba(139,92,246,.3) transparent; }
@@ -618,7 +632,8 @@
           <span style="font-family:'Inter',sans-serif; font-size:14px; color:rgba(244,236,221,.7);">Итого <span style="font-size:12px;">(вкл. услугу +1000 ₽)</span></span>
           <span id="mix-total-label" style="font-family:'Playfair Display',serif; font-weight:700; font-size:30px; color:var(--gold);">—</span>
         </div>
-        <button id="mix-submit" class="btn btn-gold" style="width:100%; opacity:.5; cursor:not-allowed;" disabled>Заказать микс</button>
+        <div id="mix-vibe-wrap" style="display:none;"></div>
+        <button id="mix-submit" class="btn btn-gold" style="width:100%; margin-top:20px; opacity:.5; cursor:not-allowed;" disabled>Заказать микс</button>
       </div>
     </div>
   </div>
@@ -734,10 +749,10 @@
       </div>
 
       <div style="background:var(--bg-cream); border:1px solid var(--line); border-radius:20px; padding:28px 24px; position:relative; overflow:hidden;">
-        <div style="position:absolute; top:-10px; right:-10px; font-size:64px; opacity:.07;">🔁</div>
-        <div style="width:44px; height:44px; border-radius:12px; background:var(--grad-gold); display:flex; align-items:center; justify-content:center; font-size:20px; margin-bottom:16px;">🔁</div>
-        <h4 class="h4" style="margin-bottom:8px; font-size:18px;">Повторный заказ −20%</h4>
-        <p style="font-size:14px; line-height:1.6; color:var(--ink-muted);">Уже брал этот аромат? При повторном заказе того же аромата — скидка 20%. Твой аромат, твоя цена.</p>
+        <div style="position:absolute; top:-10px; right:-10px; font-size:64px; opacity:.07;">💎</div>
+        <div style="width:44px; height:44px; border-radius:12px; background:var(--grad-gold); display:flex; align-items:center; justify-content:center; font-size:20px; margin-bottom:16px;">💎</div>
+        <h4 class="h4" style="margin-bottom:8px; font-size:18px;">Опт · Салоны · Блогеры</h4>
+        <p style="font-size:14px; line-height:1.6; color:var(--ink-muted);">Работаете с клиентами или аудиторией? Специальные цены на оптовые заказы от 10 флаконов, партнёрские условия для салонов красоты и коллаборации с блогерами.</p>
       </div>
 
       <div style="background:linear-gradient(135deg,#2C1B10,#4A2E18); border:1px solid rgba(194,160,90,.3); border-radius:20px; padding:28px 24px; display:flex; flex-direction:column; justify-content:center; align-items:flex-start;">
@@ -928,6 +943,32 @@
   </a>
 </nav>
 
+<!-- ======== FRAGRANCE INFO MODAL ======== -->
+<div id="fi-modal" style="display:none;" role="dialog" aria-modal="true" aria-label="Описание аромата">
+  <div class="fi-overlay" id="fi-overlay" onclick="if(event.target===this)closeFragInfo()">
+    <div class="fi-box">
+      <button class="fi-m-close" onclick="closeFragInfo()" aria-label="Закрыть">✕</button>
+      <div class="fi-hd">
+        <div class="fi-m-cat" id="fi-m-cat"></div>
+        <div class="fi-m-name" id="fi-m-name"></div>
+      </div>
+      <div class="fi-m-div"></div>
+      <div class="fi-bd">
+        <div class="fi-m-hint" id="fi-m-hint"></div>
+        <div class="fi-m-story" id="fi-m-story"></div>
+        <div class="fi-m-price">
+          <span class="fi-m-price-val" id="fi-m-price-val"></span>
+          <span class="fi-m-price-sub">за мл · от 3 мл</span>
+        </div>
+        <div class="fi-m-actions">
+          <button class="btn btn-gold" onclick="openCfgFromInfo()">Собрать флакон →</button>
+          <button class="btn btn-secondary" onclick="closeFragInfo()">Закрыть</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- ======== CONFIGURATOR MODAL ======== -->
 <div id="cfg-modal" style="display:none;" role="dialog" aria-label="Конфигуратор аромата" aria-modal="true">
   <div class="modal-overlay" id="cfg-overlay">
@@ -1113,8 +1154,164 @@ const FRAGRANCES = [
   {cat:'u', name:"Kilian Intoxicated", price:250, desc:"Кофе, кардамон и корица"},
 ];
 
+// ====== FRAGRANCE STORIES & VIBES ======
+const VIBE = {
+  "L.V. L'Immensité":'fresh', "Dark Lord by Kilian":'dark', "Bvlgari Aqva":'fresh',
+  "Tiger Bvlgari":'spicy', "Sheikh 77":'oriental', "Versace Eros":'fresh',
+  "Antonio Banderas Blue":'fresh', "P.R. Invictus Aqua":'fresh', "G. Armani Acqua di Giò":'fresh',
+  "Egoiste Chanel":'woody', "Lacoste Sport":'fresh', "Dior Homme":'powdery',
+  "C.H. 212 Men":'citrus', "D&G Light Blue":'fresh', "Allure Homme Sport":'fresh',
+  "Lacoste White":'fresh', "Zam Zam Gold":'oriental', "Dior Sauvage":'fresh',
+  "Bleu de Chanel":'woody',
+  "Victoria's Secret So Sexy":'floral', "Victoria's Secret Aqua Kiss":'fresh',
+  "Victoria's Secret Scandalous":'floral', "Victoria's Secret Mango":'sweet',
+  "Victoria's Secret Bombshell":'floral', "Hürrem Sultan":'oriental', "Lanvin Éclat":'floral',
+  "Dior J'adore":'floral', "Miss Dior":'floral', "Chanel №5":'powdery',
+  "Chanel Chance":'fresh', "Coco Mademoiselle":'floral', "Chanel Tendre":'floral',
+  "Trussardi Donna":'floral', "Givenchy Secret":'dark', "Givenchy Ange ou Démon":'oriental',
+  "Black Opium":'dark', "Carolina Herrera":'floral', "D&G Imperatrice 3":'fresh',
+  "Gucci Flora":'floral', "Gucci Bamboo":'floral', "Lancôme Idôle":'floral',
+  "Escada Cherry":'sweet', "Sheikh 33":'oriental', "Soblazn":'sweet',
+  "Zara Tuberose":'floral', "Montale Roses":'floral', "Montale Dark Purple":'dark',
+  "Kilian Good Girl":'sweet', "Jasmine":'floral', "Versace Bright Crystal":'floral',
+  "Zam Zam":'oriental', "Capitan Black":'dark', "Alexandre.J":'oriental',
+  "Puredistance White":'powdery', "Initio Oud for Greatness":'oriental',
+  "Hayati Al Haramain":'oriental', "Sospiro Accento":'sweet', "Sospiro Erba Pura":'sweet',
+  "Zielinski Orange":'citrus', "Zielinski Rosen Vanilla":'floral', "Zielinski Lemon":'citrus',
+  "Zielinski Pepper":'spicy', "Zielinski Rosemary":'fresh', "Tom Ford Cherry":'dark',
+  "Tom Ford Tobacco Vanille":'oriental', "Tom Ford Tuscan Leather":'leather',
+  "Tom Ford Tobacco Oud":'dark', "Tom Ford Oud Wood":'woody', "Tom Ford Bitter Peach":'sweet',
+  "Tom Ford Black Orchid":'dark', "Molecule 01":'musky', "Molecule 02":'musky',
+  "Molecule 04":'musky', "Molecule 05":'powdery', "Molecule 09":'floral',
+  "Molecule «Игры разума»":'musky', "Black Afgano":'dark', "Amber Wood Ajmal":'woody',
+  "Tiziana Terenzi Kirke":'sweet', "Tiziana Terenzi Gumin":'oriental', "Narcotic":'floral',
+  "Baccarat 540":'oriental', "Roja Elysium":'citrus', "Memo African Leather":'leather',
+  "Memo Italian Leather":'leather', "Initio Musk":'musky', "Kenzo Electric":'spicy',
+  "Megamare Orto Parisi":'fresh', "Mancera Cedrat Boise":'woody', "Blood Shahid":'dark',
+  "Cocain":'musky', "L.V. Afternoon":'woody', "Intrigue Devil's":'dark',
+  "Montale Starry Nights":'oriental', "Montabaco":'dark', "Byredo Bal d'Afrique":'floral',
+  "Jo Malone Wood Sage":'fresh', "Ganymede":'oriental', "Kajal Dahab":'oriental',
+  "Musk Kashmir":'musky', "Arabians Montale":'oriental', "L.V. Symphony":'woody',
+  "Attar Collection Khalat Light Blue":'fresh', "Initio Everest":'fresh',
+  "Mr. Burberry Element":'woody', "Thomas Kosmala №4":'musky', "Sheikh Shuyukh":'oriental',
+  "Oud Forest Montale":'dark', "Nejma 7":'oriental', "Kilian Intoxicated":'spicy',
+};
+
+const STORIES = {
+  "L.V. L'Immensité": "Запах горизонта, который ты не видишь — только чувствуешь. Свежий имбирь врывается как порыв ветра, амбра оседает тёплым послевкусием. Для тех, кто смотрит дальше, чем все остальные.",
+  "Dark Lord by Kilian": "Не для всех. Дымный кофе, ром и тёмный шоколад — аромат, который не просит внимания, а требует. Носить и молчать. Всё остальное скажет запах.",
+  "Bvlgari Aqva": "Море в одиннадцать утра. Солнце, соль, ни одной лишней ноты. Закрой глаза — и ты уже там, где хотел быть всё лето.",
+  "Tiger Bvlgari": "Пряный и дерзкий, как человек, который знает, чего хочет. Табак с цитрусом — сочетание для тех, кто не боится быть заметным.",
+  "Sheikh 77": "Восток без компромиссов. Уд, шафран и роза — плотный, завораживающий, стойкий. Один флакон — и понимаешь, почему арабская парфюмерия стоит дороже всего.",
+  "Versace Eros": "Мощно. Свежо. Победительно. Мята и ваниль — манифест в воздухе. Ты здесь, тебя замечают. Это нормально — ты в Erosе.",
+  "Antonio Banderas Blue": "Лёгкий, но с характером. Морской шлейф, который не кричит — намекает. Для тех, кто выбирает стиль, а не шум.",
+  "P.R. Invictus Aqua": "Соль. Грейпфрут. Движение. Аромат для тех, кто в потоке. Оставляет след быстрее, чем ты успеваешь уйти.",
+  "G. Armani Acqua di Giò": "Классика, у которой нет возраста. Бергамот, морской бриз и ротанг — свежесть, которая не надоедает. Всегда и везде уместно.",
+  "Egoiste Chanel": "Благородство в каждой молекуле. Сандал, корица и роза — аромат для мужчин, которые читали книги. Вне любого тренда, всегда выше.",
+  "Lacoste Sport": "Ментол и цитрус — с первой же секунды удар. Спортивный, но не агрессивный. После тренировки или перед встречей — выигрываешь в обоих случаях.",
+  "Dior Homme": "Пудровый ирис — неожиданный выбор для мужчины. Именно поэтому те, кто его носит, запоминаются. Элегантность нельзя объяснить словами — можно только надеть.",
+  "C.H. 212 Men": "Городской и точный. Грейпфрут и зелёный лист — для тех, кто всегда немного впереди.",
+  "D&G Light Blue": "Лёгкий как выходной день. Яблоко, кедр и средиземноморское солнце — без претензий, но с характером.",
+  "Allure Homme Sport": "Энергия в атоме. Цитрус и перец, морской бриз — работает в любой ситуации. Потому что Chanel умеют.",
+  "Lacoste White": "Чистая страница. Имбирь и кедр без лишнего шума. Свежесть, которая всегда на уровне.",
+  "Zam Zam Gold": "Сладкий, тёплый, обволакивающий. Восточный амбровый аккорд, который остаётся на коже часами. Для тех, кто ценит стойкость.",
+  "Dior Sauvage": "Самый копируемый аромат последних лет — ни один клон не дотянулся. Амброксан и бергамот — дикий, свободный, безупречный. Просто Sauvage.",
+  "Bleu de Chanel": "Цитрус, кедр и дым ладана — три слоя, которые раскрываются постепенно. Самодостаточный. Безвременный. Один из величайших мужских ароматов.",
+  "Victoria's Secret So Sexy": "Цветочно-фруктовый и немного провокационный — именно как звучит название. Для вечеров, когда хочется быть замеченной. Ты будешь.",
+  "Victoria's Secret Aqua Kiss": "Нежный поцелуй водой. Лёгкий, чистый — как будто только вышла из душа и пахнешь собой, только лучше. Носить каждый день.",
+  "Victoria's Secret Scandalous": "Жасмин с характером и ваниль с историей. Не для тихих. Дерзкий, сладкий, непрощаемый.",
+  "Victoria's Secret Mango": "Тропический соблазн. Манго и экзотика — аромат, при котором хочется лето, море и никаких планов. Беззаботность во флаконе.",
+  "Victoria's Secret Bombshell": "Пион, маракуйя и блеск. Не просто запах — образ. Яркий, игривый, ни на что не похожий. Надеваешь — и вся комната оборачивается.",
+  "Hürrem Sultan": "Роза, уд, восточная роскошь. Назван в честь самой влиятельной женщины Османской империи — и это чувствуется в каждой ноте. Тяжёлый, царственный.",
+  "Lanvin Éclat": "Сирень после дождя. Лёгкий, чистый, женственный без приторности. Для тех, кто хочет пахнуть красиво — просто и навсегда.",
+  "Dior J'adore": "Икона. Иланг-иланг, роза и жасмин — букет, от которого невозможно отказаться. Носить — значит выбрать безупречность.",
+  "Miss Dior": "Роза в руках женщины, которая знает себе цену. Романтичная, но с характером. Пачули в финале добавляют глубину, которой не ждёшь.",
+  "Chanel №5": "Первый аромат, ставший легендой. Альдегидный букет, который пережил все эпохи и тренды. Надеть — и ничего больше не нужно.",
+  "Chanel Chance": "Свежесть без банальности. Цитрус, пачули и пудровый шлейф — аромат, который ведёт тебя вперёд. Для тех, кто любит движение.",
+  "Coco Mademoiselle": "Пачули, роза, апельсин — три ноты, которые изменили всё. Дерзкий, современный, женственный. Не устаревает — это Шанель.",
+  "Chanel Tendre": "Тихая нежность. Цитрус и жасмин — как прикосновение, которое помнишь весь день. Для тех, кто выбирает деликатность.",
+  "Trussardi Donna": "Цветы, дерево и чувственность без спешки. Итальянский шик в простоте. Аромат для женщины, которая понимает: лучшее не кричит.",
+  "Givenchy Secret": "Таинственный, как взгляд через плечо. Роза и пачули — тёмная сторона женственности. Оставляет вопросы без ответов. Именно так и надо.",
+  "Givenchy Ange ou Démon": "Ангел или демон — тубероза и ладан ставят вопрос. Ты сама выбираешь. Для тех, кто не боится быть сложнее, чем кажется.",
+  "Black Opium": "Кофе, ваниль и белые цветы — сладкий, тёмный, аддиктивный. Как хорошая привычка, от которой не хочется избавляться. Культ — и заслуженно.",
+  "Carolina Herrera": "Тубероза, жасмин и сандал — роскошь без суеты. Для женщин, которые не следуют моде, а создают её.",
+  "D&G Imperatrice 3": "Арбуз и киви — лето в концентрате. Игривый, свежий, ни капли лишнего. Надеть — и сразу каникулы.",
+  "Gucci Flora": "Пион и роза расцветают прямо на коже. Нежный, весенний, всегда уместный. Красота, которая не нуждается в объяснениях.",
+  "Gucci Bamboo": "Касабланка-лилия и сандал — чистый, элегантный, зрелый. Для женщины, которая знает: тишина сильнее крика.",
+  "Lancôme Idôle": "Роза, жасмин и чистый мускус — современный цветочный без пошлости. Для идеалисток, верящих, что красота меняет всё.",
+  "Escada Cherry": "Вишня и спелые ягоды — сочно, ярко, без извинений. Фруктовый, но не детский. Для тех, кто не стесняется пахнуть сладко.",
+  "Sheikh 33": "Уд и сладкая роза — восточная роскошь для женщин. Тяжёлый, насыщенный, стойкий. Вечером, когда хочется быть незабываемой.",
+  "Soblazn": "Ягоды и ваниль — соблазн без усилий. Сладкий и чувственный, как десерт на двоих. Носить и наблюдать за реакцией.",
+  "Zara Tuberose": "Кремовая тубероза — белая, чистая, бесконечная. Простой флакон, безупречный аромат. Лучшее прячется там, где не ищут.",
+  "Montale Roses": "Дамасская роза без компромиссов и разбавителей. Богатая, живая, настоящая. Для тех, кто любит цветок как он есть.",
+  "Montale Dark Purple": "Слива, роза и пачули — тёмная сторона цветка. Глубокий, насыщенный, немного опасный. Для вечеров, которые запоминаются.",
+  "Kilian Good Girl": "Миндаль, ваниль и тубероза — хорошая девочка с тёмными мыслями. Сладкий снаружи, дерзкий внутри. Один из лучших женских ароматов десятилетия.",
+  "Jasmine": "Чистый жасмин без примесей и масок. Тот самый цветок, который пахнет как любовь. Нанести — и ни о чём не думать.",
+  "Versace Bright Crystal": "Гранат, пион и лотос — свежий, лёгкий, юный. Versace создали аромат, который хочется носить всегда. Он всегда к месту.",
+  "Zam Zam": "Восточный мускус, который греет изнутри. Тёплый, обволакивающий, без агрессии. Уходишь — и возвращаться не хочется.",
+  "Capitan Black": "Табак, ваниль и пряности — для людей с историей. Глубокий, неспешный, незабываемый.",
+  "Alexandre.J": "Медовый ирис и пачули — пересечение роскоши и земли. Богатый, тягучий, как выдержанный коньяк. Для тех, кто разбирается.",
+  "Puredistance White": "Пудровая чистота в люксовом исполнении. Цветочный и нежный — но с хребтом. Не для всех. Для тех, кто умеет слышать тонкое.",
+  "Initio Oud for Greatness": "Уд, шафран, мускатный орех. Название говорит само за себя. Монументальный аромат — для людей, которые не мыслят мелко.",
+  "Hayati Al Haramain": "Сладкий фруктовый уд — восток в современной интерпретации. Притягательный и доступный. Лучшее место для первого знакомства с удом.",
+  "Sospiro Accento": "Тропики, имбирь и пачули — взрыв, заставляющий обернуться. Итальянский люкс для тех, кто не боится быть ярким.",
+  "Sospiro Erba Pura": "Сладкие фрукты и амбра — дорогой аромат с радостным характером. Один из самых узнаваемых Sospiro. Любят бесконечно.",
+  "Zielinski Orange": "Апельсин и нероли — солнце в концентрате. Итальянская чистота, польская точность. Носить летом или когда хочется лета.",
+  "Zielinski Rosen Vanilla": "Роза и кремовая ваниль — классика в идеальных пропорциях. Для тех, кто уважает традицию и качество.",
+  "Zielinski Lemon": "Искристый лимон и свежесть — как первый глоток лимонада в жаркий день. Бодрит, освежает, поднимает настроение.",
+  "Zielinski Pepper": "Чёрный перец и древесина — минималистично и убедительно. Для людей, которые не нуждаются в украшениях.",
+  "Zielinski Rosemary": "Розмарин и ароматные травы — средиземноморская ботаника на коже. Свежий, природный, как прогулка в правильном месте.",
+  "Tom Ford Cherry": "Вишня как взрыв — ликёрная, тёмная, немного порочная. Tom Ford не умеет делать обычное. Cherry — именно об этом.",
+  "Tom Ford Tobacco Vanille": "Табак и ваниль — библия тёплых ароматов. Культ. Флакон, который пустеет быстро и пополняется сразу. Повторить невозможно.",
+  "Tom Ford Tuscan Leather": "Кожа, шафран и малина — нелогичное, но идеальное сочетание. Аромат, который нельзя объяснить словами. Просто почувствовать.",
+  "Tom Ford Tobacco Oud": "Дымный табак и уд — тяжело, смело, безупречно. Tom Ford умеет делать аромат-утверждение. Это он.",
+  "Tom Ford Oud Wood": "Уд, сандал и кардамон — восточная роскошь через западную призму. Один из самых копируемых. Оригинал знает своё место.",
+  "Tom Ford Bitter Peach": "Персик, ром и нескромность — это Bitter Peach. Фруктовый, но не невинный. Дерзкий, но не вульгарный. Редкое сочетание.",
+  "Tom Ford Black Orchid": "Тёмная орхидея и трюфель — полночь во флаконе. Не для слабонервных. Для тех, кто приходит последним и уходит первым.",
+  "Molecule 01": "Изо-э-супер — молекула, звучащая только на вашей коже. Никакой верхней ноты, никакой суеты. Просто вы, только лучше. Магия химии.",
+  "Molecule 02": "Амброксан — мягкий как облако. Этот аромат притягивает людей ближе. Незаметный для вас — сводящий с ума для других.",
+  "Molecule 04": "Уд и мускус в чистом минимализме. Меньше — это больше. Одна молекула, бесконечная глубина.",
+  "Molecule 05": "Ирис и тёплый кашмеран — нежный, как прикосновение. Molecule в самом мягком воплощении. Для тех, кто предпочитает шёпот.",
+  "Molecule 09": "Роза и чистый мускус — просто и безупречно. Для тех, кто хочет пахнуть цветком без китча. Получается невероятно.",
+  "Molecule «Игры разума»": "Гипнотический аккорд, который меняется на каждом. Носишь — и не знаешь, что именно нравится людям. Они тоже не знают. Просто притягивает.",
+  "Black Afgano": "Смолы, уд и тёмные травы — один из культовых ароматов Nasomatto. Тяжёлый, плотный, экстремальный. Для смелых.",
+  "Amber Wood Ajmal": "Амбра, дерево и мускус — восточная стабильность в каждой ноте. Тёплый и обволакивающий, как хороший вечер.",
+  "Tiziana Terenzi Kirke": "Маракуйя, персик и ваниль — итальянский люкс в самом вкусном воплощении. Носить и слышать «чем ты так хорошо пахнешь?» снова и снова.",
+  "Tiziana Terenzi Gumin": "Фрукты, ладан и амбра — сложный, многослойный, захватывающий. Раскрывается по-новому каждый час. Аромат, с которым не скучно.",
+  "Narcotic": "Гипнотичный белый цветок без тормозов. Тяжёлый, сладкий, почти невыносимый — и именно поэтому незабываемый.",
+  "Baccarat 540": "Шафран, амбра и жасмин — аромат флакона за 540 долларов. Теперь доступен. Роскошь, которую можно себе позволить.",
+  "Roja Elysium": "Цитрус, кедр и амбра — Roja Dove написал аромат про рай. Кажется, угадал. Лучший парфюмер мира в лучшей работе.",
+  "Memo African Leather": "Кожа, специи и кардамон — Африка через призму парижского люкса. Экзотика с воображением.",
+  "Memo Italian Leather": "Замша, шафран и фрукты — итальянская кожа, которая пахнет иначе. Роскошный дом Memo. Аромат, который хочется трогать.",
+  "Initio Musk": "Чувственный мускус-афродизиак. Initio специализируются на ароматах, воздействующих на подсознание. Это их самый прямой манифест.",
+  "Kenzo Electric": "Имбирь и древесина с электрическим зарядом. Японская точность и западная дерзость. Получается именно это.",
+  "Megamare Orto Parisi": "Солёный океан и водоросли — аромат глубины. Не для тех, кто любит сладкое. Для тех, кто любит настоящее.",
+  "Mancera Cedrat Boise": "Лимон, кедр и амбра — французский люкс по честной цене. Один из самых узнаваемых. Стойкость на весь день.",
+  "Blood Shahid": "Вишня и тёмные специи — восточная интерпретация фруктового. Тяжелее, чем кажется. Глубже, чем ожидаешь.",
+  "Cocain": "Холодный мускус и пудра — название провокационное, аромат безупречный. Чистый, почти стерильный шик. Для тех, кто ценит иронию.",
+  "L.V. Afternoon": "Ладан, кожа и древесина Louis Vuitton в золотой час дня. Дорого, сдержанно, без единой лишней ноты.",
+  "Intrigue Devil's": "Тёмные специи и уд — аромат интриги. Носить вечером и наблюдать, как разворачивается история.",
+  "Montale Starry Nights": "Уд, бергамот и пачули — Montale смотрит на звёзды по-своему. Восточный и свежий одновременно. Редкое сочетание.",
+  "Montabaco": "Табак, специи и сухофрукты — уютный, тёплый, как библиотека в старом доме. Для ценителей глубины.",
+  "Byredo Bal d'Afrique": "Фиалка, ваниль и нероли — Byredo написали оду Африке. Светлая и романтичная. Один из лучших Byredo.",
+  "Jo Malone Wood Sage": "Морская соль и шалфей — Jo Malone в лучшем виде. Свежий, природный, ненавязчивый. Можно смешивать с другими. Всегда к месту.",
+  "Ganymede": "Шафран, мандарин и замша — Marc-Antoine Barrois написал аромат про спутник Юпитера. Получилось про что-то большее. Неожиданно прекрасный.",
+  "Kajal Dahab": "Медовый табак и амбра — Kajal умеют делать тёплые ароматы. Dahab — их золото. Густой, медленный, притягивающий.",
+  "Musk Kashmir": "Тёплый кашмирский мускус — как кашемировый плед зимним вечером. Уютный и роскошный одновременно.",
+  "Arabians Montale": "Сладкий уд и роза — Montale про Аравию без прикрас. Насыщенный, восточный, долгий. Для тех, кто хочет быть замеченным.",
+  "L.V. Symphony": "Ладан, амбра и древесина в оркестровке Louis Vuitton. Сложный и гармоничный, как симфония. Каждая нота знает своё место.",
+  "Attar Collection Khalat Light Blue": "Свежий фруктовый мускус — восток, обращённый к западу. Лёгкий и доступный вход в мир аттаров.",
+  "Initio Everest": "Ветивер, мята и древесина — Initio написали аромат про вершину. Холодный, чистый, воздушный. Для тех, кто стремится выше.",
+  "Mr. Burberry Element": "Цитрус, кедр и пачули — Element от Burberry. Современный мужской без агрессии. В городе — всегда на своём месте.",
+  "Thomas Kosmala №4": "Ваниль, мускус и амбра — тихая роскошь из Лондона. Один из лучших ниш в своей категории. Знают немногие, любят все.",
+  "Sheikh Shuyukh": "Роскошный уд и специи — для тех, кто понимает восточную парфюмерию. Стойкий, насыщенный, достойный названия.",
+  "Oud Forest Montale": "Дымный уд и древесина — лес через призму ближневосточной традиции. Тяжёлый, первобытный, честный.",
+  "Nejma 7": "Сладкие специи и амбра — доступный вход в мир Nejma. Тёплый и приятный, носить можно каждый день.",
+  "Kilian Intoxicated": "Кофе, кардамон и корица — Kilian про опьянение без алкоголя. Тёплый, пряный, аддиктивный. Попробуешь — захочешь флакон.",
+};
+
 const BOTTLES = [
-  {id:'roll',    name:'Масляный ролик',        ml:[3,5,10],    price:0,   note:'аккуратный флакон-ролик для масла'},
+  {id:'roll',    name:'Роликовый флакон',        ml:[3,5,10],    price:0,   note:'стеклянный флакон с роликом — идеален для масла'},
   {id:'spray-s', name:'Стеклянный спрей',      ml:[15,30],     price:150, note:'классический спрей'},
   {id:'spray-m', name:'Спрей премиум',         ml:[30,50,100], price:300, note:'флакон с золотой крышкой'},
   {id:'arab',    name:'Арабский декоративный', ml:[3,6,12],    price:350, note:'узорный восточный флакон'},
@@ -1258,40 +1455,25 @@ function renderCatalog() {
   const moreBtn = document.getElementById('show-more-btn');
 
   empty.style.display = all.length === 0 ? 'block' : 'none';
-  grid.style.display = all.length === 0 ? 'none' : 'grid';
+  grid.style.cssText = all.length === 0 ? 'display:none' :
+    'display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px;';
 
-  grid.innerHTML = visible.map((f, vi) => `
-    <div class="frag-card" onclick="openCfg(${FRAGRANCES.indexOf(f)})" tabindex="0" onkeydown="if(event.key==='Enter')openCfg(${FRAGRANCES.indexOf(f)})" role="button" aria-label="Открыть конфигуратор для ${f.name}">
-      <div class="frag-thumb" style="background:${SWATCH[f.cat]};">
-        <div class="frag-thumb-pattern"></div>
-        ${f.hit ? '<span class="hit-badge">ХИТ</span>' : ''}
-        <div class="bottle-scene">
-          <div class="bottle-float" style="animation-delay:${(vi * 0.38) % 3}s">
-            <div class="b-cap"></div>
-            <div class="b-neck"></div>
-            <div class="b-body">
-              <div class="b-liquid" style="background:${LIQUID[f.cat]};animation-delay:${(vi * 0.5) % 4}s"></div>
-              <div class="b-shine"></div>
-              <div class="b-shine2"></div>
-              <div class="b-label"></div>
-              <div class="b-spark" style="width:3px;height:3px;top:10px;right:12px;animation-delay:${0.6+vi*0.3}s;"></div>
-              <div class="b-spark" style="width:4px;height:4px;top:24px;right:7px;animation-delay:${1.4+vi*0.25}s;"></div>
-            </div>
-            <div class="b-base"></div>
-          </div>
-        </div>
+  grid.innerHTML = visible.map(f => {
+    const idx = FRAGRANCES.indexOf(f);
+    return `<div class="frag-item cat-${f.cat}" onclick="openFragInfo(${idx})" tabindex="0"
+        onkeydown="if(event.key==='Enter')openFragInfo(${idx})" role="button"
+        aria-label="${f.name}">
+      <div class="fi-tag ${f.cat}">${CAT_LABEL[f.cat]}</div>
+      <div class="fi-iname">${f.name}</div>
+      <div class="fi-irow">
+        <span class="fi-iprice">от ${f.price} ₽/мл</span>
+        <span style="display:flex;gap:6px;align-items:center;">
+          ${f.hit ? '<span class="fi-ihit">ХИТ</span>' : ''}
+          <span class="fi-iarr">→</span>
+        </span>
       </div>
-      <div class="frag-info">
-        <p class="eyebrow" style="font-size:11px; letter-spacing:2px;">${CAT_LABEL[f.cat]}</p>
-        <h4 class="frag-name">${f.name}</h4>
-        <p class="frag-desc">${f.desc || ''}</p>
-        <div class="frag-footer">
-          <span class="frag-price">от ${f.price} ₽/мл</span>
-          <span class="frag-cta">Собрать →</span>
-        </div>
-      </div>
-    </div>
-  `).join('');
+    </div>`;
+  }).join('');
 
   const remaining = all.length - state.shown;
   if (remaining > 0) {
@@ -1303,6 +1485,65 @@ function renderCatalog() {
 }
 
 function setCat(c) { state.cat = c; state.shown = 12; renderFilters(); renderCatalog(); }
+
+// ====== FRAGRANCE INFO MODAL ======
+let fiIdx = null;
+function openFragInfo(idx) {
+  fiIdx = idx;
+  const f = FRAGRANCES[idx];
+  const catNames = {m:'Мужской · Масло и спрей', w:'Женский · Масло и спрей', u:'Унисекс · Масло и спрей'};
+  document.getElementById('fi-m-cat').className = 'fi-m-cat ' + f.cat;
+  document.getElementById('fi-m-cat').textContent = catNames[f.cat];
+  document.getElementById('fi-m-name').textContent = f.name;
+  document.getElementById('fi-m-hint').textContent = f.desc || '';
+  document.getElementById('fi-m-story').textContent = STORIES[f.name] || '';
+  document.getElementById('fi-m-price-val').textContent = `от ${f.price} ₽`;
+  document.getElementById('fi-modal').style.display = 'block';
+  document.body.style.overflow = 'hidden';
+}
+function closeFragInfo() {
+  document.getElementById('fi-modal').style.display = 'none';
+  document.body.style.overflow = '';
+}
+function openCfgFromInfo() {
+  closeFragInfo();
+  if (fiIdx !== null) openCfg(fiIdx);
+}
+
+// ====== BLEND DESCRIPTION GENERATOR ======
+function genBlendDesc(names) {
+  const warmVibes = ['oriental','dark','sweet','spicy'];
+  const coolVibes = ['fresh','citrus'];
+  const softVibes = ['floral','powdery','musky'];
+  const richVibes = ['woody','leather'];
+  const vibes = names.map(n => VIBE[n] || 'musky');
+  const warmCnt = vibes.filter(v => warmVibes.includes(v)).length;
+  const coolCnt = vibes.filter(v => coolVibes.includes(v)).length;
+  const softCnt = vibes.filter(v => softVibes.includes(v)).length;
+  const richCnt = vibes.filter(v => richVibes.includes(v)).length;
+  const n = names.length;
+  const firstTwo = names.slice(0,2).join(' и ');
+  const dominant = [
+    [warmCnt,'warm'],[coolCnt,'cool'],[softCnt,'soft'],[richCnt,'rich']
+  ].sort((a,b)=>b[0]-a[0])[0][1];
+  const hasContrast = (warmCnt > 0 && coolCnt > 0);
+  if (hasContrast) {
+    return `Контрастный дуэт — именно так рождаются незабываемые ароматы. Тёплые, глубокие ноты ${names.find(n=>warmVibes.includes(VIBE[n]))} встречаются со свежестью ${names.find(n=>coolVibes.includes(VIBE[n]))}. В начале — лёгкость и искра, в финале — тепло, которое остаётся. Аромат, который меняется в течение дня и удивляет каждый раз.`;
+  }
+  if (dominant === 'warm' && warmCnt === n) {
+    return `Глубокий, обволакивающий, восточный — этот микс создан для тех, кто любит оставлять след. ${firstTwo} создают насыщенный тёплый аккорд, который живёт на коже часами. Идеально для вечера и прохладного времени года. Стойкость — максимальная.`;
+  }
+  if (dominant === 'cool' && coolCnt === n) {
+    return `Искристый, лёгкий, живой — этот микс освежает с первой секунды. ${firstTwo} дают воздушный, почти невесомый аккорд, как морской бриз ранним утром. Для жаркого дня, активного ритма и тех, кто ценит чистоту.`;
+  }
+  if (dominant === 'soft') {
+    return `Нежный, цветочный, чувственный — ${firstTwo} переплетаются в мягкий шлейф. ${n > 2 ? 'Дополнительные ноты добавляют глубину, которой не ожидаешь.' : ''} Лёгкий, но запоминающийся. Для тех, кто хочет пахнуть, как будто только что был в цветущем саду.`;
+  }
+  if (dominant === 'rich') {
+    return `Сдержанный, древесный, уверенный. ${firstTwo} создают аромат-утверждение — без суеты, без лишних слов. Кожа, дерево, тихая роскошь. Носить и не объяснять.`;
+  }
+  return `Авторский микс, который сложно описать и невозможно забыть. ${firstTwo} ${n > 2 ? 'и ещё ' + (n-2) + ' аромата ' : ''}создают уникальный аккорд — только ваш, ни на что не похожий. Юнус соберёт его вручную.`;
+}
 function setCatQuery(val) { state.query = val; state.shown = 12; renderCatalog(); }
 
 document.getElementById('search-input').oninput = e => setCatQuery(e.target.value);
@@ -1497,11 +1738,26 @@ function renderMix() {
     </div>`
   ).join('');
 
-  // Volumes
-  document.getElementById('mix-volumes').innerHTML = VOLUMES.map(v => {
+  // Volumes (from 10ml only for mix)
+  const MIX_VOLUMES = VOLUMES.filter(v => v >= 10);
+  if (!MIX_VOLUMES.includes(state.mixVolume)) { state.mixVolume = 30; }
+  document.getElementById('mix-volumes').innerHTML = MIX_VOLUMES.map(v => {
     const active = state.mixVolume === v;
     return `<button onclick="setMixVolume(${v})" style="font-family:'Inter',sans-serif; font-size:13px; font-weight:500; cursor:pointer; padding:8px 14px; border-radius:999px; border:1px solid ${active ? 'var(--gold)' : 'rgba(194,160,90,.35)'}; background:${active ? 'rgba(194,160,90,.2)' : 'transparent'}; color:${active ? '#E4C988' : 'rgba(244,236,221,.8)'}; transition:all .15s;">${v} мл</button>`;
   }).join('');
+
+  // Blend description
+  const vibeWrap = document.getElementById('mix-vibe-wrap');
+  if (count >= 2) {
+    const blendText = genBlendDesc(selected);
+    if (vibeWrap) {
+      vibeWrap.style.display = 'block';
+      vibeWrap.innerHTML = `<div class="mix-vibe-box"><div class="mix-vibe-label">Что получится</div><div class="mix-vibe-text">${blendText}</div></div>`;
+    }
+  } else if (vibeWrap) {
+    vibeWrap.style.display = 'none';
+    vibeWrap.innerHTML = '';
+  }
 
   // Total
   const total = mixTotal();
@@ -1547,6 +1803,7 @@ document.getElementById('mix-submit').onclick = () => {
 // ====== KEYBOARD ESCAPE ======
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') {
+    closeFragInfo();
     closeCfg();
     closeSummary();
     closeMobileMenu();
