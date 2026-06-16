@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>YUNUS PARFUM — Селективная парфюмерия на разлив · Санкт-Петербург</title>
+  <title>Aroma Garden — Селективная парфюмерия на разлив · Санкт-Петербург</title>
   <meta name="description" content="Сотни ароматов на разлив: от 3 до 100 мл, спрей или масло, свой флакон. Собираем вручную в СПб. +7 906 448 2204">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -88,10 +88,7 @@
     #hero { position: relative; background: radial-gradient(120% 120% at 70% 10%, #FBF5EA 0%, #F4ECDD 45%, #EFE2C8 100%); overflow: hidden; }
     .hero-glow-1 { position: absolute; right: -6%; top: 8%; width: min(46vw,560px); height: min(46vw,560px); border-radius: 50%; background: radial-gradient(circle at 38% 32%, rgba(228,201,136,.85), rgba(194,160,90,.35) 55%, rgba(156,123,58,.12) 80%); filter: blur(2px); pointer-events: none; }
     .hero-glow-2 { position: absolute; right: 8%; top: 26%; width: min(20vw,200px); height: min(20vw,200px); border-radius: 50%; background: radial-gradient(circle at 40% 35%, rgba(255,255,255,.7), rgba(194,160,90,.15) 70%); pointer-events: none; }
-    .hero-inner { position: relative; max-width: 1240px; margin: 0 auto; padding: clamp(72px,11vw,128px) 24px clamp(64px,9vw,110px); display: grid; grid-template-columns: minmax(0,1.15fr) minmax(0,.85fr); gap: 48px; align-items: center; }
-    @media (max-width: 768px) { .hero-inner { grid-template-columns: 1fr; } .hero-img { display: none; } }
-    .hero-img { position: relative; aspect-ratio: 4/5; border-radius: 24px; overflow: hidden; box-shadow: var(--shadow-lg); }
-    .hero-img img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
+    .hero-inner { position: relative; max-width: 860px; margin: 0 auto; padding: clamp(72px,11vw,128px) 24px clamp(64px,9vw,110px); }
     .hero-trust { display: flex; flex-wrap: wrap; gap: 20px; }
     .hero-trust span { font-family: 'Inter', sans-serif; font-size: 13px; color: var(--ink-muted); display: flex; align-items: center; gap: 7px; }
     .hero-trust .check { color: var(--gold); }
@@ -153,7 +150,11 @@
     .pickup-opt.active { border-color: var(--gold); background: #F7EFDD; }
 
     /* Review cards */
-    .review-card { background: var(--bg-ivory); border: 1px solid var(--line); border-radius: 18px; padding: 28px; }
+    .review-card { background: var(--bg-ivory); border: 1px solid var(--line); border-radius: 24px; padding: 36px 32px; text-align: center; position: relative; }
+    .review-quote { font-family: 'Playfair Display', serif; font-size: 72px; line-height: .7; color: var(--gold); opacity: .35; position: absolute; top: 18px; left: 24px; }
+    .review-text { font-family: 'Lora', serif; font-size: 17px; line-height: 1.7; color: var(--ink); font-style: italic; margin-bottom: 22px; }
+    .review-stars { color: var(--gold); font-size: 15px; letter-spacing: 2px; margin-bottom: 8px; }
+    .review-author { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 13px; letter-spacing: 1px; text-transform: uppercase; color: var(--mocha); }
 
     /* Scroll reveal */
     .reveal { opacity: 0; transform: translateY(16px); transition: opacity .5s ease-out, transform .5s ease-out; }
@@ -183,8 +184,8 @@
 <header id="header">
   <div class="header-inner">
     <a href="#top" class="logo">
-      <span class="logo-yunus">YUNUS</span>
-      <span class="logo-parfum">PARFUM</span>
+      <span class="logo-yunus">Aroma</span>
+      <span class="logo-parfum">Garden</span>
     </a>
     <nav class="desktop" style="display:flex; gap:28px; align-items:center;">
       <a href="#catalog">Каталог</a>
@@ -229,9 +230,6 @@
           <span><span class="check">✓</span> Спрей или масло</span>
           <span><span class="check">✓</span> Свой объём и концентрация</span>
         </div>
-      </div>
-      <div class="hero-img">
-        <img src="images/shop.jpg" alt="Магазин Yunus Parfum — флаконы и ароматы" loading="eager">
       </div>
     </div>
   </div>
@@ -379,7 +377,7 @@
       </div>
       <div class="tariff-card">
         <h4 class="h4" style="margin-bottom:8px;">Приоритет</h4>
-        <p style="font-family:'Inter',sans-serif; font-weight:600; font-size:22px; color:var(--gold); margin-bottom:16px;">+300 ₽</p>
+        <p style="font-family:'Inter',sans-serif; font-weight:600; font-size:22px; color:var(--gold); margin-bottom:16px;">от 500 ₽</p>
         <p style="font-size:15px; line-height:1.55; color:var(--ink-muted);">К точному времени, аккуратная упаковка, чек.</p>
       </div>
       <div class="tariff-card">
@@ -388,7 +386,7 @@
         <p style="font-size:15px; line-height:1.55; color:var(--ink-muted);">Авторский микс масел под вас + подарочная упаковка.</p>
       </div>
     </div>
-    <p style="font-family:'Lora',serif; font-size:16px; line-height:1.6; color:var(--ink-muted); background:var(--bg-ivory); border:1px solid var(--line); border-radius:18px; padding:22px 26px;">Курьер по Санкт-Петербургу — 300 ₽. Почта России / СДЭК по всей РФ — от 350 ₽. <strong style="color:var(--mocha);">Бесплатная доставка по РФ при заказе от 3000 ₽.</strong></p>
+    <p style="font-family:'Lora',serif; font-size:16px; line-height:1.6; color:var(--ink-muted); background:var(--bg-ivory); border:1px solid var(--line); border-radius:18px; padding:22px 26px;">Курьер по Санкт-Петербургу — от 500 ₽. Почта России / СДЭК по всей РФ — от 350 ₽. <strong style="color:var(--mocha);">Бесплатная доставка по РФ при заказе от 3000 ₽.</strong></p>
   </div>
 </section>
 
@@ -396,8 +394,14 @@
 <section id="about" style="background:var(--bg-ivory); border-top:1px solid var(--line);">
   <div class="container section-pad">
     <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:56px; align-items:center;">
-      <div style="position:relative; aspect-ratio:5/4; border-radius:24px; overflow:hidden; box-shadow:var(--shadow-lg);">
-        <img src="images/spray.jpg" alt="Флаконы Yunus Parfum" style="width:100%; height:100%; object-fit:cover;">
+      <!-- Декоративный блок вместо фото -->
+      <div style="position:relative; aspect-ratio:5/4; border-radius:24px; overflow:hidden; box-shadow:var(--shadow-lg); background:linear-gradient(145deg,#EFE2C8 0%,#E3CFA3 55%,#D4B88A 100%); display:flex; align-items:center; justify-content:center;">
+        <div style="text-align:center; padding:32px;">
+          <div style="font-family:'Playfair Display',serif; font-weight:700; font-size:clamp(48px,8vw,80px); line-height:1; background:var(--grad-gold); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; margin-bottom:12px;">AG</div>
+          <div style="font-family:'Inter',sans-serif; font-weight:600; font-size:12px; letter-spacing:3px; text-transform:uppercase; color:var(--mocha);">Aroma Garden</div>
+          <div style="width:48px; height:2px; background:var(--grad-gold); margin:16px auto;"></div>
+          <div style="font-family:'Lora',serif; font-size:15px; color:var(--ink-muted); line-height:1.6;">Санкт-Петербург<br>Лиговский пр., 153</div>
+        </div>
       </div>
       <div class="reveal">
         <p class="eyebrow" style="margin-bottom:12px;">Ателье ароматов</p>
@@ -426,17 +430,75 @@
     </div>
     <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:24px;">
       <div class="review-card">
-        <p style="font-family:'Lora',serif; font-size:16px; line-height:1.6; color:var(--ink); font-style:italic; margin-bottom:18px;">«Спасибо большое! Хорошо держатся, стойкие, очень долго не выветриваются.»</p>
-        <p style="font-family:'Inter',sans-serif; font-weight:600; font-size:14px; color:var(--mocha);">Клиент <span style="color:var(--gold);">★★★★★</span></p>
+        <span class="review-quote">"</span>
+        <p class="review-text">Спасибо большое! Хорошо держатся, стойкие, очень долго не выветриваются.</p>
+        <div class="review-stars">★★★★★</div>
+        <p class="review-author">Клиент</p>
       </div>
       <div class="review-card">
-        <p style="font-family:'Lora',serif; font-size:16px; line-height:1.6; color:var(--ink); font-style:italic; margin-bottom:18px;">«Ассаламу алейкум, тоже брал месяц назад — просто бомба, в подарок ещё 4мл получил. Очень нравятся ароматы, дай Аллагь торговли и процветания!»</p>
-        <p style="font-family:'Inter',sans-serif; font-weight:600; font-size:14px; color:var(--mocha);">Постоянный клиент <span style="color:var(--gold);">★★★★★</span></p>
+        <span class="review-quote">"</span>
+        <p class="review-text">Просто бомба, в подарок ещё 4 мл получил. Очень нравятся ароматы, дай Аллах торговли и процветания!</p>
+        <div class="review-stars">★★★★★</div>
+        <p class="review-author">Клиент</p>
       </div>
       <div class="review-card">
-        <p style="font-family:'Lora',serif; font-size:16px; line-height:1.6; color:var(--ink); font-style:italic; margin-bottom:18px;">«Я не ошиблась! Шла мимо и услышала аромат, который давно искала. Возвращаюсь к вам не первый раз и всегда готова кричать о вас на каждом углу!»</p>
-        <p style="font-family:'Inter',sans-serif; font-weight:600; font-size:14px; color:var(--mocha);">Постоянная клиентка <span style="color:var(--gold);">★★★★★</span></p>
+        <span class="review-quote">"</span>
+        <p class="review-text">Шла мимо и услышала аромат, который давно искала. Возвращаюсь не первый раз и всегда готова рассказывать о вас всем!</p>
+        <div class="review-stars">★★★★★</div>
+        <p class="review-author">Клиент</p>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======== PERKS ======== -->
+<section id="perks" style="background:var(--bg-ivory); border-top:1px solid var(--line);">
+  <div class="container section-pad reveal">
+    <p class="eyebrow" style="margin-bottom:12px;">Привилегии</p>
+    <h2 class="h2" style="color:var(--ink); margin-bottom:12px;">Скидки и бонусы</h2>
+    <p style="font-family:'Lora',serif; font-size:18px; color:var(--ink-muted); margin-bottom:48px; max-width:560px;">Постоянным клиентам — особые условия. Чем чаще приходишь, тем выгоднее.</p>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:20px;">
+
+      <div style="background:var(--bg-cream); border:1px solid var(--line); border-radius:20px; padding:28px 24px; position:relative; overflow:hidden;">
+        <div style="position:absolute; top:-10px; right:-10px; font-size:64px; opacity:.08;">🎁</div>
+        <div style="width:44px; height:44px; border-radius:12px; background:var(--grad-gold); display:flex; align-items:center; justify-content:center; font-size:20px; margin-bottom:16px;">🎁</div>
+        <h4 class="h4" style="margin-bottom:8px; font-size:18px;">Первый заказ −10%</h4>
+        <p style="font-size:14px; line-height:1.6; color:var(--ink-muted);">Скажи «первый раз» при оформлении — получи скидку 10% на всё.</p>
+      </div>
+
+      <div style="background:var(--bg-cream); border:1px solid var(--line); border-radius:20px; padding:28px 24px; position:relative; overflow:hidden;">
+        <div style="position:absolute; top:-10px; right:-10px; font-size:64px; opacity:.08;">⭐</div>
+        <div style="width:44px; height:44px; border-radius:12px; background:var(--grad-gold); display:flex; align-items:center; justify-content:center; font-size:20px; margin-bottom:16px;">⭐</div>
+        <h4 class="h4" style="margin-bottom:8px; font-size:18px;">Карта постоянного клиента</h4>
+        <p style="font-size:14px; line-height:1.6; color:var(--ink-muted);">После 3-го заказа — карточка с постоянной скидкой 5% на всё.</p>
+      </div>
+
+      <div style="background:var(--bg-cream); border:1px solid var(--line); border-radius:20px; padding:28px 24px; position:relative; overflow:hidden;">
+        <div style="position:absolute; top:-10px; right:-10px; font-size:64px; opacity:.08;">🧴</div>
+        <div style="width:44px; height:44px; border-radius:12px; background:var(--grad-gold); display:flex; align-items:center; justify-content:center; font-size:20px; margin-bottom:16px;">🧴</div>
+        <h4 class="h4" style="margin-bottom:8px; font-size:18px;">Пробник в подарок</h4>
+        <p style="font-size:14px; line-height:1.6; color:var(--ink-muted);">К каждому заказу от 500 ₽ — 3 мл любого аромата на выбор.</p>
+      </div>
+
+      <div style="background:var(--bg-cream); border:1px solid var(--line); border-radius:20px; padding:28px 24px; position:relative; overflow:hidden;">
+        <div style="position:absolute; top:-10px; right:-10px; font-size:64px; opacity:.08;">🎂</div>
+        <div style="width:44px; height:44px; border-radius:12px; background:var(--grad-gold); display:flex; align-items:center; justify-content:center; font-size:20px; margin-bottom:16px;">🎂</div>
+        <h4 class="h4" style="margin-bottom:8px; font-size:18px;">Подарок в День рождения</h4>
+        <p style="font-size:14px; line-height:1.6; color:var(--ink-muted);">В месяц рождения — 5 мл любимого аромата в подарок. Просто напиши Юнусу.</p>
+      </div>
+
+      <div style="background:var(--bg-cream); border:1px solid var(--line); border-radius:20px; padding:28px 24px; position:relative; overflow:hidden;">
+        <div style="position:absolute; top:-10px; right:-10px; font-size:64px; opacity:.08;">👥</div>
+        <div style="width:44px; height:44px; border-radius:12px; background:var(--grad-gold); display:flex; align-items:center; justify-content:center; font-size:20px; margin-bottom:16px;">👥</div>
+        <h4 class="h4" style="margin-bottom:8px; font-size:18px;">Приведи друга</h4>
+        <p style="font-size:14px; line-height:1.6; color:var(--ink-muted);">Твой друг сделал заказ? Ты получаешь 5 мл на выбор — бесплатно.</p>
+      </div>
+
+      <div style="background:linear-gradient(135deg,#2C1B10,#4A2E18); border:1px solid rgba(194,160,90,.3); border-radius:20px; padding:28px 24px; display:flex; flex-direction:column; justify-content:center; align-items:flex-start;">
+        <p style="font-family:'Playfair Display',serif; font-style:italic; font-size:18px; color:var(--bg-ivory); line-height:1.5; margin-bottom:20px;">«Постоянным клиентам — всегда лучшие условия. Напиши мне лично.»</p>
+        <a href="https://wa.me/79064482204?text=Здравствуйте, Юнус! Хочу узнать о скидках" target="_blank" rel="noopener" class="btn btn-gold btn-sm">Написать Юнусу</a>
+      </div>
+
     </div>
   </div>
 </section>
@@ -457,8 +519,8 @@
   <div class="container" style="padding-top:64px; padding-bottom:40px; display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:40px;">
     <div>
       <div style="display:flex; align-items:baseline; gap:8px; margin-bottom:16px;">
-        <span style="font-family:'Playfair Display',serif; font-weight:700; font-size:24px; color:var(--bg-ivory);">YUNUS</span>
-        <span style="font-family:'Inter',sans-serif; font-weight:600; font-size:12px; letter-spacing:2.5px; text-transform:uppercase; color:var(--gold);">PARFUM</span>
+        <span style="font-family:'Playfair Display',serif; font-weight:700; font-size:24px; color:var(--bg-ivory);">Aroma</span>
+        <span style="font-family:'Inter',sans-serif; font-weight:600; font-size:12px; letter-spacing:2.5px; text-transform:uppercase; color:var(--gold);">Garden</span>
       </div>
       <p style="font-family:'Lora',serif; font-size:15px; line-height:1.6;">Ателье селективной парфюмерии на разлив. Соберём ваш аромат вручную.</p>
     </div>
@@ -475,6 +537,7 @@
       <p style="font-family:'Inter',sans-serif; font-weight:600; font-size:12px; letter-spacing:1.5px; text-transform:uppercase; color:var(--gold); margin-bottom:14px;">Контакты</p>
       <div style="display:flex; flex-direction:column; gap:10px;">
         <a href="tel:+79064482204" style="font-family:'Lora',serif; font-size:15px; color:var(--bg-ivory); text-decoration:none;">+7 906 448 2204</a>
+        <p style="font-family:'Lora',serif; font-size:13px; color:rgba(244,236,221,.5); margin-bottom:6px;">Юнус отвечает лично:</p>
         <div style="display:flex; flex-wrap:wrap; gap:8px;">
           <a href="https://wa.me/79064482204" target="_blank" rel="noopener" style="font-family:'Inter',sans-serif; font-weight:600; font-size:13px; color:var(--bg-ivory); text-decoration:none; background:rgba(194,160,90,.16); border:1px solid rgba(194,160,90,.35); padding:7px 14px; border-radius:999px; transition:background .15s;" onmouseover="this.style.background='rgba(194,160,90,.28)'" onmouseout="this.style.background='rgba(194,160,90,.16)'">WhatsApp</a>
           <a href="https://t.me/+79064482204" target="_blank" rel="noopener" style="font-family:'Inter',sans-serif; font-weight:600; font-size:13px; color:var(--bg-ivory); text-decoration:none; background:rgba(194,160,90,.16); border:1px solid rgba(194,160,90,.35); padding:7px 14px; border-radius:999px; transition:background .15s;" onmouseover="this.style.background='rgba(194,160,90,.28)'" onmouseout="this.style.background='rgba(194,160,90,.16)'">Telegram</a>
@@ -486,7 +549,7 @@
   </div>
   <div class="container" style="padding-top:24px; padding-bottom:24px; border-top:1px solid rgba(194,160,90,.2); display:flex; flex-wrap:wrap; gap:16px; justify-content:space-between;">
     <p style="font-family:'Inter',sans-serif; font-size:12px; color:rgba(244,236,221,.5); max-width:640px; line-height:1.5;">Названия ароматов приведены для ориентира по парфюмерным мотивам и не являются оригинальной продукцией указанных брендов.</p>
-    <p style="font-family:'Inter',sans-serif; font-size:12px; color:rgba(244,236,221,.5);">© 2026 YUNUS PARFUM</p>
+    <p style="font-family:'Inter',sans-serif; font-size:12px; color:rgba(244,236,221,.5);">© 2026 Aroma Garden</p>
   </div>
 </footer>
 
@@ -942,7 +1005,7 @@ function buildOrderSummary() {
   const bottle = BOTTLES.find(b => b.id === s.cfgBottle);
   const pickup = PICKUP.find(p => p.id === s.cfgPickup);
   return [
-    'Заказ · YUNUS PARFUM',
+    'Заказ · Aroma Garden',
     `Аромат: ${s.cfgFrag.name} (${CAT_LABEL[s.cfgFrag.cat]})`,
     `Формат: ${fmtLabel}`,
     `Концентрация: ${concLabel}`,
@@ -1061,7 +1124,7 @@ document.getElementById('mix-submit').onclick = () => {
   const shares = mixShares();
   if (shares.length < 2) return;
   const text = [
-    'Заказ · Свой микс · YUNUS PARFUM',
+    'Заказ · Свой микс · Aroma Garden',
     ...shares.map(s => `· ${s.name} — ${Math.round(s.share * 100)}%`),
     `Объём: ${state.mixVolume} мл`,
     'Услуга VIP-микс: +1000 ₽',
