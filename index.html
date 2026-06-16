@@ -177,6 +177,85 @@
     /* Checkbox custom */
     input[type=checkbox] { width: 18px; height: 18px; accent-color: var(--gold); cursor: pointer; flex-shrink: 0; }
 
+    /* ====== ORIGIN BUTTON RIPPLE ====== */
+    .btn { position: relative; overflow: hidden; }
+    .ob-circle { position: absolute; border-radius: 50%; pointer-events: none; will-change: transform, opacity;
+      transform: translate(-50%,-50%) scale(0);
+      transition: transform .55s cubic-bezier(0.16,1,0.3,1), opacity .4s cubic-bezier(0.16,1,0.3,1); }
+    .ob-circle.ob-show { transform: translate(-50%,-50%) scale(1); opacity: 1; }
+    .ob-circle.ob-hide { transform: translate(-50%,-50%) scale(1); opacity: 0; }
+    .btn-primary .ob-circle { background: rgba(251,245,234,.16); }
+    .btn-gold .ob-circle { background: rgba(44,27,16,.28); }
+    .btn-secondary .ob-circle { background: rgba(122,79,44,.12); }
+
+    /* ====== SCROLL REEL REVIEWS ====== */
+    .sr-wrap { display:flex; flex-direction:column; background:var(--bg-ivory); border:1px solid var(--line); border-radius:24px; overflow:hidden; box-shadow:var(--shadow-md); }
+    @media(min-width:700px) { .sr-wrap { flex-direction:row; min-height:290px; } }
+    .sr-reel { position:relative; flex-shrink:0; height:200px; overflow:hidden; background:linear-gradient(135deg,var(--bg-cream),#EDE0C8); }
+    @media(min-width:700px) { .sr-reel { width:310px; height:auto; } }
+    .sr-mask { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; gap:8px;
+      -webkit-mask-image: linear-gradient(to right,transparent 0%,black 14%,black 86%,transparent 100%), linear-gradient(to bottom,transparent 0%,black 9%,black 91%,transparent 100%);
+      mask-image: linear-gradient(to right,transparent 0%,black 14%,black 86%,transparent 100%), linear-gradient(to bottom,transparent 0%,black 9%,black 91%,transparent 100%);
+      -webkit-mask-composite: source-in; mask-composite: intersect; }
+    .sr-col { display:flex; flex-direction:column; gap:8px; flex-shrink:0; will-change:transform; }
+    .sr-col.sr-animated { transition: transform .8s cubic-bezier(0.65,0,0.35,1); }
+    .sr-cell { width:96px; height:96px; flex-shrink:0; border-radius:12px; background:linear-gradient(135deg,rgba(255,255,255,.55),rgba(228,201,136,.1)); border:1px solid var(--line); filter:blur(.6px); }
+    .sr-feat { width:96px; height:96px; flex-shrink:0; border-radius:12px; overflow:hidden; position:relative;
+      box-shadow:0 6px 20px rgba(44,27,16,.24), inset 0 1px 0 rgba(255,255,255,.55); }
+    .sr-feat img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 20%; filter:saturate(.8); }
+    .sr-feat::after { content:''; position:absolute; inset:0; background:linear-gradient(220deg,transparent 30%,rgba(194,160,90,.2) 48%,transparent 66%); mix-blend-mode:overlay; }
+    .sr-content { flex:1; display:flex; flex-direction:column; justify-content:space-between; padding:26px 28px 22px; }
+    .sr-stage-wrap { position:relative; }
+    .sr-sizer { visibility:hidden; display:flex; flex-direction:column; gap:10px; min-height:110px; }
+    .sr-sizer p { font-family:'Lora',serif; font-size:17px; line-height:1.65; }
+    .sr-block { position:absolute; top:0; left:0; right:0; display:flex; flex-direction:column; gap:10px; }
+    @keyframes srExit { from{opacity:1;transform:translateY(0)} to{opacity:0;transform:translateY(-9px)} }
+    .sr-block.sr-exit { animation:srExit .2s ease-out forwards; }
+    @keyframes srChar { from{opacity:0;transform:translateY(7px)} to{opacity:1;transform:translateY(0)} }
+    .sr-char { display:inline-block; opacity:0; animation:srChar .28s forwards; }
+    .sr-q { font-family:'Lora',serif; font-size:17px; font-style:italic; line-height:1.65; color:var(--ink); margin:0; }
+    .sr-author { font-family:'Inter',sans-serif; font-weight:600; font-size:11px; letter-spacing:1.8px; text-transform:uppercase; color:var(--mocha); margin:0; }
+    .sr-stars { color:var(--gold); font-size:12px; letter-spacing:2px; }
+    .sr-controls { display:flex; gap:8px; margin-top:18px; }
+    .sr-btn { width:28px; height:28px; border-radius:50%; border:1.5px solid var(--line); background:transparent; color:var(--ink-muted); display:grid; place-items:center; cursor:pointer; transition:all .18s; }
+    .sr-btn:hover:not([disabled]) { border-color:var(--gold); color:var(--gold); transform:scale(1.08); }
+    .sr-btn[disabled] { opacity:.28; cursor:default; }
+
+    /* ====== TUBELIGHT NAV ====== */
+    @media(max-width:880px) {
+      .tube-bar {
+        display:flex; position:fixed; bottom:18px; left:50%; transform:translateX(-50%); z-index:55;
+        background:rgba(251,245,234,.92); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
+        border:1px solid var(--line); border-radius:999px; padding:5px; gap:2px;
+        box-shadow:0 6px 28px rgba(44,27,16,.14), inset 0 1px 0 rgba(255,255,255,.85);
+      }
+      .tube-item {
+        position:relative; display:flex; flex-direction:column; align-items:center; gap:2px;
+        padding:8px 11px; border-radius:999px; font-family:'Inter',sans-serif;
+        font-size:9px; font-weight:600; letter-spacing:.5px; text-transform:uppercase;
+        color:var(--ink-muted); text-decoration:none; -webkit-tap-highlight-color:transparent;
+        cursor:pointer; transition:color .2s;
+      }
+      .tube-item.tube-active { color:var(--espresso); }
+      .tube-bg { position:absolute; inset:0; border-radius:999px; background:rgba(194,160,90,.14); opacity:0; transition:opacity .25s; }
+      .tube-item.tube-active .tube-bg { opacity:1; }
+      .tube-bar-top { position:absolute; top:0; left:50%; transform:translateX(-50%); width:26px; height:3px; border-radius:0 0 999px 999px; background:var(--gold); opacity:0; transition:opacity .25s; }
+      .tube-item.tube-active .tube-bar-top { opacity:1; }
+      .tube-glow { position:absolute; top:-7px; left:50%; transform:translateX(-50%); width:40px; height:20px; border-radius:50%; background:rgba(194,160,90,.5); filter:blur(7px); opacity:0; transition:opacity .25s; }
+      .tube-item.tube-active .tube-glow { opacity:1; }
+      .tube-icon { width:18px; height:18px; position:relative; z-index:1; }
+      .tube-icon svg { width:18px; height:18px; }
+      .tube-label { position:relative; z-index:1; }
+    }
+    @media(min-width:881px) { .tube-bar { display:none; } }
+
+    /* Desktop nav active indicator (tubelight) */
+    nav.desktop { position:relative; }
+    .nav-tube { position:absolute; top:0; height:2px; border-radius:0 0 999px 999px; background:var(--gold); pointer-events:none;
+      transition:left .32s cubic-bezier(0.3,1,0.3,1), width .32s cubic-bezier(0.3,1,0.3,1), opacity .2s; opacity:0; }
+    .nav-tube-glow { position:absolute; top:-5px; height:18px; border-radius:50%; background:rgba(194,160,90,.4); filter:blur(6px); pointer-events:none;
+      transition:left .32s cubic-bezier(0.3,1,0.3,1), width .32s cubic-bezier(0.3,1,0.3,1), opacity .2s; opacity:0; }
+
     /* ====== ANIMATED CATALOG BOTTLES ====== */
     .bottle-scene { position:absolute; inset:0; display:flex; align-items:flex-end; justify-content:center; padding-bottom:8%; }
     .bottle-float { display:flex; flex-direction:column; align-items:center; animation:bottleFloat 4s ease-in-out infinite; filter:drop-shadow(0 16px 28px rgba(0,0,0,.28)); transition:filter .3s; }
@@ -231,13 +310,15 @@
       <span class="logo-yunus">Aroma</span>
       <span class="logo-parfum">Garden</span>
     </a>
-    <nav class="desktop" style="display:flex; gap:28px; align-items:center;">
-      <a href="#catalog">Каталог</a>
-      <a href="#how">Как это работает</a>
-      <a href="#mix">Свой микс</a>
-      <a href="#faq">Вопросы</a>
-      <a href="#delivery">Доставка</a>
-      <a href="#about">О нас</a>
+    <nav class="desktop" style="display:flex; gap:28px; align-items:center;" id="desktop-nav">
+      <div class="nav-tube" id="nav-tube"></div>
+      <div class="nav-tube-glow" id="nav-tube-glow"></div>
+      <a href="#catalog" data-nav>Каталог</a>
+      <a href="#how" data-nav>Как это работает</a>
+      <a href="#mix" data-nav>Свой микс</a>
+      <a href="#faq" data-nav>Вопросы</a>
+      <a href="#delivery" data-nav>Доставка</a>
+      <a href="#about" data-nav>О нас</a>
     </nav>
     <a href="#catalog" class="btn btn-gold btn-sm hd-cta">Подобрать аромат</a>
     <button class="burger" id="burger-btn" aria-label="Меню" aria-expanded="false">
@@ -251,6 +332,7 @@
   <a href="#catalog" onclick="closeMobileMenu()">Каталог</a>
   <a href="#how" onclick="closeMobileMenu()">Как это работает</a>
   <a href="#mix" onclick="closeMobileMenu()">Свой микс</a>
+  <a href="#reviews" onclick="closeMobileMenu()">Отзывы</a>
   <a href="#faq" onclick="closeMobileMenu()">Вопросы</a>
   <a href="#delivery" onclick="closeMobileMenu()">Доставка</a>
   <a href="#about" onclick="closeMobileMenu()">О нас</a>
@@ -464,34 +546,54 @@
   </div>
 </section>
 
-<!-- ======== REVIEWS ======== -->
-<section class="section-pad reveal">
+<!-- ======== REVIEWS (ScrollReel) ======== -->
+<section id="reviews" class="section-pad reveal">
   <div class="container">
     <div style="display:flex; flex-wrap:wrap; gap:16px; justify-content:space-between; align-items:flex-end; margin-bottom:40px;">
       <div>
         <p class="eyebrow" style="margin-bottom:12px;">Нам доверяют</p>
         <h2 class="h2" style="color:var(--ink);">Отзывы клиентов</h2>
       </div>
-      <a href="https://instagram.com/aroma_garden_spb" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">Instagram: aroma_garden_spb →</a>
+      <a href="https://instagram.com/aroma_garden_spb" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">Instagram →</a>
     </div>
-    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:24px;">
-      <div class="review-card">
-        <span class="review-quote">"</span>
-        <p class="review-text">Спасибо большое! Хорошо держатся, стойкие, очень долго не выветриваются.</p>
-        <div class="review-stars">★★★★★</div>
-        <p class="review-author">Клиент</p>
+
+    <!-- ScrollReel testimonials -->
+    <div class="sr-wrap" id="sr-root" tabindex="0" role="region" aria-label="Отзывы">
+      <!-- Reel -->
+      <div class="sr-reel">
+        <div class="sr-mask">
+          <!-- Left col -->
+          <div class="sr-col" id="sr-col-l"></div>
+          <!-- Middle col (portraits) -->
+          <div class="sr-col" id="sr-col-m"></div>
+          <!-- Right col -->
+          <div class="sr-col" id="sr-col-r"></div>
+        </div>
       </div>
-      <div class="review-card">
-        <span class="review-quote">"</span>
-        <p class="review-text">Просто бомба, в подарок ещё 4 мл получил. Очень нравятся ароматы, дай Аллах торговли и процветания!</p>
-        <div class="review-stars">★★★★★</div>
-        <p class="review-author">Клиент</p>
-      </div>
-      <div class="review-card">
-        <span class="review-quote">"</span>
-        <p class="review-text">Шла мимо и услышала аромат, который давно искала. Возвращаюсь не первый раз и всегда готова рассказывать о вас всем!</p>
-        <div class="review-stars">★★★★★</div>
-        <p class="review-author">Клиент</p>
+      <!-- Content -->
+      <div class="sr-content">
+        <div>
+          <!-- Quote mark -->
+          <svg class="sr-icon" width="44" height="44" viewBox="0 0 24 24" fill="var(--gold)" style="opacity:.38; display:block; margin-bottom:14px;">
+            <path d="M4.58 17.32C3.55 16.23 3 15 3 13.01c0-3.5 2.46-6.64 6.03-8.19l.9 1.38c-3.34 1.8-4 4.15-4.25 5.62.54-.28 1.24-.38 1.93-.31 1.8.17 3.23 1.65 3.23 3.49a3.5 3.5 0 0 1-3.5 3.5c-1.07 0-2.1-.49-2.75-1.18zm10 0C13.55 16.23 13 15 13 13.01c0-3.5 2.46-6.64 6.03-8.19l.9 1.38c-3.34 1.8-4 4.15-4.25 5.62.54-.28 1.24-.38 1.93-.31 1.8.17 3.23 1.65 3.23 3.49a3.5 3.5 0 0 1-3.5 3.5c-1.07 0-2.1-.49-2.75-1.18z"/>
+          </svg>
+          <!-- Stage -->
+          <div class="sr-stage-wrap">
+            <div class="sr-sizer" id="sr-sizer" aria-hidden="true">
+              <p style="font-size:17px; line-height:1.65;"></p>
+              <p style="font-size:11px;"></p>
+            </div>
+            <div class="sr-block" id="sr-block"></div>
+          </div>
+        </div>
+        <div class="sr-controls">
+          <button class="sr-btn" id="sr-prev" aria-label="Предыдущий отзыв" disabled>
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 2.5 3.5 6l4 3.5"/></svg>
+          </button>
+          <button class="sr-btn" id="sr-next" aria-label="Следующий отзыв">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m4.5 2.5 4 3.5-4 3.5"/></svg>
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -632,6 +734,55 @@
     <p style="font-family:'Inter',sans-serif; font-size:12px; color:rgba(244,236,221,.5);">© 2026 Aroma Garden</p>
   </div>
 </footer>
+
+<!-- ======== TUBELIGHT MOBILE NAV ======== -->
+<nav class="tube-bar" aria-label="Быстрая навигация" id="tube-bar">
+  <a href="#top" class="tube-item tube-active" data-section="top">
+    <div class="tube-bg"></div>
+    <div class="tube-glow"></div>
+    <div class="tube-bar-top"></div>
+    <span class="tube-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    </span>
+    <span class="tube-label">Главная</span>
+  </a>
+  <a href="#catalog" class="tube-item" data-section="catalog">
+    <div class="tube-bg"></div>
+    <div class="tube-glow"></div>
+    <div class="tube-bar-top"></div>
+    <span class="tube-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="7" height="7"/><rect x="15" y="3" width="7" height="7"/><rect x="2" y="14" width="7" height="7"/><rect x="15" y="14" width="7" height="7"/></svg>
+    </span>
+    <span class="tube-label">Каталог</span>
+  </a>
+  <a href="#mix" class="tube-item" data-section="mix">
+    <div class="tube-bg"></div>
+    <div class="tube-glow"></div>
+    <div class="tube-bar-top"></div>
+    <span class="tube-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H5a2 2 0 0 0-2 2v4"/><path d="M21 3h-4"/><path d="M9 21H5a2 2 0 0 1-2-2v-4"/><path d="M21 21h-4"/><path d="M12 8v8"/><path d="M8 12h8"/></svg>
+    </span>
+    <span class="tube-label">Микс</span>
+  </a>
+  <a href="#faq" class="tube-item" data-section="faq">
+    <div class="tube-bg"></div>
+    <div class="tube-glow"></div>
+    <div class="tube-bar-top"></div>
+    <span class="tube-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    </span>
+    <span class="tube-label">FAQ</span>
+  </a>
+  <a href="https://wa.me/79064482204" target="_blank" rel="noopener" class="tube-item" data-section="contact">
+    <div class="tube-bg"></div>
+    <div class="tube-glow"></div>
+    <div class="tube-bar-top"></div>
+    <span class="tube-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.77 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+    </span>
+    <span class="tube-label">Связь</span>
+  </a>
+</nav>
 
 <!-- ======== CONFIGURATOR MODAL ======== -->
 <div id="cfg-modal" style="display:none;" role="dialog" aria-label="Конфигуратор аромата" aria-modal="true">
@@ -1338,6 +1489,255 @@ function faqAddMsg(type, text) {
     msgs.scrollTop = msgs.scrollHeight;
   }
 }
+
+// ====== ORIGIN BUTTON RIPPLE ======
+(function() {
+  function attachOrigin(btn) {
+    let circle = null;
+    function getOrCreate() {
+      if (!circle) {
+        circle = document.createElement('span');
+        circle.className = 'ob-circle';
+        btn.appendChild(circle);
+      }
+      return circle;
+    }
+    function calcDiam(w, h, x, y) {
+      return Math.ceil(2 * Math.max(
+        Math.hypot(x, y), Math.hypot(w - x, y),
+        Math.hypot(x, h - y), Math.hypot(w - x, h - y)
+      ));
+    }
+    btn.addEventListener('pointerenter', e => {
+      const r = btn.getBoundingClientRect();
+      const x = e.clientX - r.left, y = e.clientY - r.top;
+      const d = calcDiam(r.width, r.height, x, y);
+      const c = getOrCreate();
+      c.style.width = c.style.height = d + 'px';
+      c.style.left = x + 'px'; c.style.top = y + 'px';
+      c.classList.remove('ob-hide'); void c.offsetWidth;
+      c.classList.add('ob-show');
+    });
+    btn.addEventListener('pointerleave', () => {
+      if (!circle) return;
+      circle.classList.remove('ob-show');
+      circle.classList.add('ob-hide');
+    });
+  }
+  document.querySelectorAll('.btn-primary, .btn-gold, .btn-secondary').forEach(attachOrigin);
+})();
+
+// ====== SCROLL REEL REVIEWS ======
+(function() {
+  const REVIEWS = [
+    { quote: "Хорошо держатся, стойкие, очень долго не выветриваются. Спасибо большое!", author: "Клиент · ★★★★★",
+      img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300&q=80&auto=format&fit=crop" },
+    { quote: "Просто бомба — в подарок ещё 4 мл получил. Очень нравятся ароматы, дай Аллах процветания!", author: "Клиент · ★★★★★",
+      img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&q=80&auto=format&fit=crop" },
+    { quote: "Шла мимо и услышала аромат, который давно искала. Возвращаюсь не первый раз и рассказываю всем!", author: "Клиент · ★★★★★",
+      img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300&q=80&auto=format&fit=crop" },
+  ];
+
+  const CELL_H = 96, GAP = 8, STEP = 3 * (CELL_H + GAP);
+  const N = REVIEWS.length;
+  let idx = 0, displayIdx = 0, animating = false, mounted = false;
+
+  const colL = document.getElementById('sr-col-l');
+  const colM = document.getElementById('sr-col-m');
+  const colR = document.getElementById('sr-col-r');
+  const block = document.getElementById('sr-block');
+  const sizer = document.getElementById('sr-sizer');
+  const prevBtn = document.getElementById('sr-prev');
+  const nextBtn = document.getElementById('sr-next');
+
+  if (!colL || !colM) return;
+
+  // Build columns
+  const sideCnt = 4 + 2 * N;
+  function makeCell() {
+    const d = document.createElement('div');
+    d.className = 'sr-cell sr-cell-size';
+    return d;
+  }
+  function makeFeat(i) {
+    const d = document.createElement('div');
+    d.className = 'sr-feat sr-cell-size';
+    const img = document.createElement('img');
+    img.src = REVIEWS[i].img; img.alt = '';
+    img.loading = 'lazy';
+    d.appendChild(img);
+    return d;
+  }
+
+  // Side columns
+  for (let i = 0; i < sideCnt; i++) { colL.appendChild(makeCell()); colR.appendChild(makeCell()); }
+
+  // Middle column: 3 cells, then feat + 2 cells between each
+  const midItems = [];
+  for (let i = 0; i < 3; i++) midItems.push({type:'cell'});
+  REVIEWS.forEach((_, i) => {
+    midItems.push({type:'feat', i});
+    if (i < N - 1) { midItems.push({type:'cell'}); midItems.push({type:'cell'}); }
+  });
+  for (let i = 0; i < 3; i++) midItems.push({type:'cell'});
+  midItems.forEach(item => {
+    colM.appendChild(item.type === 'feat' ? makeFeat(item.i) : makeCell());
+  });
+
+  function setColY(col, y) { col.style.transform = `translateY(${y}px)`; }
+
+  function applyPositions() {
+    const centerIdx = (N - 1) / 2;
+    const midY = (centerIdx - idx) * STEP;
+    const sideY = -midY;
+    setColY(colM, midY); setColY(colL, sideY); setColY(colR, sideY);
+  }
+
+  // Initial position (no transition)
+  applyPositions();
+
+  // Enable transitions after first paint
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    colM.classList.add('sr-animated');
+    colL.classList.add('sr-animated');
+    colR.classList.add('sr-animated');
+    mounted = true;
+  }));
+
+  // Render text with per-char animation
+  function renderText(review, staggerMs) {
+    staggerMs = staggerMs || 5;
+    block.innerHTML = '';
+    function makeChars(text, startIdx) {
+      const span = document.createDocumentFragment();
+      let ci = startIdx;
+      text.split(' ').forEach((word, wi, arr) => {
+        const ws = document.createElement('span');
+        ws.style.display = 'inline-block';
+        ws.style.whiteSpace = 'nowrap';
+        Array.from(word).forEach(ch => {
+          const cs = document.createElement('span');
+          cs.className = 'sr-char';
+          cs.style.animationDelay = (ci * staggerMs) + 'ms';
+          cs.textContent = ch; ci++;
+          ws.appendChild(cs);
+        });
+        span.appendChild(ws);
+        if (wi < arr.length - 1) { span.appendChild(document.createTextNode(' ')); ci++; }
+      });
+      return span;
+    }
+    const qp = document.createElement('p'); qp.className = 'sr-q';
+    qp.appendChild(makeChars(review.quote, 0));
+    const ap = document.createElement('p'); ap.className = 'sr-author';
+    ap.appendChild(makeChars(review.author, review.quote.length + 4));
+    block.appendChild(qp); block.appendChild(ap);
+    // Update sizer
+    sizer.innerHTML = `<p style="font-size:17px;line-height:1.65;">${review.quote}</p><p style="font-size:11px;">${review.author}</p>`;
+  }
+
+  function updateButtons() {
+    prevBtn.disabled = idx === 0;
+    nextBtn.disabled = idx === N - 1;
+  }
+
+  function paginate(dir) {
+    if (animating) return;
+    const next = idx + dir;
+    if (next < 0 || next >= N) return;
+    animating = true;
+    idx = next;
+    applyPositions();
+    updateButtons();
+    // Exit old text
+    block.classList.add('sr-exit');
+    setTimeout(() => {
+      block.classList.remove('sr-exit');
+      displayIdx = idx;
+      renderText(REVIEWS[displayIdx]);
+    }, 210);
+    setTimeout(() => { animating = false; }, 820);
+  }
+
+  prevBtn.addEventListener('click', () => paginate(-1));
+  nextBtn.addEventListener('click', () => paginate(1));
+
+  // Keyboard nav
+  const root = document.getElementById('sr-root');
+  if (root) {
+    root.addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight') { e.preventDefault(); paginate(1); }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); paginate(-1); }
+    });
+  }
+
+  renderText(REVIEWS[0]);
+  updateButtons();
+})();
+
+// ====== TUBELIGHT NAV ======
+(function() {
+  // === Desktop: active indicator follows scroll ===
+  const nav = document.getElementById('desktop-nav');
+  const tube = document.getElementById('nav-tube');
+  const tubeGlow = document.getElementById('nav-tube-glow');
+  const navLinks = nav ? Array.from(nav.querySelectorAll('a[data-nav]')) : [];
+
+  const sections = ['catalog','how','mix','faq','delivery','about'];
+
+  function setNavActive(href) {
+    if (!nav || !tube) return;
+    const link = navLinks.find(a => a.getAttribute('href') === href);
+    if (!link) { tube.style.opacity = '0'; tubeGlow.style.opacity = '0'; return; }
+    const navR = nav.getBoundingClientRect();
+    const linkR = link.getBoundingClientRect();
+    const left = linkR.left - navR.left;
+    const width = linkR.width;
+    tube.style.left = left + 'px'; tube.style.width = width + 'px'; tube.style.opacity = '1';
+    tubeGlow.style.left = (left - 6) + 'px'; tubeGlow.style.width = (width + 12) + 'px'; tubeGlow.style.opacity = '1';
+  }
+
+  function updateDesktopNav() {
+    let active = null;
+    sections.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && el.getBoundingClientRect().top <= 120) active = id;
+    });
+    setNavActive(active ? '#' + active : null);
+  }
+
+  if (nav) {
+    window.addEventListener('scroll', updateDesktopNav, { passive: true });
+    updateDesktopNav();
+  }
+
+  // === Mobile: tubelight bottom bar ===
+  const tubeBar = document.getElementById('tube-bar');
+  const tubeItems = tubeBar ? Array.from(tubeBar.querySelectorAll('.tube-item[data-section]')) : [];
+
+  function updateTubeBar() {
+    let active = 'top';
+    sections.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && el.getBoundingClientRect().top <= 160) active = id;
+    });
+    tubeItems.forEach(item => {
+      const sec = item.getAttribute('data-section');
+      item.classList.toggle('tube-active', sec === active);
+    });
+  }
+
+  if (tubeBar) {
+    window.addEventListener('scroll', updateTubeBar, { passive: true });
+    tubeItems.forEach(item => {
+      if (item.getAttribute('data-section') === 'contact') return;
+      item.addEventListener('click', () => {
+        setTimeout(updateTubeBar, 600);
+      });
+    });
+    updateTubeBar();
+  }
+})();
 
 // ====== INIT ======
 renderFilters();
