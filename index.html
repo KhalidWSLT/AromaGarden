@@ -249,12 +249,8 @@
     }
     @media(min-width:881px) { .tube-bar { display:none; } }
 
-    /* Desktop nav active indicator (tubelight) */
+    /* Desktop nav */
     nav.desktop { position:relative; }
-    .nav-tube { position:absolute; bottom:-1px; height:2px; border-radius:999px 999px 0 0; background:var(--gold); pointer-events:none;
-      transition:left .32s cubic-bezier(0.3,1,0.3,1), width .32s cubic-bezier(0.3,1,0.3,1), opacity .2s; opacity:0; }
-    .nav-tube-glow { position:absolute; bottom:-8px; height:18px; border-radius:50%; background:rgba(194,160,90,.38); filter:blur(6px); pointer-events:none;
-      transition:left .32s cubic-bezier(0.3,1,0.3,1), width .32s cubic-bezier(0.3,1,0.3,1), opacity .2s; opacity:0; }
 
     /* Mobile bottom padding for tube bar */
     @media(max-width:880px) { footer { padding-bottom: 88px !important; } }
@@ -370,8 +366,6 @@
       <span class="logo-parfum">Garden</span>
     </a>
     <nav class="desktop" style="display:flex; gap:28px; align-items:center;" id="desktop-nav">
-      <div class="nav-tube" id="nav-tube"></div>
-      <div class="nav-tube-glow" id="nav-tube-glow"></div>
       <a href="#catalog" data-nav>Каталог</a>
       <a href="#how" data-nav>Как это работает</a>
       <a href="#mix" data-nav>Свой микс</a>
