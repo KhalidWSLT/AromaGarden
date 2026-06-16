@@ -66,10 +66,37 @@
     /* Section padding */
     .section-pad { padding: clamp(72px, 9vw, 120px) 0; }
 
-    /* Header */
-    #header { position: sticky; top: 0; z-index: 60; background: transparent; transition: background .3s ease, box-shadow .3s ease; backdrop-filter: blur(8px); }
-    #header.scrolled { background: var(--bg-ivory); box-shadow: var(--shadow-sm); }
-    .header-inner { max-width: 1240px; margin: 0 auto; padding: 16px 24px; display: flex; align-items: center; gap: 24px; }
+    /* ====== LIQUID GLASS HEADER ====== */
+    /* SVG distortion filter */
+    #glass-filter { position:absolute; width:0; height:0; pointer-events:none; }
+
+    #header {
+      position: sticky; top: 0; z-index: 60;
+      background: rgba(251,245,234,0.18);
+      backdrop-filter: blur(18px) saturate(1.6);
+      -webkit-backdrop-filter: blur(18px) saturate(1.6);
+      border-bottom: 1px solid rgba(194,160,90,0.18);
+      transition: background .35s ease, box-shadow .35s ease, border-color .35s ease;
+      box-shadow: 0 1px 0 rgba(255,255,255,0.55) inset, 0 4px 24px rgba(44,27,16,.06);
+    }
+    #header::before {
+      content:'';
+      position:absolute; inset:0;
+      background: linear-gradient(180deg, rgba(255,255,255,.28) 0%, rgba(255,255,255,.06) 100%);
+      pointer-events:none;
+    }
+    #header::after {
+      content:'';
+      position:absolute; bottom:0; left:0; right:0; height:1px;
+      background: linear-gradient(90deg, transparent, rgba(194,160,90,.35) 30%, rgba(228,201,136,.5) 50%, rgba(194,160,90,.35) 70%, transparent);
+      pointer-events:none;
+    }
+    #header.scrolled {
+      background: rgba(251,245,234,0.72);
+      box-shadow: 0 1px 0 rgba(255,255,255,.7) inset, 0 6px 32px rgba(44,27,16,.1);
+      border-color: rgba(194,160,90,.25);
+    }
+    .header-inner { max-width: 1240px; margin: 0 auto; padding: 16px 24px; display: flex; align-items: center; gap: 24px; position: relative; z-index: 1; }
     .logo { text-decoration: none; display: flex; align-items: baseline; gap: 8px; margin-right: auto; flex-shrink: 0; }
     .logo-yunus { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 24px; color: var(--ink); letter-spacing: -.3px; }
     .logo-parfum { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 12px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); }
@@ -358,6 +385,26 @@
 </head>
 <body>
 
+<!-- SVG glass distortion filter -->
+<svg id="glass-filter" aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden;">
+  <defs>
+    <filter id="glass-distortion" x="0%" y="0%" width="100%" height="100%" filterUnits="objectBoundingBox">
+      <feTurbulence type="fractalNoise" baseFrequency="0.0008 0.004" numOctaves="1" seed="17" result="turbulence"/>
+      <feComponentTransfer in="turbulence" result="mapped">
+        <feFuncR type="gamma" amplitude="1" exponent="10" offset="0.5"/>
+        <feFuncG type="gamma" amplitude="0" exponent="1" offset="0"/>
+        <feFuncB type="gamma" amplitude="0" exponent="1" offset="0.5"/>
+      </feComponentTransfer>
+      <feGaussianBlur in="turbulence" stdDeviation="2" result="softMap"/>
+      <feSpecularLighting in="softMap" surfaceScale="4" specularConstant="0.8" specularExponent="80" lightingColor="white" result="specLight">
+        <fePointLight x="-200" y="-200" z="280"/>
+      </feSpecularLighting>
+      <feComposite in="specLight" operator="arithmetic" k1="0" k2="1" k3="1" k4="0" result="litImage"/>
+      <feDisplacementMap in="SourceGraphic" in2="softMap" scale="120" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
+</svg>
+
 <!-- ======== HEADER ======== -->
 <header id="header">
   <div class="header-inner">
@@ -636,6 +683,72 @@
   </div>
 </section>
 
+<!-- ======== PERKS ======== -->
+<section id="perks" style="background:var(--bg-ivory); border-top:1px solid var(--line);">
+  <div class="container section-pad reveal">
+    <p class="eyebrow" style="margin-bottom:12px;">Привилегии</p>
+    <h2 class="h2" style="color:var(--ink); margin-bottom:12px;">Скидки и бонусы</h2>
+    <p style="font-family:'Lora',serif; font-size:18px; color:var(--ink-muted); margin-bottom:48px; max-width:560px;">Постоянным клиентам — особые условия. Чем чаще приходишь, тем выгоднее.</p>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:20px;">
+
+      <div style="background:var(--bg-cream); border:1px solid var(--line); border-radius:20px; padding:28px 24px; position:relative; overflow:hidden;">
+        <div style="position:absolute; top:-10px; right:-10px; font-size:64px; opacity:.07;">🎁</div>
+        <div style="width:44px; height:44px; border-radius:12px; background:var(--grad-gold); display:flex; align-items:center; justify-content:center; font-size:20px; margin-bottom:16px;">🎁</div>
+        <h4 class="h4" style="margin-bottom:8px; font-size:18px;">Первый заказ −10%</h4>
+        <p style="font-size:14px; line-height:1.6; color:var(--ink-muted);">Скажи «первый раз» при оформлении — получи скидку 10% на весь заказ.</p>
+      </div>
+
+      <div style="background:var(--bg-cream); border:1px solid var(--line); border-radius:20px; padding:28px 24px; position:relative; overflow:hidden;">
+        <div style="position:absolute; top:-10px; right:-10px; font-size:64px; opacity:.07;">⭐</div>
+        <div style="width:44px; height:44px; border-radius:12px; background:var(--grad-gold); display:flex; align-items:center; justify-content:center; font-size:20px; margin-bottom:16px;">⭐</div>
+        <h4 class="h4" style="margin-bottom:8px; font-size:18px;">Карта постоянного клиента</h4>
+        <p style="font-size:14px; line-height:1.6; color:var(--ink-muted);">После 3-го заказа — личная карта со скидкой 5% на всё навсегда.</p>
+      </div>
+
+      <div style="background:var(--bg-cream); border:1px solid var(--line); border-radius:20px; padding:28px 24px; position:relative; overflow:hidden;">
+        <div style="position:absolute; top:-10px; right:-10px; font-size:64px; opacity:.07;">🧴</div>
+        <div style="width:44px; height:44px; border-radius:12px; background:var(--grad-gold); display:flex; align-items:center; justify-content:center; font-size:20px; margin-bottom:16px;">🧴</div>
+        <h4 class="h4" style="margin-bottom:8px; font-size:18px;">Пробник в подарок</h4>
+        <p style="font-size:14px; line-height:1.6; color:var(--ink-muted);">К каждому заказу от 1500 ₽ — 3 мл любого аромата на выбор в подарок.</p>
+      </div>
+
+      <div style="background:var(--bg-cream); border:1px solid var(--line); border-radius:20px; padding:28px 24px; position:relative; overflow:hidden;">
+        <div style="position:absolute; top:-10px; right:-10px; font-size:64px; opacity:.07;">🫐</div>
+        <div style="width:44px; height:44px; border-radius:12px; background:var(--grad-gold); display:flex; align-items:center; justify-content:center; font-size:20px; margin-bottom:16px;">🫐</div>
+        <h4 class="h4" style="margin-bottom:8px; font-size:18px;">Дегустационный сет</h4>
+        <p style="font-size:14px; line-height:1.6; color:var(--ink-muted);">Любые 5 ароматов по 3 мл — платишь как за 4. Идеально для знакомства с коллекцией.</p>
+      </div>
+
+      <div style="background:var(--bg-cream); border:1px solid var(--line); border-radius:20px; padding:28px 24px; position:relative; overflow:hidden;">
+        <div style="position:absolute; top:-10px; right:-10px; font-size:64px; opacity:.07;">👥</div>
+        <div style="width:44px; height:44px; border-radius:12px; background:var(--grad-gold); display:flex; align-items:center; justify-content:center; font-size:20px; margin-bottom:16px;">👥</div>
+        <h4 class="h4" style="margin-bottom:8px; font-size:18px;">Приведи друга</h4>
+        <p style="font-size:14px; line-height:1.6; color:var(--ink-muted);">Друг оформил заказ по твоей рекомендации — ты получаешь 5 мл любого аромата бесплатно.</p>
+      </div>
+
+      <div style="background:var(--bg-cream); border:1px solid var(--line); border-radius:20px; padding:28px 24px; position:relative; overflow:hidden;">
+        <div style="position:absolute; top:-10px; right:-10px; font-size:64px; opacity:.07;">⚡</div>
+        <div style="width:44px; height:44px; border-radius:12px; background:var(--grad-gold); display:flex; align-items:center; justify-content:center; font-size:20px; margin-bottom:16px;">⚡</div>
+        <h4 class="h4" style="margin-bottom:8px; font-size:18px;">Парный заказ −7%</h4>
+        <p style="font-size:14px; line-height:1.6; color:var(--ink-muted);">Заказываете 2 и более аромата в один заказ — скидка 7% на весь чек автоматически.</p>
+      </div>
+
+      <div style="background:var(--bg-cream); border:1px solid var(--line); border-radius:20px; padding:28px 24px; position:relative; overflow:hidden;">
+        <div style="position:absolute; top:-10px; right:-10px; font-size:64px; opacity:.07;">🔁</div>
+        <div style="width:44px; height:44px; border-radius:12px; background:var(--grad-gold); display:flex; align-items:center; justify-content:center; font-size:20px; margin-bottom:16px;">🔁</div>
+        <h4 class="h4" style="margin-bottom:8px; font-size:18px;">Повторный заказ −20%</h4>
+        <p style="font-size:14px; line-height:1.6; color:var(--ink-muted);">Уже брал этот аромат? При повторном заказе того же аромата — скидка 20%. Твой аромат, твоя цена.</p>
+      </div>
+
+      <div style="background:linear-gradient(135deg,#2C1B10,#4A2E18); border:1px solid rgba(194,160,90,.3); border-radius:20px; padding:28px 24px; display:flex; flex-direction:column; justify-content:center; align-items:flex-start;">
+        <p style="font-family:'Playfair Display',serif; font-style:italic; font-size:18px; color:var(--bg-ivory); line-height:1.5; margin-bottom:20px;">«Постоянным клиентам — всегда лучшие условия. Напиши мне лично.»</p>
+        <a href="https://wa.me/79064482204?text=Здравствуйте, Юнус! Хочу узнать о скидках и бонусах" target="_blank" rel="noopener" class="btn btn-gold btn-sm">Написать Юнусу</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <!-- ======== REVIEWS (ScrollReel) ======== -->
 <section id="reviews" class="section-pad reveal">
   <div class="container">
@@ -712,72 +825,6 @@
           <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
         </button>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- ======== PERKS ======== -->
-<section id="perks" style="background:var(--bg-ivory); border-top:1px solid var(--line);">
-  <div class="container section-pad reveal">
-    <p class="eyebrow" style="margin-bottom:12px;">Привилегии</p>
-    <h2 class="h2" style="color:var(--ink); margin-bottom:12px;">Скидки и бонусы</h2>
-    <p style="font-family:'Lora',serif; font-size:18px; color:var(--ink-muted); margin-bottom:48px; max-width:560px;">Постоянным клиентам — особые условия. Чем чаще приходишь, тем выгоднее.</p>
-    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:20px;">
-
-      <div style="background:var(--bg-cream); border:1px solid var(--line); border-radius:20px; padding:28px 24px; position:relative; overflow:hidden;">
-        <div style="position:absolute; top:-10px; right:-10px; font-size:64px; opacity:.07;">🎁</div>
-        <div style="width:44px; height:44px; border-radius:12px; background:var(--grad-gold); display:flex; align-items:center; justify-content:center; font-size:20px; margin-bottom:16px;">🎁</div>
-        <h4 class="h4" style="margin-bottom:8px; font-size:18px;">Первый заказ −10%</h4>
-        <p style="font-size:14px; line-height:1.6; color:var(--ink-muted);">Скажи «первый раз» при оформлении — получи скидку 10% на весь заказ.</p>
-      </div>
-
-      <div style="background:var(--bg-cream); border:1px solid var(--line); border-radius:20px; padding:28px 24px; position:relative; overflow:hidden;">
-        <div style="position:absolute; top:-10px; right:-10px; font-size:64px; opacity:.07;">⭐</div>
-        <div style="width:44px; height:44px; border-radius:12px; background:var(--grad-gold); display:flex; align-items:center; justify-content:center; font-size:20px; margin-bottom:16px;">⭐</div>
-        <h4 class="h4" style="margin-bottom:8px; font-size:18px;">Карта постоянного клиента</h4>
-        <p style="font-size:14px; line-height:1.6; color:var(--ink-muted);">После 3-го заказа — личная карта со скидкой 5% на всё навсегда.</p>
-      </div>
-
-      <div style="background:var(--bg-cream); border:1px solid var(--line); border-radius:20px; padding:28px 24px; position:relative; overflow:hidden;">
-        <div style="position:absolute; top:-10px; right:-10px; font-size:64px; opacity:.07;">🧴</div>
-        <div style="width:44px; height:44px; border-radius:12px; background:var(--grad-gold); display:flex; align-items:center; justify-content:center; font-size:20px; margin-bottom:16px;">🧴</div>
-        <h4 class="h4" style="margin-bottom:8px; font-size:18px;">Пробник в подарок</h4>
-        <p style="font-size:14px; line-height:1.6; color:var(--ink-muted);">К каждому заказу от 1500 ₽ — 3 мл любого аромата на выбор в подарок.</p>
-      </div>
-
-      <div style="background:var(--bg-cream); border:1px solid var(--line); border-radius:20px; padding:28px 24px; position:relative; overflow:hidden;">
-        <div style="position:absolute; top:-10px; right:-10px; font-size:64px; opacity:.07;">🫐</div>
-        <div style="width:44px; height:44px; border-radius:12px; background:var(--grad-gold); display:flex; align-items:center; justify-content:center; font-size:20px; margin-bottom:16px;">🫐</div>
-        <h4 class="h4" style="margin-bottom:8px; font-size:18px;">Дегустационный сет</h4>
-        <p style="font-size:14px; line-height:1.6; color:var(--ink-muted);">Любые 5 ароматов по 3 мл — платишь как за 4. Идеально для знакомства с коллекцией.</p>
-      </div>
-
-      <div style="background:var(--bg-cream); border:1px solid var(--line); border-radius:20px; padding:28px 24px; position:relative; overflow:hidden;">
-        <div style="position:absolute; top:-10px; right:-10px; font-size:64px; opacity:.07;">👥</div>
-        <div style="width:44px; height:44px; border-radius:12px; background:var(--grad-gold); display:flex; align-items:center; justify-content:center; font-size:20px; margin-bottom:16px;">👥</div>
-        <h4 class="h4" style="margin-bottom:8px; font-size:18px;">Приведи друга</h4>
-        <p style="font-size:14px; line-height:1.6; color:var(--ink-muted);">Друг оформил заказ по твоей рекомендации — ты получаешь 5 мл любого аромата бесплатно.</p>
-      </div>
-
-      <div style="background:var(--bg-cream); border:1px solid var(--line); border-radius:20px; padding:28px 24px; position:relative; overflow:hidden;">
-        <div style="position:absolute; top:-10px; right:-10px; font-size:64px; opacity:.07;">⚡</div>
-        <div style="width:44px; height:44px; border-radius:12px; background:var(--grad-gold); display:flex; align-items:center; justify-content:center; font-size:20px; margin-bottom:16px;">⚡</div>
-        <h4 class="h4" style="margin-bottom:8px; font-size:18px;">Парный заказ −7%</h4>
-        <p style="font-size:14px; line-height:1.6; color:var(--ink-muted);">Заказываете 2 и более аромата в один заказ — скидка 7% на весь чек автоматически.</p>
-      </div>
-
-      <div style="background:var(--bg-cream); border:1px solid var(--line); border-radius:20px; padding:28px 24px; position:relative; overflow:hidden;">
-        <div style="position:absolute; top:-10px; right:-10px; font-size:64px; opacity:.07;">🔁</div>
-        <div style="width:44px; height:44px; border-radius:12px; background:var(--grad-gold); display:flex; align-items:center; justify-content:center; font-size:20px; margin-bottom:16px;">🔁</div>
-        <h4 class="h4" style="margin-bottom:8px; font-size:18px;">Повторный заказ −20%</h4>
-        <p style="font-size:14px; line-height:1.6; color:var(--ink-muted);">Уже брал этот аромат? При повторном заказе того же аромата — скидка 20%. Твой аромат, твоя цена.</p>
-      </div>
-
-      <div style="background:linear-gradient(135deg,#2C1B10,#4A2E18); border:1px solid rgba(194,160,90,.3); border-radius:20px; padding:28px 24px; display:flex; flex-direction:column; justify-content:center; align-items:flex-start;">
-        <p style="font-family:'Playfair Display',serif; font-style:italic; font-size:18px; color:var(--bg-ivory); line-height:1.5; margin-bottom:20px;">«Постоянным клиентам — всегда лучшие условия. Напиши мне лично.»</p>
-        <a href="https://wa.me/79064482204?text=Здравствуйте, Юнус! Хочу узнать о скидках и бонусах" target="_blank" rel="noopener" class="btn btn-gold btn-sm">Написать Юнусу</a>
-      </div>
-
     </div>
   </div>
 </section>
