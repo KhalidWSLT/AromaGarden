@@ -139,10 +139,12 @@
     .frag-card:hover { transform:translateY(-5px); box-shadow:0 18px 48px rgba(44,27,16,.14); border-color:var(--gold); }
     .frag-thumb { position:relative; height:172px; overflow:hidden; flex-shrink:0; }
     .frag-thumb-pat { position:absolute; inset:0; background:repeating-linear-gradient(135deg,rgba(255,255,255,.05) 0 8px,rgba(255,255,255,0) 8px 16px); }
+    .frag-thumb::after { content:''; position:absolute; inset:0; background:linear-gradient(180deg,rgba(255,255,255,.18) 0%,rgba(255,255,255,0) 32%,rgba(0,0,0,.06) 100%); pointer-events:none; }
     .frag-thumb-glow { position:absolute; bottom:-20px; left:50%; transform:translateX(-50%); width:110px; height:110px; border-radius:50%; filter:blur(32px); opacity:.4; }
-    .hit-badge { position:absolute; top:12px; left:12px; font-family:'Inter',sans-serif; font-weight:700; font-size:10px; letter-spacing:1.5px; color:var(--espresso); background:var(--grad-gold); padding:4px 10px; border-radius:999px; z-index:2; }
-    .sb-wrap { position:absolute; inset:0; display:flex; align-items:flex-end; justify-content:center; padding-bottom:14px; z-index:1; }
-    .sb { display:flex; flex-direction:column; align-items:center; filter:drop-shadow(0 8px 20px rgba(0,0,0,.2)); }
+    .hit-badge { position:absolute; top:12px; left:12px; font-family:'Inter',sans-serif; font-weight:700; font-size:10px; letter-spacing:1.5px; color:var(--espresso); background:var(--grad-gold); padding:4px 10px; border-radius:999px; z-index:3; box-shadow:0 3px 10px rgba(156,123,58,.35); }
+    .sb-wrap { position:absolute; inset:0; display:flex; align-items:flex-end; justify-content:center; padding-bottom:14px; z-index:2; }
+    .sb { display:flex; flex-direction:column; align-items:center; filter:drop-shadow(0 8px 20px rgba(0,0,0,.2)); transition:transform .3s ease; }
+    .frag-card:hover .sb { transform:translateY(-6px) scale(1.04); }
     .sb-cap { width:20px; height:13px; border-radius:4px 4px 2px 2px; background:linear-gradient(180deg,rgba(255,255,255,.65),rgba(255,255,255,.22)); border:1px solid rgba(255,255,255,.38); }
     .sb-neck { width:12px; height:8px; background:rgba(255,255,255,.22); }
     .sb-body { width:56px; height:76px; border-radius:9px 9px 16px 16px; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.2); position:relative; overflow:hidden; }
@@ -175,18 +177,20 @@
     .fi-m-close:hover { background:rgba(0,0,0,.55); color:#fff; }
     .fi-m-cat { font-family:'Inter',sans-serif; font-size:10px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; color:rgba(255,255,255,.65); margin-bottom:6px; }
     .fi-m-name { font-family:'Playfair Display',serif; font-size:clamp(20px,3.5vw,26px); font-weight:700; color:#fff; line-height:1.2; text-shadow:0 2px 12px rgba(0,0,0,.28); }
-    .fi-bd { padding:24px 36px 28px; flex:1; }
+    .fi-bd { padding:24px 36px 18px; flex:1; }
     .fi-m-hint { font-family:'Lora',serif; font-size:13px; color:var(--ink-muted); font-style:italic; line-height:1.65; }
     .fi-m-div { height:1px; background:linear-gradient(90deg,transparent,var(--gold) 30%,var(--gold-light) 50%,var(--gold) 70%,transparent); margin:18px 0 20px; }
-    .fi-m-story { font-family:'Lora',serif; font-size:15.5px; line-height:1.85; color:var(--ink); margin-bottom:22px; }
-    .fi-buy { background:var(--bg-cream); border-radius:18px; padding:20px 22px; border:1px solid var(--line); }
-    .fi-buy-row { display:flex; align-items:baseline; gap:8px; margin-bottom:14px; }
+    .fi-m-story { font-family:'Lora',serif; font-size:15.5px; line-height:1.85; color:var(--ink); }
+    /* Липкий блок покупки — всегда виден, не нужно искать */
+    .fi-buy { position:sticky; bottom:0; background:var(--bg-ivory); padding:16px 36px 20px; border-top:1px solid var(--line); border-radius:0 0 28px 28px; box-shadow:0 -10px 26px rgba(44,27,16,.07); }
+    .fi-buy::before { content:''; position:absolute; left:0; right:0; top:-26px; height:26px; background:linear-gradient(180deg,transparent,var(--bg-ivory)); pointer-events:none; }
+    .fi-buy-row { display:flex; align-items:baseline; gap:8px; margin-bottom:13px; }
     .fi-m-price-val { font-family:'Playfair Display',serif; font-size:28px; font-weight:700; color:var(--gold); }
     .fi-m-price-sub { font-family:'Inter',sans-serif; font-size:12px; color:var(--ink-muted); }
-    .fi-cta-big { width:100%; text-align:center; font-size:16px !important; padding:16px 24px !important; margin-bottom:10px; display:block; }
-    .fi-cta-sec { width:100%; text-align:center; font-size:14px; background:transparent !important; border:1.5px solid var(--line) !important; color:var(--ink-muted) !important; box-shadow:none !important; }
-    .fi-cta-sec:hover { border-color:var(--espresso) !important; color:var(--espresso) !important; }
-    @media(max-width:600px) { .fi-hero { padding:20px 22px 18px; min-height:120px; } .fi-hero-bot { right:20px; } .fi-bd { padding:18px 22px 24px; } }
+    .fi-cta-big { width:100%; text-align:center; font-size:16px !important; padding:15px 24px !important; margin-bottom:9px; display:block; }
+    .fi-cta-sec { width:100%; text-align:center; font-size:13px; background:transparent !important; border:none !important; color:var(--ink-muted) !important; box-shadow:none !important; padding:6px !important; }
+    .fi-cta-sec:hover { color:var(--espresso) !important; }
+    @media(max-width:600px) { .fi-hero { padding:20px 22px 18px; min-height:120px; } .fi-hero-bot { right:20px; } .fi-bd { padding:18px 22px 14px; } .fi-buy { padding:14px 22px 18px; } }
 
     /* ====== MIX VIBE BOX ====== */
     .mix-vibe-box { margin-top: 20px; padding: 18px 20px; background: rgba(194,160,90,.07); border: 1px solid rgba(194,160,90,.22); border-radius: 16px; animation: msgIn .35s ease-out; }
@@ -970,20 +974,20 @@
         </div>
         <div class="fi-hero-bot" id="fi-hero-bot"></div>
       </div>
-      <!-- Тело -->
+      <!-- Тело: ноты + история -->
       <div class="fi-bd">
         <div class="fi-m-hint" id="fi-m-hint"></div>
         <div class="fi-m-div"></div>
         <div class="fi-m-story" id="fi-m-story"></div>
-        <!-- Блок покупки — всегда виден, не нужно скроллить -->
-        <div class="fi-buy">
-          <div class="fi-buy-row">
-            <span class="fi-m-price-val" id="fi-m-price-val"></span>
-            <span class="fi-m-price-sub">за мл &nbsp;·&nbsp; от 3 мл &nbsp;·&nbsp; масло и спрей</span>
-          </div>
-          <button class="btn btn-gold fi-cta-big" onclick="openCfgFromInfo()">Собрать свой флакон →</button>
-          <button class="btn fi-cta-sec" onclick="closeFragInfo()">← Вернуться к каталогу</button>
+      </div>
+      <!-- Липкий блок покупки — всегда виден внизу, не нужно скроллить -->
+      <div class="fi-buy">
+        <div class="fi-buy-row">
+          <span class="fi-m-price-val" id="fi-m-price-val"></span>
+          <span class="fi-m-price-sub">за мл &nbsp;·&nbsp; от 3 мл &nbsp;·&nbsp; масло и спрей</span>
         </div>
+        <button class="btn btn-gold fi-cta-big" onclick="openCfgFromInfo()">Собрать свой флакон →</button>
+        <button class="btn fi-cta-sec" onclick="closeFragInfo()">← Вернуться к каталогу</button>
       </div>
     </div>
   </div>
@@ -1549,7 +1553,8 @@ function openFragInfo(idx) {
   document.getElementById('fi-m-story').textContent = STORIES[f.name] || '';
   document.getElementById('fi-m-price-val').textContent = `от ${f.price} ₽`;
   document.getElementById('fi-modal').style.display = 'block';
-  document.getElementById('fi-modal').scrollTop = 0;
+  const box = document.querySelector('#fi-modal .fi-box');
+  if (box) box.scrollTop = 0;
   document.body.style.overflow = 'hidden';
 }
 function closeFragInfo() {
