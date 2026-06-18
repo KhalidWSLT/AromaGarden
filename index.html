@@ -192,16 +192,6 @@
     .fi-cta-sec:hover { color:var(--espresso) !important; }
     @media(max-width:600px) { .fi-hero { padding:20px 22px 18px; min-height:120px; } .fi-hero-bot { right:20px; } .fi-bd { padding:18px 22px 14px; } .fi-buy { padding:14px 22px 18px; } }
 
-    /* ====== MIX VIBE BOX ====== */
-    .mix-vibe-box { margin-top: 20px; padding: 18px 20px; background: rgba(194,160,90,.07); border: 1px solid rgba(194,160,90,.22); border-radius: 16px; animation: msgIn .35s ease-out; }
-    .mix-vibe-label { font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
-    .mix-vibe-text { font-family: 'Lora', serif; font-size: 14px; line-height: 1.72; color: rgba(244,236,221,.82); }
-
-    /* Mix sliders */
-    input[type=range].mix-range { -webkit-appearance: none; appearance: none; width: 100%; height: 6px; border-radius: 999px; background: linear-gradient(90deg, var(--gold-light), var(--gold-dark)); outline: none; cursor: pointer; }
-    input[type=range].mix-range::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; border-radius: 50%; background: var(--bg-ivory); border: 3px solid var(--gold); box-shadow: 0 2px 10px rgba(20,12,6,.4); cursor: pointer; }
-    input[type=range].mix-range::-moz-range-thumb { width: 22px; height: 22px; border-radius: 50%; background: var(--bg-ivory); border: 3px solid var(--gold); cursor: pointer; }
-
     /* Modals */
     .modal-overlay { position: fixed; inset: 0; z-index: 100; background: rgba(44,27,16,.6); backdrop-filter: blur(4px); display: flex; align-items: flex-start; justify-content: center; padding: 24px; overflow-y: auto; animation: fadeIn .2s ease; }
     .modal-box { background: var(--bg-ivory); border-radius: 24px; box-shadow: 0 24px 60px rgba(60,40,20,.3); width: 100%; max-width: 920px; margin: auto; overflow: hidden; }
@@ -499,7 +489,7 @@
 <!-- ======== MARQUEE ======== -->
 <div id="marquee">
   <div class="marquee-track">
-    <span class="marquee-text">БРОНЬ <span>·</span> САМОВЫВОЗ <span>·</span> ДОСТАВКА ПО РФ <span>·</span> СВОЙ МИКС <span>·</span> ОТ 3 МЛ <span>·</span> СПРЕЙ И МАСЛО <span>·</span> БРОНЬ <span>·</span> САМОВЫВОЗ <span>·</span> ДОСТАВКА ПО РФ <span>·</span> СВОЙ МИКС <span>·</span> ОТ 3 МЛ <span>·</span> СПРЕЙ И МАСЛО <span>·</span></span>
+    <span class="marquee-text">КУРЬЕР ПО СПБ БЕСПЛАТНО <span>·</span> САМОВЫВОЗ <span>·</span> ДОСТАВКА ПО РФ <span>·</span> АВТОРСКИЙ МИКС <span>·</span> ОТ 3 МЛ <span>·</span> СПРЕЙ И МАСЛО <span>·</span> АКЦИЯ 1+1+1 <span>·</span> КУРЬЕР ПО СПБ БЕСПЛАТНО <span>·</span> САМОВЫВОЗ <span>·</span> ДОСТАВКА ПО РФ <span>·</span> АВТОРСКИЙ МИКС <span>·</span> ОТ 3 МЛ <span>·</span> СПРЕЙ И МАСЛО <span>·</span> АКЦИЯ 1+1+1 <span>·</span></span>
   </div>
 </div>
 
@@ -625,33 +615,17 @@
   </div>
 </section>
 
-<!-- ======== MIX ======== -->
+<!-- ======== MIX (по запросу) ======== -->
 <section id="mix" style="background:var(--espresso); color:var(--bg-cream);">
   <div class="container section-pad">
-    <p class="eyebrow" style="margin-bottom:12px;">Индивидуально</p>
-    <h2 class="h2" style="color:var(--bg-ivory); margin-bottom:16px;">Свой аромат из нескольких масел</h2>
-    <p style="font-family:'Lora',serif; font-size:18px; line-height:1.6; color:rgba(244,236,221,.78); max-width:620px; margin-bottom:48px;">Выберите от 2 до 4 масел — мы соберём авторский микс под ваш вкус и подготовим к вашему приходу.</p>
-
-    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:40px; align-items:start;">
-      <div>
-        <p style="font-family:'Inter',sans-serif; font-weight:600; font-size:13px; letter-spacing:1.5px; text-transform:uppercase; color:var(--gold); margin-bottom:14px;">1 · Выберите масла (до 4)</p>
-        <div id="mix-options" style="max-height:300px; overflow-y:auto; display:flex; flex-wrap:wrap; gap:8px; padding:18px; background:rgba(251,245,234,.05); border:1px solid rgba(194,160,90,.25); border-radius:18px;"></div>
-      </div>
-
-      <div style="background:rgba(251,245,234,.05); border:1px solid rgba(194,160,90,.25); border-radius:24px; padding:32px;">
-        <p style="font-family:'Inter',sans-serif; font-weight:600; font-size:13px; letter-spacing:1.5px; text-transform:uppercase; color:var(--gold); margin-bottom:18px;">2 · Пропорции</p>
-        <div id="mix-empty-hint" style="font-family:'Lora',serif; font-size:15px; color:rgba(244,236,221,.6); margin-bottom:24px;">Выберите минимум 2 масла слева.</div>
-        <div id="mix-sliders" style="display:flex; flex-direction:column; gap:18px; margin-bottom:24px;"></div>
-
-        <p style="font-family:'Inter',sans-serif; font-weight:600; font-size:13px; letter-spacing:1.5px; text-transform:uppercase; color:var(--gold); margin-bottom:10px;">3 · Объём</p>
-        <div id="mix-volumes" style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:24px;"></div>
-
-        <div style="display:flex; justify-content:space-between; align-items:baseline; padding-top:20px; border-top:1px solid rgba(194,160,90,.25); margin-bottom:20px;">
-          <span style="font-family:'Inter',sans-serif; font-size:14px; color:rgba(244,236,221,.7);">Итого <span style="font-size:12px;">(вкл. услугу +1000 ₽)</span></span>
-          <span id="mix-total-label" style="font-family:'Playfair Display',serif; font-weight:700; font-size:30px; color:var(--gold);">—</span>
-        </div>
-        <div id="mix-vibe-wrap" style="display:none;"></div>
-        <button id="mix-submit" class="btn btn-gold" style="width:100%; margin-top:20px; opacity:.5; cursor:not-allowed;" disabled>Заказать микс</button>
+    <div style="max-width:760px; margin:0 auto; text-align:center;">
+      <p class="eyebrow" style="margin-bottom:12px; color:var(--gold);">Индивидуально</p>
+      <h2 class="h2" style="color:var(--bg-ivory); margin-bottom:20px;">Авторский микс под вас</h2>
+      <p style="font-family:'Lora',serif; font-size:18px; line-height:1.7; color:rgba(244,236,221,.82); margin-bottom:16px;">Хотите аромат, которого нет больше ни у кого? Юнус соберёт <strong style="color:var(--gold-light);">микс из нескольких масел</strong> лично под ваш вкус — подберёт ноты, пропорции и стойкость.</p>
+      <p style="font-family:'Lora',serif; font-size:16px; line-height:1.7; color:rgba(244,236,221,.62); margin-bottom:36px;">Такие миксы собираются только индивидуально — напишите Юнусу в WhatsApp или приходите на точку в Санкт-Петербурге, и он подберёт ваш аромат вживую.</p>
+      <div style="display:flex; flex-wrap:wrap; gap:14px; justify-content:center;">
+        <a href="https://wa.me/79064482204?text=Здравствуйте, Юнус! Хочу собрать свой авторский микс — подскажите, с чего начать" target="_blank" rel="noopener" class="btn btn-gold">Обсудить микс в WhatsApp</a>
+        <a href="#about" class="btn btn-secondary" style="border-color:rgba(194,160,90,.4); color:var(--bg-ivory);">Как нас найти</a>
       </div>
     </div>
   </div>
@@ -661,30 +635,25 @@
 <section id="delivery" class="section-pad reveal">
   <div class="container">
     <p class="eyebrow" style="margin-bottom:12px;">Получение</p>
-    <h2 class="h2" style="color:var(--ink); margin-bottom:48px;">Доставка и бронь</h2>
-    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:24px; margin-bottom:32px;">
+    <h2 class="h2" style="color:var(--ink); margin-bottom:48px;">Доставка и получение</h2>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:24px; margin-bottom:32px;">
       <div class="tariff-card">
         <h4 class="h4" style="margin-bottom:8px;">Самовывоз</h4>
         <p style="font-family:'Inter',sans-serif; font-weight:600; font-size:22px; color:var(--gold); margin-bottom:16px;">Бесплатно</p>
-        <p style="font-size:15px; line-height:1.55; color:var(--ink-muted);">Соберём заказ — заберёте на нашей точке в ТЦ (Санкт-Петербург).</p>
+        <p style="font-size:15px; line-height:1.55; color:var(--ink-muted);">Соберём заказ — заберёте на нашей точке в Санкт-Петербурге, Лиговский пр., 153.</p>
       </div>
       <div class="tariff-card">
-        <h4 class="h4" style="margin-bottom:8px;">Бронь «Готово к приходу»</h4>
-        <p style="font-family:'Inter',sans-serif; font-weight:600; font-size:22px; color:var(--gold); margin-bottom:16px;">+100 ₽</p>
-        <p style="font-size:15px; line-height:1.55; color:var(--ink-muted);">Подготовим заранее к выбранному времени — не ждёте на месте.</p>
+        <h4 class="h4" style="margin-bottom:8px;">Курьер по СПб</h4>
+        <p style="font-family:'Inter',sans-serif; font-weight:600; font-size:22px; color:var(--gold); margin-bottom:16px;">Бесплатно</p>
+        <p style="font-size:15px; line-height:1.55; color:var(--ink-muted);">Привезём заказ прямо к вам по Санкт-Петербургу — без доплаты за доставку.</p>
       </div>
       <div class="tariff-card">
-        <h4 class="h4" style="margin-bottom:8px;">Приоритет</h4>
-        <p style="font-family:'Inter',sans-serif; font-weight:600; font-size:22px; color:var(--gold); margin-bottom:16px;">от 500 ₽</p>
-        <p style="font-size:15px; line-height:1.55; color:var(--ink-muted);">К точному времени, аккуратная упаковка, чек.</p>
-      </div>
-      <div class="tariff-card">
-        <h4 class="h4" style="margin-bottom:8px;">VIP / свой микс</h4>
-        <p style="font-family:'Inter',sans-serif; font-weight:600; font-size:22px; color:var(--gold); margin-bottom:16px;">+1000 ₽</p>
-        <p style="font-size:15px; line-height:1.55; color:var(--ink-muted);">Авторский микс масел под вас + подарочная упаковка.</p>
+        <h4 class="h4" style="margin-bottom:8px;">Доставка по РФ</h4>
+        <p style="font-family:'Inter',sans-serif; font-weight:600; font-size:22px; color:var(--gold); margin-bottom:16px;">от 350 ₽</p>
+        <p style="font-size:15px; line-height:1.55; color:var(--ink-muted);">Почта России и СДЭК по всей стране. <strong style="color:var(--mocha);">Бесплатно при заказе от 3000 ₽.</strong></p>
       </div>
     </div>
-    <p style="font-family:'Lora',serif; font-size:16px; line-height:1.6; color:var(--ink-muted); background:var(--bg-ivory); border:1px solid var(--line); border-radius:18px; padding:22px 26px;">Курьер по Санкт-Петербургу — от 500 ₽. Почта России / СДЭК по всей РФ — от 350 ₽. <strong style="color:var(--mocha);">Бесплатная доставка по РФ при заказе от 3000 ₽.</strong></p>
+    <p style="font-family:'Lora',serif; font-size:16px; line-height:1.6; color:var(--ink-muted); background:var(--bg-ivory); border:1px solid var(--line); border-radius:18px; padding:22px 26px;">По Санкт-Петербургу — <strong style="color:var(--mocha);">самовывоз и курьер бесплатно</strong>. По России — Почта / СДЭК от 350 ₽, а при заказе <strong style="color:var(--mocha);">от 3000 ₽ доставка по всей стране бесплатная</strong>.</p>
   </div>
 </section>
 
@@ -1026,14 +995,15 @@
           <div id="cfg-conc-wrap" style="margin-bottom:22px; display:none;">
             <p class="cfg-section-title">Концентрация</p>
             <div class="cfg-pills" id="cfg-concentrations"></div>
-            <p style="font-family:'Lora',serif; font-size:12px; color:var(--ink-muted); line-height:1.5;">Платите только за масло. Чем выше концентрация — тем насыщеннее и стойче аромат.</p>
+            <p style="font-family:'Lora',serif; font-size:12px; color:var(--ink-muted); line-height:1.5;">Чем выше концентрация — тем насыщеннее и стойче звучит аромат. Цена флакона фиксированная.</p>
           </div>
 
           <p class="cfg-section-title">Объём</p>
           <div class="cfg-pills" id="cfg-volumes"></div>
 
-          <p class="cfg-section-title">Флакон</p>
-          <div id="cfg-bottles"></div>
+          <div id="cfg-bottle-wrap"></div>
+
+          <div id="cfg-promo" style="display:none;"></div>
 
           <label style="display:flex; align-items:center; gap:10px; cursor:pointer; margin-bottom:22px; font-family:'Inter',sans-serif; font-size:14px; color:var(--ink);">
             <input type="checkbox" id="cfg-giftbox"> + Подарочная коробка <span style="color:var(--gold); font-weight:600;">+250 ₽</span>
@@ -1179,48 +1149,6 @@ const FRAGRANCES = [
 ];
 
 // ====== FRAGRANCE STORIES & VIBES ======
-const VIBE = {
-  "L.V. L'Immensité":'fresh', "Dark Lord by Kilian":'dark', "Bvlgari Aqva":'fresh',
-  "Tiger Bvlgari":'spicy', "Sheikh 77":'oriental', "Versace Eros":'fresh',
-  "Antonio Banderas Blue":'fresh', "P.R. Invictus Aqua":'fresh', "G. Armani Acqua di Giò":'fresh',
-  "Egoiste Chanel":'woody', "Lacoste Sport":'fresh', "Dior Homme":'powdery',
-  "C.H. 212 Men":'citrus', "D&G Light Blue":'fresh', "Allure Homme Sport":'fresh',
-  "Lacoste White":'fresh', "Zam Zam Gold":'oriental', "Dior Sauvage":'fresh',
-  "Bleu de Chanel":'woody',
-  "Victoria's Secret So Sexy":'floral', "Victoria's Secret Aqua Kiss":'fresh',
-  "Victoria's Secret Scandalous":'floral', "Victoria's Secret Mango":'sweet',
-  "Victoria's Secret Bombshell":'floral', "Hürrem Sultan":'oriental', "Lanvin Éclat":'floral',
-  "Dior J'adore":'floral', "Miss Dior":'floral', "Chanel №5":'powdery',
-  "Chanel Chance":'fresh', "Coco Mademoiselle":'floral', "Chanel Tendre":'floral',
-  "Trussardi Donna":'floral', "Givenchy Secret":'dark', "Givenchy Ange ou Démon":'oriental',
-  "Black Opium":'dark', "Carolina Herrera":'floral', "D&G Imperatrice 3":'fresh',
-  "Gucci Flora":'floral', "Gucci Bamboo":'floral', "Lancôme Idôle":'floral',
-  "Escada Cherry":'sweet', "Sheikh 33":'oriental', "Soblazn":'sweet',
-  "Zara Tuberose":'floral', "Montale Roses":'floral', "Montale Dark Purple":'dark',
-  "Kilian Good Girl":'sweet', "Jasmine":'floral', "Versace Bright Crystal":'floral',
-  "Zam Zam":'oriental', "Capitan Black":'dark', "Alexandre.J":'oriental',
-  "Puredistance White":'powdery', "Initio Oud for Greatness":'oriental',
-  "Hayati Al Haramain":'oriental', "Sospiro Accento":'sweet', "Sospiro Erba Pura":'sweet',
-  "Zielinski Orange":'citrus', "Zielinski Rosen Vanilla":'floral', "Zielinski Lemon":'citrus',
-  "Zielinski Pepper":'spicy', "Zielinski Rosemary":'fresh', "Tom Ford Cherry":'dark',
-  "Tom Ford Tobacco Vanille":'oriental', "Tom Ford Tuscan Leather":'leather',
-  "Tom Ford Tobacco Oud":'dark', "Tom Ford Oud Wood":'woody', "Tom Ford Bitter Peach":'sweet',
-  "Tom Ford Black Orchid":'dark', "Molecule 01":'musky', "Molecule 02":'musky',
-  "Molecule 04":'musky', "Molecule 05":'powdery', "Molecule 09":'floral',
-  "Molecule «Игры разума»":'musky', "Black Afgano":'dark', "Amber Wood Ajmal":'woody',
-  "Tiziana Terenzi Kirke":'sweet', "Tiziana Terenzi Gumin":'oriental', "Narcotic":'floral',
-  "Baccarat 540":'oriental', "Roja Elysium":'citrus', "Memo African Leather":'leather',
-  "Memo Italian Leather":'leather', "Initio Musk":'musky', "Kenzo Electric":'spicy',
-  "Megamare Orto Parisi":'fresh', "Mancera Cedrat Boise":'woody', "Blood Shahid":'dark',
-  "Cocain":'musky', "L.V. Afternoon":'woody', "Intrigue Devil's":'dark',
-  "Montale Starry Nights":'oriental', "Montabaco":'dark', "Byredo Bal d'Afrique":'floral',
-  "Jo Malone Wood Sage":'fresh', "Ganymede":'oriental', "Kajal Dahab":'oriental',
-  "Musk Kashmir":'musky', "Arabians Montale":'oriental', "L.V. Symphony":'woody',
-  "Attar Collection Khalat Light Blue":'fresh', "Initio Everest":'fresh',
-  "Mr. Burberry Element":'woody', "Thomas Kosmala №4":'musky', "Sheikh Shuyukh":'oriental',
-  "Oud Forest Montale":'dark', "Nejma 7":'oriental', "Kilian Intoxicated":'spicy',
-};
-
 const STORIES = {
   "L.V. L'Immensité": "Запах горизонта, который ты не видишь — только чувствуешь. Свежий имбирь врывается как порыв ветра, амбра оседает тёплым послевкусием. Для тех, кто смотрит дальше, чем все остальные.",
   "Dark Lord by Kilian": "Не для всех. Дымный кофе, ром и тёмный шоколад — аромат, который не просит внимания, а требует. Носить и молчать. Всё остальное скажет запах.",
@@ -1342,24 +1270,39 @@ const BOTTLES = [
   {id:'crystal', name:'Хрустальный графин',    ml:[30,50,100], price:400, note:'гранёный флакон-графин'},
   {id:'car',     name:'Автоароматизатор',      ml:[5,8],       price:200, note:'подвесной в авто'},
 ];
-const VOLUMES = [3, 5, 10, 15, 30, 50, 100];
+// Масло — по мл; спрей — фиксированные объёмы с фикс-ценой
+const OIL_VOLUMES = [3, 5, 6, 8, 12];
+const SPRAY_VOLUMES = [10, 20, 30, 50, 100];
+function volumesFor(fmt) { return fmt === 'spray' ? SPRAY_VOLUMES : OIL_VOLUMES; }
 const FORMATS = [
   {id:'oil',   label:'Масло',          ratio:1.0},
-  {id:'spray', label:'Спрей (парфюм)', ratio:0.30},
+  {id:'spray', label:'Спрей (парфюм)', ratio:0.40},
 ];
 const CONCENTRATIONS = [
-  {id:30, label:'30% (стандарт)', ratio:0.30},
-  {id:40, label:'40%',            ratio:0.40},
-  {id:50, label:'50%',            ratio:0.50},
+  {id:40, label:'40%',           ratio:0.40},
+  {id:50, label:'50% (максимум)',ratio:0.50},
 ];
+// Фиксированные цены на спреи (любой аромат). Акция действует до конца июля 2026.
+const SPRAY_PRICES = {
+  10:  {promo:1290, full:1790},
+  20:  {promo:2090, full:2790},
+  30:  {promo:2990, full:3990},
+  50:  {promo:3990, full:4990},
+  100: {promo:5990, full:6990},
+};
+const PROMO_UNTIL = new Date('2026-07-31T23:59:59');
+function promoActive() { return new Date() <= PROMO_UNTIL; }
+function sprayPrice(vol) {
+  const p = SPRAY_PRICES[vol];
+  if (!p) return 0;
+  return promoActive() ? p.promo : p.full;
+}
 const PICKUP = [
-  {id:'self',    label:'Самовывоз',                 fee:0},
-  {id:'book100', label:'Бронь «Готово к приходу»',  fee:100},
-  {id:'book300', label:'Приоритет',                 fee:300},
-  {id:'vip1000', label:'VIP / свой микс',           fee:1000},
-  {id:'spb',     label:'Доставка по СПб (курьер)',  fee:300},
-  {id:'rf',      label:'Доставка по РФ (Почта/СДЭК)',fee:350},
+  {id:'self', label:'Самовывоз (СПб)',             fee:0},
+  {id:'spb',  label:'Курьер по СПб',               fee:0},
+  {id:'rf',   label:'Доставка по РФ (Почта/СДЭК)', fee:350},
 ];
+const RF_FREE_FROM = 3000; // бесплатная доставка по РФ при заказе от этой суммы
 const CAT_LABEL = {m:'Мужской', w:'Женский', u:'Универсальный'};
 const SWATCH = {m:'linear-gradient(160deg,#C9B58C,#7A4F2C)', w:'linear-gradient(160deg,#E6C9A8,#B97A6A)', u:'linear-gradient(160deg,#DDC489,#9C7B3A)'};
 const LIQUID = {
@@ -1373,9 +1316,8 @@ const PHONE = '79064482204';
 const state = {
   cat: 'all', query: '', shown: 12,
   cfgFrag: null,
-  cfgFormat: 'oil', cfgConc: 30, cfgVolume: 10, cfgBottle: 'roll', cfgGiftbox: false, cfgPickup: 'self',
+  cfgFormat: 'oil', cfgConc: 40, cfgVolume: 5, cfgBottle: 'roll', cfgGiftbox: false, cfgPickup: 'self',
   summaryText: '',
-  mixWeights: {}, mixVolume: 30,
 };
 
 // ====== UTILS ======
@@ -1384,26 +1326,31 @@ const fmt = n => Math.round(n).toLocaleString('ru-RU') + ' ₽';
 function compatibleBottles(vol) {
   return BOTTLES.filter(b => b.ml.includes(vol));
 }
-function oilRatio() {
-  return state.cfgFormat === 'oil' ? 1.0 : state.cfgConc / 100;
-}
-function oilCost() {
+// Цена продукта: масло — по мл, спрей — фиксированная по объёму
+function productCost() {
   if (!state.cfgFrag) return 0;
-  return state.cfgFrag.price * state.cfgVolume * oilRatio();
+  if (state.cfgFormat === 'spray') return sprayPrice(state.cfgVolume);
+  return state.cfgFrag.price * state.cfgVolume; // масло
 }
 function bottlePrice() {
+  if (state.cfgFormat === 'spray') return 0; // премиум-флакон включён в фикс-цену
   const b = BOTTLES.find(x => x.id === state.cfgBottle);
   return b ? b.price : 0;
 }
+function subtotal() {
+  return productCost() + bottlePrice() + (state.cfgGiftbox ? 250 : 0);
+}
 function pickupFee() {
+  if (state.cfgPickup === 'rf') return subtotal() >= RF_FREE_FROM ? 0 : 350;
   const p = PICKUP.find(x => x.id === state.cfgPickup);
   return p ? p.fee : 0;
 }
 function cfgTotal() {
-  return oilCost() + bottlePrice() + (state.cfgGiftbox ? 250 : 0) + pickupFee();
+  return subtotal() + pickupFee();
 }
 function fillPct() {
-  return Math.round((state.cfgVolume / 100) * 85) + 5;
+  const max = state.cfgFormat === 'spray' ? 100 : 12;
+  return Math.round((state.cfgVolume / max) * 80) + 10;
 }
 
 // ====== HEADER SCROLL ======
@@ -1566,40 +1513,6 @@ function openCfgFromInfo() {
   if (fiIdx !== null) openCfg(fiIdx);
 }
 
-// ====== BLEND DESCRIPTION GENERATOR ======
-function genBlendDesc(names) {
-  const warmVibes = ['oriental','dark','sweet','spicy'];
-  const coolVibes = ['fresh','citrus'];
-  const softVibes = ['floral','powdery','musky'];
-  const richVibes = ['woody','leather'];
-  const vibes = names.map(n => VIBE[n] || 'musky');
-  const warmCnt = vibes.filter(v => warmVibes.includes(v)).length;
-  const coolCnt = vibes.filter(v => coolVibes.includes(v)).length;
-  const softCnt = vibes.filter(v => softVibes.includes(v)).length;
-  const richCnt = vibes.filter(v => richVibes.includes(v)).length;
-  const n = names.length;
-  const firstTwo = names.slice(0,2).join(' и ');
-  const dominant = [
-    [warmCnt,'warm'],[coolCnt,'cool'],[softCnt,'soft'],[richCnt,'rich']
-  ].sort((a,b)=>b[0]-a[0])[0][1];
-  const hasContrast = (warmCnt > 0 && coolCnt > 0);
-  if (hasContrast) {
-    return `Контрастный дуэт — именно так рождаются незабываемые ароматы. Тёплые, глубокие ноты ${names.find(n=>warmVibes.includes(VIBE[n]))} встречаются со свежестью ${names.find(n=>coolVibes.includes(VIBE[n]))}. В начале — лёгкость и искра, в финале — тепло, которое остаётся. Аромат, который меняется в течение дня и удивляет каждый раз.`;
-  }
-  if (dominant === 'warm' && warmCnt === n) {
-    return `Глубокий, обволакивающий, восточный — этот микс создан для тех, кто любит оставлять след. ${firstTwo} создают насыщенный тёплый аккорд, который живёт на коже часами. Идеально для вечера и прохладного времени года. Стойкость — максимальная.`;
-  }
-  if (dominant === 'cool' && coolCnt === n) {
-    return `Искристый, лёгкий, живой — этот микс освежает с первой секунды. ${firstTwo} дают воздушный, почти невесомый аккорд, как морской бриз ранним утром. Для жаркого дня, активного ритма и тех, кто ценит чистоту.`;
-  }
-  if (dominant === 'soft') {
-    return `Нежный, цветочный, чувственный — ${firstTwo} переплетаются в мягкий шлейф. ${n > 2 ? 'Дополнительные ноты добавляют глубину, которой не ожидаешь.' : ''} Лёгкий, но запоминающийся. Для тех, кто хочет пахнуть, как будто только что был в цветущем саду.`;
-  }
-  if (dominant === 'rich') {
-    return `Сдержанный, древесный, уверенный. ${firstTwo} создают аромат-утверждение — без суеты, без лишних слов. Кожа, дерево, тихая роскошь. Носить и не объяснять.`;
-  }
-  return `Авторский микс, который сложно описать и невозможно забыть. ${firstTwo} ${n > 2 ? 'и ещё ' + (n-2) + ' аромата ' : ''}создают уникальный аккорд — только ваш, ни на что не похожий. Юнус соберёт его вручную.`;
-}
 function setCatQuery(val) { state.query = val; state.shown = 12; renderCatalog(); }
 
 document.getElementById('search-input').oninput = e => setCatQuery(e.target.value);
@@ -1608,11 +1521,11 @@ document.getElementById('show-more-btn').onclick = () => { state.shown += 12; re
 // ====== CONFIGURATOR ======
 function openCfg(idx) {
   const frag = FRAGRANCES[idx];
-  const compat = compatibleBottles(10);
   state.cfgFrag = frag;
   state.cfgFormat = 'oil';
-  state.cfgConc = 30;
-  state.cfgVolume = 10;
+  state.cfgConc = 40;
+  state.cfgVolume = 5;
+  const compat = compatibleBottles(5);
   state.cfgBottle = compat.length ? compat[0].id : 'roll';
   state.cfgGiftbox = false;
   state.cfgPickup = 'self';
@@ -1630,10 +1543,14 @@ function renderCfg() {
   if (!state.cfgFrag) return;
   const f = state.cfgFrag;
 
+  const isSpray = state.cfgFormat === 'spray';
+
   // Header info
   document.getElementById('cfg-cat-label').textContent = CAT_LABEL[f.cat];
   document.getElementById('cfg-name').textContent = f.name;
-  document.getElementById('cfg-per-ml').textContent = `${f.price} ₽/мл · масло`;
+  document.getElementById('cfg-per-ml').textContent = isSpray
+    ? 'Спрей · фиксированная цена за флакон'
+    : `${f.price} ₽/мл · чистое масло`;
 
   // Bottle fill
   document.getElementById('cfg-fill').style.height = fillPct() + '%';
@@ -1642,7 +1559,14 @@ function renderCfg() {
   const total = cfgTotal();
   document.getElementById('cfg-total-label').textContent = fmt(total);
   document.getElementById('cfg-vol-label').textContent = state.cfgVolume + ' мл';
-  document.getElementById('cfg-oil-label').textContent = `в т.ч. масло: ${fmt(oilCost())}`;
+  if (isSpray) {
+    const full = SPRAY_PRICES[state.cfgVolume] ? SPRAY_PRICES[state.cfgVolume].full : 0;
+    document.getElementById('cfg-oil-label').innerHTML = promoActive()
+      ? `<span style="text-decoration:line-through; opacity:.6;">${fmt(full)}</span> &nbsp;по акции до 31 июля`
+      : 'фиксированная цена';
+  } else {
+    document.getElementById('cfg-oil-label').textContent = `в т.ч. аромат: ${fmt(productCost())}`;
+  }
 
   // Formats
   document.getElementById('cfg-formats').innerHTML = FORMATS.map(fmt2 =>
@@ -1650,46 +1574,81 @@ function renderCfg() {
   ).join('');
 
   // Concentration (spray only)
-  const concWrap = document.getElementById('cfg-conc-wrap');
-  concWrap.style.display = state.cfgFormat === 'spray' ? 'block' : 'none';
+  document.getElementById('cfg-conc-wrap').style.display = isSpray ? 'block' : 'none';
   document.getElementById('cfg-concentrations').innerHTML = CONCENTRATIONS.map(c =>
     `<button class="cfg-pill${state.cfgConc === c.id ? ' active' : ''}" onclick="setCfgConc(${c.id})">${c.label}</button>`
   ).join('');
 
-  // Volumes
-  document.getElementById('cfg-volumes').innerHTML = VOLUMES.map(v =>
+  // Volumes (зависят от формата)
+  document.getElementById('cfg-volumes').innerHTML = volumesFor(state.cfgFormat).map(v =>
     `<button class="cfg-pill${state.cfgVolume === v ? ' active' : ''}" onclick="setCfgVolume(${v})">${v} мл</button>`
   ).join('');
 
-  // Bottles
-  const compat = compatibleBottles(state.cfgVolume);
-  document.getElementById('cfg-bottles').innerHTML = compat.map(b =>
-    `<button class="bottle-opt${state.cfgBottle === b.id ? ' active' : ''}" onclick="setCfgBottle('${b.id}')">
-      <span class="bottle-icon"></span>
-      <span style="flex:1;">
-        <span style="display:block; font-family:'Inter',sans-serif; font-weight:600; font-size:14px; color:#241710;">${b.name}</span>
-        <span style="display:block; font-family:'Lora',serif; font-size:12px; color:#6E5C4C;">${b.note}</span>
-      </span>
-      <span style="font-family:'Inter',sans-serif; font-weight:600; font-size:14px; color:var(--gold); white-space:nowrap;">${b.price === 0 ? 'бесплатно' : '+' + b.price + ' ₽'}</span>
-    </button>`
-  ).join('');
+  // Bottles — только для масла (у спрея флакон включён)
+  const bottleWrap = document.getElementById('cfg-bottle-wrap');
+  if (isSpray) {
+    bottleWrap.innerHTML = `<p class="cfg-section-title">Флакон</p>
+      <div style="display:flex; align-items:center; gap:12px; padding:14px 16px; border:1px solid var(--line); border-radius:14px; background:#F7EFDD;">
+        <span class="bottle-icon"></span>
+        <span style="flex:1; font-family:'Inter',sans-serif; font-weight:600; font-size:14px; color:#241710;">Премиум-флакон спрей</span>
+        <span style="font-family:'Inter',sans-serif; font-weight:600; font-size:14px; color:var(--gold);">включён</span>
+      </div>`;
+  } else {
+    const compat = compatibleBottles(state.cfgVolume);
+    bottleWrap.innerHTML = `<p class="cfg-section-title">Флакон</p>` + compat.map(b =>
+      `<button class="bottle-opt${state.cfgBottle === b.id ? ' active' : ''}" onclick="setCfgBottle('${b.id}')">
+        <span class="bottle-icon"></span>
+        <span style="flex:1;">
+          <span style="display:block; font-family:'Inter',sans-serif; font-weight:600; font-size:14px; color:#241710;">${b.name}</span>
+          <span style="display:block; font-family:'Lora',serif; font-size:12px; color:#6E5C4C;">${b.note}</span>
+        </span>
+        <span style="font-family:'Inter',sans-serif; font-weight:600; font-size:14px; color:var(--gold); white-space:nowrap;">${b.price === 0 ? 'бесплатно' : '+' + b.price + ' ₽'}</span>
+      </button>`
+    ).join('');
+  }
+
+  // Promo banner (спрей)
+  const promoBox = document.getElementById('cfg-promo');
+  if (isSpray) {
+    promoBox.style.display = 'block';
+    promoBox.innerHTML = `<div style="background:linear-gradient(135deg,#2C1B10,#4A2E18); border:1px solid rgba(194,160,90,.35); border-radius:16px; padding:16px 18px; margin-bottom:20px;">
+      <div style="font-family:'Inter',sans-serif; font-weight:700; font-size:12px; letter-spacing:1.5px; text-transform:uppercase; color:var(--gold-light); margin-bottom:8px;">🎁 Акция 1 + 1 + 1</div>
+      <div style="font-family:'Lora',serif; font-size:13.5px; line-height:1.6; color:rgba(244,236,221,.88);">Купи два спрея — <strong style="color:var(--gold-light);">третий в подарок</strong> (от 10 мл, любой аромат на выбор). Цены действуют <strong style="color:var(--gold-light);">до 31 июля 2026</strong> — потом дороже.</div>
+    </div>`;
+  } else {
+    promoBox.style.display = 'none';
+    promoBox.innerHTML = '';
+  }
 
   // Giftbox
   document.getElementById('cfg-giftbox').checked = state.cfgGiftbox;
 
   // Pickups
-  document.getElementById('cfg-pickups').innerHTML = PICKUP.map(pk =>
-    `<button class="pickup-opt${state.cfgPickup === pk.id ? ' active' : ''}" onclick="setCfgPickup('${pk.id}')">
-      <span style="font-family:'Inter',sans-serif; font-weight:500; font-size:14px; color:#241710;">${pk.label}</span>
-      <span style="font-family:'Inter',sans-serif; font-weight:600; font-size:13px; color:var(--gold);">${pk.fee === 0 ? 'бесплатно' : '+' + pk.fee + ' ₽'}</span>
-    </button>`
-  ).join('');
+  document.getElementById('cfg-pickups').innerHTML = PICKUP.map(pk => {
+    let priceLabel;
+    if (pk.id === 'rf') priceLabel = subtotal() >= RF_FREE_FROM ? 'бесплатно' : '350 ₽';
+    else priceLabel = pk.fee === 0 ? 'бесплатно' : '+' + pk.fee + ' ₽';
+    const sub = pk.id === 'rf' ? '<span style="display:block; font-family:\'Lora\',serif; font-size:11px; color:#6E5C4C; margin-top:2px;">бесплатно от 3000 ₽</span>' : '';
+    return `<button class="pickup-opt${state.cfgPickup === pk.id ? ' active' : ''}" onclick="setCfgPickup('${pk.id}')">
+      <span style="flex:1; text-align:left;"><span style="font-family:'Inter',sans-serif; font-weight:500; font-size:14px; color:#241710;">${pk.label}</span>${sub}</span>
+      <span style="font-family:'Inter',sans-serif; font-weight:600; font-size:13px; color:var(--gold);">${priceLabel}</span>
+    </button>`;
+  }).join('');
 
   // Submit button
   document.getElementById('cfg-submit').textContent = `Оформить заказ · ${fmt(total)}`;
 }
 
-function setCfgFormat(id) { state.cfgFormat = id; renderCfg(); }
+function setCfgFormat(id) {
+  state.cfgFormat = id;
+  const vols = volumesFor(id);
+  if (!vols.includes(state.cfgVolume)) state.cfgVolume = (id === 'spray') ? 50 : 5;
+  if (id === 'oil') {
+    const compat = compatibleBottles(state.cfgVolume);
+    if (!compat.find(b => b.id === state.cfgBottle)) state.cfgBottle = compat.length ? compat[0].id : 'roll';
+  }
+  renderCfg();
+}
 function setCfgConc(id) { state.cfgConc = id; renderCfg(); }
 function setCfgVolume(v) {
   state.cfgVolume = v;
@@ -1703,21 +1662,27 @@ document.getElementById('cfg-giftbox').onchange = () => { state.cfgGiftbox = doc
 
 function buildOrderSummary() {
   const s = state;
-  const fmtLabel = s.cfgFormat === 'oil' ? 'Масло' : 'Спрей (парфюм)';
-  const concLabel = s.cfgFormat === 'spray' ? `${s.cfgConc}%` : '—';
-  const bottle = BOTTLES.find(b => b.id === s.cfgBottle);
+  const isSpray = s.cfgFormat === 'spray';
   const pickup = PICKUP.find(p => p.id === s.cfgPickup);
-  return [
+  const lines = [
     'Заказ · Aroma Garden',
     `Аромат: ${s.cfgFrag.name} (${CAT_LABEL[s.cfgFrag.cat]})`,
-    `Формат: ${fmtLabel}`,
-    `Концентрация: ${concLabel}`,
-    `Объём: ${s.cfgVolume} мл`,
-    `Флакон: ${bottle ? bottle.name : '—'}${s.cfgGiftbox ? ' + подарочная коробка' : ''}`,
-    `Получение: ${pickup ? pickup.label : '—'}`,
-    `В т.ч. масло: ${fmt(oilCost())}`,
-    `Итого: ${fmt(cfgTotal())}`,
-  ].join('\n');
+    `Формат: ${isSpray ? 'Спрей (парфюм)' : 'Чистое масло'}`,
+  ];
+  if (isSpray) lines.push(`Концентрация: ${s.cfgConc}%`);
+  lines.push(`Объём: ${s.cfgVolume} мл`);
+  if (isSpray) {
+    lines.push('Флакон: премиум-спрей (включён в цену)');
+    lines.push(`Цена флакона: ${fmt(productCost())}${promoActive() ? ' (акция до 31 июля)' : ''}`);
+  } else {
+    const bottle = BOTTLES.find(b => b.id === s.cfgBottle);
+    lines.push(`Флакон: ${bottle ? bottle.name : '—'}`);
+    lines.push(`В т.ч. аромат: ${fmt(productCost())}`);
+  }
+  if (s.cfgGiftbox) lines.push('Подарочная коробка: +250 ₽');
+  lines.push(`Получение: ${pickup ? pickup.label : '—'}${pickupFee() === 0 ? ' (бесплатно)' : ' (+' + fmt(pickupFee()) + ')'}`);
+  lines.push(`Итого: ${fmt(cfgTotal())}`);
+  return lines.join('\n');
 }
 
 document.getElementById('cfg-submit').onclick = () => {
@@ -1745,117 +1710,6 @@ function copyOrder() {
   setTimeout(() => { document.getElementById('copy-btn').textContent = 'Скопировать заказ'; }, 2000);
 }
 
-// ====== MIX BUILDER ======
-function mixShares() {
-  const w = state.mixWeights;
-  const names = Object.keys(w);
-  const sum = names.reduce((a, n) => a + w[n], 0) || 1;
-  return names.map(n => ({name: n, weight: w[n], share: w[n] / sum}));
-}
-function mixTotal() {
-  const shares = mixShares();
-  if (shares.length < 2) return 0;
-  const perMl = shares.reduce((a, sh) => {
-    const f = FRAGRANCES.find(x => x.name === sh.name);
-    return a + sh.share * (f ? f.price : 0);
-  }, 0);
-  const oil = perMl * state.mixVolume;
-  const bottles = compatibleBottles(state.mixVolume);
-  const bottleP = bottles.length ? bottles[0].price : 0;
-  return oil + bottleP + 1000;
-}
-
-function renderMix() {
-  const selected = Object.keys(state.mixWeights);
-  const count = selected.length;
-
-  // Options
-  document.getElementById('mix-options').innerHTML = FRAGRANCES.map(f => {
-    const active = !!state.mixWeights[f.name];
-    const disabled = !active && count >= 4;
-    return `<button
-      onclick="toggleMix('${f.name.replace(/'/g, "\\'")}')"
-      style="font-family:'Inter',sans-serif; font-size:12px; cursor:${disabled ? 'not-allowed' : 'pointer'}; padding:7px 12px; border-radius:999px; border:1px solid ${active ? 'var(--gold)' : 'rgba(194,160,90,.35)'}; background:${active ? 'rgba(194,160,90,.25)' : 'transparent'}; color:${active ? '#E4C988' : 'rgba(244,236,221,.8)'}; opacity:${disabled ? '.4' : '1'}; transition:all .15s;"
-    >${f.name}</button>`;
-  }).join('');
-
-  // Empty hint
-  document.getElementById('mix-empty-hint').style.display = count < 2 ? 'block' : 'none';
-
-  // Sliders
-  document.getElementById('mix-sliders').innerHTML = mixShares().map(s =>
-    `<div>
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-        <span style="font-family:'Lora',serif; font-size:15px; color:var(--bg-ivory);">${s.name}</span>
-        <span style="font-family:'Inter',sans-serif; font-weight:600; font-size:14px; color:var(--gold);">${Math.round(s.share * 100)}%</span>
-      </div>
-      <input class="mix-range" type="range" min="1" max="10" value="${state.mixWeights[s.name]}"
-        oninput="setMixWeight('${s.name.replace(/'/g, "\\'")}', this.value)">
-    </div>`
-  ).join('');
-
-  // Volumes (from 10ml only for mix)
-  const MIX_VOLUMES = VOLUMES.filter(v => v >= 10);
-  if (!MIX_VOLUMES.includes(state.mixVolume)) { state.mixVolume = 30; }
-  document.getElementById('mix-volumes').innerHTML = MIX_VOLUMES.map(v => {
-    const active = state.mixVolume === v;
-    return `<button onclick="setMixVolume(${v})" style="font-family:'Inter',sans-serif; font-size:13px; font-weight:500; cursor:pointer; padding:8px 14px; border-radius:999px; border:1px solid ${active ? 'var(--gold)' : 'rgba(194,160,90,.35)'}; background:${active ? 'rgba(194,160,90,.2)' : 'transparent'}; color:${active ? '#E4C988' : 'rgba(244,236,221,.8)'}; transition:all .15s;">${v} мл</button>`;
-  }).join('');
-
-  // Blend description
-  const vibeWrap = document.getElementById('mix-vibe-wrap');
-  if (count >= 2) {
-    const blendText = genBlendDesc(selected);
-    if (vibeWrap) {
-      vibeWrap.style.display = 'block';
-      vibeWrap.innerHTML = `<div class="mix-vibe-box"><div class="mix-vibe-label">Что получится</div><div class="mix-vibe-text">${blendText}</div></div>`;
-    }
-  } else if (vibeWrap) {
-    vibeWrap.style.display = 'none';
-    vibeWrap.innerHTML = '';
-  }
-
-  // Total
-  const total = mixTotal();
-  document.getElementById('mix-total-label').textContent = count >= 2 ? fmt(total) : '—';
-
-  // Submit
-  const btn = document.getElementById('mix-submit');
-  btn.disabled = count < 2;
-  btn.style.opacity = count < 2 ? '.5' : '1';
-  btn.style.cursor = count < 2 ? 'not-allowed' : 'pointer';
-}
-
-function toggleMix(name) {
-  if (state.mixWeights[name]) {
-    delete state.mixWeights[name];
-  } else {
-    if (Object.keys(state.mixWeights).length >= 4) return;
-    state.mixWeights[name] = 5;
-  }
-  renderMix();
-}
-function setMixWeight(name, val) { state.mixWeights[name] = Number(val); renderMix(); }
-function setMixVolume(v) { state.mixVolume = v; renderMix(); }
-
-document.getElementById('mix-submit').onclick = () => {
-  const shares = mixShares();
-  if (shares.length < 2) return;
-  const text = [
-    'Заказ · Свой микс · Aroma Garden',
-    ...shares.map(s => `· ${s.name} — ${Math.round(s.share * 100)}%`),
-    `Объём: ${state.mixVolume} мл`,
-    'Услуга VIP-микс: +1000 ₽',
-    `Итого: ${fmt(mixTotal())}`,
-  ].join('\n');
-  state.summaryText = text;
-  try {
-    const url = `https://wa.me/${PHONE}?text=${encodeURIComponent(text)}`;
-    const w = window.open(url, '_blank');
-    if (!w) showSummary(text);
-  } catch(e) { showSummary(text); }
-};
-
 // ====== KEYBOARD ESCAPE ======
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') {
@@ -1869,16 +1723,16 @@ document.addEventListener('keydown', e => {
 // ====== FAQ AI CHAT ======
 const FAQS = [
   { q: "Чем масло отличается от спрея?", a: "Масло — чистый ароматический концентрат без спирта. Держится на коже 8–12 часов, звучит глубже и камернее. Спрей — парфюм на спиртовой основе: лёгкий шлейф, быстро распространяется. Оба формата доступны в любом объёме — выбор за вами." },
-  { q: "Как долго держится аромат?", a: "Масло держится 8–12 часов, особенно хорошо на увлажнённой коже. Спрей 30% — 4–8 часов. При концентрации 40–50% стойкость заметно выше. Наносите на точки пульса: запястья, шея, за ушами — так аромат раскроется лучше всего." },
+  { q: "Как долго держится аромат?", a: "Масло держится 8–12 часов, особенно хорошо на увлажнённой коже. Спрей при концентрации 40% — 5–8 часов, при 50% — заметно дольше и насыщеннее. Наносите на точки пульса: запястья, шея, за ушами — так аромат раскроется лучше всего." },
   { q: "Можно ли попробовать аромат?", a: "Да! К каждому заказу от 1500 ₽ прилагается 3 мл любого аромата на ваш выбор. Также можно приехать к нам в СПб на Лиговский пр., 153 — Юнус поможет подобрать аромат лично и дать понюхать всё что понравилось." },
   { q: "Как сделать заказ?", a: "Откройте каталог, нажмите «Собрать» на понравившемся аромате. Настройте формат, объём и флакон. Нажмите «Оформить заказ» — откроется WhatsApp с готовой сводкой. Юнус подтвердит заказ и договорится об удобном способе получения." },
-  { q: "Доставляете по всей России?", a: "Да, Почтой России и СДЭК по всей стране от 350 ₽. При заказе от 3000 ₽ — доставка бесплатная. По Санкт-Петербургу — курьер от 500 ₽. Самовывоз на точке — всегда бесплатно." },
-  { q: "Что такое концентрация 40–50%?", a: "Стандартный спрей — 30% масла и 70% спирта. При повышении до 40–50% аромат становится гуще, насыщеннее и держится значительно дольше. Особенно рекомендуем в холодное время года — осенью и зимой." },
+  { q: "Доставляете по всей России?", a: "Да, Почтой России и СДЭК по всей стране от 350 ₽. При заказе от 3000 ₽ — доставка бесплатная. По Санкт-Петербургу самовывоз и курьер — всегда бесплатно." },
+  { q: "Что такое концентрация 40–50%?", a: "Это доля ароматического масла во флаконе спрея. Наши спреи идут в концентрации 40% и 50% — это выше обычного магазинного парфюма, поэтому аромат звучит гуще, насыщеннее и держится значительно дольше. 50% особенно хороши в холодное время года." },
   { q: "Как правильно наносить масло?", a: "Наносите масло на точки пульса: запястья, внутренняя сторона локтя, шея, за ушами. Лучше всего — на чуть влажную или увлажнённую кожу: крем создаёт «подложку» и аромат держится дольше. Не растирайте — просто прижмите запястья друг к другу." },
   { q: "Есть ли подарочная упаковка?", a: "Да! При заказе можно добавить подарочную упаковку — коробка с лентой и открыткой. Уточните у Юнуса в WhatsApp при оформлении заказа. Особенно популярно для подарков на дни рождения и праздники." },
-  { q: "Какой объём выбрать для первого раза?", a: "Рекомендуем начать с 10–15 мл — этого хватит на 2–4 недели ежедневного использования. Если аромат понравится, удобно дозаказать. Для знакомства с несколькими ароматами идеально подойдёт Дегустационный сет: 5×3 мл — платите как за 4." },
+  { q: "Какой объём выбрать для первого раза?", a: "Если хотите попробовать масло — начните с 5–6 мл, этого хватит на пару недель. Готовы носить постоянно — берите спрей: 30 мл по акции всего 2990 ₽. А по акции 1+1+1 при заказе двух спреев третий (от 10 мл, любой аромат) — в подарок." },
   { q: "Можно ли вернуть или обменять?", a: "Парфюмерия относится к категории товаров, которые не подлежат возврату по закону. Но если что-то пошло не так — Юнус всегда идёт навстречу. Напишите в WhatsApp, обсудим ситуацию лично. Довольный клиент важнее формальностей." },
-  { q: "Сколько времени занимает сборка?", a: "Стандартный заказ собирается в течение 1–2 часов. При самовывозе — уточните удобное время у Юнуса. Срочные заказы принимаются: если нужно «к вечеру» — напишите, постараемся успеть. VIP-миксы могут занять до суток." },
+  { q: "Сколько времени занимает сборка?", a: "Стандартный заказ собирается в течение 1–2 часов. При самовывозе — уточните удобное время у Юнуса. Срочные заказы принимаются: если нужно «к вечеру» — напишите, постараемся успеть. Авторские миксы под вас могут занять до суток." },
   { q: "Какие ароматы самые популярные?", a: "В топе всегда: Baccarat Rouge 540 — культовый сладко-древесный, Oud Wood — глубокий восточный, Dior Sauvage — свежий мужской бестселлер, Coco Mademoiselle — цветочно-пудровый женский. Полный список хитов — в каталоге, отмечены значком ХИТ." },
 ];
 
@@ -2350,7 +2204,6 @@ function faqAddMsg(type, text) {
 // ====== INIT ======
 renderFilters();
 renderCatalog();
-renderMix();
 faqInit();
 </script>
 </body>
