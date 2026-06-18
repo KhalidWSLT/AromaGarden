@@ -143,6 +143,10 @@
     .frag-thumb-glow { position:absolute; bottom:-20px; left:50%; transform:translateX(-50%); width:110px; height:110px; border-radius:50%; filter:blur(32px); opacity:.4; }
     .hit-badge { position:absolute; top:12px; left:12px; font-family:'Inter',sans-serif; font-weight:700; font-size:10px; letter-spacing:1.5px; color:var(--espresso); background:var(--grad-gold); padding:4px 10px; border-radius:999px; z-index:3; box-shadow:0 3px 10px rgba(156,123,58,.35); }
     .sb-wrap { position:absolute; inset:0; display:flex; align-items:flex-end; justify-content:center; padding-bottom:14px; z-index:2; }
+    .frag-photo { position:absolute; left:50%; top:48%; transform:translate(-50%,-50%); max-height:142px; max-width:82%; width:auto; object-fit:contain; z-index:2; filter:drop-shadow(0 15px 20px rgba(40,25,10,.36)); -webkit-box-reflect:below 1px linear-gradient(to bottom, transparent 66%, rgba(0,0,0,.16)); transition:transform .45s cubic-bezier(.2,.7,.2,1); }
+    .frag-card:hover .frag-photo { transform:translate(-50%,-54%) scale(1.05); }
+    .frag-thumb.has-photo .frag-thumb-glow { opacity:.62; }
+    .fi-hero-photo { display:block; height:clamp(104px,17vw,142px); max-width:132px; width:auto; object-fit:contain; filter:drop-shadow(0 12px 24px rgba(0,0,0,.45)); }
     .sb { display:flex; flex-direction:column; align-items:center; filter:drop-shadow(0 8px 20px rgba(0,0,0,.2)); transition:transform .3s ease; }
     .frag-card:hover .sb { transform:translateY(-6px) scale(1.04); }
     .sb-cap { width:20px; height:13px; border-radius:4px 4px 2px 2px; background:linear-gradient(180deg,rgba(255,255,255,.65),rgba(255,255,255,.22)); border:1px solid rgba(255,255,255,.38); }
@@ -181,6 +185,13 @@
     .fi-m-hint { font-family:'Lora',serif; font-size:13px; color:var(--ink-muted); font-style:italic; line-height:1.65; }
     .fi-m-div { height:1px; background:linear-gradient(90deg,transparent,var(--gold) 30%,var(--gold-light) 50%,var(--gold) 70%,transparent); margin:18px 0 20px; }
     .fi-m-story { font-family:'Lora',serif; font-size:15.5px; line-height:1.85; color:var(--ink); }
+    /* Основные аккорды (как на Fragrantica) */
+    .fi-accords { margin:18px 0 2px; }
+    .acc-title { font-family:'Inter',sans-serif; font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--ink-muted); margin-bottom:12px; }
+    .acc-list { display:flex; flex-direction:column; gap:7px; }
+    .acc-row { position:relative; height:30px; border-radius:8px; background:var(--bg-ivory); overflow:hidden; }
+    .acc-fill { position:absolute; left:0; top:0; bottom:0; border-radius:8px; }
+    .acc-name { position:absolute; left:0; top:0; height:30px; line-height:30px; padding-left:13px; font-family:'Inter',sans-serif; font-size:12.5px; font-weight:600; color:#2a2017; white-space:nowrap; }
     /* Липкий блок покупки — всегда виден, не нужно искать */
     .fi-buy { position:sticky; bottom:0; background:var(--bg-ivory); padding:16px 36px 20px; border-top:1px solid var(--line); border-radius:0 0 28px 28px; box-shadow:0 -10px 26px rgba(44,27,16,.07); }
     .fi-buy::before { content:''; position:absolute; left:0; right:0; top:-26px; height:26px; background:linear-gradient(180deg,transparent,var(--bg-ivory)); pointer-events:none; }
@@ -1011,6 +1022,7 @@
       <!-- Тело: ноты + история -->
       <div class="fi-bd">
         <div class="fi-m-hint" id="fi-m-hint"></div>
+        <div class="fi-accords" id="fi-m-accords"></div>
         <div class="fi-m-div"></div>
         <div class="fi-m-story" id="fi-m-story"></div>
       </div>
@@ -1733,6 +1745,15 @@ function filteredFragrances() {
   });
 }
 
+// ====== FRAGRANCE PHOTOS ======
+const _CYR = {а:'a',б:'b',в:'v',г:'g',д:'d',е:'e',ё:'e',ж:'zh',з:'z',и:'i',й:'y',к:'k',л:'l',м:'m',н:'n',о:'o',п:'p',р:'r',с:'s',т:'t',у:'u',ф:'f',х:'h',ц:'ts',ч:'ch',ш:'sh',щ:'sch',ъ:'',ы:'y',ь:'',э:'e',ю:'yu',я:'ya'};
+function fragSlug(name){
+  return name.toLowerCase().split('').map(c=>_CYR[c]!==undefined?_CYR[c]:c).join('')
+    .replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
+}
+const FRAG_PHOTOS = {"afnan-tribute-blue":"avif","alexandre-j":"avif","allure-homme-sport":"avif","amber-wood-ajmal":"avif","amouage-epic":"avif","amouage-honour":"avif","amouage-interlude-man":"avif","amouage-purpose":"avif","amouage-woman":"avif","antonio-banderas-blue":"avif","arabians-montale":"avif","ariana-grande-thank-u-next":"avif","armand-basi-in-red":"avif","armani-acqua-di-gioia":"avif","armani-my-way":"avif","as-al-quraish":"avif","attar-collection-khalat-light-blue":"avif","attar-crystal-love":"avif","attar-hayati":"avif","attar-khaltat-night":"avif","azzaro-chrome":"avif","baccarat-540":"avif","black-afgano":"avif","black-opium":"avif","bleu-de-chanel":"avif","blood-shahid":"avif","boadicea-aurica":"avif","boadicea-green-sapphire":"avif","boadicea-victorious-complex":"avif","bois-imperial":"avif","bvlgari-aqva":"avif","bvlgari-man-in-black":"avif","byredo-bal-d-afrique":"avif","byredo-blanche":"avif","byredo-mojave-ghost":"avif","c-h-212-men":"avif","cacharel-amor-amor":"avif","capitan-black":"avif","carolina-herrera-good-girl":"avif","chanel-5":"avif","chanel-chance":"avif","chanel-eau-fra-che":"avif","chanel-tendre":"avif","christian-dior-homme-cologne":"avif","clinique-happy":"avif","clive-christian-1872":"avif","clive-christian-blonde-amber":"avif","clive-christian-hedonistic":"avif","clive-christian-matsukita":"avif","cocain":"avif","coco-mademoiselle":"avif","creed-absolu-aventus":"avif","creed-aventus":"avif","creed-silver-mountain-water":"avif","d-g-imperatrice-3":"avif","d-g-light-blue":"avif","dark-lord-by-kilian":"avif","dear-polly":"avif","dior-fahrenheit":"avif","dior-homme":"avif","dior-homme-sport":"avif","dior-j-adore":"avif","dior-sauvage":"avif","dior-sauvage-elixir":"avif","dkny-be-delicious":"avif","dolce-gabbana-pineapple":"avif","dolce-gabbana-q":"avif","egoiste-chanel":"avif","escada-cherry":"avif","ex-nihilo-blue-talisman":"avif","ex-nihilo-fleur-narcotique":"avif","ex-nihilo-hedonist":"avif","ex-nihilo-santal-calling":"avif","frederic-malle-portrait-of-a-lady":"avif","g-armani-acqua-di-gi":"avif","gaba-hormone-paris":"avif","ganymede":"avif","geroin":"avif","giorgio-armani-code":"avif","givenchy-ange-ou-d-mon":"avif","givenchy-l-interdit":"avif","givenchy-secret":"avif","gucci-bamboo":"avif","gucci-flora":"avif","guerlain-ideal-intense":"avif","guerlain-mandarine-basilic":"avif","h-rrem-sultan":"avif","hanuma":"avif","haute-fragrance-divine-blossom":"avif","hayati-al-haramain":"avif","horion-paris-testrone":"jpg","hugo-boss":"jpg","hugo-boss-bottled":"avif","initio-aphrodisiac":"avif","initio-everest":"avif","initio-musk":"avif","initio-oud-for-greatness":"avif","initio-oud-for-happiness":"avif","initio-oud-forest":"jpg","initio-rehab":"avif","initio-side-effect":"avif","intrigue-devil-s":"avif","jasmine":"avif","jo-malone-wood-sage":"avif","kajal-dahab":"avif","kenzo-electric":"avif","kilian-angel-s-share":"avif","kilian-bad-boys":"avif","kilian-black-phantom":"avif","kilian-good-girl":"avif","kilian-intoxicated":"avif","kilian-playing-with-the-devil":"avif","kilian-princess":"avif","l-v-afternoon":"avif","l-v-l-immensit":"avif","l-v-symphony":"avif","lacoste-pour-femme":"avif","lacoste-sport":"avif","lacoste-white":"avif","lanc-me-id-le":"avif","lanvin-clat":"avif","lanvin-modern-princess":"avif","lattafa-yara":"avif","louis-vuitton-imagination":"avif","louis-vuitton-ombre-nomade":"avif","louis-vuitton-pacific-chill":"avif","mancera-cedrat-boise":"avif","mancera-hindu-kush":"avif","mango-skin":"avif","marc-antoine-barrois-b-encelade":"avif","marc-antoine-barrois-tilia":"avif","mati-re-premi-re-parisian-musk":"avif","megamare-orto-parisi":"avif","memo-african-leather":"avif","memo-italian-leather":"avif","memo-sicilian-leather":"avif","miss-dior":"avif","molecule-01":"avif","molecule-01-patchouli":"avif","molecule-02":"avif","molecule-02-black-edition":"avif","molecule-04":"avif","molecule-05":"avif","molecule-09":"avif","molecule-black-tea":"avif","mont-de-capri-soleil":"avif","montabaco":"avif","montale-bubble-forever":"avif","montale-dark-purple":"avif","montale-intense-caf":"avif","montale-roses":"avif","montale-starry-nights":"avif","mr-burberry-element":"avif","musk-kashmir":"avif","narciso-rodriguez-poudr-e":"avif","narcotic":"avif","nebesnyy-feromon":"avif","nejma-7":"avif","nina-ricci-bella":"avif","nishane-hacivat":"avif","orto-parisi-brutus":"avif","orto-parisi-terroni":"avif","oud-forest-montale":"avif","oud-maracuja":"avif","p-r-invictus-aqua":"avif","paco-rabanne-black-xs":"avif","paco-rabanne-one-million":"avif","painter-genyum":"avif","parfums-de-marly-althair":"avif","parfums-de-marly-delina":"avif","parfums-de-marly-layton":"avif","puredistance-white":"avif","richard-white-chocolat":"avif","roja-dove-elixir":"avif","roja-elysium":"avif","safari-extreme":"avif","sergio-tacchini-fantasy-forever":"avif","sheikh-33":"avif","sheikh-77":"avif","sheikh-shuyukh":"avif","sheikh-white":"avif","soblazn":"avif","sospiro-accento":"avif","sospiro-erba-pura":"avif","supreme-rouge-24k":"avif","terre-d-herm-s":"avif","thomas-kosmala-4":"avif","tiger-bvlgari":"avif","tiziana-terenzi-andromeda":"avif","tiziana-terenzi-cassiopea":"avif","tiziana-terenzi-gumin":"avif","tiziana-terenzi-kirke":"avif","tom-ford-bitter-peach":"avif","tom-ford-black-orchid":"avif","tom-ford-cherry":"avif","tom-ford-fucking-fabulous":"avif","tom-ford-metallique":"avif","tom-ford-noir-extreme":"avif","tom-ford-ombre-leather":"avif","tom-ford-oud-wood":"avif","tom-ford-rose-prive":"avif","tom-ford-tobacco-oud":"avif","tom-ford-tobacco-vanille":"avif","tom-ford-tuscan-leather":"avif","trussardi-donna":"avif","versace-bright-crystal":"avif","versace-crystal-noir":"avif","versace-eros":"avif","versace-versense":"avif","vertus-narcos-is":"avif","vertus-sole-patchol":"avif","victoria-s-secret-aqua-kiss":"avif","victoria-s-secret-bombshell":"avif","victoria-s-secret-love-me-more":"avif","victoria-s-secret-mango":"avif","victoria-s-secret-scandalous":"avif","victoria-s-secret-so-sexy":"avif","xerjoff-naxos":"avif","zam-zam":"avif","zam-zam-gold":"avif","zara-tuberose":"avif","zielinski-fiction":"avif","zielinski-grapefruit":"avif","zielinski-iris-lily-vanilla":"avif","zielinski-lemon":"avif","zielinski-orange":"avif","zielinski-pepper":"avif","zielinski-rosemary":"avif","zielinski-rosen-vanilla":"avif"};
+function fragPhoto(name){ const s=fragSlug(name); return FRAG_PHOTOS[s] ? 'images/frags/'+s+'.'+FRAG_PHOTOS[s] : null; }
+
 function renderCatalog() {
   const all = filteredFragrances();
   const visible = all.slice(0, state.shown);
@@ -1748,13 +1769,10 @@ function renderCatalog() {
   const GLOW = {m:'rgba(74,111,165,.55)', w:'rgba(184,92,110,.55)', u:'rgba(194,160,90,.55)'};
   grid.innerHTML = visible.map(f => {
     const idx = FRAGRANCES.indexOf(f);
-    return `<div class="frag-card" onclick="openFragInfo(${idx})" tabindex="0"
-        onkeydown="if(event.key==='Enter')openFragInfo(${idx})" role="button">
-      <div class="frag-thumb" style="background:${SWATCH[f.cat]};">
-        <div class="frag-thumb-pat"></div>
-        <div class="frag-thumb-glow" style="background:${GLOW[f.cat]};"></div>
-        ${f.hit ? '<span class="hit-badge">ХИТ</span>' : ''}
-        <div class="sb-wrap">
+    const photo = fragPhoto(f.name);
+    const visual = photo
+      ? `<img class="frag-photo" src="${photo}" alt="${f.name}" loading="lazy">`
+      : `<div class="sb-wrap">
           <div class="sb">
             <div class="sb-cap"></div>
             <div class="sb-neck"></div>
@@ -1766,7 +1784,14 @@ function renderCatalog() {
             </div>
             <div class="sb-base"></div>
           </div>
-        </div>
+        </div>`;
+    return `<div class="frag-card" onclick="openFragInfo(${idx})" tabindex="0"
+        onkeydown="if(event.key==='Enter')openFragInfo(${idx})" role="button">
+      <div class="frag-thumb${photo?' has-photo':''}" style="background:${SWATCH[f.cat]};">
+        <div class="frag-thumb-pat"></div>
+        <div class="frag-thumb-glow" style="background:${GLOW[f.cat]};"></div>
+        ${f.hit ? '<span class="hit-badge">ХИТ</span>' : ''}
+        ${visual}
       </div>
       <div class="frag-info">
         <div class="frag-eyebrow ${f.cat}">${CAT_LABEL[f.cat]}</div>
@@ -1791,6 +1816,72 @@ function renderCatalog() {
 
 function setCat(c) { state.cat = c; state.shown = 12; renderFilters(); renderCatalog(); }
 
+// ====== ACCORDS (как на Fragrantica) ======
+const ACCORD_C = {
+  citrus:['Цитрусовые','#E9E14A'], aromatic:['Ароматные','#4FB7A6'], woody:['Древесные','#9C7B4E'],
+  freshspicy:['Свежие пряные','#A6CB6A'], green:['Зелёные','#5BA86C'], amber:['Янтарные','#D7A56B'],
+  fruity:['Фруктовые','#F1937D'], earthy:['Землистые','#9C9C8C'], animalic:['Животные','#BBA088'],
+  sweet:['Сладкие','#E68FA8'], vanilla:['Ванильные','#E8D2A6'], floral:['Цветочные','#F0A6C4'],
+  whitefloral:['Белые цветы','#F2C7D6'], rose:['Розовые','#E58AA0'], musky:['Мускусные','#D6D0C6'],
+  powdery:['Пудровые','#E3C9CE'], leather:['Кожаные','#8A6038'], tobacco:['Табачные','#A6794A'],
+  spicy:['Пряные','#D77A4A'], warmspicy:['Тёплые пряные','#C8693C'], marine:['Морские','#6FB6D8'],
+  oud:['Удовые','#6B4A33'], smoky:['Дымные','#8A8A82'], coffee:['Кофейные','#6E4B33'],
+  chocolate:['Шоколадные','#6B4327'], creamy:['Сливочные','#EAD9B8'], resinous:['Смолистые','#8A6A3A'],
+  herbal:['Травяные','#88B06A'], honey:['Медовые','#D9A94A'], almond:['Миндальные','#D8C29A'],
+  iris:['Ирисовые','#C9C2D0'], lavender:['Лавандовые','#9A95C7'], mint:['Мятные','#7FC8A0'],
+  tropical:['Тропические','#F2B45A'], boozy:['Ликёрные','#C68A4A'], tea:['Чайные','#A6C58A'],
+  aldehydic:['Альдегидные','#CFD8DE']
+};
+const NOTE_MAP = [
+  ['бергамот','citrus'],['цитрус','citrus'],['лимон','citrus'],['грейпфрут','citrus'],['апельсин','citrus'],['мандарин','citrus'],['нероли','citrus'],
+  ['розмарин','herbal'],['шалфей','herbal'],['базилик','herbal'],['трав','herbal'],
+  ['лаванд','lavender'],['мят','mint'],['ментол','mint'],
+  ['морск','marine'],['бриз','marine'],['океан','marine'],['соль','marine'],['водя','marine'],['водор','marine'],['посидони','marine'],['акватик','marine'],['лотос','marine'],
+  ['имбир','freshspicy'],
+  ['кардамон','spicy'],['перец','spicy'],['специ','spicy'],['пряност','spicy'],['мускат','spicy'],['шафран','spicy'],
+  ['кориц','warmspicy'],
+  ['уд','oud'],['сандал','woody'],['кедр','woody'],['ротанг','woody'],['древес','woody'],['дерев','woody'],
+  ['ветивер','earthy'],['пачули','earthy'],['трюфел','earthy'],
+  ['ладан','smoky'],['дым','smoky'],['смол','resinous'],
+  ['кож','leather'],['замш','leather'],['табак','tobacco'],
+  ['кофе','coffee'],['шоколад','chocolate'],['какао','chocolate'],
+  ['ваниль','vanilla'],['тонка','vanilla'],
+  ['карамел','sweet'],['сахар','sweet'],['сладк','sweet'],['вата','sweet'],['пралине','sweet'],['макарон','sweet'],
+  ['мёд','honey'],['медов','honey'],['миндал','almond'],
+  ['ром','boozy'],['коньяк','boozy'],['виски','boozy'],['ликёр','boozy'],['ликер','boozy'],
+  ['роза','rose'],['розов','rose'],
+  ['жасмин','whitefloral'],['тубероз','whitefloral'],['иланг','whitefloral'],['лили','whitefloral'],['ландыш','whitefloral'],['гардени','whitefloral'],
+  ['пион','floral'],['фиалк','floral'],['орхиде','floral'],['сирень','floral'],['герань','floral'],['цвет','floral'],
+  ['ирис','iris'],['пудр','powdery'],
+  ['фрукт','fruity'],['персик','fruity'],['вишн','fruity'],['малин','fruity'],['личи','fruity'],['ананас','fruity'],['манго','fruity'],['яблок','fruity'],['груш','fruity'],['арбуз','fruity'],['киви','fruity'],['гранат','fruity'],['слив','fruity'],['ягод','fruity'],['маракуй','fruity'],['смородин','fruity'],['ревень','fruity'],
+  ['тропик','tropical'],['мускус','musky'],
+  ['амбр','amber'],['янтар','amber'],['кашмеран','amber'],['кашмир','amber'],
+  ['чай','tea'],['кокос','creamy'],['сливочн','creamy'],['крем','creamy'],
+  ['феромон','animalic'],['животн','animalic'],
+  ['зелен','green'],['зелён','green'],['лист','green'],['альдегид','aldehydic']
+];
+const CAT_DEFAULT_ACC = { m:['woody','aromatic','freshspicy'], w:['floral','sweet','musky'], u:['woody','amber','musky'] };
+function deriveAccords(desc, cat) {
+  const t = (desc || '').toLowerCase();
+  const tally = {}, firstIdx = {};
+  NOTE_MAP.forEach(([kw, acc]) => {
+    const i = t.indexOf(kw);
+    if (i !== -1) { tally[acc] = (tally[acc] || 0) + 1; if (firstIdx[acc] === undefined || i < firstIdx[acc]) firstIdx[acc] = i; }
+  });
+  let accs = Object.keys(tally).sort((a, b) => tally[b] - tally[a] || firstIdx[a] - firstIdx[b]);
+  (CAT_DEFAULT_ACC[cat] || []).forEach(a => { if (!accs.includes(a)) accs.push(a); });
+  accs = accs.slice(0, 6);
+  return accs.map((a, i) => ({ label: (ACCORD_C[a] || ['', ''])[0], color: (ACCORD_C[a] || ['', '#ccc'])[1], w: Math.max(50, 100 - i * 9) }));
+}
+function renderAccords(f) {
+  const el = document.getElementById('fi-m-accords');
+  if (!el) return;
+  const list = deriveAccords(f.desc, f.cat);
+  el.innerHTML = '<div class="acc-title">Основные аккорды</div><div class="acc-list">' +
+    list.map(a => `<div class="acc-row"><span class="acc-fill" style="width:${a.w}%;background:${a.color};"></span><span class="acc-name">${a.label}</span></div>`).join('') +
+    '</div>';
+}
+
 // ====== FRAGRANCE INFO MODAL ======
 let fiIdx = null;
 function openFragInfo(idx) {
@@ -1798,7 +1889,10 @@ function openFragInfo(idx) {
   const f = FRAGRANCES[idx];
   const catNames = {m:'Мужской · Масло и спрей', w:'Женский · Масло и спрей', u:'Унисекс · Масло и спрей'};
   document.getElementById('fi-hero').style.background = SWATCH[f.cat];
-  document.getElementById('fi-hero-bot').innerHTML = `
+  const heroPhoto = fragPhoto(f.name);
+  document.getElementById('fi-hero-bot').innerHTML = heroPhoto
+    ? `<img class="fi-hero-photo" src="${heroPhoto}" alt="${f.name}">`
+    : `
     <div class="sb" style="filter:drop-shadow(0 10px 28px rgba(0,0,0,.32));">
       <div class="sb-cap" style="width:24px;height:16px;"></div>
       <div class="sb-neck" style="width:14px;height:10px;"></div>
@@ -1813,6 +1907,7 @@ function openFragInfo(idx) {
   document.getElementById('fi-m-cat').textContent = catNames[f.cat];
   document.getElementById('fi-m-name').textContent = f.name;
   document.getElementById('fi-m-hint').textContent = f.desc || '';
+  renderAccords(f);
   document.getElementById('fi-m-story').textContent = STORIES[f.name] || '';
   document.getElementById('fi-m-price-val').textContent = `от ${f.price} ₽`;
   document.getElementById('fi-modal').style.display = 'block';
