@@ -660,25 +660,52 @@
 <!-- ======== ABOUT ======== -->
 <section id="about" style="background:var(--bg-ivory); border-top:1px solid var(--line);">
   <div class="container section-pad">
+    <div style="text-align:center; max-width:700px; margin:0 auto 56px;">
+      <p class="eyebrow" style="margin-bottom:12px;">О бутике</p>
+      <h2 class="h2" style="color:var(--ink); margin-bottom:20px;">Парфюмерный сад · Aroma Garden</h2>
+      <p style="font-family:'Playfair Display',serif; font-style:italic; font-size:clamp(19px,2.6vw,25px); line-height:1.5; color:var(--mocha);">Сад, в котором каждый аромат — это история, а каждый гость уходит со своим запахом.</p>
+    </div>
+
     <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:56px; align-items:center;">
-      <!-- Декоративный блок вместо фото -->
-      <div style="position:relative; aspect-ratio:5/4; border-radius:24px; overflow:hidden; box-shadow:var(--shadow-lg); background:linear-gradient(145deg,#EFE2C8 0%,#E3CFA3 55%,#D4B88A 100%); display:flex; align-items:center; justify-content:center;">
+      <!-- Фото бутика (если файл images/boutique.jpg отсутствует — показывается золотой блок) -->
+      <div style="position:relative; aspect-ratio:4/5; border-radius:24px; overflow:hidden; box-shadow:var(--shadow-lg); background:linear-gradient(145deg,#EFE2C8 0%,#E3CFA3 55%,#D4B88A 100%); display:flex; align-items:center; justify-content:center;">
         <div style="text-align:center; padding:32px;">
           <div style="font-family:'Playfair Display',serif; font-weight:700; font-size:clamp(48px,8vw,80px); line-height:1; background:var(--grad-gold); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; margin-bottom:12px;">AG</div>
           <div style="font-family:'Inter',sans-serif; font-weight:600; font-size:12px; letter-spacing:3px; text-transform:uppercase; color:var(--mocha);">Aroma Garden</div>
           <div style="width:48px; height:2px; background:var(--grad-gold); margin:16px auto;"></div>
           <div style="font-family:'Lora',serif; font-size:15px; color:var(--ink-muted); line-height:1.6;">Санкт-Петербург<br>Лиговский пр., 153</div>
         </div>
+        <img src="images/boutique.jpg" alt="Aroma Garden — премиальная селективная парфюмерия, Санкт-Петербург" loading="lazy" onerror="this.style.display='none'" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;">
+        <div style="position:absolute; inset:0; border-radius:24px; box-shadow:inset 0 0 0 1px rgba(194,160,90,.4); pointer-events:none;"></div>
       </div>
+
       <div class="reveal">
-        <p class="eyebrow" style="margin-bottom:12px;">Ателье ароматов</p>
-        <h3 class="h3" style="color:var(--ink); margin-bottom:24px;">Юнус — ваш парфюмер</h3>
-        <p style="font-family:'Lora',serif; font-size:18px; line-height:1.65; color:var(--ink-muted); margin-bottom:28px;">Юнус — основатель ателье селективной парфюмерии в Санкт-Петербурге. Уже несколько лет он помогает находить аромат, который раскрывается именно на вас. В наличии — сотни мужских, женских и универсальных ароматов, каждый можно взять в любом объёме, как спрей или как чистое масло, а можно собрать собственный микс. Здесь не продают «как все» — здесь собирают аромат под человека.</p>
+        <p class="eyebrow" style="margin-bottom:12px;">Ателье ароматов · Санкт-Петербург</p>
+        <h3 class="h3" style="color:var(--ink); margin-bottom:24px;">Больше, чем магазин ароматов</h3>
+        <p style="font-family:'Lora',serif; font-size:17px; line-height:1.7; color:var(--ink-muted); margin-bottom:18px;"><strong style="color:var(--mocha);">Парфюмерный сад</strong> — это место, куда приходят за чем-то большим, чем флакон. За эмоцией. За тем самым ароматом, который станет вашим. Уже <strong style="color:var(--mocha);">более 5 лет</strong> мы открываем людям мир селективной парфюмерии в самом сердце Петербурга — и за это время <strong style="color:var(--mocha);">более 10 000 гостей</strong> ушли отсюда со своим ароматом и улыбкой.</p>
+        <p style="font-family:'Lora',serif; font-size:17px; line-height:1.7; color:var(--ink-muted); margin-bottom:18px;">За каждым ароматом стоит <strong style="color:var(--mocha);">Юнус</strong> — основатель и парфюмер, по-настоящему влюблённый в своё дело. Он подбирает запах не «по каталогу», а по характеру, настроению и истории гостя. Здесь всё делается с душой: тщательно, честно, с вниманием к каждой детали — от первой капли до упаковки.</p>
+        <p style="font-family:'Lora',serif; font-size:17px; line-height:1.7; color:var(--ink-muted); margin-bottom:28px;">Сотни ароматов — нишевая классика, восточные жемчужины, культовые бестселлеры. Любой можно взять в любом объёме: спреем, чистым парфюмерным маслом или собрать собственный авторский микс, которого больше нет ни у кого. А ещё здесь всегда <strong style="color:var(--mocha);">акции, бонусы и подарки</strong> — новые поводы радовать гостей появляются постоянно.</p>
+
+        <div style="display:flex; flex-wrap:wrap; gap:32px; padding:24px 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); margin-bottom:28px;">
+          <div>
+            <div style="font-family:'Playfair Display',serif; font-weight:700; font-size:36px; line-height:1; background:var(--grad-gold); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">5+</div>
+            <div style="font-family:'Inter',sans-serif; font-size:12px; letter-spacing:1px; text-transform:uppercase; color:var(--ink-muted); margin-top:6px;">лет на рынке</div>
+          </div>
+          <div>
+            <div style="font-family:'Playfair Display',serif; font-weight:700; font-size:36px; line-height:1; background:var(--grad-gold); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">10 000+</div>
+            <div style="font-family:'Inter',sans-serif; font-size:12px; letter-spacing:1px; text-transform:uppercase; color:var(--ink-muted); margin-top:6px;">довольных гостей</div>
+          </div>
+          <div>
+            <div style="font-family:'Playfair Display',serif; font-weight:700; font-size:36px; line-height:1; background:var(--grad-gold); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">230+</div>
+            <div style="font-family:'Inter',sans-serif; font-size:12px; letter-spacing:1px; text-transform:uppercase; color:var(--ink-muted); margin-top:6px;">ароматов в наличии</div>
+          </div>
+        </div>
+
         <div style="display:flex; flex-wrap:wrap; gap:10px;">
-          <span class="pill">Сотни ароматов</span>
-          <span class="pill">От 3 до 100 мл</span>
           <span class="pill">Спрей и масло</span>
+          <span class="pill">От 3 до 100 мл</span>
           <span class="pill">Свой микс</span>
+          <span class="pill">Акции и подарки</span>
         </div>
       </div>
     </div>
@@ -751,55 +778,93 @@
   </div>
 </section>
 
-<!-- ======== REVIEWS (ScrollReel) ======== -->
+<!-- ======== REVIEWS ======== -->
 <section id="reviews" class="section-pad reveal">
+  <style>
+    .rev-masonry{columns:3 320px;column-gap:22px;}
+    @media(max-width:680px){.rev-masonry{columns:1;}}
+    .rev-card{break-inside:avoid;-webkit-column-break-inside:avoid;margin:0 0 22px;background:var(--bg-cream);border:1px solid var(--line);border-radius:20px;padding:26px 24px 22px;position:relative;box-shadow:0 12px 32px -22px rgba(60,40,20,.4);transition:transform .35s ease,box-shadow .35s ease;}
+    .rev-card:hover{transform:translateY(-4px);box-shadow:0 20px 44px -22px rgba(60,40,20,.5);}
+    .rev-card::before{content:"\201C";position:absolute;top:6px;right:20px;font-family:'Playfair Display',serif;font-size:60px;line-height:1;color:var(--gold);opacity:.15;}
+    .rev-stars{color:var(--gold);font-size:13px;letter-spacing:3px;margin-bottom:13px;}
+    .rev-quote{font-family:'Lora',serif;font-size:16px;line-height:1.7;color:var(--ink);margin:0 0 20px;position:relative;z-index:1;}
+    .rev-by{display:flex;align-items:center;gap:12px;}
+    .rev-mono{flex:none;width:42px;height:42px;border-radius:50%;background:var(--grad-gold);display:flex;align-items:center;justify-content:center;font-size:18px;box-shadow:0 5px 14px -5px rgba(194,160,90,.7);}
+    .rev-name{font-family:'Inter',sans-serif;font-weight:600;font-size:14px;color:var(--ink);}
+    .rev-meta{font-family:'Inter',sans-serif;font-size:12px;color:var(--ink-muted);margin-top:2px;}
+  </style>
   <div class="container">
     <div style="display:flex; flex-wrap:wrap; gap:16px; justify-content:space-between; align-items:flex-end; margin-bottom:40px;">
       <div>
         <p class="eyebrow" style="margin-bottom:12px;">Нам доверяют</p>
-        <h2 class="h2" style="color:var(--ink);">Отзывы клиентов</h2>
+        <h2 class="h2" style="color:var(--ink); margin-bottom:10px;">Отзывы клиентов</h2>
+        <p style="font-family:'Lora',serif; font-size:17px; color:var(--ink-muted);">Более <strong style="color:var(--mocha);">10 000 довольных гостей</strong> за 5 лет работы</p>
       </div>
       <a href="https://instagram.com/aroma_garden_spb" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">Instagram →</a>
     </div>
 
-    <!-- ScrollReel testimonials -->
-    <div class="sr-wrap" id="sr-root" tabindex="0" role="region" aria-label="Отзывы">
-      <!-- Reel -->
-      <div class="sr-reel">
-        <div class="sr-mask">
-          <!-- Left col -->
-          <div class="sr-col" id="sr-col-l"></div>
-          <!-- Middle col (portraits) -->
-          <div class="sr-col" id="sr-col-m"></div>
-          <!-- Right col -->
-          <div class="sr-col" id="sr-col-r"></div>
-        </div>
-      </div>
-      <!-- Content -->
-      <div class="sr-content">
-        <div>
-          <!-- Quote mark -->
-          <svg class="sr-icon" width="44" height="44" viewBox="0 0 24 24" fill="var(--gold)" style="opacity:.38; display:block; margin-bottom:14px;">
-            <path d="M4.58 17.32C3.55 16.23 3 15 3 13.01c0-3.5 2.46-6.64 6.03-8.19l.9 1.38c-3.34 1.8-4 4.15-4.25 5.62.54-.28 1.24-.38 1.93-.31 1.8.17 3.23 1.65 3.23 3.49a3.5 3.5 0 0 1-3.5 3.5c-1.07 0-2.1-.49-2.75-1.18zm10 0C13.55 16.23 13 15 13 13.01c0-3.5 2.46-6.64 6.03-8.19l.9 1.38c-3.34 1.8-4 4.15-4.25 5.62.54-.28 1.24-.38 1.93-.31 1.8.17 3.23 1.65 3.23 3.49a3.5 3.5 0 0 1-3.5 3.5c-1.07 0-2.1-.49-2.75-1.18z"/>
-          </svg>
-          <!-- Stage -->
-          <div class="sr-stage-wrap">
-            <div class="sr-sizer" id="sr-sizer" aria-hidden="true">
-              <p style="font-size:17px; line-height:1.65;"></p>
-              <p style="font-size:11px;"></p>
-            </div>
-            <div class="sr-block" id="sr-block"></div>
-          </div>
-        </div>
-        <div class="sr-controls">
-          <button class="sr-btn" id="sr-prev" aria-label="Предыдущий отзыв" disabled>
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 2.5 3.5 6l4 3.5"/></svg>
-          </button>
-          <button class="sr-btn" id="sr-next" aria-label="Следующий отзыв">
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m4.5 2.5 4 3.5-4 3.5"/></svg>
-          </button>
-        </div>
-      </div>
+    <div class="rev-masonry">
+
+      <article class="rev-card">
+        <div class="rev-stars">★★★★★</div>
+        <p class="rev-quote">«Очень хорошие духи, буду покупать постоянно. От души — за консультацию 🤝»</p>
+        <div class="rev-by"><span class="rev-mono">🌿</span><div><div class="rev-name">Постоянный клиент</div><div class="rev-meta">о консультации · 2021</div></div></div>
+      </article>
+
+      <article class="rev-card">
+        <div class="rev-stars">★★★★★</div>
+        <p class="rev-quote">«Расскажу про духи, которые меня покорили — Aventus Creed! Очень стойкие и классные. Это не реклама — советую от души 😍»</p>
+        <div class="rev-by"><span class="rev-mono">🌿</span><div><div class="rev-name">Клиентка бутика</div><div class="rev-meta">Aventus Creed · 2022</div></div></div>
+      </article>
+
+      <article class="rev-card">
+        <div class="rev-stars">★★★★★</div>
+        <p class="rev-quote">«Тоже покупала Молекулу 02 — очень довольна. Шлейф просто 🔥. Качество действительно на высшем уровне»</p>
+        <div class="rev-by"><span class="rev-mono">🌿</span><div><div class="rev-name">Клиентка бутика</div><div class="rev-meta">Molecule 02 · 2022</div></div></div>
+      </article>
+
+      <article class="rev-card">
+        <div class="rev-stars">★★★★★</div>
+        <p class="rev-quote">«В следующий раз приду за своим любимым Fleur Narcotique, и Афгано возьму. Спасибо за ваш магазин — самый лучший ❤️»</p>
+        <div class="rev-by"><span class="rev-mono">🌿</span><div><div class="rev-name">Постоянный гость</div><div class="rev-meta">Fleur Narcotique · 2022</div></div></div>
+      </article>
+
+      <article class="rev-card">
+        <div class="rev-stars">★★★★★</div>
+        <p class="rev-quote">«Благодарю вас за подарок! Ароматы — СУПЕР»</p>
+        <div class="rev-by"><span class="rev-mono">🌿</span><div><div class="rev-name">Гостья бутика</div><div class="rev-meta">подарок к заказу · 2021</div></div></div>
+      </article>
+
+      <article class="rev-card">
+        <div class="rev-stars">★★★★★</div>
+        <p class="rev-quote">«Кстати, Erba Pura, что вы дали нам как бонус — великолепные!»</p>
+        <div class="rev-by"><span class="rev-mono">🌿</span><div><div class="rev-name">Гость бутика</div><div class="rev-meta">Erba Pura в подарок · 2022</div></div></div>
+      </article>
+
+      <article class="rev-card">
+        <div class="rev-stars">★★★★★</div>
+        <p class="rev-quote">«Парфюм очень понравился, сегодня покупал у вас. Качество СУПЕР 👍»</p>
+        <div class="rev-by"><span class="rev-mono">🌿</span><div><div class="rev-name">Наш покупатель</div><div class="rev-meta">2022</div></div></div>
+      </article>
+
+      <article class="rev-card">
+        <div class="rev-stars">★★★★★</div>
+        <p class="rev-quote">«Хорошо держатся, стойкие, очень долго не выветриваются. Спасибо большое!»</p>
+        <div class="rev-by"><span class="rev-mono">🌿</span><div><div class="rev-name">Постоянный клиент</div><div class="rev-meta">★★★★★</div></div></div>
+      </article>
+
+      <article class="rev-card">
+        <div class="rev-stars">★★★★★</div>
+        <p class="rev-quote">«Просто бомба — ещё и 4 мл в подарок получил. Очень нравятся ароматы, процветания вам!»</p>
+        <div class="rev-by"><span class="rev-mono">🌿</span><div><div class="rev-name">Гость бутика</div><div class="rev-meta">бонус к заказу</div></div></div>
+      </article>
+
+      <article class="rev-card">
+        <div class="rev-stars">★★★★★</div>
+        <p class="rev-quote">«Шла мимо и услышала аромат, который давно искала. Возвращаюсь не первый раз — и рассказываю всем!»</p>
+        <div class="rev-by"><span class="rev-mono">🌿</span><div><div class="rev-name">Постоянная гостья</div><div class="rev-meta">наш постоянный клиент</div></div></div>
+      </article>
+
     </div>
   </div>
 </section>
