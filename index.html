@@ -145,8 +145,13 @@
     .sb-wrap { position:absolute; inset:0; display:flex; align-items:flex-end; justify-content:center; padding-bottom:14px; z-index:2; }
     .frag-photo { position:absolute; left:50%; top:48%; transform:translate(-50%,-50%); max-height:142px; max-width:82%; width:auto; object-fit:contain; z-index:2; filter:drop-shadow(0 15px 20px rgba(40,25,10,.36)); -webkit-box-reflect:below 1px linear-gradient(to bottom, transparent 66%, rgba(0,0,0,.16)); transition:transform .45s cubic-bezier(.2,.7,.2,1); }
     .frag-card:hover .frag-photo { transform:translate(-50%,-54%) scale(1.05); }
-    .frag-thumb.has-photo .frag-thumb-glow { opacity:.62; }
-    .fi-hero-photo { display:block; height:clamp(104px,17vw,142px); max-width:132px; width:auto; object-fit:contain; filter:drop-shadow(0 12px 24px rgba(0,0,0,.45)); }
+    .frag-thumb.has-photo .frag-thumb-glow { width:150px; height:150px; bottom:-34px; opacity:.72; filter:blur(40px); }
+    .frag-thumb.has-photo .frag-thumb-pat { background:radial-gradient(58% 24% at 50% 93%, rgba(255,250,238,.78), rgba(255,250,238,0) 72%); }
+    .frag-thumb.has-photo::after { background:
+        radial-gradient(86% 60% at 50% 2%, rgba(255,255,255,.52), rgba(255,255,255,0) 58%),
+        radial-gradient(150% 125% at 50% 42%, rgba(0,0,0,0) 50%, rgba(40,22,8,.32) 100%); }
+    .fi-hero-photo { display:block; height:clamp(104px,17vw,142px); max-width:132px; width:auto; object-fit:contain; filter:drop-shadow(0 12px 24px rgba(0,0,0,.45)); position:relative; z-index:1; }
+    .fi-hero-bot::before { content:''; position:absolute; left:50%; top:44%; transform:translate(-50%,-50%); width:185px; height:185px; border-radius:50%; background:radial-gradient(circle, rgba(255,255,255,.5), rgba(255,255,255,0) 64%); pointer-events:none; z-index:0; }
     .sb { display:flex; flex-direction:column; align-items:center; filter:drop-shadow(0 8px 20px rgba(0,0,0,.2)); transition:transform .3s ease; }
     .frag-card:hover .sb { transform:translateY(-6px) scale(1.04); }
     .sb-cap { width:20px; height:13px; border-radius:4px 4px 2px 2px; background:linear-gradient(180deg,rgba(255,255,255,.65),rgba(255,255,255,.22)); border:1px solid rgba(255,255,255,.38); }
@@ -1754,6 +1759,39 @@ function fragSlug(name){
 const FRAG_PHOTOS = {"afnan-tribute-blue":"avif","alexandre-j":"avif","allure-homme-sport":"avif","amber-wood-ajmal":"avif","amouage-epic":"avif","amouage-honour":"avif","amouage-interlude-man":"avif","amouage-purpose":"avif","amouage-woman":"avif","antonio-banderas-blue":"avif","arabians-montale":"avif","ariana-grande-thank-u-next":"avif","armand-basi-in-red":"avif","armani-acqua-di-gioia":"avif","armani-my-way":"avif","as-al-quraish":"avif","attar-collection-khalat-light-blue":"avif","attar-crystal-love":"avif","attar-hayati":"avif","attar-khaltat-night":"avif","azzaro-chrome":"avif","baccarat-540":"avif","black-afgano":"avif","black-opium":"avif","bleu-de-chanel":"avif","blood-shahid":"avif","boadicea-aurica":"avif","boadicea-green-sapphire":"avif","boadicea-victorious-complex":"avif","bois-imperial":"avif","bvlgari-aqva":"avif","bvlgari-man-in-black":"avif","byredo-bal-d-afrique":"avif","byredo-blanche":"avif","byredo-mojave-ghost":"avif","c-h-212-men":"avif","cacharel-amor-amor":"avif","capitan-black":"avif","carolina-herrera-good-girl":"avif","chanel-5":"avif","chanel-chance":"avif","chanel-eau-fra-che":"avif","chanel-tendre":"avif","christian-dior-homme-cologne":"avif","clinique-happy":"avif","clive-christian-1872":"avif","clive-christian-blonde-amber":"avif","clive-christian-hedonistic":"avif","clive-christian-matsukita":"avif","cocain":"avif","coco-mademoiselle":"avif","creed-absolu-aventus":"avif","creed-aventus":"avif","creed-silver-mountain-water":"avif","d-g-imperatrice-3":"avif","d-g-light-blue":"avif","dark-lord-by-kilian":"avif","dear-polly":"avif","dior-fahrenheit":"avif","dior-homme":"avif","dior-homme-sport":"avif","dior-j-adore":"avif","dior-sauvage":"avif","dior-sauvage-elixir":"avif","dkny-be-delicious":"avif","dolce-gabbana-pineapple":"avif","dolce-gabbana-q":"avif","egoiste-chanel":"avif","escada-cherry":"avif","ex-nihilo-blue-talisman":"avif","ex-nihilo-fleur-narcotique":"avif","ex-nihilo-hedonist":"avif","ex-nihilo-santal-calling":"avif","frederic-malle-portrait-of-a-lady":"avif","g-armani-acqua-di-gi":"avif","gaba-hormone-paris":"avif","ganymede":"avif","geroin":"avif","giorgio-armani-code":"avif","givenchy-ange-ou-d-mon":"avif","givenchy-l-interdit":"avif","givenchy-secret":"avif","gucci-bamboo":"avif","gucci-flora":"avif","guerlain-ideal-intense":"avif","guerlain-mandarine-basilic":"avif","h-rrem-sultan":"avif","hanuma":"avif","haute-fragrance-divine-blossom":"avif","hayati-al-haramain":"avif","horion-paris-testrone":"jpg","hugo-boss":"jpg","hugo-boss-bottled":"avif","initio-aphrodisiac":"avif","initio-everest":"avif","initio-musk":"avif","initio-oud-for-greatness":"avif","initio-oud-for-happiness":"avif","initio-oud-forest":"jpg","initio-rehab":"avif","initio-side-effect":"avif","intrigue-devil-s":"avif","jasmine":"avif","jo-malone-wood-sage":"avif","kajal-dahab":"avif","kenzo-electric":"avif","kilian-angel-s-share":"avif","kilian-bad-boys":"avif","kilian-black-phantom":"avif","kilian-good-girl":"avif","kilian-intoxicated":"avif","kilian-playing-with-the-devil":"avif","kilian-princess":"avif","l-v-afternoon":"avif","l-v-l-immensit":"avif","l-v-symphony":"avif","lacoste-pour-femme":"avif","lacoste-sport":"avif","lacoste-white":"avif","lanc-me-id-le":"avif","lanvin-clat":"avif","lanvin-modern-princess":"avif","lattafa-yara":"avif","louis-vuitton-imagination":"avif","louis-vuitton-ombre-nomade":"avif","louis-vuitton-pacific-chill":"avif","mancera-cedrat-boise":"avif","mancera-hindu-kush":"avif","mango-skin":"avif","marc-antoine-barrois-b-encelade":"avif","marc-antoine-barrois-tilia":"avif","mati-re-premi-re-parisian-musk":"avif","megamare-orto-parisi":"avif","memo-african-leather":"avif","memo-italian-leather":"avif","memo-sicilian-leather":"avif","miss-dior":"avif","molecule-01":"avif","molecule-01-patchouli":"avif","molecule-02":"avif","molecule-02-black-edition":"avif","molecule-04":"avif","molecule-05":"avif","molecule-09":"avif","molecule-black-tea":"avif","mont-de-capri-soleil":"avif","montabaco":"avif","montale-bubble-forever":"avif","montale-dark-purple":"avif","montale-intense-caf":"avif","montale-roses":"avif","montale-starry-nights":"avif","mr-burberry-element":"avif","musk-kashmir":"avif","narciso-rodriguez-poudr-e":"avif","narcotic":"avif","nebesnyy-feromon":"avif","nejma-7":"avif","nina-ricci-bella":"avif","nishane-hacivat":"avif","orto-parisi-brutus":"avif","orto-parisi-terroni":"avif","oud-forest-montale":"avif","oud-maracuja":"avif","p-r-invictus-aqua":"avif","paco-rabanne-black-xs":"avif","paco-rabanne-one-million":"avif","painter-genyum":"avif","parfums-de-marly-althair":"avif","parfums-de-marly-delina":"avif","parfums-de-marly-layton":"avif","puredistance-white":"avif","richard-white-chocolat":"avif","roja-dove-elixir":"avif","roja-elysium":"avif","safari-extreme":"avif","sergio-tacchini-fantasy-forever":"avif","sheikh-33":"avif","sheikh-77":"avif","sheikh-shuyukh":"avif","sheikh-white":"avif","soblazn":"avif","sospiro-accento":"avif","sospiro-erba-pura":"avif","supreme-rouge-24k":"avif","terre-d-herm-s":"avif","thomas-kosmala-4":"avif","tiger-bvlgari":"avif","tiziana-terenzi-andromeda":"avif","tiziana-terenzi-cassiopea":"avif","tiziana-terenzi-gumin":"avif","tiziana-terenzi-kirke":"avif","tom-ford-bitter-peach":"avif","tom-ford-black-orchid":"avif","tom-ford-cherry":"avif","tom-ford-fucking-fabulous":"avif","tom-ford-metallique":"avif","tom-ford-noir-extreme":"avif","tom-ford-ombre-leather":"avif","tom-ford-oud-wood":"avif","tom-ford-rose-prive":"avif","tom-ford-tobacco-oud":"avif","tom-ford-tobacco-vanille":"avif","tom-ford-tuscan-leather":"avif","trussardi-donna":"avif","versace-bright-crystal":"avif","versace-crystal-noir":"avif","versace-eros":"avif","versace-versense":"avif","vertus-narcos-is":"avif","vertus-sole-patchol":"avif","victoria-s-secret-aqua-kiss":"avif","victoria-s-secret-bombshell":"avif","victoria-s-secret-love-me-more":"avif","victoria-s-secret-mango":"avif","victoria-s-secret-scandalous":"avif","victoria-s-secret-so-sexy":"avif","xerjoff-naxos":"avif","zam-zam":"avif","zam-zam-gold":"avif","zara-tuberose":"avif","zielinski-fiction":"avif","zielinski-grapefruit":"avif","zielinski-iris-lily-vanilla":"avif","zielinski-lemon":"avif","zielinski-orange":"avif","zielinski-pepper":"avif","zielinski-rosemary":"avif","zielinski-rosen-vanilla":"avif"};
 function fragPhoto(name){ const s=fragSlug(name); return FRAG_PHOTOS[s] ? 'images/frags/'+s+'.'+FRAG_PHOTOS[s] : null; }
 
+// ====== ФОН ПОД СТИЛЬ АРОМАТА (по главному аккорду) ======
+const ACC_THEME = {
+  citrus:'citrus', aldehydic:'musk', tea:'green', aromatic:'green', herbal:'green',
+  green:'green', mint:'green', lavender:'green', marine:'aqua',
+  freshspicy:'spicy', spicy:'spicy', warmspicy:'spicy',
+  woody:'woody', oud:'woody', earthy:'woody', amber:'amber', resinous:'amber',
+  leather:'leather', tobacco:'leather', smoky:'leather', animalic:'leather',
+  coffee:'sweet', chocolate:'sweet', vanilla:'sweet', sweet:'sweet', honey:'sweet',
+  almond:'sweet', creamy:'sweet', boozy:'sweet',
+  rose:'floral', floral:'floral', whitefloral:'floral', iris:'floral', powdery:'floral',
+  musky:'musk', fruity:'fruity', tropical:'fruity'
+};
+const THEME_BG = {
+  citrus:['linear-gradient(160deg,#EADFA4,#A89033)','rgba(210,192,70,.52)'],
+  green:['linear-gradient(160deg,#CBD9A6,#5E7B3C)','rgba(120,152,78,.5)'],
+  aqua:['linear-gradient(160deg,#BCD7DF,#4E86A1)','rgba(88,160,192,.52)'],
+  floral:['linear-gradient(160deg,#ECC8D3,#AE6E8A)','rgba(200,120,152,.5)'],
+  fruity:['linear-gradient(160deg,#EDC6A2,#C16E58)','rgba(222,124,92,.5)'],
+  sweet:['linear-gradient(160deg,#E8CD9C,#A6713B)','rgba(212,162,90,.5)'],
+  woody:['linear-gradient(160deg,#C9B084,#654526)','rgba(150,110,70,.5)'],
+  amber:['linear-gradient(160deg,#E5C07C,#945D24)','rgba(218,160,76,.55)'],
+  spicy:['linear-gradient(160deg,#E1B187,#9F4F29)','rgba(202,104,54,.5)'],
+  leather:['linear-gradient(160deg,#A98B6C,#41301E)','rgba(122,92,62,.5)'],
+  musk:['linear-gradient(160deg,#DBD3C4,#928574)','rgba(172,156,136,.5)']
+};
+function topAccord(desc, cat){
+  const t = (desc || '').toLowerCase(), tally = {}, firstIdx = {};
+  NOTE_MAP.forEach(([kw, acc]) => { const i = t.indexOf(kw); if (i !== -1) { tally[acc] = (tally[acc] || 0) + 1; if (firstIdx[acc] === undefined || i < firstIdx[acc]) firstIdx[acc] = i; } });
+  const accs = Object.keys(tally).sort((a, b) => tally[b] - tally[a] || firstIdx[a] - firstIdx[b]);
+  return accs.length ? accs[0] : (CAT_DEFAULT_ACC[cat] || ['amber'])[0];
+}
+function fragStyle(f){ return THEME_BG[ACC_THEME[topAccord(f.desc, f.cat)] || 'amber'] || THEME_BG.amber; }
+
 function renderCatalog() {
   const all = filteredFragrances();
   const visible = all.slice(0, state.shown);
@@ -1770,6 +1808,7 @@ function renderCatalog() {
   grid.innerHTML = visible.map(f => {
     const idx = FRAGRANCES.indexOf(f);
     const photo = fragPhoto(f.name);
+    const st = fragStyle(f);
     const visual = photo
       ? `<img class="frag-photo" src="${photo}" alt="${f.name}" loading="lazy">`
       : `<div class="sb-wrap">
@@ -1787,9 +1826,9 @@ function renderCatalog() {
         </div>`;
     return `<div class="frag-card" onclick="openFragInfo(${idx})" tabindex="0"
         onkeydown="if(event.key==='Enter')openFragInfo(${idx})" role="button">
-      <div class="frag-thumb${photo?' has-photo':''}" style="background:${SWATCH[f.cat]};">
+      <div class="frag-thumb${photo?' has-photo':''}" style="background:${st[0]};">
         <div class="frag-thumb-pat"></div>
-        <div class="frag-thumb-glow" style="background:${GLOW[f.cat]};"></div>
+        <div class="frag-thumb-glow" style="background:${st[1]};"></div>
         ${f.hit ? '<span class="hit-badge">ХИТ</span>' : ''}
         ${visual}
       </div>
@@ -1888,7 +1927,7 @@ function openFragInfo(idx) {
   fiIdx = idx;
   const f = FRAGRANCES[idx];
   const catNames = {m:'Мужской · Масло и спрей', w:'Женский · Масло и спрей', u:'Унисекс · Масло и спрей'};
-  document.getElementById('fi-hero').style.background = SWATCH[f.cat];
+  document.getElementById('fi-hero').style.background = fragStyle(f)[0];
   const heroPhoto = fragPhoto(f.name);
   document.getElementById('fi-hero-bot').innerHTML = heroPhoto
     ? `<img class="fi-hero-photo" src="${heroPhoto}" alt="${f.name}">`
