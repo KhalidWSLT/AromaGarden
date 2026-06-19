@@ -379,6 +379,10 @@
     .sc-frag-meta { font-family:'Inter',sans-serif; font-size:10px; color:rgba(244,236,221,.4); }
     .sc-frag-price { font-family:'Inter',sans-serif; font-weight:600; font-size:12px; color:var(--gold); margin-top:6px; }
     .sc-hit { position:absolute; top:7px; left:7px; font-family:'Inter',sans-serif; font-size:9px; font-weight:700; color:var(--espresso); background:var(--grad-gold); padding:3px 8px; border-radius:999px; z-index:2; }
+    .sc-frag { cursor:pointer; }
+    .sc-frag:hover .sc-frag-name { color:var(--gold); }
+    .sc-mini-photo { max-height:76px; max-width:84%; width:auto; object-fit:contain; position:relative; z-index:1; filter:drop-shadow(0 7px 11px rgba(0,0,0,.45)); transition:transform .3s ease; }
+    .sc-frag:hover .sc-mini-photo { transform:translateY(-3px) scale(1.06); }
 
     /* ====== CATALOG REDESIGN ====== */
     .catalog-search-wrap { position:relative; max-width:520px; }
@@ -1996,6 +2000,8 @@ function renderCfg() {
   const isSpray = state.cfgFormat === 'spray';
 
   // Header info
+  const cfgLeft = document.querySelector('#cfg-modal .cfg-left');
+  if (cfgLeft) cfgLeft.style.background = `radial-gradient(78% 36% at 50% 104%, rgba(255,252,245,.95), rgba(255,252,245,0) 68%), radial-gradient(92% 52% at 50% 4%, rgba(255,255,255,.5), rgba(255,255,255,0) 60%), ${fragStyle(f)[0]}`;
   document.getElementById('cfg-cat-label').textContent = CAT_LABEL[f.cat];
   document.getElementById('cfg-name').textContent = f.name;
   document.getElementById('cfg-per-ml').textContent = isSpray
@@ -2362,15 +2368,17 @@ function faqAddMsg(type, text) {
     u: 'linear-gradient(155deg,#D4B86A,#8C6028)',
   };
 
-  // Pick 6 hits, pad with first frags if needed
-  const preview = [...FRAGRANCES.filter(f => f.hit).slice(0, 6),
-                   ...FRAGRANCES.filter(f => !f.hit)].slice(0, 6);
+  // Берём ароматы С фото (хиты вперёд), 12 шт — чтобы сетка заполнялась без пропусков
+  const withPhoto = FRAGRANCES.filter(f => fragPhoto(f.name));
+  const preview = [...withPhoto.filter(f => f.hit), ...withPhoto.filter(f => !f.hit)].slice(0, 12);
 
-  grid.innerHTML = preview.map(f => `
-    <div class="sc-frag">
-      <div class="sc-frag-thumb" style="background:${SWCH[f.cat]};">
-        ${f.hit ? '<span class="sc-hit">ХИТ</span>' : ''}
-        <div class="sc-mini-bottle">
+  grid.innerHTML = preview.map(f => {
+    const idx = FRAGRANCES.indexOf(f);
+    const photo = fragPhoto(f.name);
+    const st = fragStyle(f);
+    const visual = photo
+      ? `<img class="sc-mini-photo" src="${photo}" alt="${f.name}" loading="lazy">`
+      : `<div class="sc-mini-bottle">
           <div class="sc-mb-cap"></div>
           <div class="sc-mb-neck"></div>
           <div class="sc-mb-body">
@@ -2378,15 +2386,20 @@ function faqAddMsg(type, text) {
             <div class="sc-mb-shine"></div>
           </div>
           <div class="sc-mb-base"></div>
-        </div>
+        </div>`;
+    return `
+    <div class="sc-frag" onclick="openFragInfo(${idx})" tabindex="0" role="button" onkeydown="if(event.key==='Enter')openFragInfo(${idx})">
+      <div class="sc-frag-thumb" style="background:${st[0]};">
+        ${f.hit ? '<span class="sc-hit">ХИТ</span>' : ''}
+        ${visual}
       </div>
       <div class="sc-frag-body">
         <div class="sc-frag-name">${f.name}</div>
         <div class="sc-frag-meta">${f.desc}</div>
         <div class="sc-frag-price">от ${f.price} ₽/мл</div>
       </div>
-    </div>
-  `).join('');
+    </div>`;
+  }).join('');
 
   function tick() {
     const rect = section.getBoundingClientRect();
