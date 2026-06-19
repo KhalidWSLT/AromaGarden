@@ -6,6 +6,5 @@
     </linearGradient>
   </defs>
   <rect width="64" height="64" rx="15" fill="#2C1B10"/>
-  <path d="M32 9 C 19 21, 19 43, 32 56 C 45 43, 45 21, 32 9 Z" fill="url(#g)"/>
-  <path d="M32 15 L32 51" stroke="#2C1B10" stroke-width="2.6" stroke-linecap="round" opacity="0.5"/>
+  <text x="32" y="43.5" font-family="Georgia, 'Times New Roman', serif" font-size="30" font-weight="700" letter-spacing="-1.5" text-anchor="middle" fill="url(#g)">AG</text>
 </svg>
